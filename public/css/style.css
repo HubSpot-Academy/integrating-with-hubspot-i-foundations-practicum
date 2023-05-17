@@ -9,25 +9,26 @@ body, * {
 h1 {
     margin: 1rem;
 }
-
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+a {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+table{
+    margin: 1rem;
+}
+.table-head{
+    background-color: pink;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+td{
+    padding: 0.5em;
+    border: solid 1px black;
 }
 
-.card__email {
-    font-size: 1rem;
+.table-head th{
+    border: none;
+    font-weight: bold;
+    padding: 0.5em;
 }
 
 .form-wrapper {
