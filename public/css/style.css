@@ -1,59 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+body,
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    margin: 1rem;
+  margin: 1rem;
 }
 a {
-    margin-bottom: 1rem;
-    margin-left: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
 }
-table{
-    margin: 1rem;
+table {
+  margin: 1rem;
 }
-.table-head{
-    background-color: pink;
-}
-
-td{
-    padding: 0.5em;
-    border: solid 1px black;
+.table-head {
+  background-color: pink;
 }
 
-.table-head th{
-    border: none;
-    font-weight: bold;
-    padding: 0.5em;
+td {
+  padding: 0.5em;
+  border: solid 1px black;
+}
+
+.table-head th {
+  border: none;
+  font-weight: bold;
+  padding: 0.5em;
 }
 
 .form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+  font-size: 18px;
+  max-width: 768px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: solid 1px lightgrey;
+  border-radius: 15px;
+  box-shadow: 3px 2px 6px lightgrey;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
+label,
+input {
+  margin-top: 5px;
+  display: block;
+  font-size: inherit;
 }
 
-input[type="text"], input[type="date"], input[type="number"] {
-    padding: .25rem;
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+  padding: 0.25rem;
 }
 
 input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+  background-color: lightgrey;
+  border: none;
+  padding: 0.375rem 1rem;
+  margin-top: 10px;
 }

@@ -3,15 +3,15 @@ html
     head 
         title= `${title}`
         meta(name="viewport" content="width=device-width, initial-scale=1")
-        link(rel="stylesheet", href="/css/style.css")
+        link(rel="stylesheet" href="/css/style.css")
     body    
         h1 Custom Object Table
         a(href="/update-cobj") Add/Update this table
         table
             tr(class='table-head') 
-                    th Name 
-                    th Scientific Name
-                    th Age 
+                th Name 
+                th Scientific Name
+                th Age 
             each plant in data
                 tr(class="table-row") 
                     td #{plant.properties.name}
