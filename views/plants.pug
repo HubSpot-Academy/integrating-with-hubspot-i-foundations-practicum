@@ -6,16 +6,14 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Custom Object Table
-        a(href="/update") Add/Update this table
+        a(href="/update-cobj") Add/Update this table
         table
             tr(class='table-head') 
                     th Name 
                     th Scientific Name
                     th Age 
-                    th Acquired Date
             each plant in data
                 tr(class="table-row") 
                     td #{plant.properties.name}
                     td #{plant.properties.scientific_name}
                     td #{plant.properties.age}
-                    td  #{plant.properties.acquired_date}

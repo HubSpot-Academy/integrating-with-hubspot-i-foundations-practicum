@@ -6,13 +6,11 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body  
         a(href="/") Return to the homepage
-        form(action="/add" class="form-wrapper") 
-            label Name
+        form(method="POST" class="form-wrapper") 
+            label(for="name") Name
             input(type="text" name="name" id="name")
-            label Scientific Name
+            label(for="scientific_name") Scientific Name
             input(type="text" name="scientific_name" id="scientific_name")
-            label Ascquired Date
-            input(type="date" name="acquired_date" id="acquired_date")
-            label Age
+            label(for="age") Age
             input(type="number" name="age" id="age")
-            button(type="submit") Add Plant
+            button(type="submit" value="Submit") Add Plant
