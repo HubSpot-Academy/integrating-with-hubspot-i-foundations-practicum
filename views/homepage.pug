@@ -1,0 +1,16 @@
+html
+  head
+    title Homepage | Integrating With HubSpot I Practicum
+  body
+    h1 Homepage
+    table
+      tr
+        th Property 1
+        th Property 2
+        th Property 3
+      each customObject in customObjectData
+        tr
+          td= customObject.property1
+          td= customObject.property2
+          td= customObject.property3
+    a(href="/update-cobj") Add/Update this table
