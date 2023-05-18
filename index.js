@@ -33,7 +33,7 @@ app.get('/', async (req, res) => {
 
 // * Code for Route 2 goes here
 app.get('/update-cobj', (req, res) => {
-    res.render('updates');
+    res.render('updates',{ title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
   });
   
 
@@ -46,7 +46,7 @@ app.post('/update-cobj', async (req, res) => {
       property2: req.body.property2,
       property3: req.body.property3
     };
-
+});
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
 
