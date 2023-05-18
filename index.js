@@ -46,7 +46,38 @@ app.post('/update-cobj', async (req, res) => {
       property2: req.body.property2,
       property3: req.body.property3
     };
-});
+  
+    try {
+      await updateCustomObjectData(newData);
+      res.redirect('/'); 
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error updating custom object data');
+    }
+  });
+
+  async function updateCustomObjectData(data) {
+    const customObjects = 'https://api.hubspot.com/crm/v3/objects/custom-objects'; 
+    const headers = {
+      Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+      'Content-Type': 'application/json'
+    };
+  
+    try {
+      
+      const updateData = {
+        properties: {
+          property1: data.property1,
+          property2: data.property2,
+          property3: data.property3
+        }
+      };
+  
+      await axios.patch(customObjects, updateData, { headers });
+    } catch (error) {
+        console.error(error);
+    }
+  }
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
 
