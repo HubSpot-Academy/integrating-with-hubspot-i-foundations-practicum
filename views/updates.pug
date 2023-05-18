@@ -1,17 +1,19 @@
 html
   head
-    title Update Custom Object
+    title Update Custom Object Form | Integrating With HubSpot I Practicum
   body
-    h1 Update Custom Object
+    h1 Update Custom Object Form | Integrating With HubSpot I Practicum
+    a(href="/") Return to the homepage
+  
     form(action="/update-cobj" method="POST")
-      label(for="property1") Property 1:
+      label(for="property1") Name:
       input(type="text" name="property1")
       br
-      label(for="property2") Property 2:
+      label(for="property2") Description:
       input(type="text" name="property2")
       br
-      label(for="property3") Property 3:
+      label(for="property3") Price:
       input(type="text" name="property3")
       br
       input(type="submit" value="Submit")
-    a(href="/") Return to the homepage
+    

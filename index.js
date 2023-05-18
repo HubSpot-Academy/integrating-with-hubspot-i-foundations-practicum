@@ -1,4 +1,3 @@
-require ('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const app = express();
@@ -15,7 +14,8 @@ const PRIVATE_APP_ACCESS = 'pat-na1-684b78ea-7959-4374-babf-6da5328ca0d1';
 
 // * Code for Route 1 goes here
 app.get('/', async (req, res) => {
-    const customObjects = 'https://api.hubspot.com/crm/v3/objects/custom-objects';
+    const customObjects = 'https://api.hubspot.com/crm/v3/objects/2-14963659?portalId=39772501&properties=name&properties=description&properties=price'
+    // const customObjects = 'https://api.hubspot.com/crm/v3/objects/contacts';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -23,7 +23,8 @@ app.get('/', async (req, res) => {
     try {
         const resp = await axios.get(customObjects, { headers });
         const data = resp.data.results;
-        res.render('customObjects', { title: 'Custom Objects | HubSpot APIs', data });      
+        console.log("data", data)
+        res.render('homepage', { title: 'Custom Objects | HubSpot APIs', data });      
     } catch (error) {
         console.error(error);
     }
@@ -57,7 +58,8 @@ app.post('/update-cobj', async (req, res) => {
   });
 
   async function updateCustomObjectData(data) {
-    const customObjects = 'https://api.hubspot.com/crm/v3/objects/custom-objects'; 
+    const customObjects = 'https://api.hubspot.com/crm/v3/schemas';
+    // const customObjects = 'https://api.hubspot.com/crm/v3/objects/contacts'; 
     const headers = {
       Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
       'Content-Type': 'application/json'

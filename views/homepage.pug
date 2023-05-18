@@ -1,16 +1,31 @@
 html
   head
-    title Homepage | Integrating With HubSpot I Practicum
+    title Homepage
   body
-    h1 Homepage
+    h1 Custom Object Table
+    a(href="/update-cobj") Add/Update this table
     table
       tr
-        th Property 1
-        th Property 2
-        th Property 3
-      each customObject in customObjectData
+        th NAME
+        th DESCRIPTION
+        th PRICE
+      each contact in data
         tr
-          td= customObject.property1
-          td= customObject.property2
-          td= customObject.property3
-    a(href="/update-cobj") Add/Update this table
+          td= contact.properties.name
+          td= contact.properties.description
+          td= contact.properties.price
+          
+    
+
+//- html 
+//-     head 
+//-         title= `${title}`
+//-         meta(name="viewport" content="width=device-width, initial-scale=1")
+//-         link(rel="stylesheet", href="/css/style.css")
+//-     body    
+//-         h1 Contacts
+//-         .cards 
+//-             each contact in data
+//-                 .card 
+//-                     h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
+//-                     p.card__email #{contact.properties.email}
