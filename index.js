@@ -49,23 +49,21 @@ app.post('/update-cobj', async (req, res) => {
         price: req.body.price
       }
     };
-    const objectTypeId = '2-14963659'; // Replace with your custom object's ID
-    const updateCustomObjectUrl = `https://api.hubapi.com/crm/v3/schemas/${objectTypeId}`;
+    console.log("customObject", customObject)
+    const createOrUpdateCustomObjectUrl = 'https://api.hubspot.com/crm/v3/schemas/2-14963659';
     const headers = {
       Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
       'Content-Type': 'application/json'
     };
   
     try {
-      await axios.patch(updateCustomObjectUrl, customObject, { headers });
+      await axios.patch(createOrUpdateCustomObjectUrl, customObject, { headers });
       res.redirect('/');
     } catch (error) {
       console.error(error);
       res.redirect('/');
     }
   });
-  
-  
   
 
 // * * This is sample code to give you a reference for how you should structure your calls. 
