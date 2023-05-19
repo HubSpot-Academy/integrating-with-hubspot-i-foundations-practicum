@@ -43,9 +43,9 @@ app.get('/update-cobj', (req, res) => {
 // * Code for Route 3 goes here
 app.post('/update-cobj', async (req, res) => {
     const newData = {
-      property1: req.body.property1,
-      property2: req.body.property2,
-      property3: req.body.property3
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price
     };
   
     try {
@@ -58,7 +58,7 @@ app.post('/update-cobj', async (req, res) => {
   });
 
   async function updateCustomObjectData(data) {
-    const customObjects = 'https://api.hubspot.com/crm/v3/schemas';
+    const customObjects = 'https://api.hubspot.com/crm/v3objects/2-14963659?portalId=39772501&properties=name&properties=description&properties=price';
     // const customObjects = 'https://api.hubspot.com/crm/v3/objects/contacts'; 
     const headers = {
       Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
@@ -69,9 +69,9 @@ app.post('/update-cobj', async (req, res) => {
       
       const updateData = {
         properties: {
-          property1: data.property1,
-          property2: data.property2,
-          property3: data.property3
+          name: data.name,
+          description: data.description,
+          price: data.price
         }
       };
   

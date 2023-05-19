@@ -1,6 +1,23 @@
 html
   head
     title Homepage
+    style.
+      table {
+        border-collapse: collapse;
+        width: 50%;
+        display:flex;
+        align-items:center;
+      }
+      
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+      }
+      
+      th {
+        background-color: #eb8d8d;
+      }
   body
     h1 Custom Object Table
     a(href="/update-cobj") Add/Update this table
@@ -14,8 +31,8 @@ html
           td= contact.properties.name
           td= contact.properties.description
           td= contact.properties.price
-          
-    
+
+ 
 
 //- html 
 //-     head 
