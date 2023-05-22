@@ -24,7 +24,7 @@ app.get('/', async (req, res) => {
         const resp = await axios.get(customObjects, { headers });
         const data = resp.data.results;
         console.log("data--->", data)
-        res.render('homepage', { title: 'Custom Objects | HubSpot APIs', data });      
+        res.render('homepage', { title: 'Custom Objects | HubSpot APIs', data, cache: false });      
     } catch (error) {
         console.error(error);
     }
@@ -43,14 +43,14 @@ app.get('/update-cobj', (req, res) => {
 // * Code for Route 3 goes here
 app.post('/update-cobj', async (req, res) => {
     const customObject = {
-      properties: {
+        properties: {
         name: req.body.name,
         description: req.body.description,
-        price: req.body.price
+        price: req.body.price,
       }
     };
     console.log("customObject", customObject)
-    const createOrUpdateCustomObjectUrl = 'https://api.hubspot.com/crm/v3/schemas/2-14963659';
+    const createOrUpdateCustomObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-14963659/6377083650';
     const headers = {
       Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
       'Content-Type': 'application/json'
