@@ -42,74 +42,81 @@ app.get('/update-cobj', (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
+
 app.post('/update-cobj', async (req, res) => {
-    const customObject = {
-        properties: {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-      }
-    };
-    console.log("customObject", customObject)
-    const createOrUpdateCustomObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-14963659/6377083650';
-    const headers = {
-      Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-      'Content-Type': 'application/json'
-    };
-  
-    try {
-      await axios.patch(createOrUpdateCustomObjectUrl, customObject, { headers });
-      res.redirect('/');
-    } catch (error) {
-      console.error(error);
-      res.redirect('/');
+  const customObject = {
+    properties: {
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
     }
-  });
-  
+  };
 
-// * * This is sample code to give you a reference for how you should structure your calls. 
+  const createOrUpdateCustomObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-14963659';
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
+  };
 
-// * * App.get sample
-// app.get('/contacts', async (req, res) => {
-//     const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-//     const headers = {
-//         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-//         'Content-Type': 'application/json'
-//     }
-//     try {
-//         const resp = await axios.get(contacts, { headers });
-//         const data = resp.data.results;
-//         res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-//     } catch (error) {
-//         console.error(error);
-//     }
-// });
+  try {
+    const checkRecordExistsUrl = `${createOrUpdateCustomObjectUrl}/search`;
+    const searchPayload = {
+      filterGroups: [
+        {
+          filters: [
+            {
+              propertyName: 'name', 
+              operator: 'EQ',
+              value: req.body.name
+            }
+          ]
+        }
+      ]
+    };
+    const checkRecordExistsResponse = await axios.post(checkRecordExistsUrl, searchPayload, { headers });
 
-// * * App.post sample
-// app.post('/update', async (req, res) => {
-//     const update = {
+    if (checkRecordExistsResponse.data.total === 0) {
+      // Custom object record doesn't exist, create a new one
+      const createCustomObjectResponse = await axios.post(createOrUpdateCustomObjectUrl, customObject, { headers });
+      console.log("New custom object record created:", createCustomObjectResponse.data);
+    } else {
+      // Custom object record already exists, update it
+      const recordId = checkRecordExistsResponse.data.results[0].id;
+      const updateCustomObjectUrl = `${createOrUpdateCustomObjectUrl}/${recordId}`;
+      await axios.patch(updateCustomObjectUrl, customObject, { headers });
+      console.log("Custom object record updated:", recordId);
+    }
+
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    res.redirect('/');
+  }
+});
+// Only Updates with harcoded objectID
+// app.post('/update-cobj', async (req, res) => {
+//     const customObject = {
 //         properties: {
-//             "favorite_book": req.body.newVal
-//         }
-//     }
-
-//     const email = req.query.email;
-//     const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-//     const headers = {
-//         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-//         'Content-Type': 'application/json'
+//         name: req.body.name,
+//         description: req.body.description,
+//         price: req.body.price,
+//       }
 //     };
-
-//     try { 
-//         await axios.patch(updateContact, update, { headers } );
-//         res.redirect('back');
-//     } catch(err) {
-//         console.error(err);
+//     console.log("customObject", customObject)
+//     const createOrUpdateCustomObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-14963659/6377083650';
+//     const headers = {
+//       Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+//       'Content-Type': 'application/json'
+//     };
+  
+//     try {
+//       await axios.patch(createOrUpdateCustomObjectUrl, customObject, { headers });
+//       res.redirect('/');
+//     } catch (error) {
+//       console.error(error);
+//       res.redirect('/');
 //     }
-
-// });
-
-
+//   });
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
