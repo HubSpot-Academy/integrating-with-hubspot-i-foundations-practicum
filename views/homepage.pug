@@ -10,14 +10,11 @@ html(lang="en")
      h1 Characters Table
      table(border='1')
         tr
-            th name
-            th nickname 
-            th clan
-        tr
-            td name
-            td nickname 
-            td clan
-        tr
-            td name
-            td nickname 
-            td clan
+            th Character Name
+            th Also Known As 
+            th Clan
+        each character in charactersList
+            tr
+                td #{character.properties.character_name}
+                td #{character.properties.also_known_as} 
+                td #{character.properties.clan} 

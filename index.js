@@ -55,9 +55,8 @@ app.get('/', async (req, res, next) => {
 		// store character's custom object records
 		const charactersList = response.data.results;
 
-		// send the custom object to the front end so I can see it
-		// res.render('homepage', { title: 'Home Page' });
-		res.status(200).json(charactersList);
+		// render homepage view and pass the characters list to the template
+		res.render('homepage', { title: 'Home Page', charactersList });
 	} catch (error) {
 		next(error);
 	}
