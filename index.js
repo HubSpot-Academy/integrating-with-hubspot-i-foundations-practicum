@@ -2,6 +2,12 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 
+// import dotenv to use my store private app token
+const dotenv = require('dotenv');
+
+// load .env file into process.env
+dotenv.config();
+
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
