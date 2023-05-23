@@ -30,26 +30,36 @@ const baseURL = 'https://api.hubspot.com';
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here Root route
-app.get('/', async (req, res) => {
-	// end point to retrieve all custom objects
-	const endPoint = '/crm/v3/schemas';
+app.get('/', async (req, res, next) => {
+	// name of custom object which I want to retrieve a list of records
+	const objectType = 'characters';
+
+	// checked the docs and it seems that the properties are passed as a list to control what is returned via the properties query param.
+	const properties = ['character_name', 'also_known_as', 'clan'];
+
+	// The properties query parameter in the HubSpot API expects a comma-separated list of property names to retrieve specific custom properties for the custom object records
+	const params = {
+		properties: properties.join(','),
+	};
+
+	// end point to retrieve characters object records
+	const endPoint = `/crm/v3/objects/${objectType}`;
 
 	// creating the full url for the request
 	const URL = `${baseURL}${endPoint}`;
 
 	try {
-		// store response that we get back from the HubSpot API
-		const response = await axios.get(`${baseURL}${endPoint}`, {
-			headers,
-		});
+		// store response that we get back from the HubSpot API and request the records from HubSpot API
+		const response = await axios.get(URL, { headers, params });
 
-		// store custom objects
-		const customObjects = response.data.results;
+		// store character's custom object records
+		const charactersList = response.data.results;
 
 		// send the custom object to the front end so I can see it
-		res.render('homepage', { title: 'Home Page' });
+		// res.render('homepage', { title: 'Home Page' });
+		res.status(200).json(charactersList);
 	} catch (error) {
-		console.log(error);
+		next(error);
 	}
 });
 
