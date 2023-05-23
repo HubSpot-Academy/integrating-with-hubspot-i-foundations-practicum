@@ -16,11 +16,18 @@ app.use(express.json());
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
 
 // Base on the following tip given on the Practicum "Don’t include your private app access token in your repo. We’ll grab this from your test account private app." I will add a .env file to store my private app token instead of adding it right here so I can test my app
-const PRIVATE_APP_ACCESS = '';
+const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
-// * Code for Route 1 goes here
+// * Code for Route 1 goes here Root route
+app.get('/', (req, res) => {
+	try {
+		res.send('Hello from express app');
+	} catch (error) {
+		console.log(error);
+	}
+});
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
