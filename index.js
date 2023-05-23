@@ -80,9 +80,32 @@ app.get('/update-cobj', (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-app.post('/update-cobj', (req, res) => {
+app.post('/update-cobj', async (req, res, next) => {
 	try {
-		res.send('Form has been submitted');
+		// name of custom object which I want to retrieve characters custom object list of records
+		const objectType = 'characters';
+
+		// url to create new custom object record
+		const endPoint = `/crm/v3/objects/${objectType}`;
+
+		// creating the full url for the request
+		const URL = `${baseURL}${endPoint}`;
+
+		// new custom objects record properties get data from the form in update pug template
+		const properties = req.body;
+		console.log(properties);
+
+		// get response from creating the new custom object record
+		const response = await axios.post(
+			URL,
+			{ properties },
+			{ headers }
+		);
+
+		const newCharacter = response.data;
+
+		// send response back to the from end
+		res.send(newCharacter);
 	} catch (error) {
 		next(error);
 	}
