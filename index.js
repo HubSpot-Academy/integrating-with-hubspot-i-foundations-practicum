@@ -47,7 +47,7 @@ app.get('/', async (req, res) => {
 		const customObjects = response.data.results;
 
 		// send the custom object to the front end so I can see it
-		res.send(customObjects);
+		res.render('homepage');
 	} catch (error) {
 		console.log(error);
 	}
