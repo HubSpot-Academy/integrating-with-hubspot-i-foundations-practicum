@@ -93,7 +93,6 @@ app.post('/update-cobj', async (req, res, next) => {
 
 		// new custom objects record properties get data from the form in update pug template
 		const properties = req.body;
-		console.log(properties);
 
 		// get response from creating the new custom object record
 		const response = await axios.post(
@@ -102,10 +101,8 @@ app.post('/update-cobj', async (req, res, next) => {
 			{ headers }
 		);
 
-		const newCharacter = response.data;
-
 		// send response back to the from end
-		res.send(newCharacter);
+		res.redirect('/');
 	} catch (error) {
 		next(error);
 	}
