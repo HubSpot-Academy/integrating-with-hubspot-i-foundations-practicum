@@ -58,7 +58,8 @@ app.get('/', async (req, res) => {
 // * Code for Route 2 goes here Update Route
 app.get('/update-cobj', (req, res) => {
 	try {
-		res.send('This is the update route!');
+		// render the updates template
+		res.render('updates');
 	} catch (error) {
 		console.log(error);
 	}
