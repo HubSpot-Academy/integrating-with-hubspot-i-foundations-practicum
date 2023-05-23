@@ -8,4 +8,12 @@ html(lang="en")
         link(rel="stylesheet", href="/css/style.css")
     body
      a(href="/") Return to the homepage
-     h1 Updates
+     h1 Add new Vampire the Masquerade Character 
+     form(method="POST")
+                label(for="character_name") Character name
+                input(type="text" name="character_name" required)
+                label(for="nickname") Also know as
+                input(type="text" name="nickname" required)
+                label(for="clan") Clan
+                input(type="text" name="clan" required)
+                input(type="submit" value="Submit")

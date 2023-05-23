@@ -31,7 +31,7 @@ const baseURL = 'https://api.hubspot.com';
 
 // * Code for Route 1 goes here Root route
 app.get('/', async (req, res, next) => {
-	// name of custom object which I want to retrieve a list of records
+	// name of custom object which I want to retrieve characters custom object list of records
 	const objectType = 'characters';
 
 	// checked the docs and it seems that the properties are passed as a list to control what is returned via the properties query param.
