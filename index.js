@@ -24,12 +24,30 @@ const headers = {
 	Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
 };
 
+// Base url for all HubSpot API request
+const baseURL = 'https://api.hubspot.com';
+
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here Root route
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+	// end point to retrieve all custom objects
+	const endPoint = '/crm/v3/schemas';
+
+	// creating the full url for the request
+	const URL = `${baseURL}${endPoint}`;
+
 	try {
-		res.send('Hello from express app');
+		// store response that we get back from the HubSpot API
+		const response = await axios.get(`${baseURL}${endPoint}`, {
+			headers,
+		});
+
+		// store custom objects
+		const customObjects = response.data.results;
+
+		// send the custom object to the front end so I can see it
+		res.send(customObjects);
 	} catch (error) {
 		console.log(error);
 	}
