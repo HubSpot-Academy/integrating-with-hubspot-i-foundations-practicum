@@ -22,9 +22,9 @@ app.get("/", async (req, res) => {
     }
     try {
         const response = await axios.get(URL, { headers })
-        const responseData = Object.keys(response).length === 0 ? { message: "no custom objects found" } : { message: "custom objects found", results: response.data.results }
+        const responseData = Object.keys(response).length === 0 ? { message: "no custom objects found" } : { results: response.data.results }
         res.render("homepage", { title: "Custom Objects | Integrating With HubSpot I Practicum", message: message, data: responseData })
-        // res.json({ response: responseData, message: message })
+        // res.json(responseData)
     } catch (e) {
         console.error(e)
         res.json({ error: e })

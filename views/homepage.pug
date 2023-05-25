@@ -6,12 +6,12 @@ html(lang="en")
     body
         h1 #{title  || 'Custom Objects'}
         .cards 
-            each customObj in data
+            each customObj in data.results
                 .card 
-                    h2.card__name Primary Display Property:  #{customObj.properties.primaryDisplayProperty}
-                    //- ol.card_email Secondary Display Properties:
-                    //- each prop in customObj.properties.secondaryDisplayProperty
-                    //-     li #{prop}
+                    h2.card__name Primary Display Property:  #{customObj.primaryDisplayProperty}
+                    ol.card_email Secondary Display Properties:
+                    each prop in customObj.secondaryDisplayProperties
+                        li #{prop}
                        
         
         
