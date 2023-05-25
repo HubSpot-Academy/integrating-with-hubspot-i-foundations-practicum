@@ -1,0 +1,16 @@
+doctype html 
+html(lang="en")
+    head 
+        title=title 
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Custom Objects
+        a(href="/") <- Return to the Homepage
+        .cards 
+            each customObj in data
+                .card 
+                    h2.card__name #{customObj.properties.name}
+                    p.card_description #{customObj.properties.description}
+                    each prop in customObj.properties
+                        if prop != customObj.properties.name && prop != customObj.properties.description
+                            p.card__#{prop} #{customObj.properties[prop]}

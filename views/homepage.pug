@@ -1,0 +1,18 @@
+doctype html 
+html(lang="en")
+    head 
+        title=title
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 #{title  || 'Custom Objects'}
+        .cards 
+            each customObj in data
+                .card 
+                    h2.card__name Primary Display Property:  #{customObj.properties.primaryDisplayProperty}
+                    //- ol.card_email Secondary Display Properties:
+                    //- each prop in customObj.properties.secondaryDisplayProperty
+                    //-     li #{prop}
+                       
+        
+        
+        
