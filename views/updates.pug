@@ -4,13 +4,23 @@ html(lang="en")
         title=title 
         link(rel="stylesheet", href="/css/style.css")
     body
-        h1 Custom Objects
         a(href="/") <- Return to the Homepage
-        .cards 
-            each customObj in data
-                .card 
-                    h2.card__name #{customObj.properties.name}
-                    p.card_description #{customObj.properties.description}
-                    each prop in customObj.properties
-                        if prop != customObj.properties.name && prop != customObj.properties.description
-                            p.card__#{prop} #{customObj.properties[prop]}
+        h1 Pets
+        br
+        .form-wrapper
+            h2.card__name #{petData.petName}
+            p.card_description #{petData.petBreed}
+            p.card_description #{petData.petType}
+            br
+            hr
+            br
+            p.card_description Update Pet Data
+            br
+            form(method="POST")
+                label(for="petName") Pet Name
+                input(type="text", name="petName", value=`${petData.petName}`)
+                label(for="petBreed") Pet Breed
+                input(type="text", name="petBreed", value=`${petData.petBreed}`)
+                label(for="petType") Pet Type
+                input(type="text", name="petType", value=`${petData.petType}`)
+                input(type="submit", value="Update Pet")

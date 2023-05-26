@@ -14,57 +14,67 @@ const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS
 
 // * Code for Route 1 goes here
 app.get("/", async (req, res) => {
-    const message = { message: "Hello HubSpot Certification Giver being!" }
-    const tHURL = "https://api.hubspot.com/crm/v3/schemas/pets"
-    const petDataURL = "https://api.hubspot.com/crm/v3/objects/pets/"
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         "Content-Type": "application/json",
     }
+    const tHURL = "https://api.hubspot.com/crm/v3/schemas/pets"
+    const petDataURL = "https://api.hubspot.com/crm/v3/objects/pets/"
     try {
         const responseTH = await axios.get(tHURL, { headers })
         const responseTHData = responseTH.data.searchableProperties
         const responsePets = await axios.get(petDataURL, { headers })
         const responsePetsData = responsePets.data.results
-        const petsIds = responsePetsData.map((pet) => pet.id);
-    const petDataPromises = petsIds.map((id) => {
-      const petDataURL = `https://api.hubspot.com/crm/v3/objects/pets/${id}?properties=pet_name&properties=pet_breed&properties=pet_type`;
-      return axios.get(petDataURL, { headers }).then((response) => {
-        return {
-          petId: response.data.id,
-          petName: response.data.properties.pet_name,
-          petBreed: response.data.properties.pet_breed,
-          petType: response.data.properties.pet_type,
-        };
-      });
-    });
-    const allPetsData = await Promise.all(petDataPromises);
-    res.render("homepage", { title: "Custom Objects | Integrating With HubSpot I Practicum", petsData: allPetsData, tableHeaders: responseTHData });
-    // res.json({ allPetsData, responseTHData });
-  } catch (e) {
-    console.error(e);
-    res.json({ error: e });
-  }
+        const petsIds = responsePetsData.map((pet) => pet.id)
+        const petDataPromises = petsIds.map((id) => {
+            const petDataURL = `https://api.hubspot.com/crm/v3/objects/pets/${id}?properties=pet_name&properties=pet_breed&properties=pet_type`
+            return axios.get(petDataURL, { headers }).then((response) => {
+                return {
+                    petId: response.data.id,
+                    petName: response.data.properties.pet_name,
+                    petBreed: response.data.properties.pet_breed,
+                    petType: response.data.properties.pet_type,
+                }
+            })
+        })
+        const allPetsData = await Promise.all(petDataPromises)
+        res.render("homepage", { title: "Custom Objects | Integrating With HubSpot I Practicum", petsData: allPetsData, tableHeaders: responseTHData })
+    } catch (e) {
+        console.error(e)
+        res.json({ error: e })
+    }
 })
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
-app.get("/update-cobj", async (req, res) => {
+app.get("/updates", async (req, res) => {
+    const petId = req.query.petId
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        "Content-Type": "application/json",
+    }
+    const getPet = `https://api.hubspot.com/crm/v3/objects/pets/${petId}?properties=pet_name&properties=pet_breed&properties=pet_type`
     const title = "Update Custom Object Form | Integrating With HubSpot I Practicum"
-    const allObjectsURL = "https://api.hubapi.com/crm/v3/schemas"
     try {
-        const resp = axios.get(allObjectsURL, { headers })
-        const data = resp.data.results
+        const response = await axios.get(getPet, { headers })
+        const petData = {
+            petId: response.data.id,
+            petName: response.data.properties.pet_name,
+            petBreed: response.data.properties.pet_breed,
+            petType: response.data.properties.pet_type,
+        }
+        console.log(petData)
+        res.render("updates", { title, petData })
     } catch (e) {
         console.error(e)
+        res.json({ message: "error", error: e })
     }
-    res.render("update-cobj", { title, data })
 })
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-app.post("/update-cobj", async (req, res) => {
+app.post("/updates", async (req, res) => {
     const update = {
         properties: {
             name: req.body.name,
