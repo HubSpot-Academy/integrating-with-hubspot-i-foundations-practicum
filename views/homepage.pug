@@ -1,0 +1,21 @@
+doctype html
+html 
+  head 
+    title= `${title}`
+      meta(name="viewport" content="width=device-width, initial-scale=1")
+      link(rel="stylesheet", href="/css/style.css")
+  body    
+    h1 Characters
+    a(href="/update-cobj") Add/Update this table
+    table
+      tr
+        th Id
+        th Name
+        th Type
+        th Bio
+      each character in data
+        tr
+          td #{character.id}
+          td #{character.properties.name}
+          td #{character.properties.type}
+          td #{character.properties.bio}
