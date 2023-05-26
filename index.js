@@ -75,20 +75,24 @@ app.get("/updates", async (req, res) => {
 
 // * Code for Route 3 goes here
 app.post("/updates", async (req, res) => {
+    const petName = req.body.petName
+    const petBreed = req.body.petBreed
+    const petType = req.body.petType
+    const petId= req.query.petId
     const update = {
         properties: {
-            name: req.body.name,
-            description: req.body.description,
+            pet_name: petName,
+            pet_breed: petBreed,
+            pet_type: petType,
         },
     }
-    const objectName = req.body.objectName
-    const updateObject = `https://api.hubapi.com/crm/v3/schemas/${objectName}`
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         "Content-Type": "application/json",
     }
+    const updatePet = `https://api.hubspot.com/crm/v3/objects/pets/${petId}`
     try {
-        await axios.patch(updateObject, update, { headers })
+        await axios.patch(updatePet, update, { headers })
         res.redirect("back")
     } catch (e) {
         console.error(e)
