@@ -39,8 +39,8 @@ app.get("/", async (req, res) => {
       });
     });
     const allPetsData = await Promise.all(petDataPromises);
-    // res.render("homepage", { title: "Custom Objects | Integrating With HubSpot I Practicum", petsData: allPetsData, tableHeaders: responseTH.data.properties });
-    res.json({ allPetsData, responseTHData });
+    res.render("homepage", { title: "Custom Objects | Integrating With HubSpot I Practicum", petsData: allPetsData, tableHeaders: responseTHData });
+    // res.json({ allPetsData, responseTHData });
   } catch (e) {
     console.error(e);
     res.json({ error: e });
