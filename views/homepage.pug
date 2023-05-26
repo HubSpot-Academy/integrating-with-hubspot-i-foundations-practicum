@@ -1,18 +1,62 @@
-doctype html 
+doctype html
 html(lang="en")
-    head 
-        title=title
-        link(rel="stylesheet", href="/css/style.css")
-    body
-        h1 #{title  || 'Custom Objects'}
-        .cards 
-            each customObj in data.results
-                .card 
-                    h2.card__name Primary Display Property:  #{customObj.primaryDisplayProperty}
-                    ol.card_email Secondary Display Properties:
-                    each prop in customObj.secondaryDisplayProperties
-                        li #{prop}
-                       
-        
-        
+  head
+    title=title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 #{title || 'Custom Objects'}
+    table
+       thead
+            tr
+                each label, index in data.labels
+                    th(key=index)= label
+            tbody
+            each result in data.results
+                tr
+                    each property in properties
+                        td= property.label
+                        td= property.type
+                        td= property.fieldType
+                        td= property.description
+    //-   tbody
+    //-     each item in data
+    //-       tr
+    //-         each prop in 
+    //-           td
+    //-             if Array.isArray(item[key])
+    //-               each subItem in item[key]
+    //-                 each subKey in Object.keys(subItem)
+    //-                   p #{subKey}: #{subItem[subKey]}
+    //-             else
+    //-               p #{item[key]}
+
+
+//- doctype html 
+//- html(lang="en")
+//-     head 
+//-         title=title
+//-         link(rel="stylesheet", href="/css/style.css")
+//-     body
+//-         -const primary_display_name = customObj.primaryDisplayProperty
+//-         -const secondary_display_names = customObj.secondaryDisplayProperties
+//-         h1 #{title  || 'Custom Objects'}
+//-         .cards 
+//-             each customObj in data.results
+//-                 .card 
+//-                     h2.card__name Primary Display Property:  #{customObj.primaryDisplayProperty}
+//-                     ol.card_email Secondary Display Properties:
+//-                     each prop in customObj.secondaryDisplayProperties
+//-                         li #{prop}
+//-         table
+//-       thead
+//-         tr
+//-           #{primary_display_name}
+//-           each prop in secondary_display_names
+//-           tr
+//-             td #{customObj.secondaryDisplayProperties}
+//-       tbody
+//-         each prop in secondary_display_names
+//-           tr
+//-             td #{customObj.secondaryDisplayProperties}
+    
         

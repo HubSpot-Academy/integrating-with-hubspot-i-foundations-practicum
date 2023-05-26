@@ -15,20 +15,36 @@ const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS
 // * Code for Route 1 goes here
 app.get("/", async (req, res) => {
     const message = { message: "Hello HubSpot Certification Giver being!" }
-    const URL = "https://api.hubapi.com/crm/v3/schemas"
+    const tHURL = "https://api.hubspot.com/crm/v3/schemas/pets"
+    const petDataURL = "https://api.hubspot.com/crm/v3/objects/pets/"
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         "Content-Type": "application/json",
     }
     try {
-        const response = await axios.get(URL, { headers })
-        const responseData = Object.keys(response).length === 0 ? { message: "no custom objects found" } : { results: response.data.results }
-        res.render("homepage", { title: "Custom Objects | Integrating With HubSpot I Practicum", message: message, data: responseData })
-        // res.json(responseData)
-    } catch (e) {
-        console.error(e)
-        res.json({ error: e })
-    }
+        const responseTH = await axios.get(tHURL, { headers })
+        const responseTHData = responseTH.data.searchableProperties
+        const responsePets = await axios.get(petDataURL, { headers })
+        const responsePetsData = responsePets.data.results
+        const petsIds = responsePetsData.map((pet) => pet.id);
+    const petDataPromises = petsIds.map((id) => {
+      const petDataURL = `https://api.hubspot.com/crm/v3/objects/pets/${id}?properties=pet_name&properties=pet_breed&properties=pet_type`;
+      return axios.get(petDataURL, { headers }).then((response) => {
+        return {
+          petId: response.data.id,
+          petName: response.data.properties.pet_name,
+          petBreed: response.data.properties.pet_breed,
+          petType: response.data.properties.pet_type,
+        };
+      });
+    });
+    const allPetsData = await Promise.all(petDataPromises);
+    // res.render("homepage", { title: "Custom Objects | Integrating With HubSpot I Practicum", petsData: allPetsData, tableHeaders: responseTH.data.properties });
+    res.json({ allPetsData, responseTHData });
+  } catch (e) {
+    console.error(e);
+    res.json({ error: e });
+  }
 })
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
