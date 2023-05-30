@@ -6,4 +6,12 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body
         a(href="/") Return to the homepage
+        form(action='/update-cobj', method='POST')
+            label(for='name') Name:
+            input(type='text', placeholder='name', name='name')
+            label(for='type') Type:
+            input(type='text', placeholder='type', name='type')
+            label(for='age') Age:
+            input(type='number', placeholder='age', name='age')
+            input(type='submit')
 

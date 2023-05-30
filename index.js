@@ -34,13 +34,15 @@ app.get('/update-cobj', async (req,res)=>{
 // * Code for Route 2 goes here
 
 app.post('/update-cobj', async (req, res) => {
+    console.log('request log: ', req.body.name)
     const insert = {
         properties:{
-            "Name": req.body.Name,
-            "Type": req.body.Type,
-            "Age": req.body.Age
+            "name": req.body.name,
+            "type": req.body.type,
+            "age": req.body.age
         }
     }
+    console.log('Insert prop: ', insert);
     const insertPet = `https://api.hubapi.com/crm/v3/objects/pets`
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
@@ -60,7 +62,7 @@ app.post('/update-cobj', async (req, res) => {
 // * Code for Route 3 goes here
 
 app.get('/', async (req, res) => {
-    const pets = 'https://api.hubspot.com/crm/v3/objects/pets';
+    const pets = 'https://api.hubspot.com/crm/v3/objects/pets?properties=name&properties=type&properties=age';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -68,7 +70,8 @@ app.get('/', async (req, res) => {
     try{
         const resp = await axios.get(pets, {headers});
         const data = resp.data.results;
-        res.render('updates', {title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'});
+        console.log("data: ",data)
+        res.render('homepage', {title: 'Homepage | Integrating With HubSpot I Practicum', data});
     }catch (error){
         console.error(error)
     }
