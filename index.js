@@ -27,6 +27,24 @@ app.get('/contacts', async (req, res) => {
     }
 });
 
+// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
+
+app.get('/update', async (req, res) => {
+    const email = req.query.email;
+    const getContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email&properties=email,favourite_book`;
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+    try {
+        const response = await axios.get(getContact, { headers });
+        const data = response.data;
+        res.render('update', {userEmail: data.properties.email, favouriteBook: data.properties.favourite_book});
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
