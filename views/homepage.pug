@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+  head
+    title=title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 #{title || 'Custom Objects'}
+    table
+       thead
+            tr
+                each label, index in tableHeaders 
+                    th(key=index)= label
+            tbody
+            each pet in petsData
+                tr
+                        td= pet.petName
+                        td= pet.petBreed
+                        td= pet.petType
+                        td
+                            a(href=`/updates?petId=${pet.petId}`) Update Pet Data
+
+                        

@@ -1,0 +1,26 @@
+doctype html 
+html(lang="en")
+    head 
+        title=title 
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        a(href="/") <- Return to the Homepage
+        h1 Pets
+        br
+        .form-wrapper
+            h2.card__name #{petData.petName}
+            p.card_description #{petData.petBreed}
+            p.card_description #{petData.petType}
+            br
+            hr
+            br
+            p.card_description Update Pet Data
+            br
+            form(method="POST")
+                label(for="petName") Pet Name
+                input(type="text", name="petName", value=`${petData.petName}`)
+                label(for="petBreed") Pet Breed
+                input(type="text", name="petBreed", value=`${petData.petBreed}`)
+                label(for="petType") Pet Type
+                input(type="text", name="petType", value=`${petData.petType}`)
+                input(type="submit", value="Update Pet")
