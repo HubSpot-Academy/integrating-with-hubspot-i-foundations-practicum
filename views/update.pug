@@ -17,5 +17,5 @@ html(lang="en")
                 label(for="publisher") Publisher
                 input(type="text" placeholder="The game publisher" value=publisher name="publisher" required)
                 label(for="rating") Rating
-                input(type="number" placeholder="Your rating (out of 10)" value=rating name="rating" required)
+                input(type="number" placeholder="Your rating (out of 10)" value=rating name="rating" required min=0 max=10)
                 input(type="submit" value="Submit")
