@@ -4,11 +4,16 @@ html(lang="en")
         title Update Game Rating
         link(rel="stylesheet", href="/css/style.css")
     body
+        a(href="/") Return to home page
         .form-wrapper
-            p Game: #{game}
+            p Game: #{name}
             p Publisher: #{publisher}
             p Rating: #{rating}
             form(method="POST")
-                label(for="newVal") Updated Rating
-                input(type="number" name="newVal" required)
+                label(for="Name") Name
+                input(type="text" placeholder="The name of the game" value=name name="name" required)
+                label(for="publisher") Publisher
+                input(type="text" placeholder="The game publisher" value=publisher name="publisher" required)
+                label(for="rating") Rating
+                input(type="number" placeholder="Your rating (out of 10)" value=rating name=rating required)
                 input(type="submit" value="Submit")
