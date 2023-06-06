@@ -14,15 +14,18 @@ const PRIVATE_APP_ACCESS = "pat-na1-bf8e5671-ddc8-4631-a9ab-bbb199798e62";
 
 // * Code for Route 1 goes here
 app.get("/", async (req, res) => {
-  const contacts = "https://api.hubspot.com/crm/v3/objects/clicks";
+  const url = "https://api.hubspot.com/crm/v3/objects/games";
   const headers = {
     Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
     "Content-Type": "application/json",
   };
+  const params = new URLSearchParams([
+    ["properties", ["name", "publisher", "rating"]],
+  ]);
   try {
-    const resp = await axios.get(contacts, { headers });
-    const data = resp.data.results;
-    res.render("clicks", { title: "Clicks | HubSpot APIs", data });
+    const response = await axios.get(url, { headers, params });
+    const data = response.data.results;
+    res.render("games", { title: "Games | HubSpot APIs", data });
   } catch (error) {
     console.error(error);
   }

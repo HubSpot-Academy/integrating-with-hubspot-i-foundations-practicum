@@ -1,0 +1,14 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Games
+        .cards 
+            each game in data
+                .card 
+                    h2.card__name #{game.properties.name}
+                    p.card__publisher #{game.properties.publisher}
+                    p.card__rating #{game.properties.rating}
