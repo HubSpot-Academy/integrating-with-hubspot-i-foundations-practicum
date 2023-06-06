@@ -6,9 +6,16 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Games
-        .cards 
+        table
+            tr
+                th Name
+                th Publisher 
+                th Rating 
+                th Edit 
             each game in data
-                .card 
-                    h2.card__name #{game.properties.name}
-                    p.card__publisher #{game.properties.publisher}
-                    p.card__rating #{game.properties.rating}
+                tr 
+                    td #{game.properties.name}
+                    td #{game.properties.publisher}
+                    td #{game.properties.rating}
+                    td 
+                        a(href="/update-cobj?id="+game.id) Update

@@ -6,14 +6,16 @@ html(lang="en")
     body
         a(href="/") Return to home page
         .form-wrapper
+            p Id: #{id}
             p Game: #{name}
             p Publisher: #{publisher}
             p Rating: #{rating}
             form(method="POST")
+                input(type="hidden" name="id" value=id)
                 label(for="Name") Name
                 input(type="text" placeholder="The name of the game" value=name name="name" required)
                 label(for="publisher") Publisher
                 input(type="text" placeholder="The game publisher" value=publisher name="publisher" required)
                 label(for="rating") Rating
-                input(type="number" placeholder="Your rating (out of 10)" value=rating name=rating required)
+                input(type="number" placeholder="Your rating (out of 10)" value=rating name="rating" required)
                 input(type="submit" value="Submit")

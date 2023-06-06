@@ -10,22 +10,27 @@ app.use(express.json());
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
 const PRIVATE_APP_ACCESS = "pat-na1-bf8e5671-ddc8-4631-a9ab-bbb199798e62";
 
+const headers = {
+  Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+  "Content-Type": "application/json",
+};
+
+const params = new URLSearchParams([
+  ["properties", ["name", "publisher", "rating"]],
+]);
+
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
 app.get("/", async (req, res) => {
   const url = "https://api.hubspot.com/crm/v3/objects/games";
-  const headers = {
-    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-    "Content-Type": "application/json",
-  };
-  const params = new URLSearchParams([
-    ["properties", ["name", "publisher", "rating"]],
-  ]);
   try {
     const response = await axios.get(url, { headers, params });
     const data = response.data.results;
-    res.render("games", { title: "Games | HubSpot APIs", data });
+    res.render("games", {
+      title: "List Custom Objects | Integrating With HubSpot I Practicum",
+      data,
+    });
   } catch (error) {
     console.error(error);
   }
@@ -35,23 +40,51 @@ app.get("/", async (req, res) => {
 
 // * Code for Route 2 goes here
 app.get("/update-cobj", async (req, res) => {
-  const data = {
-    name: "test",
-    publisher: "pub",
-    rating: 1,
-  };
+  let data = {};
+  if (req.query.id) {
+    const url =
+      "https://api.hubspot.com/crm/v3/objects/games" + "/" + req.query.id;
+    try {
+      const response = await axios.get(url, {
+        headers,
+        params,
+      });
+      data = { id: response.data.id, ...response.data.properties };
+    } catch (error) {
+      console.error(error);
+    }
+  }
   res.render("update", {
     title: "Update Custom Object Form | Integrating With HubSpot I Practicum",
-    name: "test",
-    publisher: "pub",
-    rating: 1,
+    ...data,
   });
 });
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-app.post("/update-cobj", async (req, res) => {});
+app.post("/update-cobj", async (req, res) => {
+  const data = {
+    properties: {
+      name: req.body.name,
+      publisher: req.body.publisher,
+      rating: req.body.rating,
+    },
+  };
+
+  const url =
+    "https://api.hubspot.com/crm/v3/objects/games" +
+    (req.body.id ? "/" + req.body.id : "");
+
+  try {
+    req.body.id
+      ? await axios.patch(url, data, { headers })
+      : await axios.post(url, data, { headers });
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 

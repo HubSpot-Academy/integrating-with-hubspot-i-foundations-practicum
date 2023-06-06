@@ -10,6 +10,10 @@ h1 {
     margin: 1rem;
 }
 
+th, td {
+    padding: 15px;
+}
+
 .cards {
     display: flex;
     align-items: center;
