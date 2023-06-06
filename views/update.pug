@@ -6,10 +6,6 @@ html(lang="en")
     body
         a(href="/") Return to home page
         .form-wrapper
-            p Id: #{id}
-            p Game: #{name}
-            p Publisher: #{publisher}
-            p Rating: #{rating}
             form(method="POST")
                 input(type="hidden" name="id" value=id)
                 label(for="Name") Name
