@@ -1,0 +1,7 @@
+doctype html
+html
+  head
+    title= Update Custom Object Form | Integrating With HubSpot I Practicum
+  body
+    a(href="/") Return to the homepage
+    // Add your content for the "updates" page here
