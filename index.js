@@ -12,7 +12,29 @@ const PRIVATE_APP_ACCESS = '';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
-// * Code for Route 1 goes here
+// Import required modules
+const express = require('express');
+const app = express();
+
+// Set up the view engine
+app.set('view engine', 'pug');
+app.set('views', './views');
+
+// Define the route for "/update-cobj"
+app.get('/update-cobj', (req, res) => {
+  const pageTitle = 'Update Custom Object Form | Integrating With HubSpot I Practicum';
+  res.render('updates', { pageTitle });
+});
+
+// Define the root route
+app.get('/', (req, res) => {
+  res.send('Welcome to the homepage!');
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
