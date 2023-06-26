@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= pageTitle
+  body
+    a(href="/update-cobj") Add/Update this table
+    table
+      tr
+        th Custom Object Field 1
+        th Custom Object Field 2
+        // Add more table headers for each custom object property field
+      
+      // Iterate over the custom objects and display them in the table rows
+      each customObject in customObjects
+        tr
+          td= customObject.field1
+          td= customObject.field2
+          // Add more table cells for each custom object property field
+

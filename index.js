@@ -20,7 +20,73 @@ const PRIVATE_APP_ACCESS = '';
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
-// * Code for Route 3 goes here
+// Import required modules
+const express = require('express');
+const axios = require('axios');
+const app = express();
+
+// Set up the view engine
+app.set('view engine', 'pug');
+app.set('views', './views');
+app.use(express.urlencoded({ extended: true }));
+
+// Define the route for "/update-cobj"
+app.get('/update-cobj', (req, res) => {
+  const pageTitle = 'Update Custom Object Form | Integrating With HubSpot I Practicum';
+  res.render('updates', { pageTitle });
+});
+
+// Define the app.post route for form submission
+app.post('/update-cobj', (req, res) => {
+  // Capture form data
+  const formData = req.body;
+
+  // Make a POST request to create a new custom object
+  axios
+    .post('https://api.example.com/custom-objects', formData)
+    .then((response) => {
+      // Custom object created successfully
+      console.log('New custom object created:', response.data);
+
+      // Redirect back to the homepage
+      res.redirect('/');
+    })
+    .catch((error) => {
+      // Error occurred while creating the custom object
+      console.error('Error creating custom object:', error);
+
+      // Redirect back to the homepage
+      res.redirect('/');
+    });
+});
+
+// Define the homepage route
+app.get('/', (req, res) => {
+  // Make a GET request to retrieve a list of custom object records
+  axios
+    .get('https://api.example.com/custom-objects')
+    .then((response) => {
+      // Retrieve the list of custom objects
+      const customObjects = response.data;
+
+      // Render the homepage template and pass the list of custom objects
+      const pageTitle = 'Homepage | Integrating With HubSpot I Practicum';
+      res.render('homepage', { pageTitle, customObjects });
+    })
+    .catch((error) => {
+      // Error occurred while retrieving the custom object records
+      console.error('Error retrieving custom object records:', error);
+
+      // Render the homepage template with an empty list of custom objects
+      const pageTitle = 'Homepage | Integrating With HubSpot I Practicum';
+      res.render('homepage', { pageTitle, customObjects: [] });
+    });
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
