@@ -16,7 +16,55 @@ const PRIVATE_APP_ACCESS = '';
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
-// * Code for Route 2 goes here
+// Import required modules
+const express = require('express');
+const axios = require('axios');
+const app = express();
+
+// Set up the view engine
+app.set('view engine', 'pug');
+app.set('views', './views');
+app.use(express.urlencoded({ extended: true }));
+
+// Define the route for "/update-cobj"
+app.get('/update-cobj', (req, res) => {
+  const pageTitle = 'Update Custom Object Form | Integrating With HubSpot I Practicum';
+  res.render('updates', { pageTitle });
+});
+
+// Define the app.post route for form submission
+app.post('/update-cobj', (req, res) => {
+  // Capture form data
+  const formData = req.body;
+
+  // Make a POST request to create a new custom object
+  axios
+    .post('https://app.hubspot.com/sales-products-settings/24461038/object/2-15978272', formData)
+    .then((response) => {
+      // Custom object created successfully
+      console.log('New custom object created:', response.data);
+
+      // Redirect back to the homepage
+      res.redirect('/');
+    })
+    .catch((error) => {
+      // Error occurred while creating the custom object
+      console.error('Error creating custom object:', error);
+
+      // Redirect back to the homepage
+      res.redirect('/');
+    });
+});
+
+// Define the root route
+app.get('/', (req, res) => {
+  res.send('Welcome to the homepage!');
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
