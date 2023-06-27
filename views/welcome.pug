@@ -1,17 +1,19 @@
 doctype html
 html 
     head 
-        title= `HubSpot Practicum: ${title}`
+        title= `${title}`
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
         link(rel="icon", type="image/x-icon" href="/favicon.ico")
     body    
         h1 Welcome!
-        h2 Scooters in our inventory
-        .cards 
+        table(border='1')
+            tr
+                th Name
+                th Model 
+                th Top speed
             each scooter in scooters
-                .card 
-                    p.card__name #{scooter.properties.name} 
-                    p.card__model #{scooter.properties.model}
-                    p.card__speed Top speed: 
-                        strong #{scooter.properties.top_speed}km/h
+                tr 
+                    td #{scooter.properties.name}
+                    td #{scooter.properties.model}
+                    td #{scooter.properties.top_speed}
