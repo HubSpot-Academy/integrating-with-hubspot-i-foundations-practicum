@@ -7,13 +7,17 @@ html
         link(rel="icon", type="image/x-icon" href="/favicon.ico")
     body    
         h1 Welcome!
+        a(href="/update-cobj") Add more items
         table(border='1')
             tr
                 th Name
                 th Model 
                 th Top speed
+                th Edit
             each scooter in scooters
                 tr 
                     td #{scooter.properties.name}
                     td #{scooter.properties.model}
                     td #{scooter.properties.top_speed}
+                    td 
+                        a(href="/update-cobj") ✏️
