@@ -7,21 +7,42 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
+// * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT.
+// Don't do this practicum in your normal account.
 const PRIVATE_APP_ACCESS = 'pat-eu1-c0988919-3456-4c80-9119-a19cf26bd11d';
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+const HEADERS = {
+    'Authorization': `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
+};
+
+// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data.
+// Pass this data along to the front-end and create a new pug template in the views folder.
 app.get('/', async (req, res) => {
-    res.render('welcome', {
-        title: 'HubSpot Practicum: home page'
-    })
+
+    const contacts = 'https://api.hubapi.com/crm/v3/objects/p_scooters?properties=name,model,top_speed';
+    try {
+        const resp = await axios.get(contacts, { headers: HEADERS });
+        // const data = resp.data.results;
+        // res.render('contacts', { title: 'Contacts | HubSpot APIs', data });
+
+        res.render('welcome', {
+            title: 'home page',
+            scooters: resp.data.results
+        })
+    } catch (e) {
+        console.error(e);
+        res.render('error');
+    }
 })
 
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
+// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data.
+// Send this data along in the next route.
 
 // * Code for Route 2 goes here
 
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
+// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your
+// custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
 

@@ -6,7 +6,7 @@ body, * {
     padding: 0;
 }
 
-h1 {
+h1, h2 {
     margin: 1rem;
 }
 
@@ -26,8 +26,16 @@ h1 {
     box-shadow: 3px 2px 6px lightgrey;
 }
 
-.card__email {
+.card__name {
+    font-size: 1.2rem;
+}
+
+.card__speed, .card__model {
     font-size: 1rem;
+}
+
+.card__speed {
+    font-style: italic;
 }
 
 .form-wrapper {
