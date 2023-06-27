@@ -40,13 +40,15 @@ app.get('/', async (req, res) => {
 app.get('/update-cobj/:id?', async (req, res) => {
     try {
         let data = {
-            title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'
+            title: 'Update Custom Object Form | Integrating With HubSpot I Practicum',
+            edit: false
         }
 
         if (req.params.id) {
             const scooter = `${BASE_SCOOTERS}/${req.params.id}${SCOOTER_PROPERTIES}`;
             const resp = await axios.get(scooter, { headers: HEADERS });
-            console.log(resp.data);
+            data.scooter = resp.data;
+            data.edit = true;
         }
         res.render('updates', data);
     } catch (e) {
@@ -57,11 +59,19 @@ app.get('/update-cobj/:id?', async (req, res) => {
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your
 // custom object data. Once executed, redirect the user to the homepage.
-app.post('/update-cobj', async (req, res) => {
+app.post('/update-cobj/:id?', async (req, res) => {
     try {
-        res.render('updates', {
-            title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'
-        });
+        let data = req.body;
+
+        if (req.params.id) { // update
+            
+        } else { // create
+            await axios.post(BASE_SCOOTERS, {
+                properties: data
+            }, { headers: HEADERS });
+        }
+
+        res.redirect('/');
     } catch (e) {
         console.error(e);
         res.render('error');

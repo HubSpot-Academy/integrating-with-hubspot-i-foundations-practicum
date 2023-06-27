@@ -6,5 +6,15 @@ html
         link(rel="stylesheet", href="/css/style.css")
         link(rel="icon", type="image/x-icon" href="/favicon.ico")
     body
-        h1 updates
+        if edit
+            h1 Update "#{scooter.properties.name}"
+        else
+            h1 Create new scooter
+
         a(href="/") Return to the homepage
+
+        form(action=edit ? `/update-cobj/${scooter.id}` : '/update-cobj', method='POST')
+            input(type='text', name='name', placeholder='Name', value=edit ? scooter.properties.name : '', required=true)
+            input(type='text', name='model', placeholder='Model', value=edit ? scooter.properties.model : '', required=true)
+            input(type='number', name='top_speed', placeholder='Top speed', value=edit ? scooter.properties.top_speed : '', required=true)
+            input(type='submit', value='Save')
