@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    title= `${title}`
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Add/Update a record
+    a(href="/") Return to the homepage
+
+    .form-wrapper 
+      form(method="POST")
+        label(for="productcode") Product Code *
+        input(type="text" name="productcode" value=data.properties.productcode required)
+        label(for="name") Name *
+        input(type="text" name="name" value=data.properties.name required)
+        label(for="vintage") Vintage
+        input(type="text" name="vintage" value=data.properties.vintage)
+        label(for="producer") Producer
+        input(type="text" name="producer" value=data.properties.producer)
+        label(for="category") Category
+
+        select(name='category', id='category')
+          option(value='' selected= true)
+          option(value='Red' selected= data.properties.category == 'Red') Red
+          option(value='White' selected= data.properties.category == 'White') White
+          option(value='Rose' selected= data.properties.category == 'Rose') Rose
+          option(value='Sparkling' selected= data.properties.category == 'Sparkling') Sparkling
+
+        label(for="size") Size
+        input(type="text" name="size" value=data.properties.size)
+        label(for="price") Price
+        input(type="text" name="price" value=data.properties.price)
+        label(for="comment") Comment
+        input(type="text" name="comment" value=data.properties.comment)
+        input(type="submit" value="Submit")

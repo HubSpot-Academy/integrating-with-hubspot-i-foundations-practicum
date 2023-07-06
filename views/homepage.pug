@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Custom Object Table
+    a(href=portalUrl) Test Portal
+    a(href="/update-cobj") Add/Update this table
+    table 
+      thead
+        tr
+          th Product Code
+          th Name
+          th Vintage
+          th Producer
+          th Category
+          th Size
+          th Price
+          th Comment
+          th 
+      tbody
+        each wine in data
+          tr
+            td
+              a(href="/update-cobj?productcode=" + wine.properties.productcode) #{wine.properties.productcode}
+            td= wine.properties.name
+            td= wine.properties.vintage
+            td= wine.properties.producer
+            td= wine.properties.category
+            td= wine.properties.size
+            td= wine.properties.price
+            td= wine.properties.comment
+            td
+              a(href="/delete-cobj?hs_object_id=" + wine.properties.hs_object_id) Delete
+
+    br
+
+    a(class='btn' href="/update-cobj") Add record
