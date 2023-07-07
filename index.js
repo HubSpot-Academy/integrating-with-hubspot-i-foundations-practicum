@@ -9,13 +9,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
+const HUB_BASE_URI ='https://api.hubspot.com/crm/v3';
 const PORT = 3000;
 
 const baseURI = `http://localhost:${PORT}`;
 
 app.get("/", async (req, res) => {
   const customObject =
-    "https://api.hubspot.com/crm/v3/objects/Anime?properties=name,village,ability";
+    `${HUB_BASE_URI}/objects/Anime?properties=name,village,ability`;
   const headers = {
     Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
     "Content-Type": "application/json",
@@ -42,12 +43,12 @@ app.get("/update-cobj", async (req, res) => {
 app.post("/update-cobj", async (req, res) => {
   const update = {
     properties: {
-      name: req.body.name,
-      ability: req.body.ability,
-      village: req.body.village,
+      name: req?.body?.name ?? 'Naruto',
+      ability: req?.body?.ability ?? 'Rasagen',
+      village: req?.body?.village ?? 'Leaf village',
     },
   };
-  const updateCustomObject = `https://api.hubapi.com/crm/v3/objects/Anime`;
+  const updateCustomObject = `${HUB_BASE_URI}/objects/Anime`;
   const headers = {
     Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
     "Content-Type": "application/json",
