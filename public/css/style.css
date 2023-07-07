@@ -1,58 +1,124 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+body,
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    margin: 1rem;
+  margin: 1rem;
+  text-align: center;
+  font-size: 60px;
+}
+
+h2 {
+  margin-left: 200px;
+  font-size: 40px;
+}
+
+h3 {
+  margin-left: 280px;
+}
+
+.container {
+  padding-top: 40px;
 }
 
 .cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+  flex-basis: 31%;
+  margin: 1rem 0.4rem;
+  padding: 1rem 0.4rem 2.5rem 0.4rem;
+  border: solid 1px lightgrey;
+  border-radius: 15px;
+  box-shadow: 3px 2px 6px lightgrey;
 }
 
 .card__email {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+  font-size: 18px;
+  max-width: 768px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: solid 1px lightgrey;
+  border-radius: 15px;
+  box-shadow: 3px 2px 6px lightgrey;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
+label,
+input {
+  margin-top: 10px;
+  display: block;
+  font-size: inherit;
 }
 
 input[type="text"] {
-    padding: .25rem;
+  padding: 0.25rem;
+  margin-top: 10px;
 }
 
 input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+  background-color: lightgrey;
+  border: none;
+  padding: 0.375rem 1rem;
+  margin-top: 20px;
+}
+
+a {
+  padding-left: 80px;
+  color: rebeccapurple;
+  font-size: 25px;
+}
+
+#alink {
+  margin-left: 125px;
+  font-size: 25px;
+  padding-top: 20px;
+}
+
+#table-center {
+  padding-top: 20px;
+  margin-left: 200px;
+}
+
+table {
+  width: 50%;
+  overflow-x: auto;
+}
+
+td {
+  font-weight: bold;
+  height: 70px;
+  border: 1px solid black;
+  border-collapse: collapse;
+  row-gap: 1px;
+  text-align: left;
+  font-size: 20px;
+  padding-left: 15px;
+}
+
+th {
+  font-weight: bold;
+  font-size: 20px;
+  height: 70px;
+  border: 1px solid rgb(235, 145, 175);
+  background-color: rgb(235, 145, 175);
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.title2 {
+  padding-top: 40px;
+  font-size: 60px;
 }
