@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    title= `${title}`
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Add/Update a record
+    a(href="/") Return to the homepage
+
+    .form-wrapper 
+      form(method="POST")
+        label(for="productcode") Product Code *
+        input(type="text" name="productcode" required)
+        label(for="name") Name *
+        input(type="text" name="name" required)
+        label(for="vintage") Vintage
+        input(type="text" name="vintage")
+        label(for="producer") Producer
+        input(type="text" name="producer")
+        label(for="category") Category
+
+        select(name='category', id='category')
+          option(value='' selected= true)
+          option(value='Red') Red
+          option(value='White') White
+          option(value='Rose') Rose
+          option(value='Sparkling') Sparkling
+
+        label(for="size") Size
+        input(type="text" name="size")
+        label(for="price") Price
+        input(type="text" name="price") 
+        label(for="comment") Comment
+        input(type="text" name="comment")
+        input(type="submit" value="Submit")
