@@ -1,0 +1,24 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+         a(href='/') Return to the homepage
+        
+         .form-wrapper
+           form(action='/update-cobj', method='POST')
+             label(for='name') Name:
+             input(type='text', name='name', required)
+             br
+             label(for='description') Description:
+             input(type='text', name='description', required)
+             br
+             label(for='price') Price(USD):
+             input(type='number', name='price', required)
+             br
+             label(for='dietary_info') Dietary Info:
+             input(type='text', name='dietary_info', required)
+             br
+             input(type="submit" value="Submit")

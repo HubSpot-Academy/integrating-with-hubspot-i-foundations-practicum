@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= `${title}`
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1= `${title}`
+    // Link to add/update the table
+    a(href='/update-cobj') Add/Update this table
+
+    // Table displaying custom objects (coffees)
+    table
+      thead
+        tr
+          th Name
+          th Description
+          th Price(USD)
+          th Dietary Info
+      tbody
+        each coffee in data
+          tr
+            td #{coffee.properties.name}
+            td #{coffee.properties.description}
+            td #{coffee.properties.price}
+            td #{coffee.properties.dietary_info}
+
