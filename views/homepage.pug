@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 #{title}
+    a(href="/update-cobj") Add/Update this table
+    table
+      thead
+        tr
+          th Name
+          th Address
+          th Price
+      tbody
+        each home in homesData
+          tr
+            td= home.properties.name
+            td= home.properties.address
+            td= home.properties.price

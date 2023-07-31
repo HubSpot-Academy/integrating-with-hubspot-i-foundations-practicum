@@ -1,14 +1,17 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/styles.css')
+    title Create/Update Home
   body
-    h1= title
-    form(action='/update-cobj' method='post')
-      each prop in ['name', 'address', 'price']
-        label(for=prop)= prop.charAt(0).toUpperCase() + prop.slice(1)
-        input(type='text' name=prop required)
-      button(type='submit') Save
-    p
-      a(href='/') Return to the homepage
+    h1 Create/Update Home
+    form(action='/create-update', method='POST')
+      .form-group
+        label(for='name') Name:
+        input#name.form-control(type='text', name='name', required)
+      .form-group
+        label(for='address') Address:
+        input#address.form-control(type='text', name='address', required)
+      .form-group
+        label(for='price') Price:
+        input#price.form-control(type='number', name='price', required)
+      button.btn.btn-primary(type='submit') Save

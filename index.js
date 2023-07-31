@@ -1,38 +1,76 @@
 const express = require('express');
+const axios = require('axios');
 const app = express();
-const path = require('path');
 
 app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
+const path = require('path');
+
+// Set the path to the public directory
+const publicPath = path.join(__dirname, 'public');
+
+app.use(express.static(publicPath));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// TODO: Define your custom object properties here
-const CUSTOM_PROPERTIES = ['name', 'address', 'price'];
+const PRIVATE_APP_ACCESS = 'pat-na1-498e306e-abfb-4d79-b809-6a84344316a2';
 
-// TODO: Implement your custom object data handling logic here
-const customObjects = [];
+// Route 1 - Homepage
+app.get('/', async (req, res) => {
+  try {
+    const homesUrl = 'https://api.hubspot.com/crm/v3/objects/homes?limit=10&properties=price&properties=name&properties=address&archived=false';
+    const headers = {
+      Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+      'Content-Type': 'application/json'
+    };
 
-// Route 1: Homepage
-app.get('/', (req, res) => {
-  res.render('homepage', { title: 'Homepage | Integrating With HubSpot I Practicum', customObjects });
-});
+    console.log('Making API call to retrieve custom objects data...');
+    const response = await axios.get(homesUrl, { headers });
+    const homesData = response.data.results;
+    console.log('Custom objects data retrieved successfully:', homesData);
 
-// Route 2: Form to create or update custom objects
-app.get('/update-cobj', (req, res) => {
-  res.render('form', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
-});
-
-// Route 3: Create or update custom objects
-app.post('/update-cobj', (req, res) => {
-  const newCustomObject = {};
-  for (const prop of CUSTOM_PROPERTIES) {
-    newCustomObject[prop] = req.body[prop];
+    res.render('homepage', {
+      title: 'Homepage | Integrating With HubSpot I Practicum',
+      homesData
+    });
+  } catch (error) {
+    console.error('Error retrieving custom objects data:', error);
   }
-  customObjects.push(newCustomObject);
-  res.redirect('/');
 });
 
-// * Localhost
+// Route 2 - Form for Updating Custom Object
+app.get('/update-cobj', (req, res) => {
+  res.render('updates', {
+    title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'
+  });
+});
+
+// Route 3 - Update Custom Object
+app.post('/update-cobj', async (req, res) => {
+  const { name, address, price } = req.body;
+
+  const newCustomObject = {
+    properties: {
+      name,
+      address,
+      price
+    }
+  };
+
+  const homesUrl = 'https://api.hubspot.com/crm/v3/objects/homes';
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
+  };
+
+  try {
+    await axios.post(homesUrl, newCustomObject, { headers });
+    console.log('Custom object updated successfully:', newCustomObject);
+    res.redirect('/');
+  } catch (error) {
+    console.error('Error updating custom object:', error);
+    res.status(500).send('Error updating custom object.');
+  }
+});
+
+// Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));

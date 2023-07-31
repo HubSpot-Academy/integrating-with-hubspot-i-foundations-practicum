@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 #{title}
+    a(href="/") Return to the homepage
+    div.form-wrapper
+      form(action="/update-cobj", method="post")
+        label(for="name") Name:
+        input(type="text", name="name", id="name")
+        br
+        label(for="address") Address:
+        input(type="text", name="address", id="address")
+        br
+        label(for="price") Price:
+        input(type="text", name="price", id="price")
+        br
+        input(type="submit", value="Submit")
