@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/styles.css')
+  body
+    h1= title
+    form(action='/update-cobj' method='post')
+      each prop in ['name', 'address', 'price']
+        label(for=prop)= prop.charAt(0).toUpperCase() + prop.slice(1)
+        input(type='text' name=prop required)
+      button(type='submit') Save
+    p
+      a(href='/') Return to the homepage
