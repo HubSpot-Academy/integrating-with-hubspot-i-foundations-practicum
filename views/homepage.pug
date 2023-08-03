@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= `${title}`
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1= `${title}`
+    // Link to add/update the table
+    a(href='/update-cobj') Add/Update this table
+
+    // Table displaying custom objects (coffees)
+    table
+      thead
+        tr
+          th Name
+          th About
+          th Colour
+      tbody
+        each planet in data
+          tr
+            td #{planet.name}
+            td #{planet.about}
+            td #{planet.colour}
