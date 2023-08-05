@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    title= title
+    style.
+      @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+      body, * {
+          font-family: 'Roboto', sans-serif;
+          margin: 0;
+          padding: 0;
+      }
+
+      h1 {
+          margin: 1rem;
+      }
+
+      label, input {
+          margin-top: 5px;
+          display: block;
+          font-size: inherit;
+      }
+
+      input[type="text"] {
+          padding: .25rem;
+      }
+
+      input[type="submit"] {
+          background-color: lightgrey;
+          border: none;
+          padding: .375rem 1rem;
+          margin-top: 10px;
+      }
+  body
+    h1= title
+    p
+      a(href='/') Return to the homepage
+    h1 Create Custom Object Record
+    form(action='/update-cobj' method='post')
+      label(for='firstName') First Name:
+      input(type='text' name='firstName')
+      br
+      label(for='lastName') Last Name:
+      input(type='text' name='lastName')
+      br
+      label(for='Email') Email:
+      input(type='text' name='Email')
+      br
+      input(type='submit' value='Create')
