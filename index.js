@@ -5,11 +5,11 @@ const app = express();
 const port = 3000;
 
 app.set("view engine", "pug");
-app.set("views", __dirname + "/views"); // Ensure the correct path to your views directory
+app.set("views", __dirname + "/views"); 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Replace "YOUR_HUBSPOT_ACCESS_TOKEN" with your actual HubSpot access token
+
 const accessToken = "pat-na1-ac0741a6-a46f-4e88-b660-06a052043cd7";
 
 // Routes
