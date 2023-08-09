@@ -1,0 +1,41 @@
+doctype html
+html(lang="en")
+    head
+        title= `${title}`
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        p.padding_line
+        a.homepage_link(href="/") Return to the homepage
+        h1 Add Custom Object
+        form(method="POST")
+            table
+                thead
+                    tr
+                        td Field
+                        td Value
+                tr
+                    td Name
+                    td
+                        input(type="text" name="newName" required)
+                tr
+                    td Concert Type
+                    td
+                        input(type="text" name="newConcertType" required)
+                tr
+                    td Composer
+                    td
+                        input(type="text" name="newComposer" required)
+                tr
+                    td Artist
+                    td
+                        input(type="text" name="newArtist" required)
+                tr
+                    td Concert Date
+                    td
+                        input(type="text" name="newConcertDate" required)
+                tr
+                    td Ticket Price
+                    td
+                        input(type="text" name="newTicketPrice" required)
+            input.padding_line(type="submit" value="Submit")
+            

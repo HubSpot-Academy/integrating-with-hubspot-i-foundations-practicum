@@ -7,27 +7,30 @@ body, * {
 }
 
 h1 {
+    margin: 2rem
+}
+
+.homepage_link {
     margin: 1rem;
+    padding-left: 1rem;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+.padding_line {
+    margin-top: 1rem;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+a, table 
+{
+    margin: 2rem;
 }
 
-.card__email {
-    font-size: 1rem;
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+tr.submit_table_row {
+    column-span: 2;
 }
 
 .form-wrapper {
@@ -38,6 +41,10 @@ h1 {
     border: solid 1px lightgrey;
     border-radius: 15px;
     box-shadow: 3px 2px 6px lightgrey;
+}
+
+input.padding_line {
+    margin-left: 30px;
 }
 
 label, input {
