@@ -1,0 +1,23 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet" href="/css/style.css")
+    body    
+        a(href='/') Return to the homepage
+        .form-wrapper
+            h2 Car Form
+            br
+            form(method="POST") 
+                label(for="newval") Car Name
+                input(type="text" name="name" required) 
+                label(for="newval") Brand
+                input(type="text" name="brand" required) 
+                label(for="newval") Mileage
+                input(type="text" name="mileage" required) 
+                label(for="newval") Year of Manufacture
+                input(type="text" name="year_of_manufacture" required) 
+                input(type="submit" value="submit")

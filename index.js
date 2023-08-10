@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const app = express();
@@ -8,19 +9,78 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const { PRIVATE_APP_ACCESS } = process.env;
+const BASE_URL = 'https://api.hubspot.com/crm/v3/objects';
+const HEADERS = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
+};
+const OBJECT_TYPE = '2-17498505'
+
+const hubspotRequest = axios.create({
+    baseURL: BASE_URL,
+    headers: HEADERS
+});
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
 
+app.get('/', async (req, res) => {
+    const properties = [
+        'name',
+        'brand',
+        'year_of_manufacture',
+        'mileage'
+    ]
+    const propertiesQuery = properties.map(property => `properties=${property}`).join('&');
+
+    try {
+        const resp = await hubspotRequest.get(`/${OBJECT_TYPE}?${propertiesQuery}`);
+        const data = resp.data.results;
+        return res.render('homepage', { data });
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
 
+app.get('/update-cobj', async (req, res) => {
+    return res.render('updates', { title: "Update Custom Object Form | Integrating With HubSpot I Practicum" })
+});
+
+
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
+
+app.post('/update-cobj', async (req, res) => {
+    const {
+        name,
+        year_of_manufacture,
+        brand,
+        mileage
+    } = req.body;
+
+    const data = {
+        properties: {
+            name,
+            year_of_manufacture,
+            brand,
+            mileage
+        }
+    }
+
+    try {
+        await hubspotRequest.post(`/${OBJECT_TYPE}`, data);
+        return res.redirect('/');
+    } catch(err) {
+        console.error(err);
+    }
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 

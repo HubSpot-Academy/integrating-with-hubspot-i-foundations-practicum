@@ -1,0 +1,25 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet" href="/css/style.css")
+    body    
+        h1 Custom Object Table
+        a(href='/update-cobj') Add/Update this table 
+        br
+        br
+        table(style="" border='1')
+            tr
+                th Name
+                th Brand
+                th Year of Manufacture
+                th Mileage
+            each car in data
+                tr
+                    td #{car.properties.name} 
+                    td #{car.properties.brand}
+                    td #{car.properties.year_of_manufacture}
+                    td #{car.properties.mileage}
