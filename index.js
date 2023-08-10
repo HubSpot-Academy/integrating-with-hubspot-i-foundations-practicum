@@ -51,7 +51,16 @@ app.get('/update-cobj', (req, res) => {
 app.post('/update-cobj', async (req, res) => {
 
     const formData = req.body;
+    console.log('formData :'  + JSON.stringify(formData))
 
+    const customObjectPayload = {
+        
+            "properties": {
+              "partner_name": formData.partner_name,
+              "partner_type": formData.partner_type,
+              "account_number": formData.account_number
+            }
+        }
     //Post the data received from the form to create the custom object
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
@@ -60,12 +69,11 @@ app.post('/update-cobj', async (req, res) => {
 
     
     try { 
-        await axios.post(`${baseUrl}${customObjectEndpoint}`, formData, {
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                'Content-Type': 'application/json'
-              }
-        } );
+        const result = await axios.post(`${baseUrl}${customObjectEndpoint}`, customObjectPayload, 
+            { headers }
+        );
+        console.log('result: ' + result)
+
         //then redirect
         res.redirect('/');
     } catch(err) {
