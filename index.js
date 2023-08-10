@@ -11,39 +11,35 @@ app.use(express.json());
 
 const PRIVATE_APP_ACCESS = 'pat-na1-3e5e4fde-a7c7-4855-944c-5c271f730920';
 const baseUrl = 'https://api.hubapi.com';
-const customObjectEndpoint = '/crm/v3/objects/custom-objects';
+const customObjectEndpoint = '/crm/v3/objects/2-17491631';
 
-// route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
-// * Code for Route 1 goes here
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
 
-    const partners = '';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     }
+
     try {
-        const resp = await axios.get(partners, { headers });
-        const data = resp.data.results;
-        res.render('updates', { pageTitle: 'Update Custom Object Form | Integrating With HubSpot I Practicum', data });
+        const resp = await axios.get('${baseUrl}${customObjectEndpoint}', { headers 
+        });
+        const customObjects  = resp.data.results;
+        res.render('homepage', { customObjects });
     } catch (error) {
         console.error(error);
+        res.render('homepage', { customObjects: [] });
     }
 
 
 
 })
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
-// * Code for Route 2 goes here
-app.get('/update-cobj', async (req, res) => {
+app.get('/update-cobj', (req, res) => {
 
-    res.render('homepage', { customObjects: /* List of custom objects */ });
+    res.render('updates', { pageTitle: 'Update Custom Object Form | Integrating With HubSpot I Practicum' }); 
+});
 
-
-})
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
 app.post('/update-cobj', async (req, res) => {
