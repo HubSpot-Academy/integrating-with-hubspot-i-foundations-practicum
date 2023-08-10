@@ -10,6 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const PRIVATE_APP_ACCESS = 'pat-na1-3e5e4fde-a7c7-4855-944c-5c271f730920';
+const baseUrl = 'https://api.hubapi.com';
+const customObjectEndpoint = '/crm/v3/objects/custom-objects';
 
 // route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
