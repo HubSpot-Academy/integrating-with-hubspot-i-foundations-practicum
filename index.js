@@ -23,15 +23,53 @@ app.get('/', (req, res) => {
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
-app.get('/update-cobj', (req, res) => {
+app.get('/update-cobj', async (req, res) => {
 
-    res.render('updates', { pageTitle: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
+        const partners = 'https://api.hubspot.com/crm/v3/objects/contacts';
+        const headers = {
+            Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+            'Content-Type': 'application/json'
+        }
+        try {
+            const resp = await axios.get(partners, { headers });
+            const data = resp.data.results;
+            res.render('updates', { pageTitle: 'Update Custom Object Form | Integrating With HubSpot I Practicum', data });
+        } catch (error) {
+            console.error(error);
+        }
+
 
 })
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-app.post('/update-cobj', (req, res) => {
+app.post('/update-cobj', async (req, res) => {
+
+    const update = {
+        properties: {
+            "partner_name": req.body.partner_name,
+            "partner_type": req.body.partner_type,
+            "account_number": req.body.partner_type
+        }
+    }
+    const createPartner = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
+
+    //we need to post the data received from the form to create the custom object
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    
+    try { 
+        await axios.patch(createPartner, update, { headers } );
+        //then redirect
+        res.redirect('/');
+    } catch(err) {
+        console.error(err);
+    }
+
+    res.redirect('/');
 
 
 })
