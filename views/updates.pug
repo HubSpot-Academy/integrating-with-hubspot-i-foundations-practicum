@@ -5,12 +5,12 @@ html
   body
     a(href='/') Return to the homepage
 
-  script(type='text/javascript').
-    if (foo) bar(1 + 5)
-  script(charset='utf-8' type='text/javascript' src='//js.hsforms.net/forms/embed/v2.js')
-  script.
-    hbspt.forms.create({
-    region: "na1",
-    portalId: "43523241",
-    formId: "0e1fc7b9-5b8e-4efc-bc18-8e17cfc40a97"
-    });
+    form(action='/update-cobj', method='POST')
+      p
+        | title: 
+        input(name='partner_name', value='', type='text')
+        |          year: 
+        input(name='partner_type', value='', type='text')
+        |          imdb: 
+        input(name='account_number', value='', type='number')
+      input(value='Submit', type='submit')
