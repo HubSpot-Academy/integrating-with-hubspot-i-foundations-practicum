@@ -5,9 +5,17 @@ html
         title= 'Homepage | Integrating With HubSpot I Practicum'
       
     body    
-     a(href='/update-cobj') //update this table
-//-         .cards 
-//-             each contact in data
-//-                 .card 
-//-                     h2.card__name #{contact.properties.partner_name}  #{contact.properties.partner_type}
-//-                     p.card__email #{contact.properties.account_number}
+        a(href='/update-cobj') Update this table
+        h1 Partners
+        table
+            thead
+                tr
+                    th Partner Name
+                    th Partner Type
+                    th Account Number 
+            tbody
+                each obj in customObjects
+                    tr 
+                        td= JSON.stringify(obj)
+                        td= obj.properties.hs_object_id
+                        td= obj.id

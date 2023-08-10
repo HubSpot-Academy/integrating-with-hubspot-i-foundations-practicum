@@ -13,19 +13,25 @@ const PRIVATE_APP_ACCESS = 'pat-na1-3e5e4fde-a7c7-4855-944c-5c271f730920';
 const baseUrl = 'https://api.hubapi.com';
 const customObjectEndpoint = '/crm/v3/objects/2-17491631';
 
-
 app.get('/', async (req, res) => {
 
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
 
     try {
-        const resp = await axios.get('${baseUrl}${customObjectEndpoint}', { headers 
+
+        const headers = {
+            Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+            'Content-Type': 'application/json'
+        }
+    
+
+        const resp = await axios.get(`${baseUrl}${customObjectEndpoint}`, { headers 
         });
+
         const customObjects  = resp.data.results;
+        console.log('hello world2 ' + JSON.stringify(customObjects));
         res.render('homepage', { customObjects });
+        console.log('app.get begins' + req)
+
     } catch (error) {
         console.error(error);
         res.render('homepage', { customObjects: [] });
@@ -46,7 +52,7 @@ app.post('/update-cobj', async (req, res) => {
 
     const formData = req.body;
 
-    //we need to post the data received from the form to create the custom object
+    //Post the data received from the form to create the custom object
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -54,7 +60,7 @@ app.post('/update-cobj', async (req, res) => {
 
     
     try { 
-        await axios.post('', formData, {
+        await axios.post(`${baseUrl}${customObjectEndpoint}`, formData, {
             headers: {
                 'Authorization': `Bearer ${apiKey}`,
                 'Content-Type': 'application/json'
