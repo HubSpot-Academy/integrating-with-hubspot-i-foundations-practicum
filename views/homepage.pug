@@ -16,6 +16,6 @@ html
             tbody
                 each obj in customObjects
                     tr 
-                        td= JSON.stringify(obj)
-                        td= obj.properties.hs_object_id
-                        td= obj.id
+                        td= obj.properties.partner_name
+                        td= obj.properties.partner_type
+                        td= obj.properties.account_number

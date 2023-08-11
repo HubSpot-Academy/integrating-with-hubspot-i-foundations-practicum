@@ -12,6 +12,10 @@ app.use(express.json());
 const PRIVATE_APP_ACCESS = 'pat-na1-3e5e4fde-a7c7-4855-944c-5c271f730920';
 const baseUrl = 'https://api.hubapi.com';
 const customObjectEndpoint = '/crm/v3/objects/2-17491631';
+const properties = '?properties=partner_name&properties=partner_type&properties=account_number'
+
+
+
 
 app.get('/', async (req, res) => {
 
@@ -24,13 +28,12 @@ app.get('/', async (req, res) => {
         }
     
 
-        const resp = await axios.get(`${baseUrl}${customObjectEndpoint}`, { headers 
+        const resp = await axios.get(`${baseUrl}${customObjectEndpoint}${properties}`, { headers 
         });
 
         const customObjects  = resp.data.results;
-        console.log('hello world2 ' + JSON.stringify(customObjects));
+
         res.render('homepage', { customObjects });
-        console.log('app.get begins' + req)
 
     } catch (error) {
         console.error(error);
