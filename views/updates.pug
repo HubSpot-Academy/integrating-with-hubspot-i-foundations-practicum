@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title New Partner Form
+  body
+    a(href='/') Return to the homepage
+
+    form(action='/update-cobj', method='POST')
+      p
+        | partner_name: 
+        input(name='partner_name', value='', type='text')
+        |          partner_type: 
+        input(name='partner_type', value='', type='text')
+        |          account_number: 
+        input(name='account_number', value='', type='number')
+      input(value='Submit', type='submit')

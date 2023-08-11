@@ -1,0 +1,21 @@
+
+doctype html
+html 
+    head 
+        title= 'Homepage | Integrating With HubSpot I Practicum'
+      
+    body    
+        a(href='/update-cobj') Update this table
+        h1 Partners
+        table
+            thead
+                tr
+                    th Partner Name
+                    th Partner Type
+                    th Account Number 
+            tbody
+                each obj in customObjects
+                    tr 
+                        td= obj.properties.partner_name
+                        td= obj.properties.partner_type
+                        td= obj.properties.account_number
