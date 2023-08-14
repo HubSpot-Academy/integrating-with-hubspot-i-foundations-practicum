@@ -1,6 +1,6 @@
 # Welcome to the Integrating With HubSpot I: Foundations Practicum
 
-here is link to my custom created object - Mixed Reality Spaces
+Here is link to my custom created object - Mixed Reality Spaces
 https://app.hubspot.com/contacts/22581352/objects/2-17611006/views/all/list
 
 
