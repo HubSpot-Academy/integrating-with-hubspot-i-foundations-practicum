@@ -21,7 +21,7 @@ app.get('/contacts', async (req, res) => {
     try {
         const response = await axios.get(contacts, { headers });
         const data = response.data.results;
-        res.render('contacts', { title: 'Contacts | Hubspot APIs', data });
+        res.render('contacts', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum', data });
     } catch (error) {
         console.error(error);
     }
@@ -31,7 +31,7 @@ app.get('/contacts', async (req, res) => {
 
 app.get('/update', async (req, res) => {
     const email = req.query.email;
-    const getContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email&properties=email,favourite_book`;
+    const getContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email&associations=bikes`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -39,7 +39,8 @@ app.get('/update', async (req, res) => {
     try {
         const response = await axios.get(getContact, { headers });
         const data = response.data;
-        res.render('update', {userEmail: data.properties.email, favouriteBook: data.properties.favourite_book});
+        console.log(data);
+        res.render('update', {userFirstname: data.properties.firstname, userLastname: data.properties.lastname, userEmail: data.properties.email, bikeName: data.properties.bike_name});
     } catch (error) {
         console.error(error);
     }
@@ -50,7 +51,7 @@ app.get('/update', async (req, res) => {
 app.post('/update', async (req, res) => {
     const update = {
         properties: {
-            "favourite_book": req.body.newVal
+            "bike_name": req.body.newVal  
         }
     }
     const email = req.query.email;
