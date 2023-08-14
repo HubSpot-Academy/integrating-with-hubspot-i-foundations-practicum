@@ -57,5 +57,5 @@ input[type="submit"] {
     margin-top: 10px;
 }
 .test{
-    display block;
+    display: inline;
 }
