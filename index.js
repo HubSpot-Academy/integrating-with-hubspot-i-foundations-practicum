@@ -12,7 +12,13 @@ const PRIVATE_APP_ACCESS = 'pat-na1-d06d72a9-9bed-4f97-91f7-1998749955ba';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
-// * Code for Route 1 goes here
+app.get('/', async (req, res) => {
+    res.send('Hello World!')
+  });
+
+  app.get('/update-cobj', async (req, res) => {
+    res.send('update object!')
+  });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
@@ -23,7 +29,7 @@ const PRIVATE_APP_ACCESS = 'pat-na1-d06d72a9-9bed-4f97-91f7-1998749955ba';
 // * Code for Route 3 goes here
 
 /** 
-* * This is sample code to give you a reference for how you should structure your calls. */
+* * This is sample code to give you a reference for how you should structure your calls. 
 
 
 app.get('/contacts', async (req, res) => {
@@ -64,7 +70,7 @@ app.post('/update', async (req, res) => {
     }
 
 });
-
+*/
 
 
 // * Localhost
