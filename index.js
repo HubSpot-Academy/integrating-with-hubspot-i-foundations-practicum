@@ -14,7 +14,8 @@ const PRIVATE_APP_ACCESS = 'pat-na1-d06d72a9-9bed-4f97-91f7-1998749955ba';
 
 app.get('/', async (req, res) => {
     //res.send('homepage!')
-    const contacts = 'https://api.hubapi.com/crm/v3/schemas/2-16358760';
+    res.render('pets-object', { title: 'Pets | HubSpot APIs', name: 'Test name' });
+    /*const contacts = 'https://api.hubapi.com/crm/v3/schemas/2-16358760';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -25,7 +26,7 @@ app.get('/', async (req, res) => {
         res.send(data );      
     } catch (error) {
         console.error(error);
-    }
+    }*/
   });
 
   app.get('/update-cobj', async (req, res) => {
