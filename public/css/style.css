@@ -56,3 +56,21 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+table{
+    border-collapse: collapse;
+}
+th{
+    border:2px solid black;
+    width: 250px;
+    background-color: brown;
+    color: white;
+    padding: 10px;
+    margin: auto;
+   
+}
+td{
+    border:1px solid black;
+}
+.files{
+    text-align: center;
+}

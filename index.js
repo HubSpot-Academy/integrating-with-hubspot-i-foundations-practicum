@@ -1,6 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const app = express();
+
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
@@ -8,11 +10,73 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP;
+
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+app.get('/', async (req, res) => {
 
-// * Code for Route 1 goes here
+    const moviesUrl = 'https://api.hubspot.com/crm/v3/objects/2-17921709?properties=name,genres,year';
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+
+    try {
+        const resp = await axios.get(moviesUrl, { headers });
+        const data = resp.data.results;
+        res.render('index', { title: 'Movies', data }); 
+    } catch (error) {
+        console.error(error);
+    }
+
+});
+
+app.get('/update-cobj', (req, res) => {
+    res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
+});
+
+app.post('/update-cobj', async (req, res) => {
+    try {
+   
+        const id = req.body.id
+        const name = req.body.name;
+        const genres = req.body.genres;
+        const year = req.body.year;
+        
+     
+        const newMovie = {
+            properties: {
+                "id":id,
+                "name": name,
+                "genres": genres,
+                "year": year
+            }
+        };
+
+        const createUrl = 'https://api.hubspot.com/crm/v3/objects/2-17921709';
+
+        
+        const headers = {
+            Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+            'Content-Type': 'application/json'
+        };
+
+        const response = await axios.post(createUrl, newMovie, { headers });
+     
+
+     
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+
+
+
+
+app.listen(3000, () => console.log('Listening on http://localhost:3000'));
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
@@ -68,4 +132,3 @@ app.post('/update', async (req, res) => {
 
 
 // * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
