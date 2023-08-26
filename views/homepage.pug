@@ -1,0 +1,21 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Vehicles
+        .container
+            a(href="/update-cobj") Add/Update this table 
+            table.styled-table
+                thead
+                    th Name
+                    th Color
+                    th Type 
+                tbody 
+                    each vehicle in data
+                        tr
+                            td=`${vehicle.properties.name}`
+                            td=`${vehicle.properties.color}`
+                            td=`${vehicle.properties.vehicle_type}`
