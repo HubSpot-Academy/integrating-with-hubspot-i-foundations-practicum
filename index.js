@@ -8,22 +8,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = "";
+const PRIVATE_APP_ACCESS = "pat-na1-e7cb266f-f6d3-42e5-8680-35e9461529b4";
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get("/", async (req, res) => {
-    const dataURL = "https://api.hubapi.com/crm/v3/objects/vehicles";
+    const dataURL =
+        "https://api.hubapi.com/crm/v3/objects/vehicles?properties=name&properties=color&properties=vehicle_type";
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         "Content-Type": "application/json",
     };
     try {
-        const res = await axios.get(dataURL, { headers });
-        const data = res.data.results;
+        const response = await axios.get(dataURL, { headers });
+        const data = response.data.results;
+        console.log(data);
         res.render("homepage", { title: "HomePage | Vehicles List", data });
     } catch (error) {
-        res.render("Error", {title:"Error 500", error})
+        res.render("Error", { title: "Error 500", error });
     }
 });
 
