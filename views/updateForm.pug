@@ -1,0 +1,23 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Add New Custom Object Record
+
+        .container
+            a(href="/") Return to Homepage
+
+            form(action="/update-cobj", method="post").form-wrapper
+                label Vehicle Name
+                input#name(type="text", name="Vehicle Name",required)
+
+                label Vehicle Color
+                input#color(type="text", name="Vehicle Color",required)
+
+                label Vehicle Type
+                input#vehicle_type(type="text", name="Vehicle Type",required)
+
+                input(type="submit", value="Submit")
