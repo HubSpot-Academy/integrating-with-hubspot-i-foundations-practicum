@@ -10,14 +10,14 @@ html
         .container
             a(href="/") Return to Homepage
 
-            form(action="/update-cobj", method="post").form-wrapper
+            form(action="http://localhost:3000/update-cobj", method="post").form-wrapper
                 label Vehicle Name
-                input#name(type="text", name="Vehicle Name",required)
+                input#name(type="text", name="name",required)
 
                 label Vehicle Color
-                input#color(type="text", name="Vehicle Color",required)
+                input#color(type="text", name="color",required)
 
                 label Vehicle Type
-                input#vehicle_type(type="text", name="Vehicle Type",required)
+                input#vehicle_type(type="text", name="vehicle_type",required)
 
                 input(type="submit", value="Submit")
