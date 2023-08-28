@@ -3,7 +3,24 @@ html
 head 
     title= `${title}`
     meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel='stylesheet', type='text/css', href='/css/style.css')
 body    
     h1 Updates
     p 
         a(href="/") Return to the homepage
+    form(method="POST")
+        p
+            label(for="name") Name*
+            input(type="text" name="name" required)
+        p
+            label(for="location") Location*
+            input(type="text" name="location" required)
+        
+        p
+            label(for="start_date") Start Date*
+            input(type="date" name="start_date" required)
+        p
+            label(for="end_date") End Date*
+            input(type="date" name="end_date" required)
+        p
+            input(type="submit" value="Submit")

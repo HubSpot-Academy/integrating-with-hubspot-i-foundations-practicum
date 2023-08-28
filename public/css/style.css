@@ -5,9 +5,12 @@ body, * {
     margin: 0;
     padding: 0;
 }
+body {
+    padding: 30px;
+}
 
 h1 {
-    margin: 1rem;
+    margin: 1rem 0;
 }
 
 .cards {
@@ -55,4 +58,11 @@ input[type="submit"] {
     border: none;
     padding: .375rem 1rem;
     margin-top: 10px;
+}
+table td {
+    border: solid 1px #ccc;
+    padding: 10px;
+}
+table tr:nth-child(odd) {
+    background-color: #efefef;
 }
