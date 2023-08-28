@@ -5,4 +5,18 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body
-       <a href="/">Return to the homepage</a>
+       <a href="/">Return to the homepage</a><br><br>
+        form(role='form' method='POST' action='/update-cobj')
+                label(for='petname') Pet Name:
+                input#petname(type='text', placeholder='' name='petname' required='true')
+                label(for='pettype') Pet Type:
+                select#pettype(type='select', placeholder='' name='pettype' required='true')
+                    option(value='') Please select
+                    option(value='Canine') Canine
+                    option(value='Feline') Feline
+                label(for='petgender') Pet Gender:
+                select#petgender(type='select', placeholder='' name='petgender' required='true')
+                    option(value='') Please select
+                    option(value='Male') Male
+                    option(value='Female') Female
+                button.btn(type="submit", name="submit") Submit

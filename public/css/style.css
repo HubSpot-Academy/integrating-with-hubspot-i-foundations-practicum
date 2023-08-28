@@ -3,9 +3,11 @@
 body, * {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 0px;
 }
-
+body {
+    padding: 20px;
+}
 h1 {
     margin: 1rem;
 }
@@ -40,19 +42,21 @@ h1 {
     box-shadow: 3px 2px 6px lightgrey;
 }
 
-label, input {
+label, input, select {
     margin-top: 5px;
     display: block;
     font-size: inherit;
+    margin-bottom: 10px;
 }
 
-input[type="text"] {
+input[type="text"], select {
     padding: .25rem;
 }
 
-input[type="submit"] {
+input[type="submit"], .btn {
     background-color: lightgrey;
     border: none;
-    padding: .375rem 1rem;
+    padding: 1rem 1rem;
     margin-top: 10px;
+    cursor: pointer;
 }
