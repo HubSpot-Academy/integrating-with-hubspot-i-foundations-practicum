@@ -8,9 +8,12 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body
        h1= `${title}`
--       var list = ["Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis"]
-       .cards
+       <table>
          each pet in data
-            .card 
-                 h2.card__name  #{pet.properties.pet_name}
-                 p.card__type   #{pet.properties.pet_type__v2_}
+            <tr>
+                <td>
+                  h3.pet__name  #{pet.properties.pet_name}
+                <td> 
+                  p.pet__type   #{pet.properties.pet_type__v2_}
+                <td> 
+                  p.pet_gender   #{pet.properties.pet_gender}  

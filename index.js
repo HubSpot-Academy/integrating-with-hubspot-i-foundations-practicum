@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
   });
 
   app.get('/update-cobj', async (req, res) => {
-    res.send('update object!')
+    res.render('updates', {title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'})
   });
 
   app.post('/update-cobj', async (req, res) => {
