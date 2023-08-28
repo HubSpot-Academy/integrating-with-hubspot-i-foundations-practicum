@@ -1,0 +1,17 @@
+doctype html
+html 
+head 
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel='stylesheet', type='text/css', href='/css/style.css')
+body    
+    h1 Vacations
+    p 
+        a(href="/update-cobj") Add/Update this table
+    table
+        each vacation in data 
+            tr 
+                td #{vacation.properties.name}
+                td #{vacation.properties.location}
+                td #{vacation.properties.start_date}
+                td #{vacation.properties.end_date}
