@@ -60,3 +60,13 @@ input[type="submit"], .btn {
     margin-top: 10px;
     cursor: pointer;
 }
+table {
+    border-spacing: 2px;
+}
+th,td {
+    padding: 10px;
+    border: 1px solid #333;
+}
+th {
+    background-color: #ffbdbd;
+}

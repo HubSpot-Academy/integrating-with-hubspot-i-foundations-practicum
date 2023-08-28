@@ -9,11 +9,19 @@ html
     body
        h1= `${title}`
        <br><a href="/update-cobj">Add/Update this table</a>
-       <table>
+       <br><br><table>
+         <tr>
+            <th>
+              h3.pet__name Pet Name
+            <th>
+              h3.pet__type Pet Type
+            <th>
+              h3.pet_gender Pet Gender
+
          each pet in data
             <tr>
                 <td>
-                  h3.pet__name  #{pet.properties.pet_name}
+                  p.pet__name  #{pet.properties.pet_name}
                 <td> 
                   p.pet__type   #{pet.properties.pet_type__v2_}
                 <td> 
