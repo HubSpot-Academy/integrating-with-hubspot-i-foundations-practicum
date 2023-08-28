@@ -14,16 +14,16 @@ const PRIVATE_APP_ACCESS = 'pat-na1-d06d72a9-9bed-4f97-91f7-1998749955ba';
 
 app.get('/', async (req, res) => {
     //res.send('homepage!')
-    res.render('pets-object', { title: 'Pets | HubSpot APIs', name: 'Test name' });
-    const pets = 'https://api.hubapi.com/crm/v3/objects/2-16358760';
+    const pets = 'https://api.hubapi.com/crm/v3/objects/2-16358760?properties=pet_name, pet_type__v2_, pet_gender';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     }
     try {
-        const resp = await axios.get(contacts, { headers });
+        const resp = await axios.get(pets, { headers });
         const data = resp.data.results;
-        res.send(data );      
+        //res.send(data);
+        res.render('pets-object', { title: 'Pets | HubSpot APIs', data });      
     } catch (error) {
         console.error(error);
     }

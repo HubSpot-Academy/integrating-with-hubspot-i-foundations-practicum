@@ -9,5 +9,8 @@ html
     body
        h1= `${title}`
 -       var list = ["Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis"]
-       each item in list
-        li= item
+       .cards
+         each pet in data
+            .card 
+                 h2.card__name  #{pet.properties.pet_name}
+                 p.card__type   #{pet.properties.pet_type__v2_}
