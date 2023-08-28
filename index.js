@@ -48,7 +48,11 @@ app.get('/', async (req, res) => {
     try {
         const resp = await axios.post(pets, { properties }, { headers });
         const data = resp.data;
-        res.send(data.id);
+        if(data.id){
+            return res.redirect('/');
+        }else{
+            res.send("Error!");
+        }
     } catch (error) {
         console.error(error);
     }
