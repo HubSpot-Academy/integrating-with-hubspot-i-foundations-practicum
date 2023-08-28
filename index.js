@@ -34,7 +34,26 @@ app.get('/', async (req, res) => {
   });
 
   app.post('/update-cobj', async (req, res) => {
-    res.send('update object!')
+    const formData = {
+        "properties": {
+          "pet_name": req.body.petname,
+          "pet_type__v2_": req.body.pettype,
+          "pet_gender": req.body.petgender
+        }
+      };
+
+    const pets = 'https://api.hubapi.com/crm/v3/objects/2-16358760';
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+    try {
+        const resp = await axios.post(pets, { headers }, data: formData);
+        const data = resp.id;
+        res.send(data);
+    } catch (error) {
+        console.error(error);
+    }
   });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
