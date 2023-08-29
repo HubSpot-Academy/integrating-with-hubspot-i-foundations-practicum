@@ -40,11 +40,25 @@ app.get('/', async (req, res) => {
 
 // * Code for Route 3 goes here
   app.post('/update-cobj', async (req, res) => {
+    
+    const filterGroups = [
+      {
+        "filters":[
+          {
+            "propertyName": "pet_name",
+            "operator": "EQ",
+            "value": req.body.petname
+          }
+        ]
+      }
+    ];
+    const searchPet = 'https://api.hubapi.com/crm/v3/objects/2-16358760/search';
+
     const properties = {
-          "pet_name": req.body.petname,
-          "pet_type__v2_": req.body.pettype,
-          "pet_gender": req.body.petgender
-      };
+      "pet_name": req.body.petname,
+      "pet_type__v2_": req.body.pettype,
+      "pet_gender": req.body.petgender
+  };
 
     const pets = 'https://api.hubapi.com/crm/v3/objects/2-16358760';
     const headers = {
@@ -52,6 +66,19 @@ app.get('/', async (req, res) => {
         'Content-Type': 'application/json'
     }
     try {
+        const objSearch = await axios.post(searchPet, { filterGroups }, { headers });
+        const objSearchdata = objSearch.data.results[0].id;
+
+        if(objSearchdata !== 'undefined'){//update
+            const respupdate = await axios.patch(pets+'/'+objSearchdata, { properties }, { headers });
+            const dataUpdate = respupdate.data;
+            if(dataUpdate.id){
+                return res.redirect('/');
+            }else{
+                res.send("Error!");
+            }
+        }else{//create
+
         const resp = await axios.post(pets, { properties }, { headers });
         const data = resp.data;
         if(data.id){
@@ -59,6 +86,7 @@ app.get('/', async (req, res) => {
         }else{
             res.send("Error!");
         }
+      }
     } catch (error) {
         console.error(error);
     }
