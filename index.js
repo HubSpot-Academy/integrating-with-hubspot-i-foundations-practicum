@@ -17,9 +17,10 @@ const CUSTOM_OBJECT_NAME = 'competition';
 
 // ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 app.get('/', async (req, res) => {
-    const objectId = checkCustomObject();
-    const data = getCustomObject(objectId);
-    res.render('index', { title: 'Index', data });
+    const objectId = await checkCustomObject();
+    console.log(objectId);
+    const data = await getCustomObject(objectId);
+    res.render('index', { title: 'Index', data, objectId });
 });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
@@ -30,29 +31,7 @@ app.get('/update-cobj', async (req, res) => {
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-* * App.post sample
-app.post('/update', async (req, res) => {
+app.post('/update-cobj', async (req, res) => {
     const update = {
         properties: {
             "favorite_book": req.body.newVal
@@ -74,11 +53,9 @@ app.post('/update', async (req, res) => {
     }
 
 });
-*/
-
 
 // * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+app.listen(3000, () => console.log('-> http://localhost:3000'));
 
 
 const checkCustomObject = async () => {
@@ -87,22 +64,24 @@ const checkCustomObject = async () => {
         const { data } = await axios.get(custom, { headers });
 
         if (data.results) {
-            const competitions = data.results.filter(x => x.fullyQualifiedName && x.fullyQualifiedName.includes(CUSTOM_OBJECT_NAME));
+            const competitions = data.results.filter(x => x.fullyQualifiedName && x.fullyQualifiedName.toLowerCase().includes(CUSTOM_OBJECT_NAME));
+            
             let objectId;
             // haven't custom object
-            if (competitions.length > 0) 
+            if (competitions.length === 0) 
             {
                 // then create it
-                const results = createCustomObject();
+                const results = await createCustomObject();
                 objectid = results.objectTypeId;
             } else {
-                objectId = competitions.objectTypeId;
+                objectId = competitions[0].objectTypeId;
+                console.log(objectId);
             }
 
             return objectId;
         }
     } catch (error) {
-        if (error.response.status === 400) {
+        if (error.response && error.response.status === 400) {
             // if error means no custom object, then create it
             const results = createCustomObject();
             return results.objectTypeId;   
