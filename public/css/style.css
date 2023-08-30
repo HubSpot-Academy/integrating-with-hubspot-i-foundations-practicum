@@ -6,7 +6,7 @@ body, * {
     padding: 0;
 }
 
-h1 {
+h1, h2, a {
     margin: 1rem;
 }
 

@@ -23,30 +23,34 @@ app.get('/', async (req, res) => {
     res.render('index', { title: 'Index', data, objectId });
 });
 
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
+// ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 app.get('/update-cobj', async (req, res) => {
+    const objectId = req.query.id;
+
+    if (!objectId) {
+        const objectId = await checkCustomObject();
+        res.redirect(301, `/update-cobj?id=${objectId}`);
+    }
+
     res.render('form');
 });
 
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
+// ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 app.post('/update-cobj', async (req, res) => {
     const update = {
         properties: {
-            "favorite_book": req.body.newVal
+            "name": req.body.name,
+            "winner": req.body.winner,
+            "looser": req.body.looser
         }
     }
-
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
+    const objectId = req.query.id;
+    const custom = `https://api.hubspot.com/crm/v3/objects/${objectId}`;
 
     try { 
-        await axios.patch(updateContact, update, { headers } );
+        await axios.post(custom, update, { headers } );
         res.redirect('back');
     } catch(err) {
         console.error(err);
