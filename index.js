@@ -15,19 +15,18 @@ const headers = {
 };
 const CUSTOM_OBJECT_NAME = 'competition';
 
-// ROUTE 0: Check for custom objects
+// ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 app.get('/', async (req, res) => {
-    checkCustomObject();
-    res.render('index', { title: 'Index' });      
+    const objectId = checkCustomObject();
+    const data = getCustomObject(objectId);
+    res.render('index', { title: 'Index', data });
 });
-
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
-// * Code for Route 2 goes here
+app.get('/update-cobj', async (req, res) => {
+    res.render('form');
+});
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
@@ -89,19 +88,28 @@ const checkCustomObject = async () => {
 
         if (data.results) {
             const competitions = data.results.filter(x => x.fullyQualifiedName && x.fullyQualifiedName.includes(CUSTOM_OBJECT_NAME));
+            let objectId;
             // haven't custom object
             if (competitions.length > 0) 
             {
                 // then create it
-                createCustomObject();
+                const results = createCustomObject();
+                objectid = results.objectTypeId;
+            } else {
+                objectId = competitions.objectTypeId;
             }
+
+            return objectId;
         }
     } catch (error) {
         if (error.response.status === 400) {
             // if error means no custom object, then create it
-            createCustomObject();
+            const results = createCustomObject();
+            return results.objectTypeId;   
         }
     }
+
+    return false;
 };
 
 const createCustomObject = async () => {
@@ -145,9 +153,22 @@ const createCustomObject = async () => {
     };
 
     try {
-        const { response, data } = await axios.post(custom, customObject, { headers });
-        console.log(data);
+        const { data } = await axios.post(custom, customObject, { headers });
+        return data.results;
     } catch (error) {
         console.error(error);
     }
+};
+
+const getCustomObject = async (objectId) => {
+    const custom = `https://api.hubspot.com/crm/v3/objects/${objectId}`;
+    try {
+        const { data } = await axios.get(custom, { headers });
+        return data.results;
+        
+    } catch (error) {
+        console.log(error.data);
+    }
+
+    return false;
 };

@@ -7,3 +7,8 @@ html
     body    
         h1 Index
         h2 Custom Object Exists
+        .cards 
+            each custom in data
+                .card 
+                    h2.card__name test
+                    p.card__email #{custom}
