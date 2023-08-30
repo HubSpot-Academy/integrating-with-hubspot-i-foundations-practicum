@@ -7,8 +7,19 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+
+const PRIVATE_APP_ACCESS = 'pat-eu1-e223cb8c-b635-4701-bd31-de38036ff098';
+const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
+};
+const CUSTOM_OBJECT_NAME = 'competition';
+
+// ROUTE 0: Check for custom objects
+app.get('/', async (req, res) => {
+    checkCustomObject();
+    res.render('index', { title: 'Index' });      
+});
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
@@ -69,3 +80,74 @@ app.post('/update', async (req, res) => {
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+
+
+const checkCustomObject = async () => {
+    const custom = `https://api.hubspot.com/crm/v3/schemas`;
+    try {
+        const { data } = await axios.get(custom, { headers });
+
+        if (data.results) {
+            const competitions = data.results.filter(x => x.fullyQualifiedName && x.fullyQualifiedName.includes(CUSTOM_OBJECT_NAME));
+            // haven't custom object
+            if (competitions.length > 0) 
+            {
+                // then create it
+                createCustomObject();
+            }
+        }
+    } catch (error) {
+        if (error.response.status === 400) {
+            // if error means no custom object, then create it
+            createCustomObject();
+        }
+    }
+};
+
+const createCustomObject = async () => {
+    const custom = `https://api.hubspot.com/crm/v3/schemas`;
+    const customObject = {
+        "name": "Competitions",
+        "labels": {
+            "singular": "Competition",
+            "plural": "Competitions"
+        },
+        "properties": [
+            {
+                "name": "name",
+                "label": "Name",
+                "type": "string",
+                "fieldType": "text",
+                "archived": false,
+                "hasUniqueValue": false
+            },
+            {
+                "name": "winner",
+                "label": "Winner",
+                "type": "string",
+                "fieldType": "text",
+                "archived": false,
+                "hasUniqueValue": false
+            },
+            {
+                "name": "looser",
+                "label": "Looser",
+                "type": "string",
+                "fieldType": "text",
+                "archived": false,
+                "hasUniqueValue": false
+            },
+        ],
+        "primaryDisplayProperty": "name",
+        "associatedObjects": [
+            "CONTACT"
+        ],
+    };
+
+    try {
+        const { response, data } = await axios.post(custom, customObject, { headers });
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+};
