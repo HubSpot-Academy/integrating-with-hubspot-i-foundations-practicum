@@ -18,9 +18,9 @@ const CUSTOM_OBJECT_NAME = 'competition';
 // ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 app.get('/', async (req, res) => {
     const objectId = await checkCustomObject();
-    console.log(objectId);
     const data = await getCustomObject(objectId);
-    res.render('index', { title: 'Index', data, objectId });
+    
+    res.render('homepage', { title: 'Index', data, objectId });
 });
 
 // ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
@@ -33,7 +33,7 @@ app.get('/update-cobj', async (req, res) => {
         res.redirect(301, `/update-cobj?id=${objectId}`);
     }
 
-    res.render('form');
+    res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum.'});
 });
 
 // ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
@@ -51,7 +51,7 @@ app.post('/update-cobj', async (req, res) => {
 
     try { 
         await axios.post(custom, update, { headers } );
-        res.redirect('back');
+        res.redirect(301, '/');
     } catch(err) {
         console.error(err);
     }
@@ -79,7 +79,6 @@ const checkCustomObject = async () => {
                 objectid = results.objectTypeId;
             } else {
                 objectId = competitions[0].objectTypeId;
-                console.log(objectId);
             }
 
             return objectId;
@@ -144,9 +143,14 @@ const createCustomObject = async () => {
 };
 
 const getCustomObject = async (objectId) => {
+    const params = new URLSearchParams();
+    params.append('properties', 'name');
+    params.append('properties', 'winner');
+    params.append('properties', 'looser');
+    
     const custom = `https://api.hubspot.com/crm/v3/objects/${objectId}`;
     try {
-        const { data } = await axios.get(custom, { headers });
+        const { data } = await axios.get(custom, { headers, params });
         return data.results;
         
     } catch (error) {
