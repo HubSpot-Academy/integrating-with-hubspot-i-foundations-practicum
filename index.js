@@ -67,17 +67,18 @@ app.get('/', async (req, res) => {
     }
     try {
         const objSearch = await axios.post(searchPet, { filterGroups }, { headers });
-        const objSearchdata = objSearch.data.results[0].id;
+        //const objSearchdata = objSearch.data.results[0].id;
 
-        if(objSearchdata !== 'undefined'){//update
-            const respupdate = await axios.patch(pets+'/'+objSearchdata, { properties }, { headers });
+       // if pet name is exist I perform the object update
+        if(objSearch.data.total > 0){//update
+            const respupdate = await axios.patch(pets+'/'+objSearch.data.results[0].id, { properties }, { headers });
             const dataUpdate = respupdate.data;
             if(dataUpdate.id){
                 return res.redirect('/');
             }else{
                 res.send("Error!");
             }
-        }else{//create
+        }else{ //if the pet name is not found then I perform the create
 
         const resp = await axios.post(pets, { properties }, { headers });
         const data = resp.data;
