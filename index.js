@@ -8,9 +8,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const PRIVATE_APP_ACCESS = 'pat-eu1-da53a09a-7f52-4045-968c-1e190a42c818';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+app.get('/', async (req, res) => {
+    const companies = 'https://api.hubspot.com/crm/v3/objects/companies?properties=name,domain,industry,phone';
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+    try {
+        const resp = await axios.get(companies, { headers });
+        const data = resp.data.results;
+        console.log(data)
+        res.render('homepage', { title: 'Homepage | Integrating With HubSpot I Practicum.', data });      
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 // * Code for Route 1 goes here
 

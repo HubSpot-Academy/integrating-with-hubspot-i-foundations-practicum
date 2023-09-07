@@ -5,18 +5,7 @@ This repository is for the Integrating With HubSpot I: Foundations course. This 
 To read the full directions, please go to the [practicum instructions](https://app.hubspot.com/academy/l/tracks/1092124/1093824/5493?language=en).
 
 **Put your HubSpot developer test account custom objects URL link here:**
-I'm posting only a link to contacts as I'm unable to access custom objects on my test account. Here's a reply from the professor:
-
-> Hello Dominik,
-
-> I've looked into your test account you created. Unfortunately, it seems as if your HubSpot account isn't on Marketing Hub Enterprise, which is required for custom objects. Due to this, I will return to my team to discuss how to make our practicum more inclusive of those who don't have access to them.
-
-> For now, you can complete the practicum by calling a standard object that comes within your CRM (contact, company, etc). Please let me know if that makes sense to you.
-
-> Best,
-> Brooke Bond, Developer Professor
-
-https://app-eu1.hubspot.com/contacts/143267642/objects/0-1/views/all/list
+https://app-eu1.hubspot.com/contacts/143267642/objects/0-5/views/all/list
 
 ---
 
