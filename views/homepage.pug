@@ -8,12 +8,20 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Companies
-        .cards 
+        
+        a(href="/update-cobj") Add/Update this table
+        
+        table 
+            tr
+                th Name
+                th Domain
+                th Industry
+                th Phone
             each company in data
-                .card 
-                    h2.card__name #{company.properties.name}
-                    p.card__item #{company.properties.domain}
-                    p.card__item #{company.properties.industry}
-                    p.card__item #{company.properties.phone}
+                tr 
+                    td #{company.properties.name}
+                    td #{company.properties.domain}
+                    td #{company.properties.industry}
+                    td #{company.properties.phone}
                     
 

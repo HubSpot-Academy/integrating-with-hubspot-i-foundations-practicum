@@ -1,7 +1,7 @@
 doctype html
 html 
     head 
-        title= {title}
+        title= `${title}`
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
@@ -15,7 +15,13 @@ html
                 input(type="text" id="domain" name="domain" required)
 
                 label(for="industry") Industry:
-                input(type="text" id="industry" name="industry" required)
+                select(id="industry" name="industry" required)
+                    option(value="ACCOUNTING") ACCOUNTING
+                    option(value="AIRLINES_AVIATION") AIRLINES_AVIATION
+                    option(value="ALTERNATIVE_DISPUTE_RESOLUTION") ALTERNATIVE_DISPUTE_RESOLUTION
+                    option(value="COMPUTER_SOFTWARE") COMPUTER_SOFTWARE
+                    option(value="CONSUMER_ELECTRONICS") CONSUMER_ELECTRONICS
+                    
 
                 label(for="phone") Phone:
                 input(type="text" id="phone" name="phone" required)

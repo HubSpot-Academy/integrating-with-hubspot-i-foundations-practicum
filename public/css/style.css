@@ -57,3 +57,17 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+
+table {
+    border-spacing: 2px;
+}
+
+th {
+    background-color: lightgrey;
+    padding: 4px;
+}
+
+td {
+    border: 1px solid black;
+    padding: 4px;
+}
