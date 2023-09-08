@@ -1,0 +1,21 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Update Custom Object Form
+        form(action="/update", method="POST")
+            label(for="name") Name:
+            input(type="text", id="name", name="name", placeholder="Enter the name", required)
+            
+            label(for="age") Age:
+            input(type="number", id="age", name="age", placeholder="0", required)
+
+            label(for="description") Description:
+            input(type="text", id="description", name="description", placeholder="Add a description", required)
+
+            button(type="submit") Submit
