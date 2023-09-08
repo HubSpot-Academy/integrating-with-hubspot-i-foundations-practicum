@@ -27,7 +27,7 @@ app.get('/', async (req, res) => {
          const resp = await axios.get(successionCharacters, { headers });
          const data = resp.data.results;
          console.log(data)
-         res.render('successionCharacters', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });      
+         res.render('successionCharacters', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum', data });      
      } catch (error) {
          console.error(error);
      }

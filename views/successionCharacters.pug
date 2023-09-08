@@ -7,8 +7,9 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Succession Characters
-        //- .cards 
-        //-     each contact in data
-        //-         .card 
-        //-             h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-        //-             p.card__email #{contact.properties.email}
+        .cards 
+            each characters in data
+                .card 
+                    h2.card__name #{characters.properties.name}  
+                    p.card_age #{characters.properties.age}
+                    p.card__description #{characters.properties.description}
