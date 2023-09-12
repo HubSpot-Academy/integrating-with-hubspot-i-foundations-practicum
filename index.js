@@ -46,12 +46,15 @@ app.post('/update-cobj', async (req, res) => {
 
         // Create a new custom object instance
         const newCustomObject = {
-            properties: {
-                property1,
-                property2,
-                property3,
+            "properties": {
+                "name": "Recipe",
+                "instructions": property1,
+                "ingredients": property2,
+                "tastiness": property3
             },
         };
+
+        console.log(newCustomObject);
 
         // Make a POST request to create a new custom object
         await axios.post('https://api.hubspot.com/crm/v3/objects/recipes', newCustomObject, {
