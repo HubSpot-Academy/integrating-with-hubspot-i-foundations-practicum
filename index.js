@@ -8,64 +8,65 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const PRIVATE_APP_ACCESS = 'pat-eu1-278efacb-75d7-45d8-b3a9-a4b9152221c8';
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
+// Route 1 - Fetch custom object data and render the homepage template
+app.get('/', async (req, res) => {
     try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
+        // Fetch custom object records
+        const response = await axios.get('https://api.hubspot.com/crm/v3/objects/recipes', {
+            headers: {
+                Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        console.log(response.data.results);
+
+        const customObjects = response.data.results;
+
+        // Render the homepage.pug template and pass the custom object data
+        res.render('homepage', { title: 'Custom Object Records', customObjects });
     } catch (error) {
         console.error(error);
     }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
-
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
-
+// Route 2 - Render the updates.pug template
+app.get('/update-cobj', (req, res) => {
+    // Render the updates.pug template with the page title and a link to the homepage
+    res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
 });
-*/
 
+// Route 3 - Create or update a custom object record
+app.post('/update-cobj', async (req, res) => {
+    try {
+        // Capture form data
+        const { property1, property2, property3 } = req.body;
+
+        // Create a new custom object instance
+        const newCustomObject = {
+            properties: {
+                property1,
+                property2,
+                property3,
+            },
+        };
+
+        // Make a POST request to create a new custom object
+        await axios.post(BASE_URL, newCustomObject, {
+            headers: {
+                Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        // Redirect back to the homepage
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));

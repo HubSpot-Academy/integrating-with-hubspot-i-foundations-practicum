@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Custom Object Records
+    a(href='/update-cobj') Add/Update this table
+    if customObjects.length > 0
+      table
+        thead
+          tr
+            th Property 1
+            th Property 2
+            th Property 3
+        tbody
+          each customObject in customObjects
+            tr
+              td= customObject.properties.hs_object_id
+              td= AA
+              td= AA
+    else
+      p No custom object records found.

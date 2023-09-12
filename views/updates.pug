@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1= title
+    a(href='/') Return to the homepage
+    form(action='/update-cobj', method='post')
+      label(for='property1') Property 1:
+      input(type='text', name='property1', id='property1', required)
+      br
+      label(for='property2') Property 2:
+      input(type='text', name='property2', id='property2', required)
+      br
+      label(for='property3') Property 3:
+      input(type='text', name='property3', id='property3', required)
+      br
+      input(type='submit', value='Create Custom Object')
