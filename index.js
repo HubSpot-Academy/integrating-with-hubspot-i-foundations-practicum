@@ -54,7 +54,7 @@ app.post('/update-cobj', async (req, res) => {
         };
 
         // Make a POST request to create a new custom object
-        await axios.post(BASE_URL, newCustomObject, {
+        await axios.post('https://api.hubspot.com/crm/v3/objects/recipes', newCustomObject, {
             headers: {
                 Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
                 'Content-Type': 'application/json',
