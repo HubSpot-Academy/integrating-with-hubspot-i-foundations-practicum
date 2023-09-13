@@ -14,7 +14,7 @@ const PRIVATE_APP_ACCESS = 'pat-eu1-278efacb-75d7-45d8-b3a9-a4b9152221c8';
 app.get('/', async (req, res) => {
     try {
         // Fetch custom object records
-        const response = await axios.get('https://api.hubspot.com/crm/v3/objects/recipes', {
+        const response = await axios.get('https://api.hubspot.com/crm/v3/objects/recipes?properties=name,instructions,ingredients,tastiness', {
             headers: {
                 Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
                 'Content-Type': 'application/json',
