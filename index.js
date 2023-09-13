@@ -54,8 +54,6 @@ app.post('/update-cobj', async (req, res) => {
             },
         };
 
-        console.log(newCustomObject);
-
         // Make a POST request to create a new custom object
         await axios.post('https://api.hubspot.com/crm/v3/objects/recipes', newCustomObject, {
             headers: {
@@ -71,5 +69,5 @@ app.post('/update-cobj', async (req, res) => {
     }
 });
 
-// * Localhost
+// Serve this app on Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));

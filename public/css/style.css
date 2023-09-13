@@ -1,58 +1,100 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+/* Reset default browser styles */
 body, * {
-    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/* Apply the 'Roboto' font to all elements */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Style the header */
 h1 {
-    margin: 1rem;
+    text-align: center;
+    padding: 20px;
+    background-color: #007BFF;
+    color: #fff;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+/* Style the links */
+a {
+    text-decoration: none;
+    color: #007BFF;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-.card__email {
-    font-size: 1rem;
-}
-
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-label, input {
-    margin-top: 5px;
+/* Style the homepage link */
+a[href='/'] {
     display: block;
-    font-size: inherit;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
 }
 
-input[type="text"] {
-    padding: .25rem;
+/* Style the form */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
+/* Style the form labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style the form inputs */
+input[type='text'] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Style the form submit button */
+input[type='submit'] {
+    background-color: #007BFF;
+    color: #fff;
     border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* Style the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Style the table header */
+th {
+    background-color: #007BFF;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+}
+
+/* Style the table rows */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Style the table rows on hover */
+tr:hover {
+    background-color: #f2f2f2;
 }
