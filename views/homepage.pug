@@ -10,14 +10,16 @@ html
       table
         thead
           tr
-            th Property 1
-            th Property 2
-            th Property 3
+            th Name
+            th Ingredients
+            th Instructions
+            th Tastiness
         tbody
           each customObject in customObjects
             tr
-              td= customObject.properties.hs_object_id
-              td= AA
-              td= AA
+              td= customObject.properties.name
+              td= customObject.properties.ingredients
+              td= customObject.properties.instructions
+              td= customObject.properties.tastiness
     else
       p No custom object records found.

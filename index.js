@@ -42,15 +42,15 @@ app.get('/update-cobj', (req, res) => {
 app.post('/update-cobj', async (req, res) => {
     try {
         // Capture form data
-        const { property1, property2, property3 } = req.body;
+        const { name, ingredients, instructions, tastiness } = req.body;
 
         // Create a new custom object instance
         const newCustomObject = {
             "properties": {
-                "name": "Recipe",
-                "instructions": property1,
-                "ingredients": property2,
-                "tastiness": property3
+                "name": name,
+                "ingredients": ingredients,
+                "instructions": instructions,
+                "tastiness": tastiness
             },
         };
 

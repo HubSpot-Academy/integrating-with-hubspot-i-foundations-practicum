@@ -7,13 +7,16 @@ html
     h1= title
     a(href='/') Return to the homepage
     form(action='/update-cobj', method='post')
-      label(for='property1') Property 1:
-      input(type='text', name='property1', id='property1', required)
+      label(for='name') Name:
+      input(type='text', name='name', id='name', required)
       br
-      label(for='property2') Property 2:
-      input(type='text', name='property2', id='property2', required)
+      label(for='ingredients') Ingredients:
+      input(type='text', name='ingredients', id='ingredients', required)
       br
-      label(for='property3') Property 3:
-      input(type='text', name='property3', id='property3', required)
+      label(for='instructions') Instructions:
+      input(type='text', name='instructions', id='instructions', required)
+      br
+      label(for='tastiness') Tastiness:
+      input(type='text', name='tastiness', id='tastiness', required)
       br
       input(type='submit', value='Create Custom Object')
