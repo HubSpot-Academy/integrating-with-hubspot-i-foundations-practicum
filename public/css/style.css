@@ -12,26 +12,6 @@ h1 {
   text-align: center;
 }
 
-.cards {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-
-.card {
-  flex-basis: 31%;
-  margin: 1rem 0.4rem;
-  padding: 1rem 0.4rem 2.5rem 0.4rem;
-  border: solid 1px lightgrey;
-  border-radius: 15px;
-  box-shadow: 3px 2px 6px lightgrey;
-}
-
-.card__email {
-  font-size: 1rem;
-}
-
 .form-wrapper {
   font-size: 18px;
   max-width: 768px;
@@ -54,8 +34,10 @@ input[type='text'] {
 }
 
 input[type='submit'] {
-  background-color: lightgrey;
+  background-color: #0056b3;
   border: none;
+  border-radius: 5px;
+  color: white;
   padding: 0.375rem 1rem;
   margin-top: 10px;
 }
