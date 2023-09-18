@@ -1,94 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+body,
+* {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    margin: 1rem;
-    text-align: center;
+  margin: 1rem;
+  text-align: center;
 }
 
 .cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+  flex-basis: 31%;
+  margin: 1rem 0.4rem;
+  padding: 1rem 0.4rem 2.5rem 0.4rem;
+  border: solid 1px lightgrey;
+  border-radius: 15px;
+  box-shadow: 3px 2px 6px lightgrey;
 }
 
 .card__email {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+  font-size: 18px;
+  max-width: 768px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: solid 1px lightgrey;
+  border-radius: 15px;
+  box-shadow: 3px 2px 6px lightgrey;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
+label,
+input {
+  margin-top: 5px;
+  display: block;
+  font-size: inherit;
 }
 
-input[type="text"] {
-    padding: .25rem;
+input[type='text'] {
+  padding: 0.25rem;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+input[type='submit'] {
+  background-color: lightgrey;
+  border: none;
+  padding: 0.375rem 1rem;
+  margin-top: 10px;
 }
 
 /* Table styles */
 table {
-    width: 70%;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-    margin: 0 auto;
-    margin-top: 2rem;
-  }
-  th, td {
-    padding: 1%;
-    text-align: center;
-  }
-  th {
-    background-color: #13ddb6;
-  }
-  td {
-    background-color: #fff;
-  }
-  a {
-    padding: 10px;
-    background-color: #007bff;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    padding: 1%;
-    text-decoration: none;
-  }
-  a:hover {
-    background-color: #0056b3;
-  }
-
-  .new {
-    text-align: center;
-  }
+  width: 70%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+th,
+td {
+  padding: 1%;
+  text-align: center;
+}
+th {
+  background-color: #13ddb6;
+}
+td {
+  background-color: #fff;
+}
+a {
+  padding: 10px;
+  background-color: #007bff;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  padding: 1%;
+  text-decoration: none;
+}
+a:hover {
+  background-color: #0056b3;
+}
+.center {
+  text-align: center;
+}

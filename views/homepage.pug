@@ -6,8 +6,8 @@ html
         link(rel="stylesheet", href="/css/style.css")
   body
     h1 Pets
-    .new
-        a(href='/pets/new') Add Pet
+    .center
+        a(href='/update-cobj') Add Pet
     table
       thead
         tr
@@ -22,7 +22,7 @@ html
             td #{pet.properties.pet_type}
             td #{pet.properties.pet_age}
             td 
-                a(href=`/pets/${pet.id}/edit`) Edit Me!
+                a(href=`/update-cobj/${pet.id}`) Edit Me!
          
 
     
