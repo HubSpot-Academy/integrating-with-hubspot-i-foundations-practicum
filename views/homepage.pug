@@ -7,7 +7,7 @@ html
   body
     h1 Pets
     .center
-        a(href='/update-cobj') Add Pet
+        a(href='/update-cobj/?mode=Create') Add Pet
     table
       thead
         tr
@@ -22,7 +22,5 @@ html
             td #{pet.properties.pet_type}
             td #{pet.properties.pet_age}
             td 
-                a(href=`/update-cobj/${pet.id}`) Edit Me!
-         
-
-    
+                a(href=`/update-cobj/?mode=Edit&id=${pet.id}`) Edit Me!
+                

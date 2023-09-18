@@ -2,57 +2,62 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 const dotenv = require('dotenv');
-
+const NodeCache = require('node-cache');
+const myCache = new NodeCache();
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// * Load environment variables
+// Load environment variables
 dotenv.config();
 
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
-const {PRIVATE_APP_ACCESS} = process.env;
-
+const { PRIVATE_APP_ACCESS } = process.env;
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 // * Code for Route 1 goes here
 app.get('/', async (req, res) => {
-    const pets = 'https://api.hubspot.com/crm/v3/objects/pets';
-    const params = {
-        limit: 100,
-        archived: false,
-        properties: 'name,pet_type,pet_age'
-    }
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(pets, { params, headers });
-        const data = resp.data.results;
-        // console.log(data);
-        res.render('homepage', { title: 'Integrating With HubSpot I Practicum', data });
-    } catch (error) {
-        console.error(error);
-    }
+  const pets = 'https://api.hubspot.com/crm/v3/objects/pets';
+  const params = {
+    limit: 100,
+    archived: false,
+    properties: 'name,pet_type,pet_age',
+  };
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const resp = await axios.get(pets, { params, headers });
+    const data = resp.data.results;
+    myCache.set('petsData', data, 0);
+    // console.log(data);
+    res.render('homepage', { title: 'Integrating With HubSpot I Practicum', data });
+  } catch (error) {
+    console.error(error);
+  }
 });
-
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
 app.get('/update-cobj', async (req, res) => {
-    res.render('updates', { title: 'Update Custom Object | HubSpot APIs' });
+  // Recieve params
+  const petId = req.query.id;
+  const mode = req.query.mode;
 
+  let petsData = myCache.get('petsData');
+  let pet = petsData.find((pet) => pet.id === petId);
+
+  res.render('updates', { title: 'Update Custom Object | HubSpot APIs', mode, pet });
 });
-
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
 app.post('/update-cobj', async (req, res) => {
-    console.log("post request received");
+  console.log('post request received');
 });
 
 /** 
@@ -98,7 +103,6 @@ app.post('/update', async (req, res) => {
 
 });
 */
-
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
