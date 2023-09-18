@@ -17,12 +17,55 @@ const {PRIVATE_APP_ACCESS} = process.env;
 
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+app.get('/', async (req, res) => {
+    const pets = 'https://api.hubspot.com/crm/v3/objects/pets';
+    const params = {
+        limit: 100,
+        archived: false,
+        properties: 'name,pet_type,pet_age'
+    }
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+    try {
+        const resp = await axios.get(pets, { params, headers });
+        const data = resp.data.results;
+        console.log(data);
+        res.render('homepage', { title: 'Integrating With HubSpot I Practicum', data });
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 
 // * Code for Route 1 goes here
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
+app.get('/update-cobj', async (req, res) => {
+    const pets = 'https://api.hubspot.com/crm/v3/objects/pets';
+    const params = {
+        limit: 100,
+        archived: false,
+        properties: 'name,pet_type,pet_age'
+    }
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }    
+    try {
+        const resp = await axios.get(pets, { params, headers });
+        const data = resp.data.results;
+        console.log(data);
+        res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum', data });
+        //res.render('contacts', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum', data });      
+    } catch (error) {
+        console.error(error);
+    }
+
+});
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 

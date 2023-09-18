@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Pets
+    .new
+        a(href='/pets/new') Add Pet
+    table
+      thead
+        tr
+          th Pet's Name
+          th Pet's Type
+          th Pet's Age
+          th Edit Pet
+      tbody
+        each pet in data
+          tr
+            td #{pet.properties.name}            
+            td #{pet.properties.pet_type}
+            td #{pet.properties.pet_age}
+            td 
+                a(href=`/pets/${pet.id}/edit`) Edit Me!
+         
+
+    
