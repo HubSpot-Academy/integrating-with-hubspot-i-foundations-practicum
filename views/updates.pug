@@ -6,4 +6,18 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Update / Create Pets
-       
+        form(action=`/pets/${pet._id}/update` method='POST')
+            div
+                label(for='name') Name:
+                input(type='text' name='name' id='name' value=pet.name)
+            div
+                label(for='age') Edad:
+                input(type='number' name='age' id='age' value=pet.age)
+            div
+                label(for='type') Tipo de Mascota:
+                select(name='type' id='type')
+                option(value='Perro' selected=(pet.type === 'Perro')) Perro
+                option(value='Gato' selected=(pet.type === 'Gato')) Gato
+                // Agrega más opciones según sea necesario
+            div
+                button(type='submit') Guardar
