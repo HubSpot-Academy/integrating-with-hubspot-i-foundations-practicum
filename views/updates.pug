@@ -8,6 +8,8 @@ html
         h1= mode + " Pet"
         .form-wrapper
             form(action='/update-cobj' method='POST')
+                - if (pet && pet.id)
+                    input(type='hidden' name='petId' value=pet.id)
                 div
                     label(for='name') Name (*):
                     input(type='text' name='name' id='name' required value=pet ? pet.properties.name : '') 

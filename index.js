@@ -41,23 +41,70 @@ app.get('/', async (req, res) => {
 });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
 // * Code for Route 2 goes here
 app.get('/update-cobj', async (req, res) => {
   // Recieve params
   const petId = req.query.id;
   const mode = req.query.mode;
-
+  // Get data from cache
   let petsData = myCache.get('petsData');
   let pet = petsData.find((pet) => pet.id === petId);
-
   res.render('updates', { title: 'Update Custom Object | HubSpot APIs', mode, pet });
 });
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
 // * Code for Route 3 goes here
 app.post('/update-cobj', async (req, res) => {
   console.log('post request received');
+
+  const petId = req.body.petId;
+  const name = req.body.name;
+  const petType = req.body.type;
+  const petAge = req.body.age;
+  console.log(name, petType, petAge, petId);
+
+  if (petId) {
+    console.log('updating');
+    const updatePet = `https://api.hubspot.com/crm/v3/objects/pets/${petId}`;
+    const headers = {
+      Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+      'Content-Type': 'application/json',
+    };
+    const body = {
+      properties: {
+        name,
+        pet_type: petType,
+        pet_age: petAge,
+      },
+    };
+    try {
+      const resp = await axios.patch(updatePet, body, { headers });
+      console.log('respuesta Post actualizar', resp);
+      res.redirect('/');
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    console.log('creating');
+    const createPet = 'https://api.hubspot.com/crm/v3/objects/pets';
+    const headers = {
+      Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+      'Content-Type': 'application/json',
+    };
+    const body = {
+      properties: {
+        name,
+        pet_type: petType,
+        pet_age: petAge,
+      },
+    };
+    try {
+      const resp = await axios.post(createPet, body, { headers });
+      console.log('respuesta Post crear', resp);
+      res.redirect('/');
+    } catch (error) {
+      console.error(error);
+    }
+  }
 });
 
 /** 
