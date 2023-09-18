@@ -1,14 +1,20 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
+const dotenv = require('dotenv');
+
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// * Load environment variables
+dotenv.config();
+
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const {PRIVATE_APP_ACCESS} = process.env;
+
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
