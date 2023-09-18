@@ -14,6 +14,7 @@ app.use(express.json());
 dotenv.config();
 
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
+// PRIVATE_APP_ACCESS = pat-na1-4ac5ab5c-b000-411f-b67f-3332d3126333
 const { PRIVATE_APP_ACCESS } = process.env;
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
