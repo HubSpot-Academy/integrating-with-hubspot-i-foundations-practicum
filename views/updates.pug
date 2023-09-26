@@ -1,0 +1,17 @@
+doctype html
+html 
+    head 
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Update Cards
+        a(href='/') Return to the homepage
+        form(method='post', action='/update-cobj')
+            label(for='card_name') Card Name
+            input(type='text', id='card_name', name='card_name', required)
+            label(for='cmc') CMC
+            input(type='text', id='cmc', name='cmc', required)
+            label(for='card_type') Card Type
+            input(type='text', id='card_type', name='card_type', required)
+            button(type='submit') Submit
