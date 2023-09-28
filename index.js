@@ -15,7 +15,7 @@ const SALESORDER_OBJECTTYPEID = '2-19009984';
 
 // * Code for Route 1 goes here
 app.get('/', async (req, res) => {
-    const ordersURL = `https://api.hubspot.com/crm/v3/objects/${SALESORDER_OBJECTTYPEID}`;
+    const ordersURL = `https://api.hubspot.com/crm/v3/objects/${SALESORDER_OBJECTTYPEID}?properties=so&properties=name&properties=grand_total&properties=estimated_ship_date`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ app.get('/', async (req, res) => {
         const resp = await axios.get(ordersURL, { headers });
         const data = resp.data.results;
         res.send(JSON.stringify(data))
-        // res.render('orders', { title: 'View Custom Object List | Integrating With HubSpot I Practicum', data });      
+        // res.render('homepage', { title: 'View Custom Object List | Integrating With HubSpot I Practicum', data });      
     } catch (error) {
         console.error(error);
     }
