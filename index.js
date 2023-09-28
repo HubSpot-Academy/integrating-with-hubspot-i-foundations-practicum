@@ -23,8 +23,7 @@ app.get('/', async (req, res) => {
     try {
         const resp = await axios.get(ordersURL, { headers });
         const data = resp.data.results;
-        res.send(JSON.stringify(data))
-        // res.render('homepage', { title: 'View Custom Object List | Integrating With HubSpot I Practicum', data });      
+        res.render('homepage', { title: 'View Custom Object List | Integrating With HubSpot I Practicum', data });      
     } catch (error) {
         console.error(error);
     }

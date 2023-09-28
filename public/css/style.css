@@ -10,6 +10,17 @@ h1 {
     margin: 1rem;
 }
 
+th {
+    background-color: pink;
+    padding: 4px;
+}
+td {
+    border-width: 1px;
+    border-style: solid;
+    border-color: gray;
+    padding: 4px;
+}
+
 .cards {
     display: flex;
     align-items: center;
