@@ -26,6 +26,14 @@ td {
     margin-left: 1em;
 }
 
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap:nowrap;
+    flex-direction: column;
+}
+
 .cards {
     display: flex;
     align-items: center;
@@ -46,7 +54,7 @@ td {
     font-size: 1rem;
 }
 
-.form-wrapper {
+.form-wrapper, .table-wrapper {
     font-size: 18px;
     max-width: 768px;
     margin: 2rem auto;

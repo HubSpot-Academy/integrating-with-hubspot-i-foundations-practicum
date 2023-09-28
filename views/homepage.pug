@@ -6,22 +6,21 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Custom Object Table
-        a(href='/update-cobj') Add/Update this table
-        br
-        br
-        table
-          thead 
-            th SO #
-            th Customer Name 
-            th Grand Total 
-            th Estimated Ship Date
-            th
-          tbody
-            each order in data
-              tr 
-                td #{order.properties.so}
-                td #{order.properties.name}
-                td #{order.properties.grand_total}
-                td #{order.properties.estimated_ship_date}
-                td 
-                  a(href=`/update-cobj/${order.id}`) Edit
+        .container
+          a(href='/update-cobj') Add/Update this table
+          table.table-wrapper
+            thead 
+              th SO #
+              th Customer Name 
+              th Grand Total 
+              th Estimated Ship Date
+              th
+            tbody
+              each order in data
+                tr 
+                  td #{order.properties.so}
+                  td #{order.properties.name}
+                  td #{order.properties.grand_total}
+                  td #{order.properties.estimated_ship_date}
+                  td 
+                    a(href=`/update-cobj/${order.id}`) Edit

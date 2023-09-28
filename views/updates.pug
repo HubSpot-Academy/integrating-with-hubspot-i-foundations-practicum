@@ -5,15 +5,16 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body  
-      a.nav-link(href="/") Return to the homepage  
       h1 Add Sales Order
-      form.form-wrapper(action="" method="POST")
-        label(for="so") SO #
-        input(type="text" name="so" value=`${order.so || ''}` required)
-        label(for="name") Name
-        input(type="text" name="name" value=`${order.name || ''}` required)
-        label(for="grand_total") Grand Total
-        input(type="number" name="grand_total" value=`${order.grand_total || ''}` step=0.01 required)
-        label(for="estimated_ship_date" required) Estimated Ship Date
-        input(type="date" name="estimated_ship_date" value=`${order.estimated_ship_date || ''}` required)
-        input(type="submit" value="Save")
+      .container
+        a.nav-link(href="/") Return to the homepage  
+        form.form-wrapper(action="" method="POST")
+          label(for="so") SO #
+          input(type="text" name="so" value=`${order.so || ''}` required)
+          label(for="name") Name
+          input(type="text" name="name" value=`${order.name || ''}` required)
+          label(for="grand_total") Grand Total
+          input(type="number" name="grand_total" value=`${order.grand_total || ''}` step=0.01 required)
+          label(for="estimated_ship_date" required) Estimated Ship Date
+          input(type="date" name="estimated_ship_date" value=`${order.estimated_ship_date || ''}` required)
+          input(type="submit" value="Save")
