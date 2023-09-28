@@ -39,54 +39,39 @@ app.get('/update-cobj', (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-app.post('/update-cobj', (req, res) => {
-    res.send('Hello Update Post')
-})
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
+app.post('/update-cobj', async (req, res) => {
+    if (!req.body || req.body === ''){
+        res.statusCode(400)
+        res.send('Bad Request')
+        return
     }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
-});
 
-* * App.post sample
-app.post('/update', async (req, res) => {
+    const salesOrderProps = {
+        "so": req.body.so,
+        "name": req.body.name,
+        "grand_total": req.body.grand_total,
+        "estimated_ship_date": req.body.estimated_ship_date,
+    }
+    
+    console.log(salesOrderProps)
+
     const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
+        properties: salesOrderProps
     }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
+    const updateContact = `https://api.hubapi.com/crm/v3/objects/${SALESORDER_OBJECTTYPEID}`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     };
 
     try { 
-        await axios.patch(updateContact, update, { headers } );
+        await axios.post(updateContact, update, { headers } );
         res.redirect('back');
     } catch(err) {
         console.error(err);
     }
-
-});
-*/
-
+})
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));

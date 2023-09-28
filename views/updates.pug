@@ -7,13 +7,13 @@ html
     body  
       a.nav-link(href="/") Return to the homepage  
       h1 Add Sales Order
-      form.form-wrapper(action="/" method="POST")
+      form.form-wrapper(action="/update-cobj" method="POST")
         label(for="so") SO #
-        input(type="text" name="so")
+        input(type="text" name="so" required)
         label(for="name") Name
-        input(type="text" name="name")
+        input(type="text" name="name" required)
         label(for="grand_total") Grand Total
-        input(type="number" name="grand_total")
-        label(for="estimated_ship_date") Estimated Ship Date
+        input(type="number" name="grand_total" step=0.01 required)
+        label(for="estimated_ship_date" required) Estimated Ship Date
         input(type="date" name="estimated_ship_date")
         input(type="submit" value="Save")
