@@ -1,0 +1,19 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body  
+      a.nav-link(href="/") Return to the homepage  
+      h1 Add Sales Order
+      form.form-wrapper(action="/" method="POST")
+        label(for="so") SO #
+        input(type="text" name="so")
+        label(for="name") Name
+        input(type="text" name="name")
+        label(for="grand_total") Grand Total
+        input(type="number" name="grand_total")
+        label(for="estimated_ship_date") Estimated Ship Date
+        input(type="date" name="estimated_ship_date")
+        input(type="submit" value="Save")

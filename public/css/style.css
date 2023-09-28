@@ -8,6 +8,7 @@ body, * {
 
 h1 {
     margin: 1rem;
+    text-align: center;
 }
 
 th {
@@ -19,6 +20,10 @@ td {
     border-style: solid;
     border-color: gray;
     padding: 4px;
+}
+
+.nav-link {
+    margin-left: 1em;
 }
 
 .cards {
@@ -57,7 +62,7 @@ label, input {
     font-size: inherit;
 }
 
-input[type="text"] {
+input[type="text"], input[type="date"], input[type="number"] {
     padding: .25rem;
 }
 
