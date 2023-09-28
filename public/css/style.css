@@ -8,6 +8,30 @@ body, * {
 
 h1 {
     margin: 1rem;
+    text-align: center;
+}
+
+th {
+    background-color: pink;
+    padding: 4px;
+}
+td {
+    border-width: 1px;
+    border-style: solid;
+    border-color: gray;
+    padding: 4px;
+}
+
+.nav-link {
+    margin-left: 1em;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap:nowrap;
+    flex-direction: column;
 }
 
 .cards {
@@ -30,7 +54,7 @@ h1 {
     font-size: 1rem;
 }
 
-.form-wrapper {
+.form-wrapper, .table-wrapper {
     font-size: 18px;
     max-width: 768px;
     margin: 2rem auto;
@@ -46,7 +70,7 @@ label, input {
     font-size: inherit;
 }
 
-input[type="text"] {
+input[type="text"], input[type="date"], input[type="number"] {
     padding: .25rem;
 }
 
