@@ -15,6 +15,7 @@ html
             th Customer Name 
             th Grand Total 
             th Estimated Ship Date
+            th
           tbody
             each order in data
               tr 
@@ -22,3 +23,5 @@ html
                 td #{order.properties.name}
                 td #{order.properties.grand_total}
                 td #{order.properties.estimated_ship_date}
+                td 
+                  a(href=`/update-cobj/${order.id}`) Edit

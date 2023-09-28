@@ -15,7 +15,7 @@ const SALESORDER_OBJECTTYPEID = '2-19009984';
 
 // * Code for Route 1 goes here
 app.get('/', async (req, res) => {
-    const ordersURL = `https://api.hubspot.com/crm/v3/objects/${SALESORDER_OBJECTTYPEID}?properties=so&properties=name&properties=grand_total&properties=estimated_ship_date`;
+    const ordersURL = `https://api.hubspot.com/crm/v3/objects/${SALESORDER_OBJECTTYPEID}?limit=100&properties=so&properties=name&properties=grand_total&properties=estimated_ship_date`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -32,14 +32,31 @@ app.get('/', async (req, res) => {
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
-app.get('/update-cobj', (req, res) => {
-    res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
+app.get('/update-cobj/:id?', async (req, res) => {
+    let order = {}
+    if (req.params.id) {
+        const ordersURL = `https://api.hubspot.com/crm/v3/objects/${SALESORDER_OBJECTTYPEID}/${req.params.id}?properties=so&properties=name&properties=grand_total&properties=estimated_ship_date`;
+        const headers = {
+            Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+            'Content-Type': 'application/json'
+        }
+        try {
+            const resp = await axios.get(ordersURL, { headers });
+            const data = resp.data;
+            if (data) {
+                order = data.properties
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum', order });
 })
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-app.post('/update-cobj', async (req, res) => {
+app.post('/update-cobj/:id?', async (req, res) => {
     if (!req.body || req.body === ''){
         res.statusCode(400)
         res.send('Bad Request')
@@ -53,21 +70,23 @@ app.post('/update-cobj', async (req, res) => {
         "estimated_ship_date": req.body.estimated_ship_date,
     }
     
-    console.log(salesOrderProps)
-
     const update = {
         properties: salesOrderProps
     }
 
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/${SALESORDER_OBJECTTYPEID}`;
+    const updateURL = `https://api.hubapi.com/crm/v3/objects/${SALESORDER_OBJECTTYPEID}`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     };
 
     try { 
-        await axios.post(updateContact, update, { headers } );
-        res.redirect('back');
+        if (req.params.id) {
+            await axios.patch(`${updateURL}/${req.params.id}`, update, { headers } );
+        } else {
+            await axios.post(updateURL, update, { headers } );
+        }
+        res.redirect('/');
     } catch(err) {
         console.error(err);
     }
