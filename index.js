@@ -8,13 +8,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please include the private app access token in your repo BUT only an access token built in a TEST ACCOUNT. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const PRIVATE_APP_ACCESS = 'pat-na1-de7fd6da-ca1c-4106-b64a-2908b9c13bec';
+const SALESORDER_OBJECTTYPEID = '2-19009984';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+app.get('/', async (req, res) => {
+    const ordersURL = `https://api.hubspot.com/crm/v3/objects/${SALESORDER_OBJECTTYPEID}`;
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+    try {
+        const resp = await axios.get(ordersURL, { headers });
+        const data = resp.data.results;
+        res.send(JSON.stringify(data))
+        // res.render('orders', { title: 'View Custom Object List | Integrating With HubSpot I Practicum', data });      
+    } catch (error) {
+        console.error(error);
+    }
 })
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
