@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= pageTitle
+  a(href='/') Retour à la page d'accueil
+
+  form.form-wrapper(action='/update-cobj', method='post')
+    label(for='nom') Nom :
+    input(type='text', name='nom', class='form-input')
+
+    label(for='age') Age :
+    input(type='number', name='age', class='form-input')
+
+    label(for='biographie') Biographie :
+    input(type='text', name='biographie', class='form-input')
+
+    button(type='submit', class='form-submit') Soumettre
