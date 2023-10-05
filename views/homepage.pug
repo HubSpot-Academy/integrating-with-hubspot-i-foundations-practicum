@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= pageTitle
+  a(href='/update-cobj') Add/Update this table
+
+  table.card
+    thead
+      tr
+        th Name
+        th Age
+        th Bio
+
+    tbody
+      each objet in objetsPersonnalises
+        tr
+          td= objet.properties.nom
+          td= objet.properties.age
+          td= objet.properties.biographie
