@@ -6,7 +6,7 @@ body, * {
     padding: 0;
 }
 
-h1 {
+h1, a {
     margin: 1rem;
 }
 
@@ -45,6 +45,11 @@ label, input {
     display: block;
     font-size: inherit;
 }
+select {
+    margin-top: 5px;
+    display: block;
+    font-size: inherit;
+}
 
 input[type="text"] {
     padding: .25rem;
@@ -55,4 +60,22 @@ input[type="submit"] {
     border: none;
     padding: .375rem 1rem;
     margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+  }
+
+th, td {
+    padding: 15px;
+    text-align: left;
+  }
+
+table {
+    margin: 1rem;
+}
+
+th {
+    background-color: green;
 }
