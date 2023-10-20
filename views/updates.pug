@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+    head
+        title Update Custom Object Form | Integrating With HubSpot I Practicum
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .form-wrapper
+            a(href='/') Return to the homepage
+            p
+            form(method="POST")
+                label(for="pet_name") Pet Name
+                input(type="text" name="pet_name" required)
+                label(for="age") Age
+                input(type="text" name="age" required)
+                label(for="type") Pet Type
+                select(name='type' required)
+                    option(value='Dog') Dog
+                    option(value='Cat') Cat
+                input(type="submit" value="Submit")
