@@ -12,8 +12,7 @@ html(lang="en")
                 th Songname
                 th Artist
                 th Album
-        tbody 
-            each song in data
+            each song in data.results
                 tr 
                     td #{song.properties.name}
                     td #{song.properties.artist}
