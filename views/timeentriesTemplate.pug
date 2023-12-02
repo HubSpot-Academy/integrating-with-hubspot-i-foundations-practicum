@@ -1,0 +1,33 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+//- doctype html
+//- html 
+//-     head 
+//-         title= `${title}`
+//-         meta(name="viewport" content="width=device-width, initial-scale=1")
+//-         link(rel="stylesheet", href="/css/style.css")
+//-     body    
+//-         h1 Timeentries
+//-         .cards 
+//-             each timentries in data
+//-                 .card 
+//-                     h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
+//-                     p.card__email #{contact.properties.email}
+
+doctype html
+html
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Time Entries
+        .cards
+            each entry in data
+                .card
+                    // Example properties, adjust according to your custom object structure
+                    h2.card__id ID: #{entry.id}
+                    p.card__name Name: #{entry.properties.name}
+                    p.card__description Description: #{entry.properties.description}
+                    p.card__date Duration: #{entry.properties.duration}
+                    // Add more properties as needed
