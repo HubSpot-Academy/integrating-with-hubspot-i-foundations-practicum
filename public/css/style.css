@@ -56,3 +56,29 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+
+.centered-table {
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
+  .centered-table, .centered-table th, .centered-table td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+    
+  .centered-table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: separate;
+    border-spacing: 5px; /* Adjust this value for more or less space between cells */
+  }
+  
+  .centered-table th, .centered-table td {
+    border: 1px solid black;
+    padding: 10px; /* Adjust padding for more or less space inside cells */
+  }
+  
+  .centered-title {
+    text-align: center;
+  }

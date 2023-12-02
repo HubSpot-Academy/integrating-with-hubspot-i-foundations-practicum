@@ -16,18 +16,25 @@
 
 doctype html
 html
-    head
-        title= `${title}`
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-        link(rel="stylesheet", href="/css/style.css")
-    body
-        h1 Time Entries
-        .cards
-            each entry in data
-                .card
-                    // Example properties, adjust according to your custom object structure
-                    h2.card__id ID: #{entry.id}
-                    p.card__name Name: #{entry.properties.name}
-                    p.card__description Description: #{entry.properties.description}
-                    p.card__date Duration: #{entry.properties.duration}
-                    // Add more properties as needed
+  head
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1.centered-title Time Entries
+    
+
+    table.centered-table(style='width:50%; border:1px solid black; margin: 0 auto;')
+      thead
+        tr
+          th Id
+          th Name
+          th Duration
+          th Description
+      tbody
+        each entry in data
+          tr
+            td #{entry.id}
+            td #{entry.properties.name}
+            td #{entry.properties.duration}
+            td #{entry.properties.description}
