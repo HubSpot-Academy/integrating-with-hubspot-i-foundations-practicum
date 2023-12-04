@@ -1,5 +1,9 @@
 # Welcome to the Integrating With HubSpot I: Foundations Practicum
 
+Here is link to my custom created object - Mixed Reality Spaces
+https://app.hubspot.com/contacts/22581352/objects/2-17611006/views/all/list
+
+
 This repository is for the Integrating With HubSpot I: Foundations course. This practicum is one of two requirements for receiving your Integrating With HubSpot I: Foundations certification. You must also take the exam and receive a passing grade (at least 75%).
 
 To read the full directions, please go to the [practicum instructions](https://app.hubspot.com/academy/l/tracks/1092124/1093824/5493?language=en).
