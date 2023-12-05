@@ -1,0 +1,23 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Captains Table
+        div#alink
+            a(href="/update-cobj") Add to this table
+        div
+            table 
+                tr
+                    th Name
+                    th Crew Name
+                    th Ship Name
+                tr 
+                    each captain in data
+                        tr
+                            td #{captain.properties.name}  
+                            td #{captain.properties.pirate_crew_name}
+                            td #{captain.properties.pirate_ship_name}
+                        tr
