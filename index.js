@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = 'Bearer pat-eu1-a6f3ccc7-44ff-483f-80d9-9d94bb41a748';
+const PRIVATE_APP_ACCESS = 'Bearer pat-eu1-013e2f7a-d53a-48c7-8bba-e00a1ed8a4a6';
 const API_URL = 'https://api.hubapi.com/crm/v3/objects'
 const HEADER = { 'Authorization': PRIVATE_APP_ACCESS }
 
@@ -17,10 +17,10 @@ const HEADER = { 'Authorization': PRIVATE_APP_ACCESS }
 // * Code for Route 1 goes here
 
 app.get('/', async (req, res) => {
-    url = `${API_URL}/vehicles/?properties=name&properties=type&properties=registration_number&properties=brand`
+    url = `${API_URL}/vehicles?properties=name&properties=type&properties=registration_number&properties=brand`
     const response = await axios.get(url, { headers: HEADER });
-    console.log('response', response.data.results[0].properties)
-    res.render('homepage', { title: 'Vehicles Data', vehicles: response.data.results });
+    console.log('response', response)
+    // res.render('homepage', { title: 'Vehicles Data', vehicles: response.data.results });
 
 })
 
