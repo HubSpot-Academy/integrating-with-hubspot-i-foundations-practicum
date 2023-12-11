@@ -20,7 +20,7 @@ app.get('/', async (req, res) => {
     url = `${API_URL}/vehicles/?properties=name&properties=type&properties=registration_number&properties=brand`
     const response = await axios.get(url, { headers: HEADER });
     console.log('response', response.data.results[0].properties)
-    res.render('records', { title: 'Vehicles Data', vehicles: response.data.results });
+    res.render('homepage', { title: 'Vehicles Data', vehicles: response.data.results });
 
 })
 
