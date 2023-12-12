@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Create new Vehicle
+    link(rel='stylesheet', href='css/style.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+  body
+    header
+      h1=title
+
+    // New Record Form
+    section.new-record
+      h2 Add New Vehicle
+      form.new-vehicle-form(method='post', action='/createVehicle')
+        input(type='text', name='registration_number', placeholder='Registration Number')
+        input(type='text', name='name', placeholder='Vehicle Name')
+        input(type='text', name='brand', placeholder='Vehicle Brand')
+        input(type='text', name='type', placeholder='Vehicle Type')
+        button(type='submit') Create Vehicle

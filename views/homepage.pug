@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title Vehicle Data
+    link(rel='stylesheet', href='css/style.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+  body
+    header
+      h1=title
+      a(href='/cobj') Add/Update This Table
+    table
+      thead
+        tr
+          th Registration Number
+          th Vehicle Name
+          th Vehicle Brand
+          th Vehicle Type
+          th Actions
+      tbody
+        each vehicle in vehicles
+          tr
+            td
+              input(type='text', name='registration_number', value=vehicle.properties.registration_number, readonly)
+            td
+              input(type='text', name='name', value=vehicle.properties.name, readonly)
+            td
+              input(type='text', name='brand', value=vehicle.properties.brand, readonly)
+            td
+              input(type='text', name='type', value=vehicle.properties.type, readonly)
