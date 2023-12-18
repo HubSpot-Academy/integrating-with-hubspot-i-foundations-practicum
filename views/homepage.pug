@@ -1,0 +1,36 @@
+//** This is a pug template to homepage custom object form.
+
+doctype html
+html 
+    head 
+        title= 'Custom Object Table | Integrating With HubSpot I Practicum'
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+     .title2
+       h2 Custom Object Table
+     div#alink
+      a(href=baseURI) Add/Update the Pets
+     div#table-center
+      table
+        tr 
+          th Name
+          th Bio
+          th PetColor
+          th PetCountry
+          th PetOwnerAddress
+          th PetOwnerName
+          th PetOwnerPhoneNumber
+        tr
+         each Pets in data
+          tr
+            td #{Pets.properties.name}
+            td #{Pets.properties.bio}
+            td #{Pets.properties.pet_color}
+            td #{Pets.properties.pet_country}
+            td #{Pets.properties.pet_owner_address}
+            td #{Pets.properties.pet_owner_name}
+            td #{Pets.properties.pet_owner_phone_number}
+          tr
+
+
