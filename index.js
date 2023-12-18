@@ -27,7 +27,7 @@ app.get("/", async (_req, res) => {
     const data = resp.data.results;
     res.render("homepage", { baseURI: baseURI + "/update-cobj", data });
   } catch (e) {
-    console.error(e?.message);
+    console.error('----Error on Get Properties----', {error: e?.message});
     res.render("error");
   }
 });
@@ -36,7 +36,7 @@ app.get("/update-cobj", async (_req, res) => {
   try {
     res.render("update", { baseURI: baseURI + "/update-cobj" });
   } catch (e) {
-    console.error(e.message);
+    console.error('----Error on Get Custom Objects----', {error: e?.message});
     res.render("error");
   }
 });
@@ -62,12 +62,12 @@ app.post("/update-cobj", async (req, res) => {
     await axios.post(updateCustomObject, updateProp, { headers });
     res.redirect("/");
   } catch (e) {
-    console.error(e.message);
+    console.error('----Error on Create Custom Objects with Valid Input Values----', {error: e?.message});
     res.redirect("/");
   }
 });
 
-app.use((_req, res, next) => {
+app.use((_req, res, _next) => {
   res.render("error", { baseURI });
 });
 
