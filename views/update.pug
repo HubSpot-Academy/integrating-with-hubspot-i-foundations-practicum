@@ -1,0 +1,38 @@
+//** This is a pug template to update custom object form.
+
+doctype html
+html 
+    head 
+        title= 'Update Custom Object Form | Integrating With HubSpot I Practicum'
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+    .container
+    div 
+        a(href='/') Return to the homepage
+        .form-wrapper
+           h3 Custom Object Form 
+           form(role='form' method='POST' action=baseURI)
+              div
+                label(for='name') Name:
+                input(type='text', placeholder='name' name='name')
+              div
+                 label(for='bio') Bio:
+                 input(type='text', placeholder='bio' name='bio')
+              div
+                 label(for='pet_color') PetColor:
+                 input(type='text', placeholder='pet_color' name='pet_color')
+              div
+                 label(for='pet_country') PetCountry:
+                 input(type='text', placeholder='pet_country' name='pet_country')
+              div
+                 label(for='pet_owner_address') PetOwnerAddress:
+                 input(type='text', placeholder='pet_owner_address' name='pet_owner_address')
+              div
+                 label(for='pet_owner_name') PetOwnerName:
+                 input(type='text', placeholder='pet_owner_name' name='pet_owner_name')
+              div
+                 label(for='pet_owner_phone_number') PetOwnerPhoneNumber:
+                 input(type='text', placeholder='pet_owner_phone_number' name='pet_owner_phone_number')
+              div
+                 input(type="submit", name="submit")
