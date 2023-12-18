@@ -8,7 +8,8 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const PRIVATE_APP_ACCESS = 'pat-na1-f4afd4e6-49df-42ac-bcbd-0ff6bb8cff45'
+const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
+
 const HUBSPOT_BASE_URI ='https://api.hubspot.com/crm/v3';
 const PORT = 3000;
 
