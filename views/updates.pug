@@ -1,0 +1,43 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+//- doctype html
+//- html 
+//-     head 
+//-         title= `${title}`
+//-         meta(name="viewport" content="width=device-width, initial-scale=1")
+//-         link(rel="stylesheet", href="/css/style.css")
+//-     body    
+//-         h1 Timeentries
+//-         .cards 
+//-             each timentries in data
+//-                 .card 
+//-                     h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
+//-                     p.card__email #{contact.properties.email}
+
+doctype html
+html
+  head
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1.centered-title Update time entries 
+    form(action="/update-cobj" method="post")
+      div 
+        label(for="name") Task Name:
+        input(type="text" id="name" name="name")
+      div
+        label(for="description") Description:
+        input(type="text" id="description" name="description")
+      div
+        label(for="duration") Duration (in minutes):
+        input(type="text" id="duration" name="duration")
+      div
+        input(type="submit" value="Submit")
+    a(href="/") Return to the homepage
+    
+
+            //-td #{entry.id}
+            //-td #{entry.properties.name}
+            //-td #{entry.properties.duration}
+            //-td #{entry.properties.description}
