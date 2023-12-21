@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1.centered-title Custom Object Table: For tracking time spent on projects
+    
+    a(href="/update-cobj") Update / Add to this table
+
+    table.centered-table(style='width:50%; border:1px solid black; margin: 0 auto;')
+      thead
+        tr
+          th Id
+          th Name
+          th Duration
+          th Description
+      tbody
+        each entry in data
+          tr
+            td #{entry.id}
+            td #{entry.properties.name}
+            td #{entry.properties.duration}
+            td #{entry.properties.description}
