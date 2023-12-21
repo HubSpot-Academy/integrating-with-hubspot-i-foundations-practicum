@@ -4,7 +4,7 @@ html
     title= `${title}`
     link(rel="stylesheet", href="/css/style.css")
   body 
-    form
+    form(action="/update-cobj" method="post")
       h1 Create New Dog Record
       label Name
       input(type='text' name='name')
