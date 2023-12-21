@@ -1,7 +1,21 @@
 doctype html
 html 
-    head 
-        title= `${title}`
-        link(rel="stylesheet", href="/css/style.css")
-    body    
-        a(href="/") Return to the homepage
+  head 
+    title= `${title}`
+    link(rel="stylesheet", href="/css/style.css")
+  body 
+    form
+      h1 Create New Dog Record
+      label Name
+      input(type='text' name='name')
+      br
+      label Age
+      input(type='number' name='age')
+      br
+      label Breed
+      input(type='text' name='breed')
+      br
+      input(type='submit' value="Create")
+      br
+      br   
+      a(href="/") Return to the homepage
