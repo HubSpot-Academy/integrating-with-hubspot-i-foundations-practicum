@@ -40,11 +40,11 @@ app.get('/', async (req, res) => {
        res.render('homepage', { title: 'Pets', data: data });
       } else {
         console.error('Empty or invalid response data.');
-        res.status(500).send('Failed to fetch pets data');
+        res.status(500).send('Failed to fetch Assets data');
       }
     } catch (error) {
       console.error('Error fetching pets:', error);
-      res.status(500).send('Failed to fetch pets data');
+      res.status(500).send('Failed to fetch Assets data');
     }
   });
   
