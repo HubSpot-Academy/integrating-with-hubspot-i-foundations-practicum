@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const PRIVATE_APP_ACCESS = 'pat-na1-d9eaad3d-b6aa-4889-a06b-1096457997ff';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
@@ -23,7 +23,28 @@ app.get('/update-cobj', async (req, res) => {
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
-// * Code for Route 3 goes here
+app.post('/update-cobj', async (req, res) => {
+    const create = {
+        properties: {
+            "name": req.body.name,
+            "age": req.body.age,
+            "breed": req.body.breed
+        }
+    }
+
+    const createDog = `https://api.hubapi.com/crm/v3/objects/2-21791998`;
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    try { 
+        await axios.post(createDog, create, { headers } );
+        res.redirect("/");
+    } catch(err) {
+        console.error(err);
+    }
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
