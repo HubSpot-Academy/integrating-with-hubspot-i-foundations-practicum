@@ -22,7 +22,7 @@ app.get('/', async (req, res) => {
     try {
         const resp = await axios.get(dogs, { headers });
         const data = resp.data.results;
-        res.render('homepage', data);     
+        res.render('homepage', { title: "Dogs | Integrating With HubSpot I Practicum", data });     
     } catch (error) {
         console.error(error);
     }
