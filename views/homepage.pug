@@ -1,0 +1,17 @@
+
+
+doctype html
+html 
+     head 
+         title= `${title}`
+         meta(name="viewport" content="width=device-width, initial-scale=1")
+         link(rel="stylesheet", href="/css/style.css")
+     body    
+         h1 Characters
+         .cards 
+             each character in data
+                 .card 
+                     h2.card__name #{character.properties.character_name},  #{character.properties.character_age}
+                     p.card__email #{character.properties.job}
+                     br
+                     a(href=`/update?hs_id=${character.id}`) Update
