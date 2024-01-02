@@ -34,12 +34,60 @@ app.get('/', async (req, res) => {
 });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
+app.get('/update-cobj', async (req, res) => {
+    const hs_id = req.query.hs_id;
+    let data = {};
+    let title = 'Create New Character';
+    let submit_action = 'Create';
 
-// * Code for Route 2 goes here
+    if(typeof hs_id != 'undefined') {
+        submit_action = 'Edit';
+        const endpoint = `https://api.hubspot.com/crm/v3/objects/2-22046266/${hs_id}?properties=character_name,character_age,job`;
+        console.log(endpoint);
+        const headers = {
+            Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+            'Content-Type': 'application/json'
+        }
+        try {
+            const resp = await axios.get(endpoint, { headers });
+            data = resp.data;
+        } catch (error) {
+            console.error(error);
+        }
+        title = 'Update Character';
+    }
+
+    res.render('updates', { title: title + ' | Integrating With HubSpot I Practicum', submit_action: submit_action, data });
+});
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
-// * Code for Route 3 goes here
+app.post('/update', async (req, res) => {
+    const update = {
+        properties: {
+            "character_name": req.body.character_name,
+            "character_age": req.body.character_age,
+            "job": req.body.job
+        }
+    }
+
+    let   updateEndpoint = `https://api.hubspot.com/crm/v3/objects/2-22046266`;
+    if(typeof req.body.hs_id != 'undefined') {
+        updateEndpoint += `/${req.body.hs_id}`;
+    }
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    try { 
+        await axios.patch(updateEndpoint, update, { headers } );
+        res.redirect('/');
+    } catch(err) {
+        console.error(err);
+    }
+
+});
 
 app.get('/contacts', async (req, res) => {
     const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
