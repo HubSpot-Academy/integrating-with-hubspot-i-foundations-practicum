@@ -7,10 +7,10 @@ html
             .header
                 h1 Create New CRM Record
                 a(href='/') Return to the homepage
-            form(method='POST', action='/submit-crm-record')
+            form(method='POST', action='/update-cobj')
                 .form-group
                     label(for='name') Name * : 
-                    input#name(type='text', name='name', required=true)
+                    input#name(type='text', name='pet_name', required=true)
 
                 .form-group
                     label(for='breed') Breed * :
@@ -25,5 +25,7 @@ html
                     select#type(name='type', required=true)
                         option(value='Dog') Dog
                         option(value='Cat') Cat
+                        option(value='Rabbit') Rabbit
+                        option(value='Snake') Snake
 
                 button(type='submit') Submit
