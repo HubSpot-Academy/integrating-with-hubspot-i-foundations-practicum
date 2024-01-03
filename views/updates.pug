@@ -1,0 +1,29 @@
+doctype html
+html
+    head
+        title New CRM Record
+        Link(rel="stylesheet", href="/css/style.css")
+        body
+            .header
+                h1 Create New CRM Record
+                a(href='/') Return to the homepage
+            form(method='POST', action='/submit-crm-record')
+                .form-group
+                    label(for='name') Name * : 
+                    input#name(type='text', name='name', required=true)
+
+                .form-group
+                    label(for='breed') Breed * :
+                    input#breed(type='text', name='breed', required=true)
+
+                .form-group
+                    label(for='age') Age * :
+                    input#age(type='number', name='age', required=true)
+
+                .form-group
+                    label(for='type') Type :
+                    select#type(name='type', required=true)
+                        option(value='Dog') Dog
+                        option(value='Cat') Cat
+
+                button(type='submit') Submit

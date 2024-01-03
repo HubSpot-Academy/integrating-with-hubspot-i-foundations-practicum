@@ -12,11 +12,17 @@ const PRIVATE_APP_ACCESS = 'pat-na1-10ba3975-2c84-47c6-b0e8-fae16bf3efe8';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
-// * Code for Route 1 goes here
+app.get('/', (req, res) => {
+    res.send('Hello, this is my custom route!');
+});
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
+app.get('/update-cobj', (req, res) => {
+    res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
+});
+
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 

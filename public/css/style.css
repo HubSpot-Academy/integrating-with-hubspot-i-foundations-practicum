@@ -6,53 +6,57 @@ body, * {
     padding: 0;
 }
 
-h1 {
-    margin: 1rem;
+html {
+    box-sizing: border-box;
+  }
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+body {
+    padding: 3rem;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+.header {
+    text-align: center;
 }
 
-.card__email {
-    font-size: 1rem;
-}
-
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
+form {
     margin: 2rem auto;
     padding: 2rem;
     border: solid 1px lightgrey;
     border-radius: 15px;
     box-shadow: 3px 2px 6px lightgrey;
+    max-width: 300px;
 }
 
-label, input {
+label, input, select {
     margin-top: 5px;
     display: block;
     font-size: inherit;
+    width: 100%;
 }
 
-input[type="text"] {
-    padding: .25rem;
+.form-group {
+    margin: .5rem 0;
 }
 
-input[type="submit"] {
+label {
+    flex-grow: 0;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: .375rem .75rem;
+}
+
+button[type="submit"] {
     background-color: lightgrey;
     border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+    padding: .7rem 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
 }
+
