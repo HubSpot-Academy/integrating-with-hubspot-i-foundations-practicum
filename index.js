@@ -45,7 +45,7 @@ app.post('/update-cobj', async (req, res) => {
             }
         });
 
-        res.send('CRM Record Created: ' + JSON.stringify(response.data));
+        res.redirect('back');
     } catch (error) {
         console.error('Error creating CRM record:', error);
         res.status(500).send('Error creating CRM record');
