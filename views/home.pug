@@ -1,0 +1,14 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Pets
+        .cards 
+            each pet in data
+                .card 
+                    h2.card__name #{pet.properties.name}  
+                    p.card__email  Type #{pet.properties.type}
+                    p.card__email  Age #{pet.properties.age}
