@@ -1,0 +1,24 @@
+doctype html
+html
+    head
+        title Pets
+        Link(rel="stylesheet", href="/css/style.css")
+    body
+        .header
+            h1 Pet Information
+        .table
+            a(href='/update-cobj') Add to this table
+            table(border='1' cellspacing='1')
+                thead
+                    tr
+                        th Name
+                        th Breed
+                        th Age
+                        th Type
+                tbody
+                    each pet in data
+                        tr
+                            td #{pet.properties.pet_name}
+                            td #{pet.properties.breed}
+                            td #{pet.properties.age}
+                            td #{pet.properties.type}

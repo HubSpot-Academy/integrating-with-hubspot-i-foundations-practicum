@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
 body, * {
-    font-family: 'Roboto', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -60,3 +58,26 @@ button[type="submit"] {
     cursor: pointer;
 }
 
+.table {
+    margin: 3rem auto;
+    max-width: 500px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+th {
+    background-color: lightblue;
+    font-weight: 900;
+}
+
+td {
+    background-color: lightyellow;
+}
+
+th, td {
+    padding: .4rem;
+}
