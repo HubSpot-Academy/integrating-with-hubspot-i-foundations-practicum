@@ -1,0 +1,17 @@
+doctype html 
+html(lang="en")
+    head 
+        title= `${title}` 
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .form-wrapper 
+            h1=`${title}`
+            a(href='/') Return to the homepage
+            form(method="POST")
+                label(for="name") Name
+                input(type="text" name="name" id="name" placeholder="Enter name" required)
+                label(for="type") Type
+                input(type="text" name="type" id="type" placeholder="Enter type" required)
+                label(for="age") Age
+                input(type="number" name="age" id="age" placeholder="Enter age" required)
+                button(type="submit" value="Submit") Create
