@@ -7,7 +7,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const PRIVATE_APP_ACCESS = 'pat-na1-10ba3975-2c84-47c6-b0e8-fae16bf3efe8';
+const PRIVATE_APP_ACCESS = '';
 
 app.get('/', async (req, res) => {
 
