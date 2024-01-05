@@ -15,11 +15,12 @@ if(typeof process.env.PRIVATE_APP_ACCESS == 'undefined') {
 }
 
 const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
+const CUSTOM_OBJ = '2-22046266';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get('/', async (req, res) => {
-    const endpoint = 'https://api.hubspot.com/crm/v3/objects/2-22046266?properties=character_name,character_age,job';
+    const endpoint = `https://api.hubspot.com/crm/v3/objects/${CUSTOM_OBJ}?properties=character_name,character_age,job`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -53,7 +54,7 @@ app.get('/update-cobj', async (req, res) => {
 
     if(String(hs_id).length > 0) {
         submit_action = 'Edit';
-        const endpoint = `https://api.hubspot.com/crm/v3/objects/2-22046266/${hs_id}?properties=character_name,character_age,job`;
+        const endpoint = `https://api.hubspot.com/crm/v3/objects/${CUSTOM_OBJ}/${hs_id}?properties=character_name,character_age,job`;
 
         const headers = {
             Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
@@ -83,7 +84,7 @@ app.post('/update', async (req, res) => {
     };
     let hs_id = req.body.hs_id;
 
-    let   updateEndpoint = `https://api.hubspot.com/crm/v3/objects/2-22046266`;
+    let   updateEndpoint = `https://api.hubspot.com/crm/v3/objects/${CUSTOM_OBJ}`;
     if(String(hs_id).length > 0) {
         updateEndpoint += `/${hs_id}`;
     }
