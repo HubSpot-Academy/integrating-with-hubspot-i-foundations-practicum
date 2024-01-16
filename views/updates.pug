@@ -6,7 +6,7 @@ html
          link(rel="stylesheet", href="/css/style.css")
      body
          .form-wrapper    
-             h1 Update Character
+             h1 #{submit_action} Character
              form(action="/update" method="POST")
                   input(type="hidden" name="hs_id" value=`${data.id}`)
                   p Full Name:
