@@ -1,0 +1,24 @@
+
+
+doctype html
+html 
+     head 
+         title= `${title}`
+         meta(name="viewport" content="width=device-width, initial-scale=1")
+         link(rel="stylesheet", href="/css/style.css")
+     body    
+         h1 Characters
+         a(href=`/update-cobj`) Create New Character
+         table(border='1')
+             tr
+                 th Character Name 
+                 th Age
+                 th Job
+                 th Action
+             each character in data
+                 tr 
+                     td #{character.properties.character_name}
+                     td #{character.properties.character_age}
+                     td #{character.properties.job}
+                     td 
+                         a(href=`/update-cobj?hs_id=${character.id}`) Edit

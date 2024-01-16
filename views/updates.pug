@@ -1,0 +1,20 @@
+doctype html
+html 
+     head 
+         title= `${title}`
+         meta(name="viewport" content="width=device-width, initial-scale=1")
+         link(rel="stylesheet", href="/css/style.css")
+     body
+         .form-wrapper    
+             h1 #{submit_action} Character
+             form(action="/update" method="POST")
+                  input(type="hidden" name="hs_id" value=`${data.id}`)
+                  p Full Name:
+                  input(type="text" name="character_name" placeholder="First / Last Name" value=`${data.properties.character_name}`)
+                  p Age:
+                  input(type="text" name="character_age" placeholder="Age" value=`${data.properties.character_age}`)
+                  p Job:
+                  input(type="text" name="job" placeholder="Job Title" value=`${data.properties.job}`)
+                  input(type="submit" value=`${submit_action} Character`)
+             br
+             a(href='/') Return to the homepage
