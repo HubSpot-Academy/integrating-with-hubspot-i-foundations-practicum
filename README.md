@@ -22,7 +22,5 @@ ___
 - Using the command line
 - Using [Git and GitHub](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners)
 
-## Requirements
-- All work must be your own. During the grading process we will check the revision history. Submissions that do not meet this requirement will not be considered.
-- You must have at least two new routes in your index.js file and one new pug template for the homepage.
-- You must create a developer test account and link to it in your README.md file. Submissions that do not meet this requirement will not be considered.
+## Custom Object link
+- (https://app.hubspot.com/contacts/44890011/objects/2-22437256/views/all/list)
