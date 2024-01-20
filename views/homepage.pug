@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Custom Object Table
+        table
+            tr
+                th Name
+                th Category
+                th Price
+                th Number of Pieces
+                th Age Range
+            each lego_set in data
+                tr
+                    td #{lego_set.properties.name}
+                    td #{lego_set.properties.category}
+                    td #{lego_set.properties.price}
+                    td #{lego_set.properties.number_of_pieces}
+                    td #{lego_set.properties.age_range}
