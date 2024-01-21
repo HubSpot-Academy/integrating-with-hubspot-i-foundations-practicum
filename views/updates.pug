@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+    head
+        title Update Lego Kits
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .form-wrapper
+            h3 Add a New Lego Set
+            form(method="POST")
+                label(for="newName") Name
+                input(type="text" name="newName" required)
+                label(for="newCategory") Category
+                input(type="text" name="newCategory" required)
+                label(for="newPrice") Price
+                input(type="text" name="newPrice" required)
+                label(for="newNumberOfPieces") Number of Pieces
+                input(type="text" name="newNumberOfPieces")
+                label(for="newAgeRange") Age Range
+                input(type="text" name="newAgeRange")
+                input(type="submit" value="Submit")
+                br
+                a(href="/") Return to the homepage
