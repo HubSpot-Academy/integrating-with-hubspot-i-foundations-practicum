@@ -1,0 +1,23 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+
+        h1 Custom Object Table
+        a(href='/update') Add/Update this table
+        table(border='1')
+            tr
+                each pokemon in data 
+                    td #{pokemon.properties.name}
+            tr  
+                each pokemon in data   
+                    td #{pokemon.properties.power}
+            tr  
+                each pokemon in data   
+                    td #{pokemon.properties.strength}
+            tr  
+                each pokemon in data   
+                    td #{pokemon.properties.weakness}
