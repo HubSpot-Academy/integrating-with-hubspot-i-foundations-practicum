@@ -4,11 +4,55 @@ body,
 * {
   font-family: "Roboto", sans-serif;
   margin: 0;
+  padding: 20px;
+}
+
+strong {
   padding: 0;
 }
 
 h1 {
-  margin: 1rem;
+  margin: 0;
+  padding: 20px;
+}
+
+.back-link,
+.button {
+  margin: 0 20px;
+  padding: 11px 20px;
+  background-color: #02A4FF;
+  border-radius: 35px;
+  width: fit-content;
+  color: white;
+  text-decoration: none;
+}
+
+.edit-link {
+  font-size: 1rem;
+  color: black;
+}
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: left;
+  margin: 20px;
+}
+
+thead {
+  background-color: #f8f8f8;
+}
+
+thead tr th {
+  font-weight: bold;
+}
+
+td {
+  padding: 0;
+}
+
+tr {
+  border: 1px solid black;
 }
 
 .cards {
@@ -27,7 +71,15 @@ h1 {
   box-shadow: 3px 2px 6px lightgrey;
 }
 
-.card__email {
+.card__name {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.card__email,
+.card__model,
+.card__country,
+.card__owner {
   font-size: 1rem;
 }
 
@@ -38,16 +90,23 @@ h1 {
 .form-wrapper {
   font-size: 18px;
   max-width: 768px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 20px;
+  padding: 20px;
   border: solid 1px lightgrey;
   border-radius: 15px;
   box-shadow: 3px 2px 6px lightgrey;
+
+  & p {
+    padding: 5px 20px;
+  }
 }
 
-label,
+label {
+  padding: 0;
+}
+
 input {
-  margin-top: 5px;
+  margin: 10px 0 10px 0;
   display: block;
   font-size: inherit;
 }

@@ -6,13 +6,35 @@ html(lang="en")
         link(rel="stylesheet", href="/css/style.css")
 
     body
+        h1 Bikes
         .back-link 
-            a(class="button" href="/updates") Add/Update this table
+            a(class="button" href="/create") Add New Bike
 
-        .cards 
-            each contact in data
-                .card 
-                    h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-                    p.card__email #{contact.properties.email}
-                    p.card__email #{contact.properties.bike_name}
-                    p.card__id #{contact.id}
+        //- .cards 
+        //-     each bike in data
+        //-         .card 
+        //-             h2.card__name #{bike.properties.bike_name}
+        //-             p.card__email Model: #{bike.properties.model}
+        //-             p.card__email Country of Manufacture: #{bike.properties.country_of_manufacture}
+
+        table 
+            thead
+                tr
+                    th Bike Name
+                    th Model
+                    th Country of Manufacture
+                    th Owner
+                    th Edit
+                tbody 
+                    each bike in data 
+                        tr
+                            td 
+                                p.card__name #{bike.properties.bike_name}
+                            td 
+                                p.card__model #{bike.properties.model}
+                            td 
+                                p.card__country #{bike.properties.country_of_manufacture}
+                            td 
+                                p.card__owner #{bike.properties.name}
+                            td 
+                                a(class="edit-link" href="/updates?id=" + `${bike.id}`) Edit #{bike.properties.bike_name}

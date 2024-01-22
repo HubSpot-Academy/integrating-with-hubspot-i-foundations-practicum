@@ -9,10 +9,15 @@ html(lang="en")
             a(class="button" href="/homepage") Return to the homepage
 
         .form-wrapper 
-            p Name: #{userFirstname} #{userLastname}
-            p Email: #{userEmail}
-            p Bike: #{bikeName}
+            h2 Update #{bikeName}
+            p <strong>Model:</strong> #{bikeModel}
+            p <strong>Country of Manufacture:</strong> #{countryOfManufacture}
+            p <strong>Owner:</strong> #{name}
             form(method="POST")
-                label(for=newVal) New Bike
-                input(type="text" name="newVal" required)
+                label(for=newModel) New Bike Model
+                input(type="text" name="newModel" required)
+                label(for=newCountry) New Country of Manufacture
+                input(type="text" name="newCountry" required)
+                label(for=newName) New Owner
+                input(type="text" name="newName" required)
                 input(type="submit" value="Submit")

@@ -1,0 +1,22 @@
+doctype html 
+html(lang="en")
+    head 
+        title=`${title}`
+        link(rel="stylesheet", href="/css/style.css")
+
+    body
+        .back-link 
+            a(class="button" href="/homepage") Return to the homepage
+
+        .form-wrapper 
+            h2 Create New Bike
+            form(method="POST")
+                label(for=bikeName) Bike Name
+                input(type="text" name="bikeName" required)
+                label(for=bikeModel) Bike Model
+                input(type="text" name="bikeModel" required)
+                label(for=bikeCountry) Country of Manufacture
+                input(type="text" name="bikeCountry" required)
+                label(for=bikeOwner) Owner
+                input(type="text" name="bikeOwner" required)
+                input(type="submit" value="Submit")

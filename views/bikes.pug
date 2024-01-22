@@ -8,10 +8,11 @@ html
         link(rel="stylesheet", href="/css/style.css")
         
     body    
-        h1 Contacts
+        h1 Bikes
         .cards 
-            each contact in data
+            each bike in data
                 .card 
-                    h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-                    p.card__email #{contact.properties.email}
-                    p.card__email #{contact.associations.bike_name}
+                    h2.card__name #{bike.properties.bike_name}
+                    p.card__email #{bike.properties.model}
+                    p.card__email #{bike.properties.country_of_manufacture}
+                    p.card__email #{bike.properties.name}
