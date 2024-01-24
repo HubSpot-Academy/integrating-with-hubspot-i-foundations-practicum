@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+    head
+        title #{title}
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Tours
+        a.btn-success.float-right(href=`/create/`) Add Tour
+        br
+        br
+        if(tours)
+        table
+            tr
+                th Name
+                th(style="width:20%") Description
+                th Date
+                th Cost ($)
+                th Contact Number
+                th Action
+            each tour in tours
+                tr
+                    td #{tour.properties.tour_name}
+                    td #{tour.properties.tour_description}
+                    td #{tour.properties.tour_date}
+                    td #{tour.properties.tour_cost}
+                    td #{tour.properties.tour_contact_number}
+                    td 
+                        a.btn-warning(href=`/update/?id=${tour.id}`) Edit

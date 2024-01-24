@@ -1,58 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body, * {
+body,
+* {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-h1 {
-    margin: 1rem;
+body {
+    position: relative;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 50px;
+}
+.float-right{
+    position: absolute;
+    right: 0;
+    top:0
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+.btn-warning {
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #ffc107;
+    color: #000;
+    font-size: 11pt;
+    border-radius: 2px;
+    border:none;
+    margin-right: 5px;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+.btn-success {
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #0d6efd;
+    color: #fff;
+    font-size: 11pt;
+    border-radius: 2px;
+    border:none;
+    margin-right: 5px;
 }
-
-.card__email {
-    font-size: 1rem;
+.btn-dark{
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #323e48;
+    color: #fff;
+    font-size: 11pt;
+    border-radius: 2px;
+    border:none;
+    margin-right: 5px;
 }
-
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-label, input {
-    margin-top: 5px;
+label{
     display: block;
-    font-size: inherit;
+    margin: 4px 0;
 }
-
-input[type="text"] {
-    padding: .25rem;
+input,textarea{
+    width: 100%;
+    padding: 4px;
 }
-
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th{
+    background-color: #eee;
+}
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
