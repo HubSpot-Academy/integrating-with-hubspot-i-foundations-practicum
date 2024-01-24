@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const private_app_token = 'pat-na1-e8a03560-d6a4-4d32-b3b9-4e74dd85fe61';
+const private_app_token = process.env.PRIVATE_APP_KEY;
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
