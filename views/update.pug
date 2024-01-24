@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+    head
+        title #{title}
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Update Tour
+        form(method="POST")
+            label(for="tour_name") Name
+            input(type="text" name="tour_name" value=tour.tour_name required)
+            br
+            label(for="tour_description") Description
+            textarea(name="tour_description" required) #{tour.tour_description}
+            br
+            label(for="tour_date") Date
+            input(type="date" name="tour_date" value=tour.tour_date required)
+            br
+            label(for="tour_cost") Cost ($)
+            input(type="text" name="tour_cost" value=tour.tour_cost required)
+            br
+            label(for="tour_contact_number") Contact Number
+            input(type="text" name="tour_contact_number" value=tour.tour_contact_number required)
+            br
+            br
+            button.btn-warning(name="submit") Update 
+            a.btn-dark.float-right(href=`/`) Return to the homepage        

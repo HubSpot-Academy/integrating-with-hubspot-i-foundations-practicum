@@ -53,4 +53,47 @@ app.post("/create", async (req, res) => {
     console.error(error);
   }
 });
+
+app.get("/update-cobj", async (req, res) => {
+  const id = req.query.id;
+  const apiURL = `https://api.hubapi.com/crm/v3/objects/tours/${id}?properties=tour_name,tour_description,tour_date,tour_cost,tour_contact_number`;
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    "Content-Type": "application/json",
+  };
+
+  try {
+    const response = await axios.get(apiURL, { headers });
+    const tour = response.data.properties;
+    res.render("update", { title: "Update Tour", tour });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post("/update-cobj", async (req, res) => {
+  const id = req.query.id;
+  const data = {
+    properties: {
+      tour_name: req.body.tour_name,
+      tour_description: req.body.tour_description,
+      tour_date: req.body.tour_date,
+      tour_cost: req.body.tour_cost,
+      tour_contact_number: req.body.tour_contact_number,
+    },
+  };
+
+  const apiURL = `https://api.hubapi.com/crm/v3/objects/tours/${id}`;
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    "Content-Type": "application/json",
+  };
+
+  try {
+    await axios.patch(apiURL, data, { headers });
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+  }
+});
 app.listen(3000, () => console.log("Listening on http://localhost:3000"));
