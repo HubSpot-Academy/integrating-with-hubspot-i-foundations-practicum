@@ -1,0 +1,20 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        
+        table
+            tr
+                th Name 
+                th Bio 
+                th Type
+            each animal in animals 
+                tr 
+                    td #{animal.name}  
+                    td #{animal.bio}  
+                    td #{animal.type}                    

@@ -12,31 +12,60 @@ const PRIVATE_APP_ACCESS = 'pat-na1-c99beb54-3fd8-4343-ae4e-02eecc610367';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 app.get('/', async (req, res) => {
-    const animals = 'https://api.hubapi.com/crm/v3/schemas/2-22879493';
+    const animalsRequest = 'https://api.hubapi.com/crm/v3/objects/2-22879493?limit=10&properties=name,animal_biography,animal_type&archived=false';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     }
     try {
-        const response = await axios.get(animals, { headers });
-        const data = response.data;
-        console.log('here it is:', data.properties.name);
-        res.json(data);
-        
-        // const data = resp.data.results;
-        //res.render('animals', { title: 'Animals | HubSpot APIs', data });   
-        //res.render(data);   
+        const response = await axios.get(animalsRequest, { headers });
+        const results = response.data.results;
+        const animals = results.map((result)=>{
+            return {
+                name : result.properties.name,
+                bio : result.properties.animal_biography,
+                type : result.properties.animal_type
+            };
+        })
+        console.log('here it is:', animals);
+        res.render('homepage', { title: 'Animals | HubSpot APIs', animals });  
     } catch (error) {
         console.error(error);
     }
 });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
+app.get('/update-cobj', async (req, res) => {
+    try {
+        res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });      
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
+app.post('/update', async (req, res) => {
+    const update = {
+        properties: {
+            "favorite_book": req.body.newVal
+        }
+    }
+
+    const email = req.query.email;
+    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    try { 
+        await axios.patch(updateContact, update, { headers } );
+        res.redirect('back');
+    } catch(err) {
+        console.error(err);
+    }
+
+});
 
 // * Code for Route 3 goes here
 
