@@ -1,12 +1,19 @@
-//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
-
 doctype html
 html 
     head 
         title= `${title}`
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
-    body
-        
-        h1 updates
-        a(href="/") Return to the homepage
+        body
+            h1 Create a new Animal in Hubspot
+            a(href="/") Return to the homepage
+            p
+                form( action="/update-cobj" method="post")
+                    input(type="text", name="name", value="", placeholder="Animal Name")
+                    br
+                    input(type="text", name="animal_bio", value="", placeholder="Animal Bio")
+                    br
+                    input(type="text", name="animal_type", value="", placeholder="Animal Type")
+                    br
+                    p 
+                    input(type="submit" value="Create a new Animal")
