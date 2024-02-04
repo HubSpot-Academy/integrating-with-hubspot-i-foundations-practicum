@@ -1,0 +1,23 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 #{title}
+        
+        a(href="http://localhost:3000") Return to the homepage
+        br
+
+        form(action="/update-cobj", method="post")
+            label(for="car_name") Car Name:
+            input(type="text", id="car_name", name="car_name", required)
+
+            label(for="car_color") Car Color:
+            input(type="text", id="car_color", name="car_color", required)
+
+            label(for="car_company") Car Company:
+            input(type="text", id="car_company", name="car_company", required)
+
+            button(type="submit") Submit Car Info

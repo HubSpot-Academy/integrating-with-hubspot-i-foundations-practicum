@@ -1,0 +1,41 @@
+doctype html
+//- html(lang="en")
+//-     head
+//-         title Getting Started With Hubspot OAuth
+//-     body
+//-         h1 Custom Object Name : Cars 
+//-         h3 List of cars present in hubspot account
+//-         if token
+//-             p You're authenticated using the token: #{token}
+//-             p Your account has these cool contacts:
+//-             ul
+//-                 each contact in contacts
+//-                     li #{contact.properties.firstname.value}  #{contact.properties.lastname.value}
+//-         else
+//-             p You're not authenticated 
+//-             p Please install me #[a(href=`${authUrl}`) here]
+
+html
+  head
+    title #{title}
+    link(rel="stylesheet", href="/css/style.css")
+
+  body
+    h1 #{title}
+    h2 List of cars present in hubspot account
+    br
+    a(href="http://localhost:3000/update-cobj") Add to this table
+    br
+    table
+      thead
+        tr
+          th Car Name
+          th Car Color
+          th Car Company
+
+      tbody
+        each item in data
+          tr
+            td= item.properties.car_name
+            td= item.properties.car_color
+            td= item.properties.car_company
