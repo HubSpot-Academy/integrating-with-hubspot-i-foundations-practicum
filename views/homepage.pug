@@ -11,13 +11,13 @@ html(lang="en")
                 thead
                     tr
                         th Name
-                        th Publisher
-                        th Price
+                        th Short Address
+                        th Street Number
                 tbody
                     each obj in customObjectsData
                         tr
-                            td= obj.properties.name
-                            td= obj.properties.short_address
-                            td= obj.properties.street_number
+                            td= obj.name
+                            td= obj.short_address
+                            td= obj.street_number
         else
             p No data available.

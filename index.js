@@ -14,7 +14,8 @@ const PRIVATE_APP_ACCESS = process.env.ACCESS_TOKEN;
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get('/', async (req, res) => {
-    const getAllURL = 'https://api.hubspot.com/crm/v3/objects/2-23781024';
+    const properties = 'properties=name,street_address,street_number'; // Add your property names here
+    const getAllURL = `https://api.hubspot.com/crm/v3/objects/2-23781024?${properties}`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -22,7 +23,11 @@ app.get('/', async (req, res) => {
 
     try {
         const response = await axios.get(getAllURL, { headers });
-        const customObjectsData = response.data.results;
+        const customObjectsData = response.data.results.map(obj => ({
+            name: obj.properties.name,
+            short_address: obj.properties.short_address,
+            street_number: obj.properties.street_number
+        }));
         res.render('homepage', {
             customObjectsData,
             url: '/update-cobj',
@@ -32,7 +37,6 @@ app.get('/', async (req, res) => {
         res.status(500).send('Error retrieving custom object data');
     }
 });
-
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
