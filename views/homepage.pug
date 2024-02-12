@@ -4,19 +4,20 @@ html(lang="en")
         title Daniel Chaves' Practicum Private App
     body
         h1 Custom Object Table
-            a(href=url) Add to this table
-            if customObjectsData && customObjectsData.length > 0
-                table
-                    thead
+        a(href=url) Add to this table
+        div
+        if customObjectsData && customObjectsData.length > 0
+            table
+                thead
+                    tr
+                        th Name
+                        th Publisher
+                        th Price
+                tbody
+                    each obj in customObjectsData
                         tr
-                            th Name
-                            th Publisher
-                            th Price
-                    tbody
-                        each obj in customObjectsData
-                            tr
-                                td= obj.properties.name
-                                td= obj.properties.short_address
-                                td= obj.properties.street_number
-            else
-                p No data available.
+                            td= obj.properties.name
+                            td= obj.properties.short_address
+                            td= obj.properties.street_number
+        else
+            p No data available.
