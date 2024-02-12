@@ -4,4 +4,9 @@ html(lang="en")
         title= `${title}`
     body
         h1= `${title}`
+        form(action='/update-cobj' method='post')
+            input(type='text' name='name' placeholder='Real Estate Name')
+            input(type='text' name='short_address' placeholder='Real Estate Address')
+            input(type='text' name='street_number' placeholder='Real Estate Street Number')
+            button(type='submit') Submit
         p Return to the homepage #[a(href=`${url}`) page]
