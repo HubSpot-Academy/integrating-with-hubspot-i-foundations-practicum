@@ -25,7 +25,7 @@ app.get('/', async (req, res) => {
         const response = await axios.get(getAllURL, { headers });
         const customObjectsData = response.data.results.map(obj => ({
             name: obj.properties.name,
-            short_address: obj.properties.short_address,
+            short_address: obj.properties.short_address ?? 'N/A',
             street_number: obj.properties.street_number
         }));
         res.render('homepage', {
