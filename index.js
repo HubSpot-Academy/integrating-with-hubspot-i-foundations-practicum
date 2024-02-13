@@ -1,26 +1,86 @@
-const express = require('express');
-const axios = require('axios');
+const express = require("express");
+const axios = require("axios");
 const app = express();
+const cors = require("cors");
+const dotenv = require("dotenv");
 
-app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+app.set("view engine", "pug");
+app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
+
+// * Load environment variables
+dotenv.config();
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
+app.get("/", async (req, res) => {
+  const pokemonObject =
+    "https://api.hubspot.com/crm/v3/objects/pokemons?properties=pokemon_name,pokemon_type,pokemon_attack_points,pokemon_defence_points";
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    "Content-Type": "application/json",
+  };
+  try {
+    const resp = await axios.get(pokemonObject, { headers });
+    const data = resp.data.results;
+    // console.log(data);
+    res.render("homepage", { title: "Custom Object Table", data });
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
+app.get("/update-cobj", (req, res) => {
+  try {
+    res.render("update", {
+      title: "Update Custom Object Form | Integrating With HubSpot I Practicum",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 // * Code for Route 2 goes here
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
+app.post("/update-cobj", async (req, res) => {
+  const {
+    pokemon_name,
+    pokemon_type,
+    pokemon_attack_points,
+    pokemon_defence_points,
+  } = req.body;
+  const update = {
+    properties: {
+      pokemon_name,
+      pokemon_type,
+      pokemon_attack_points,
+      pokemon_defence_points,
+    },
+  };
+
+  const updateContact = `https://api.hubspot.com/crm/v3/objects/pokemons`;
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    "Content-Type": "application/json",
+  };
+
+  try {
+    await axios.post(updateContact, update, { headers });
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
@@ -66,6 +126,5 @@ app.post('/update', async (req, res) => {
 });
 */
 
-
 // * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+app.listen(3000, () => console.log("Listening on http://localhost:3000"));
