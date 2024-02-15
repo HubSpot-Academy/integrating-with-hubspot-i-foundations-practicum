@@ -1,0 +1,19 @@
+doctype html 
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Add Pokemon
+        form(action="/update-cobj" method="post")
+            label(for="pokemon_name") Pokemon Name:
+            input(type="text" name="pokemon_name")
+            label(for="pokemon_type") Pokemon Type:
+            input(type="text" name="pokemon_type")
+            label(for="pokemon_attack_points") Pokemon Attack Points:
+            input(type="text" name="pokemon_attack_points")
+            label(for="pokemon_defence_points") Pokemon Defence Points:
+            input(type="text" name="pokemon_defence_points")
+            input(type="submit" value="Submit")
+        a( href="/") Back to home

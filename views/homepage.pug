@@ -1,0 +1,24 @@
+doctype html
+html 
+    head
+        title #{title}
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 #{title}
+        p Pokemons in hubspot account: 
+        a( href="/update-cobj") Add pokemon to table 
+        table 
+            tr
+                th Name
+                th Type
+                th attack points 
+                th defense points
+            each pokemon in data 
+                tr
+                    td= pokemon.properties.pokemon_name
+                    td= pokemon.properties.pokemon_type
+                    td= pokemon.properties.pokemon_attack_points
+                    td= pokemon.properties.pokemon_defence_points
+
+
