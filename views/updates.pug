@@ -7,8 +7,9 @@ html
     body          
         .form-wrapper
             h1= `${title}`
-            p
-                a(href="/") << Return to the homepage
+            ul
+                li
+                    a(href="/") Return to the homepage
             form(method="POST")
                 label(for="dogname") Dog name
                 input(type="text" name="dogname" required)

@@ -24,7 +24,7 @@ app.get( '/' , async (req, res) => {
     try {
         const resp = await axios.get(requestUrl, { headers });
         const dogs = resp.data.results;
-        res.render('dogs', { title: 'Dog directory', dogs });    
+        res.render('homepage', { title: 'Dog directory', dogs });    
     } catch (error) {
         console.error(error);
     }
