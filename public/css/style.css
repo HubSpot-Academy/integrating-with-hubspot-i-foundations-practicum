@@ -40,7 +40,7 @@ h1 {
     box-shadow: 3px 2px 6px lightgrey;
 }
 
-label, input {
+label, input, select {
     margin-top: 5px;
     display: block;
     font-size: inherit;
@@ -51,6 +51,13 @@ input[type="text"] {
 }
 
 input[type="submit"] {
+    background-color: lightgrey;
+    border: none;
+    padding: .375rem 1rem;
+    margin-top: 10px;
+}
+
+input[type="button"] {
     background-color: lightgrey;
     border: none;
     padding: .375rem 1rem;
