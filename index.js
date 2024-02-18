@@ -15,7 +15,19 @@ const PRIVATE_APP_ACCESS = process.env.ACCESS_TOKEN;
 
 app.get( '/' , async (req, res) => {
 
-    res.render('dogs', {title: 'Dog directory'});
+    const requestUrl = 'https://api.hubspot.com/crm/v3/objects/dogs?limit=50&properties=name,breed,birth_date';
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+
+    try {
+        const resp = await axios.get(requestUrl, { headers });
+        const dogs = resp.data.results;
+        res.render('dogs', { title: 'Dog directory', dogs });    
+    } catch (error) {
+        console.error(error);
+    }
 
 });
 
