@@ -45,52 +45,28 @@ app.get( '/update-cobj' , async (req, res) => {
 
 app.post( '/update-cobj' , async (req, res) => {
 
-    
-});
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
+    const requestBody = {
         properties: {
-            "favorite_book": req.body.newVal
+            "name": req.body.dogname,
+            "breed": req.body.dogbreed,
+            "birth_date": req.body.birthdate
         }
-    }
+    };
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
+    const requestUrl = `https://api.hubapi.com/crm/v3/objects/dogs`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     };
 
     try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
+        await axios.post(requestUrl, requestBody, { headers } );
+        res.redirect('/');
     } catch(err) {
         console.error(err);
     }
 
 });
-*/
 
 
 // * Localhost
