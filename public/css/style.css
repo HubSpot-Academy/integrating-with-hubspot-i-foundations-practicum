@@ -57,13 +57,6 @@ input[type="submit"] {
     margin-top: 10px;
 }
 
-input[type="button"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
-}
-
 th, td {
     padding: 20px;
     text-align: left;

@@ -7,6 +7,8 @@ html
     body          
         .form-wrapper
             h1= `${title}`
+            p
+                a(href="/") << Return to the homepage
             form(method="POST")
                 label(for="dogname") Dog name
                 input(type="text" name="dogname" required)
@@ -23,4 +25,3 @@ html
                 label(for="birthdate") Birth date 
                 input(type="date" name="birthdate")
                 input(type="submit" value="Submit")
-                input(type="button" value="Cancel" onclick="window.location.href='/';")
