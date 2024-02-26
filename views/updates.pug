@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    a(href="/") Return to the homepage
+    form(action="/update-cobj" method="POST")
+        label(for="name") Name:
+        input(type="text", id="name", name="name", required)
+        br
+        label(for="bio") Bio:
+        input(type="text", id="bio", name="bio", required)
+        br
+        label(for="game") Game:
+        select(id="game", name="game", required)
+            option(value="the_legend_of_zelda") The Legend of Zelda
+            option(value="super_mario_bros") Super Mario Bros.
+            option(value="final_fantasy") Final Fantasy
+            option(value="pokemon") Pokémon
+        br
+        input(type="submit", value="Submit")
