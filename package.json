@@ -1,15 +1,16 @@
 {
-    "name": "integrating-with-hubspot-i-foundations-practicum",
+    "name": "foundations-of-authenticating-integrations",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "HubSpot Academy learner",
+    "author": "",
     "license": "ISC",
     "dependencies": {
-        "axios": "^1.3.5",
+        "@hubspot/api-client": "^11.0.0",
+        "axios": "^1.6.7",
         "express": "^4.18.2",
         "pug": "^3.0.2"
     }
