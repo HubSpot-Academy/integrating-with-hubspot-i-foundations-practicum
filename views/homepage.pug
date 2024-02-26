@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/style.css")
+  body
+    h1= title
+    a(href="/update-cobj") Add/Update this table
+    table
+      thead
+        tr
+          th Name
+          th Bio
+          th Game
+      tbody
+        each videoGame in videoGamesData
+          tr
+            td= videoGame.properties.name
+            td= videoGame.properties.bio
+            td= videoGame.properties.game
