@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+    head
+        title=`${title}`
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .form-wrapper
+            h1 Update Athlete Information
+            form(method="POST")
+                label(for="newName") Athlete Name
+                input(type="text" name="newName" required)
+                label(for="newEmail") Athlete Email
+                input(type="email" name="newEmail" required)
+                label(for="newName") Athlete Tenure
+                input(type="number" name="newTenure", min="0", max="100")
+                input(type="submit" value="Submit")
+                br
+                a(href="/") Return to the home page

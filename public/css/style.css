@@ -56,3 +56,20 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+
+th {
+    background-color: rgb(247, 190, 190);
+    padding: 1em;
+    text-align: center;
+    border: 1px solid black;
+    padding: 1em;
+}
+
+td {
+    border: 1px solid black;
+    padding: 1em;
+}
+
+div.link-container {
+    padding-bottom: 10px;
+}

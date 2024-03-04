@@ -1,0 +1,20 @@
+doctype html
+html
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Custom Object Table (Athletes)
+        div.link-container 
+            a(href="/update-cobj") Add/Update This Table
+        table
+            tr
+                th Name
+                th Email
+                th Tenure
+            each athlete in data
+                tr
+                    td #{athlete.properties.athlete_name}
+                    td #{athlete.properties.athlete_email}
+                    td #{athlete.properties.athlete_tenure}
