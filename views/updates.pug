@@ -1,0 +1,16 @@
+html(lang="en")
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        a(href="/") Return to the homepage
+        .form-wrapper
+            form(method="POST")
+                label(for="name") New Name
+                input(type="text" name="name" required)
+                label(for="age") New Age
+                input(type="text" name="age" required)
+                label(for="class") New Type
+                input(type="text" name="class" required)
+                input(type="submit" value="Submit")
