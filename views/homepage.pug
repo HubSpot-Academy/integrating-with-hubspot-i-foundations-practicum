@@ -1,16 +1,41 @@
-//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+//- //- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+//- doctype html
+//- html 
+//-     head 
+//-         title= `${title}`
+//-         meta(name="viewport" content="width=device-width, initial-scale=1")
+//-         link(rel="stylesheet", href="/css/style.css")
+//-     body    
+//-         h1 Pets
+//-         .cards 
+//-             each pet in data
+//-                 .card 
+//-                   h2.card__name Name: #{pet.properties.pet_name}
+//-                     p.card__type Type: #{pet.properties.pet_type}
+//-                     p.card__age Age: #{pet.properties.pet_age}
+
+
+
+
 
 doctype html
-html 
-    head 
-        title= `${title}`
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-        link(rel="stylesheet", href="/css/style.css")
-    body    
-        h1 Pets
-        .cards 
-            each pet in data
-                .card 
-                  h2.card__name Name: #{pet.properties.pet_name}
-                    p.card__type Type: #{pet.properties.pet_type}
-                    p.card__age Age: #{pet.properties.pet_age}
+html(lang="en")
+  head
+    title= `${title}`
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Pets
+    table
+       thead
+            tr
+                each label, index in tableHeaders 
+                    th(key=index)= label
+            tbody
+            each pet in petsData
+                tr
+                        td= pet.petName
+                        td= pet.petType
+                        td= pet.petAge
+                        td
+                            a(href=`/updates?petId=${pet.petId}`) Update Pet Data
