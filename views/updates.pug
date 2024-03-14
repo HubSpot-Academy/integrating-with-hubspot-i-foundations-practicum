@@ -1,0 +1,28 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body          
+        .form-wrapper
+            h1= `${title}`
+            ul
+                li
+                    a(href="/") Return to the homepage
+            form(method="POST")
+                label(for="dogname") Dog name
+                input(type="text" name="dogname" required)
+                label(for="dogbreed") Dog breed
+                select(name="dogbreed" required) 
+                    option(value="Shiba") Shiba
+                    option(value="Akita") Akita
+                    option(value="Pug") Pug
+                    option(value="Corgi") Corgi
+                    option(value="Border Collie") Border Collie
+                    option(value="Bulldog") Bulldog
+                    option(value="Poodle") Poodle
+                    option(value="Chihuahua") Chihuahua
+                label(for="birthdate") Birth date 
+                input(type="date" name="birthdate")
+                input(type="submit" value="Submit")
