@@ -47,6 +47,18 @@ app.get('/update-cobj', (req, res) => {
 
 // * Code for Route 3 goes here
 
+//skapa data för ny hund
+app.post('/update-cobj', async (req, res)=> {
+    const { name, breed, age } = req.body;
+    const newDogData = {
+        "properties": {
+            "Name": name,
+            "Dog Breed": breed,
+            "Age": age
+        }
+    };
+})
+
 /**
 * * This is sample code to give you a reference for how you should structure your calls.
 
