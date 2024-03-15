@@ -8,8 +8,12 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Contacts
-        .cards 
-            each contact in data
-                .card 
-                    h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-                    p.card__email #{contact.properties.email}
+        if token
+            .cards 
+                each contact in data
+                    .card 
+                        h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
+                        p.card__email #{contact.properties.email}
+        else 
+            p You're not authenticated 
+            p please install me #[a(href=`${authUrl}`) here] 

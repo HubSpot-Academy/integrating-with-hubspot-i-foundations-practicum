@@ -12,6 +12,8 @@ app.use(express.json());
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
 const PRIVATE_APP_ACCESS = '';
 
+const authUrl = "https://app-eu1.hubspot.com/oauth/authorize?client_id=5a58f855-a10c-4696-860b-f7f77b4cc312&redirect_uri=http://localhost:3000/practicum/&scope=crm.objects.contacts.read%20crm.schemas.custom.read%20crm.objects.custom.read"
+
 const REDIRECT_URI = 'http://localhost/3000/contacts';
 
 
@@ -31,34 +33,26 @@ const isAuthorized = (userId) => {
 
 app.get('/', async (req, res) => {
     if (isAuthorized(req.sessionID)) {
-
+       // const customObjectData = await callCustomObjectData();
+       res.render("contacts", { customObjectData });
     } else {
-        res.render("home", {authUrl});
+        res.render("contacts", {authUrl});
     }
 });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
-// * Code for Route 2 goes here
+app.get('/update-cobj', async (req, res) => {
+    res.render("updates");
+});
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
-app.get('/contacts', async (req, res) => {
-    res.send(req.query.code);
-    const authCodeProof = {
-        grant_type: 'authorization_code',
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        redirect_uri: REDIRECT_URI,
-        code: req.query.code
-    };
-    try {
-        const responseBody = await axios.post('https://api.hubspot.com/oauth/v1/token', querystring.stringify(authCodeProof));
-        res.json(responseBody.data)
-    } catch (error) {
-        console.error(error);
-    }
-});
+app.post('/update-cobj', async (req, res) => {
+    const formData = req.body
+    // Traitement des données formData...
+    res.redirect('/')
+})
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
