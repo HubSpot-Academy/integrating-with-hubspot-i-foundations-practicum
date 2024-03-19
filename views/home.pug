@@ -1,0 +1,26 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html
+  head
+    title #{title}
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .global-wrapper
+      h1 #{title}
+      if data.length > 0
+        table
+          thead
+            tr
+              th Name
+              th Weight
+              th Type
+          tbody
+            each item in data
+              tr
+                td #{item.properties.name}
+      else 
+        p No data available
+
+      a(href="/updates") Add to the table

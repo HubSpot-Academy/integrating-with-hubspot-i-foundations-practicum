@@ -1,11 +1,22 @@
 
 doctype html
-html 
-    head 
-        title= `Update Custom Object Form | Integrating With HubSpot I Practicum`
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-        link(rel="stylesheet", href="/css/style.css")
-    body    
-        h1 Update Custom Object Form - Integrating With HubSpot I Practicum
-        p
-            a(href='/') back to home page
+html
+  head
+    title #{title}
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .global-wrapper
+      h1 #{title}
+
+      form(action="/updates", method="post")
+        label(for="name") Name:
+        input(type="text", name="name", required)
+        label(for="weight") Weight:
+        input(type="text", name="weight", required)
+        label(for="type") Type:
+        input(type="text", name="type", required)
+
+        .button-wrapper        
+          a.a-inverse(href="/") Return to the homepage
+          button.a(type="submit") Add item
