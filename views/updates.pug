@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title= pageTitle
+        link(rel="stylesheet" href="/css/style.css")
+    body
+
+        h1= pageTitle
+        // HubSpot CRM Record Creation
+        form(action="/update-cobj", method="POST")
+            label(for="name") Name:
+            input(type="text", name="name", id="name")
+
+            label(for="gender") Gender:
+            input(type="text", name="gender", id="gender")
+
+            label(for="age")  Age:
+            input(type="text", name="age", id="age")
+
+            button(type="submit") Create Student
+
+    a.update-link(href="/") Return to the homepage

@@ -1,0 +1,20 @@
+doctype html
+html 
+    head 
+        title= pageTitle
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1= pageTitle
+        a.update-link(href="/update-cobj") Add to this table
+        table(style='width:80%', border='1')
+            thead
+                tr
+                    th Name
+                    th Gender
+                    th Age
+            tbody
+                each student in students
+                    tr
+                        td #{student.properties.name}
+                        td #{student.properties.gender}
+                        td #{student.properties.age}
