@@ -1,0 +1,23 @@
+doctype html
+html 
+    head 
+        title= Update Custom Object Form | Integrating With HubSpot I Practicum
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+		h1 Add New Custom Object Record
+		
+		a(href="/") Return to Homepage
+	
+        .form-wrapper
+			form(action="http://localhost:3000/update-cobj", method="POST")
+				label Vehicle Year
+				input#vehicle_year(type="text", name="name",required)
+				
+				label Vehicle Make
+				input#vehicle_make(type="text", name="name",required)
+				
+				label Vehicle Model
+				input#vehicle_model(type="text", name="name",required)
+				
+				input(type="submit", value="Submit")

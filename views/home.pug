@@ -1,0 +1,21 @@
+doctype html
+html 
+    head 
+        title= `Vehicles`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Vehicle List
+        .container
+            a(href="/update-cobj") Add/Update this table 
+            table
+                thead
+                    th Year
+                    th Make
+                    th Model 
+                tbody 
+                    each vehicle in data
+                        tr
+                            td=`${vehicle.properties.vehicle_year}`
+                            td=`${vehicle.properties.vehicle_make}`
+                            td=`${vehicle.properties.vehicle_model}`
