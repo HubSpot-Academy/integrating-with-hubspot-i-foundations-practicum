@@ -1,0 +1,24 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Video Games
+        - var url = "http://localhost:3000/create"
+        a(href=url) Add to this table
+
+        table.table
+            tr
+                td Name
+                td Developer
+                td Description
+
+            each videogame in data
+                tr
+                    td #{videogame.properties.name} 
+                    td #{videogame.properties.developer}
+                    td #{videogame.properties.description}

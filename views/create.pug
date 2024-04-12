@@ -1,0 +1,38 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Video Games
+        .cards 
+        - var url = "http://localhost:3000/"
+        a(href=url) Back to Homepage
+    form( method="POST")
+        label(for="name") Nombre:
+        input(type="text", id="name", name="name", required)
+        
+        label(for="developer") Desarrollador:
+        input(type="text", id="developer", name="developer", required)
+        
+        label(for="description") Descripción:
+        textarea(id="description", name="description", rows="4", required)
+        
+        label(for="rating") Rating:
+        input(type="number", id="rating", name="rating", min="1", max="10", required)
+        
+        label(for="release_date") Fecha de lanzamiento:
+        input(type="date", id="release_date", name="release_date", required)
+        
+        label(for="genre") Género:
+        input(type="text", id="genre", name="genre", required)
+        
+        label(for="main_platform") Plataforma principal:
+        input(type="text", id="main_platform", name="main_platform", required)
+        
+        button(type="submit") Enviar
+
+
