@@ -28,5 +28,5 @@ ___
 - You must create a developer test account and link to it in your README.md file. Submissions that do not meet this requirement will not be considered.
 
 
-## Custom object
-- https://app.hubspot.com/contacts/44890011/objects/44890011/views/all/list
+## Standard object
+- https://app.hubspot.com/contacts/44890011/objects/0-1/views/all/list
