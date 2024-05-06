@@ -1,0 +1,18 @@
+
+block content
+    h1= pageTitle
+    a(href="/") Return to the homepage
+    br
+    br
+    form(action="/update", method="POST")
+        label(for="firstname") First Name:
+        input(type="text", id="firstname", name="firstname")
+        br
+        label(for="email") Email:
+        input(type="email", id="email", name="email")
+        br
+        label(for="phone") Phone:
+        input(type="tel", id="phone", name="phone")
+        br
+        br
+        button(type="submit") Submit
