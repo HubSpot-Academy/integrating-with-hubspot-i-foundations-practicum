@@ -1,0 +1,20 @@
+doctype html 
+html 
+    head
+        title="Custom Object Table" 
+    body 
+        h1 Custom Object Table
+        h2 
+            a(href="/update-cobj") Add/Update This Table 
+        table 
+            thead 
+                tr 
+                    th Name
+                    th Age 
+                    th Breed 
+            tbody 
+                each pet in data
+                    tr 
+                        td #{pet.name}
+                        td #{pet.age}
+                        td #{pet.breed}
