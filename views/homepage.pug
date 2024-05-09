@@ -1,7 +1,9 @@
 doctype html 
 html 
     head
-        title="Custom Object Table" 
+        title=`${title}` 
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css") 
     body 
         h1 Custom Object Table
         h2 
@@ -14,7 +16,7 @@ html
                     th Breed 
             tbody 
                 each pet in data
-                    tr 
-                        td #{pet.properties.name}
-                        td #{pet.properties.age}
-                        td #{pet.properties.breed}
+                        tr 
+                            td #{pet.properties.name}
+                            td #{pet.properties.age}
+                            td #{pet.properties.breed}
