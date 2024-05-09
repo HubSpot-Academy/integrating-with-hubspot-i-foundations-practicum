@@ -6,12 +6,12 @@ html
         link(rel="stylesheet", href="/css/style.css") 
     body 
         h1
-            a(href="/") Back To Custom Object Table
-        form(action="POST")
-            label(for="name") Name 
+            a(href="/") Return To The Homepage
+        form(method="POST",  action="/update-cobj")
+            label(for="name") Name: 
             input(type="text" name="name" id="name")
-            label(for="age") Age
+            label(for="age") Age:
             input(type="number" name="age" id="age")
-            label(for="breed") Breed
+            label(for="breed") Breed:
             input(type="text" name="breed" id="breed")
-            input(type="submit" name="submit" id="submit" value="Submit")
+            input(type="submit" name="add" id="add" value="Add")
