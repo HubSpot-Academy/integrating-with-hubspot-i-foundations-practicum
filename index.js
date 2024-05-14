@@ -7,65 +7,63 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+const PRIVATE_APP_ACCESS = 'pat-na1-79f9510a-9f0a-47be-b8a5-e6f7d8d7bcec';
 
-// * Code for Route 1 goes here
 
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
+app.get('/', async (req, res) => {
 
-// * Code for Route 2 goes here
+  const cars =  'https://api.hubapi.com/crm/v3/objects/2-29614249?properties=car_name,make,model';  
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
+  }  
 
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
+  try {
+    const resp = await axios.get(cars, { headers });
+    const data = resp.data.results;
+    res.render('cars', { title: 'Cars HubSpot API', data });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
+app.get('/add', async (req, res) => {
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
+    try {
+        res.render('add', {});
+        
     } catch(err) {
         console.error(err);
     }
-
 });
-*/
 
+app.post('/add', async (req, res) => {
 
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+    console.log(req.body); 
+  
+    try {
+      const { car_name, make, model } = req.body;
+  
+      await axios.post(
+        'https://api.hubapi.com/crm/v3/objects/2-29614249',
+        { properties: { car_name, make, model } },
+        { headers: { Authorization: `Bearer ${PRIVATE_APP_ACCESS}` } }
+      )
+      .then(response => {
+        console.log('Registro criado com sucesso:', response.data);
+        res.redirect('/');
+      })
+      .catch(error => {
+        console.error('Erro ao criar registro:', error.response.data);
+        res.status(500).send('Erro ao criar registro do objeto personalizado');
+      });
+  
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Erro ao criar registro do objeto personalizado');
+    }
+  });
+
+app.listen(3000, () => console.log('Servidor rodando na porta http://localhost:3000'));
