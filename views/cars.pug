@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= `${title}`
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    h1 List of Cars
+    a.btn(href="/add") Add a Car
+    .cards 
+        each car in data 
+          .card
+            h2.card__name #{car.properties.car_name}  
+            p.card__email Details of car: #{car.properties.make} #{car.properties.model}
