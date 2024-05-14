@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    h1 Criar Novo Carro
+    a.btn(href="/") Retornar à página inicial
+
+    form(method="POST" action="/add")
+      label(for="car_name") Car Name:
+      input(type="text" id="car_name" name="car_name" required)
+
+      label(for="make") Make:
+      select(id="make" name="make" required)
+        option(value="Toyota") Toyota
+        option(value="Honda") Honda
+        option(value="Ford") Ford
+        option(value="Chevrolet") Chevrolet
+        option(value="Nissan") Nissan
+
+      label(for="model") Model:
+      select(id="model" name="model" required)
+        option(value="Sedan") Sedan
+        option(value="Hatchback") Hatchback
+        option(value="Si Sedan") Si Sedan
+
+      button(type="submit") Criar Carro
