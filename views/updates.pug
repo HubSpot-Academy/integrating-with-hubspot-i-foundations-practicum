@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .form-wrapper
+            p Add new Instrument
+            form(method="POST")
+                label(for="description") Description:
+                input(type="text" name="description" required)
+                label(for="name") Name:
+                input(type="text" name="name" required)
+                label(for="type") Type:
+                input(type="text" name="type" required)
+                label(for="brand") Brand:
+                input(type="text" name="brand" required)
+                input(type="submit" value="Submit")

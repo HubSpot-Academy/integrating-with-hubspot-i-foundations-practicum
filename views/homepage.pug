@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title= `Custom Objects 'Instruments'`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Instruments
+        a(href="update-cobj") Add to this table
+        table
+            tr
+                th Name
+                th Description
+                th Type
+                th Brand
+            each instrument in data
+                tr
+                    td  #{instrument.properties.name}
+                    td  #{instrument.properties.description}
+                    td  #{instrument.properties.type}
+                    td  #{instrument.properties.brand}

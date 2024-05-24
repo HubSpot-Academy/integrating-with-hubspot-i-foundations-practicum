@@ -7,32 +7,38 @@ body, * {
 }
 
 h1 {
-    margin: 1rem;
+    text-align: center;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+a {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+p {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.card__email {
-    font-size: 1rem;
+table {
+    margin-left: auto;
+    margin-right: auto;
 }
+table, th, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+th, td {
+        padding: 10px;
+}
+
 
 .form-wrapper {
     font-size: 18px;
     max-width: 768px;
+    width: 300px;
     margin: 2rem auto;
     padding: 2rem;
     border: solid 1px lightgrey;
@@ -44,6 +50,13 @@ label, input {
     margin-top: 5px;
     display: block;
     font-size: inherit;
+    margin-left: 30px;
+}
+label {
+    width: 100px;
+}
+input {
+    widtH: 200px;
 }
 
 input[type="text"] {
@@ -54,5 +67,5 @@ input[type="submit"] {
     background-color: lightgrey;
     border: none;
     padding: .375rem 1rem;
-    margin-top: 10px;
+    margin-top: 30px;
 }
