@@ -1,0 +1,14 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        .form-wrapper
+            form(method="POST")
+                input(type="text" placeholder="Name" name="name" required )
+                input(type="number" placeholder="Age (Year)" name="age" required )
+                input(type="text" placeholder="Bio" name="bio" required )
+                input(type="submit" value="Submit")
+        a(href="http://localhost:3000") Return to the homepage 
