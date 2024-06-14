@@ -1,0 +1,17 @@
+
+html 
+    head 
+        title= 'List of Dota2 Heroes'
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Heroes
+        button(onclick="window.location.href='http://localhost:3000/update-heroes'") Add to this table
+        .cards 
+            each hero in heroes
+                .card 
+                    h2.card__name #{hero.properties.name}
+                    p.card__attribute Main Attribute: #{hero.properties.main_attribute}
+                    p.card__spells Number of Spells: #{hero.properties.number_of_spells}
+        
+    
