@@ -1,0 +1,81 @@
+doctype html
+html
+  head
+    title= pageTitle
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .form-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        margin-top: 20px;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      button[type="submit"] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #4CAF50;
+        text-decoration: none;
+      }
+  body
+    div.content
+      h1 New Car Addition Form
+      div.form-container
+        form(action="/update-cars" method="post")
+          label(for="name") Car name
+          input(type="text" name="name")
+          label(for="year") Car year
+          input(type="text" name="year")
+          label(for="model") Car model
+          input(type="text" name="model")
+          label(for="vin") VIN
+          input(type="text" name="vin")
+          label(for="make") Make
+          input(type="text" name="make")
+          button(type="submit") Add New Car
+        a(href="/home-cars") Return to the home
