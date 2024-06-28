@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= `${title}`
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    .content
+      h1= `${title}`
+
+    .form-wrapper
+      form(action="/update-cobj", method="POST")
+        .form-field
+          label(for="name") Name:
+          input(type="text", name="name", placeholder="Enter Pet Name", id="name")
+
+        .form-field
+          label(for="breed") Breed:
+          input(type="text", name="breed", placeholder="Enter Breed Name", id="breed")
+
+        .form-field
+          label(for="age") Age:
+          input(type="number", name="age", placeholder="Enter Pet Age", id="age")
+
+        button(type="submit") Create Pet
+
+    a.update-link(href="/") Return to the homepage
+

@@ -1,58 +1,122 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body, * {
+body {
     font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    margin: 1rem;
-}
-
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-.card__email {
-    font-size: 1rem;
-}
-
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-label, input {
-    margin-top: 5px;
+    background-color: #f0f0f0; 
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
     display: block;
-    font-size: inherit;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+.form-wrapper {
+  font-size: 18px;
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 40px;
+    border: solid 1px lightgrey;
+    border-radius: 15px;
+    box-shadow: 3px 2px 6px lightgrey;
+}
+.form-wrapper input {
+  font-size: 16px;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.form-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
-input[type="text"] {
-    padding: .25rem;
+.form-field label {
+  font-weight: bold;
+  margin-right: 10px;
+  white-space: nowrap;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+.form-field input[type="text"],
+.form-field input[type="number"] {
+  flex-grow: 1;
+  margin-bottom: 12px;
+  align-items: center;
 }
+label {
+  font-weight: bold;
+  display: flex;
+}
+
+button[type="submit"] {
+  width: 100%;
+  background-color: #0d9ec3;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button[type="submit"]:hover {
+  background-color: #4CAF50;
+}
+.update-link:hover {
+  color: #4CAF50;
+}
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #4CAF50;
+  text-decoration: none;
+}
+  button:hover {
+    background-color: #0b7a99;
+  }
+
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #0d9ec3;
+    color: white;
+  }
+  tr:hover {
+    background-color: #F5F5F5;
+  }
+  a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #0d9ec3;
+  }
+  
