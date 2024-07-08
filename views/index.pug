@@ -8,4 +8,15 @@ html(lang="en")
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1= `${title}`
-        p= `${message}`
+        p= `${helloMessage}`
+
+        if successMessage
+            .alert.alert-success
+                p= `${successMessage}`
+
+        p
+            a(href="/update-cobj") Add / Update Pet
+        p
+            a(href="/contacts") Contacts Page
+        p
+            a(href="/pets") Pets Page

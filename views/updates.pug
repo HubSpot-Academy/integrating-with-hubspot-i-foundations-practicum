@@ -1,15 +1,23 @@
-// ** This is a sample of a pug template and how it uses the data passed to it from index.js.
-
 doctype html
 html(lang="en")
-    head
-        title= `${title}`
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-        link(rel="stylesheet", href="/css/style.css")
-    body    
-        h1 Update Custom Object Form
-        .cards 
-            each contact in data
-                .card 
-                    h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-                    p.card__email #{contact.properties.email}
+  head
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Update Custom Object Form
+    p This is the form to update custom objects.
+    .form-wrapper
+      form(action="/update-pets" method="post")
+        .form-row
+            label(for="pet_name") Pet name
+            input(type="text" name="pet_name" id="pet_name")
+        .form-row
+            label(for="pet_type") Pet type
+            input(type="text" name="pet_type" id="pet_type")
+        .form-row
+            label(for="pet_breed") Pet Breed
+            input(type="text" name="pet_breed" id="pet_breed")
+        button(type="submit") Add New Pet
+    p
+        a(href="/") Return to Homepage

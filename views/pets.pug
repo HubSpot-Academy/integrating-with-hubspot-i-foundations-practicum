@@ -1,13 +1,16 @@
 doctype html
 html(lang="en")
-    head 
-        title= `${title}`
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-        link(rel="stylesheet", href="/css/style.css")
-    body
-        h1 pets
-        .cards 
-            each pet in data
-                .card 
-                    h2.card__name #{pets.properties.name} (#{pets.properties.type})
-                    p.card__email #{pets.properties.breed}
+  head 
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Pets
+    .cards 
+      if data && data.length
+        each pet in data
+          .card 
+            h2.card__name #{pet.properties.pet_name} (#{pet.properties.pet_type})
+            p.card__breed #{pet.properties.pet_breed}
+      else
+        p No pets data available
