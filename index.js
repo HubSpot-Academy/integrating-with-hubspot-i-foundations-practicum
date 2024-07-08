@@ -68,6 +68,34 @@ app.get('/pets', async (req, res) => {
 });
 
 
+app.get('/homepage', async (req, res) => {
+  const petsUrl = 'https://api.hubapi.com/crm/v3/objects/pets?properties=pet_name&properties=pet_type&properties=pet_breed';
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json',
+  };
+
+  console.log('Starting to fetch pets'); // Log start of fetching process
+
+  try {
+    const resp = await axios.get(petsUrl, { headers });
+    const data = resp.data.results;
+    console.log('Fetched Pets Data:', data);  // Log the fetched data
+
+    if (!Array.isArray(data)) {
+      console.error('Data is not an array');
+      res.status(500).send('Invalid data format');
+      return;
+    }
+
+    res.render('homepage', { title: 'Pets | HubSpot APIs', data });
+  } catch (error) {
+    console.error('Error fetching pets:', error.response ? error.response.data : error.message);
+    res.status(500).send('An error occurred while fetching pets.');
+  }
+});
+
+
 app.post('/update-pets', async (req, res) => {
   const petProperties = {
       properties: {

@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+  head 
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Custom Object Table (Pets)
+    p
+      a(href="/update-cobj") Add to this table
+    if data && data.length
+      table
+        thead
+          tr
+            td Pet Name
+            td Pet Type
+            td Pet Breed
+        tbody
+          each pet in data
+            tr
+            td #{pet.properties.pet_name}
+            td #{pet.properties.pet_type}
+            td #{pet.properties.pet_breed}
+    else
+      p No pets data available
