@@ -3,11 +3,11 @@
 body, * {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 20px 30px;
 }
 
 h1 {
-    margin: 1rem;
+    margin: 1rem 0;
 }
 
 .cards {
@@ -40,19 +40,82 @@ h1 {
     box-shadow: 3px 2px 6px lightgrey;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
+.form-row {
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+    margin-bottom: .2rem;
+}
+
+label {
+    margin-right: 1rem; /* Space between label and input */
     font-size: inherit;
 }
 
 input[type="text"] {
+    flex: 1; /* Allow input to take up remaining space */
     padding: .25rem;
+    font-size: inherit;
 }
 
-input[type="submit"] {
+button[type="submit"] {
     background-color: lightgrey;
     border: none;
     padding: .375rem 1rem;
     margin-top: 10px;
+    cursor: pointer;
+    font-size: inherit;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: darkgrey;
+}
+
+.alert {
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+th, td {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+tr {
+    transition: background-color 0.3s;
 }
