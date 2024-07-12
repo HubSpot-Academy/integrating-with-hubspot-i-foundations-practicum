@@ -1,0 +1,16 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .content
+            h1.index Update Custom Object Form | Integrating With HubSpot I Practicum.
+            a(href="/update-cobj") Create/Update 
+            .cards 
+                each Sport in data
+                    .card 
+                        h2.card__name #{Sport.properties.name}
+                        p.card__country Country: #{Sport.properties.country}
+                        p.card__outstanding_athlete Outstanding athlete: #{Sport.properties.outstanding_athlete}

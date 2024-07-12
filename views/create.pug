@@ -1,0 +1,23 @@
+doctype html
+html
+    head
+        title Create/Update Sports
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .form-container
+            h1 Create/Update Sports
+            a(href="/") Back to list sports
+            br
+            p If not found by name, it's created!
+            br
+            form(action="/update-cobj" method="post")
+                div.form-group
+                    label(for="name") Name
+                    input(type="text" id="name" name="name")
+                div.form-group
+                    label(for="country") Country
+                    input(type="text" id="country" name="country")
+                div.form-group
+                    label(for="outstanding_athlete") Outstanding athlete
+                    input(type="text" id="outstanding_athlete" name="outstanding_athlete")
+                button(type="submit") Submit
