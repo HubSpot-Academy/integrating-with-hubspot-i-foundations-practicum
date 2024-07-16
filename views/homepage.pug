@@ -1,0 +1,21 @@
+doctype html
+html
+  head 
+      title= `${title}`
+      meta(name="viewport" content="width=device-width, initial-scale=1")
+      link(rel="stylesheet", href="/css/homepage.css")
+  body
+    .container
+      h1 #{title}
+      a(href="/update-cobj" ) Add to this table
+      table
+        tr
+          th Name
+          th Type
+          th Food
+            each obj in data
+                tr
+                td #{obj.properties.name}
+                td #{obj.properties.type}
+                td #{obj.properties.food}
+        
