@@ -1,0 +1,16 @@
+doctype html
+html 
+  head 
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body    
+    h1 Pets
+    .cards 
+      each pet in data
+        .card 
+          h2.card__name #{pet.properties.name}
+          p.card__type Pet Type: #{pet.properties.pet_type}
+          p.card__color Pet Color: #{pet.properties.pet_color}
+
+    a(href="/") Return to the homepage
