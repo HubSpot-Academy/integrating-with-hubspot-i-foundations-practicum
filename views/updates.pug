@@ -1,16 +1,23 @@
 doctype html
 html 
-  head 
-    title= `${title}`
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    link(rel="stylesheet", href="/css/style.css")
-  body    
-    h1 Pets
-    .cards 
-      each pet in data
-        .card 
-          h2.card__name #{pet.properties.name}
-          p.card__type Pet Type: #{pet.properties.pet_type}
-          p.card__color Pet Color: #{pet.properties.pet_color}
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Add New Pet
 
-    a(href="/") Return to the homepage
+        .container
+            a(href="/") Return to Homepage
+
+            form(action="http://localhost:3000/update-cobj", method="post").form-wrapper
+                label Pet Name
+                input#name(type="text", name="name",required)
+
+                label Pet Color
+                input#pet_color(type="text", name="pet_color",required)
+
+                label Pet Type
+                input#pet_type(type="text", name="pet_type",required)
+
+                input(type="submit", value="Submit")
