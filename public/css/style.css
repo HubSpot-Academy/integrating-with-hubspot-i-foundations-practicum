@@ -3,41 +3,49 @@
 body, * {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
 }
 
 h1 {
     margin: 1rem;
+    text-align: center;
+    color: #2c3e50;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+a {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #007bff;
+    text-decoration: none;
 }
 
-.card__email {
-    font-size: 1rem;
+a:hover {
+    text-decoration: underline;
 }
 
 .form-wrapper {
     font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
     padding: 2rem;
-    border: solid 1px lightgrey;
+    border: solid 1px #ccc;
     border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+    box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
 label, input {
@@ -48,11 +56,55 @@ label, input {
 
 input[type="text"] {
     padding: .25rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
 }
 
 input[type="submit"] {
-    background-color: lightgrey;
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.table th, .table td {
+    padding: 16px; 
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.table th {
+    background-color: #f8d7da;
+    color: #333;
+    font-weight: bold !important; 
+    font-size: 1.5rem !important; 
+}
+
+.table td {
+    font-size: 1.6rem; 
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
 }
