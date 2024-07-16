@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+      title= `${title}`
+      meta(name="viewport" content="width=device-width, initial-scale=1")
+      link(rel="stylesheet", href="/css/updates.css")
+     
+  body
+    .container
+      a(href="/") Return to the homepage
+      form(method="POST")
+        .form-group
+          label(for="name") Name:
+          input(type="text" id="name" name="name" required)
+        .form-group
+          label(for="type") Type:
+          input(type="text" id="type" name="type" required)
+        .form-group
+          label(for="food") Food:
+          input(type="text" id="food" name="food" required)
+        button(type="submit") Submit
