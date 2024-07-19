@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title List of Pets
+    link(rel="stylesheet", href="/css/style.css")
+   
+  body
+    h1 Custom Object Table
+    a(href="/update-cobj" class="linkForUpdate") Add / Update this table
+    table
+      thead
+        tr
+          th Name
+          th Brand
+          th Price
+      tbody
+        each headset in headsets
+          tr
+            td= headset.properties.name
+            td= headset.properties.brand
+            td= headset.properties.price

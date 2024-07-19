@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= pageTitle
+    link(rel="stylesheet", href="/css/style.css")
+
+  body
+    div.content
+      h1 Add new Headset 
+      div.form-container
+        form(action="/update-cobj" method="post")
+          label(for="name") Headset Name
+          input(type="text" name="name")
+          label(for="brand") Brand
+          input(type="text" name="brand")
+          label(for="price") Price
+          input(type="text" name="price")
+          button(type="submit") Add New Headset
+        a(href="/") Return to the homepage
