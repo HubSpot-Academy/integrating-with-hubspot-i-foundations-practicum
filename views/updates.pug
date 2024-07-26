@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+    head
+        title Update contact info
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .form-wrapper
+            a(href='/') Return to the homepage
+            p Add new food:
+            form(method="POST")
+                label(for="newName") Name
+                input(type="text" name="newName" required)
+                label(for="newType") Type
+                input(type="text" name="newType" required)
+                label(for="newQuantity") Quantity
+                input(type="text" name="newQuantity" required)
+                input(type="submit" value="Submit")

@@ -56,3 +56,67 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+
+body {
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-container {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+th {
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #FF7A59;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+td:hover {
+    background-color: #e0f7fa;
+}
+
+tr:nth-child(even) td {
+    background-color: #fafafa;
+}
+
+tr:nth-child(odd) td {
+    background-color: #f9f9f9;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin: 1rem;
+    font-size: 1rem;
+    color: #FF7A59; /* Matches the table header background color */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
