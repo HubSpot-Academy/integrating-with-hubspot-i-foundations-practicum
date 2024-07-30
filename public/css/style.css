@@ -18,7 +18,7 @@ h1 {
 }
 
 .card {
-    flex-basis: 31%;
+    flex-basis: 22%;
     margin: 1rem 0.4rem;
     padding: 1rem 0.4rem 2.5rem 0.4rem;
     border: solid 1px lightgrey;

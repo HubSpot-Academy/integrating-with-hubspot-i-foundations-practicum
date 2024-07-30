@@ -1,0 +1,16 @@
+doctype html
+html 
+head 
+title= `${title}`
+meta(name="viewport" content="width=device-width, initial-scale=1")
+link(rel="stylesheet", href="/css/style.css")
+body   
+
+h1 Climbing Routes
+.cards 
+    each item in dataFinal
+        .card 
+                h2.card__name #{item.properties.name}
+                p.card_location #{item.properties.location}                     
+                p.card_number_of_pitches #{item.properties.number_of_pitches}  
+                p.card_grade #{item.properties.grade}  
