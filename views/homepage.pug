@@ -1,0 +1,24 @@
+doctype html
+html 
+    head
+        title #{title}
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 #{title}
+        h2 film
+        a( href="/update-cobj") add a film
+        table 
+            tr
+                th Name
+                th Actor name
+                th Rating
+                th Description 
+                th Actor age
+            each film in data 
+                tr
+                    td= film.properties.film_name
+                    td= film.properties.film_actors
+                    td= film.properties.film_rating
+                    td= film.properties.file_description               
+                    td= film.properties.actor_age

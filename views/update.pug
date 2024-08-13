@@ -1,0 +1,21 @@
+doctype html 
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Add A Film
+        form(action="/update-cobj" method="post")
+            label(for="film_name") Film Name:
+            input(type="text" name="film_name")
+            label(for="film_actors") Actor Name:
+            input(type="text" name="film_actors")
+            label(for="film_rating") Rating:
+            input(type="text" name="film_rating")
+            label(for="file_description") Description:
+            input(type="text" name="file_description")
+            label(for="actor_age") Actor Age:
+            input(type="number" name="actor_age")
+            input(type="submit" value="Submit")
+        a( href="/") Back to home
