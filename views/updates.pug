@@ -1,0 +1,13 @@
+doctype html
+html(lang="en")
+    head
+        title Update Custom Object Form | Integrating With HubSpot I Practicum
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Add a new Playset
+        .form-wrapper
+            form(method="POST")
+                label(for="playsetName") Name
+                input(type="text" name="playsetName" required)
+                label(for="setNumber") Set Number
+                input(type="text" name="setNumber")
