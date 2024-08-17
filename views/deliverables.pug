@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Deliverables
+     body
+    h1 Deliverables
+    table.table(style='width:100%', border='1')
+      thead
+        tr
+          th Id
+          th Name
+          th Client
+          th Status
+          th Due Date
+      tbody
+        each deliverable in data
+          tr
+            td #{deliverable.id}
+            td #{deliverable.properties.deliverable_name}
+            td #{deliverable.properties.client}
+            td #{deliverable.properties.status} 
+            td #{deliverable.properties.due_date} 
