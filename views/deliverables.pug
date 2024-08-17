@@ -6,6 +6,7 @@ html
     title Deliverables
      body
     h1 Deliverables
+    a(href="/update-cobj?id=14384526940" class="add-update-link") Add / Update this table
     table.table(style='width:100%', border='1')
       thead
         tr
@@ -13,7 +14,6 @@ html
           th Name
           th Client
           th Status
-          th Due Date
       tbody
         each deliverable in data
           tr
@@ -21,4 +21,3 @@ html
             td #{deliverable.properties.deliverable_name}
             td #{deliverable.properties.client}
             td #{deliverable.properties.status} 
-            td #{deliverable.properties.due_date} 

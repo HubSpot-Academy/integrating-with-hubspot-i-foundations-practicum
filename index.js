@@ -11,8 +11,11 @@ app.use(express.json());
 const PRIVATE_APP_ACCESS = '';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+
+// * Code for Route 1 goes here
+
 app.get('/', async (req, res) => {
-    const deliverables = 'https://api.hubspot.com/crm/v3/objects/2-32667144?properties=Client,Status,Name,Deliverable_Name,Due_Date';
+    const deliverables = 'https://api.hubspot.com/crm/v3/objects/2-32667144?properties=Client,Status,Name,Deliverable_Name';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -26,15 +29,63 @@ app.get('/', async (req, res) => {
         console.error(error);
     }
 });
-// * Code for Route 1 goes here
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
 
+app.get('/update-cobj', async (req, res) => {
+    const id = req.query.id;
+    console.log(id);
+    const deliverableEndpoint = 'https://api.hubspot.com/crm/v3/objects/2-32667144/' + id +'?properties=client,status,name,deliverable_name';
+    console.log(deliverableEndpoint);
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+
+    try {
+        const resp = await axios.get(deliverableEndpoint, { headers });
+        const data = resp.data;
+        //console.log(data);
+        res.render('updateDeliverables', {client: data.properties.client, deliverable_name: data.properties.deliverable_name, status: data.properties.status});    
+       // res.json(data);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
+
+app.post('/update-cobj', async (req, res) => {
+    const update = {
+        properties: {
+            "deliverable_name": req.body.newName,
+            "status": req.body.newStatus,
+            "client": req.body.newClient
+        }
+    }
+    const id = req.query.id;
+
+    const updateDeliverable = 'https://api.hubapi.com/crm/v3/objects/2-32667144/14384526940';
+
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    try { 
+        await axios.patch(updateDeliverable, update, { headers } );
+        res.redirect('back');
+        //res.redirect('localhost:3000/');
+    } catch(err) {
+        console.error(err);
+
+    }
+
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
