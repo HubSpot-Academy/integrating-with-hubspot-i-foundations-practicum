@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+    head
+        title List of Playsets (Custom Object) | Integrating With HubSpot I Practicum
+        link(rel="stylesheet" href="/css/style.css")
+    body
+        h1 Playsets Table
+        table
+            tr
+                th Name
+                th Set Number
+                th Brand
+                th Theme
+            each playset in playsets
+                tr
+                    td #{playset.properties.name}
+                    td #{playset.properties.set_number}
+                    td #{playset.properties.brand}
+                    td #{playset.properties.theme}

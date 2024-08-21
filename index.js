@@ -10,17 +10,35 @@ app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
 const PRIVATE_APP_ACCESS = '';
+const playsetUrl = 'https://api.hubapi.com/crm/v3/objects/2-33304237';
+const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
+}
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
+app.get('/', async (req, res) => {
+    try {
+        const params = {
+            "properties": "name,set_number,brand,theme",
+            "limit": 10
+        }
+        const playsetsResults = await axios.get(playsetUrl, { headers, params });
+        const playsets = playsetsResults.data.results;
 
+        res.render('homepage', { playsets });
+    } catch(err) {
+        console.log(err);
+    }
+});
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
 
-app.get('/update-cobj', (req, res) => {
+app.get('/update-cobj', async (req, res) => {
 
     try {
         res.render('updates', {});
@@ -34,11 +52,6 @@ app.get('/update-cobj', (req, res) => {
 
 // * Code for Route 3 goes here
 app.post('/update-cobj', async (req, res) => {
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    const playsetUpdate = "https://api.hubapi.com/crm/v3/objects/2-33304237";
     const playsetInfos = {
         "associations": [],
         "objectType": "2-33304237",
@@ -51,7 +64,7 @@ app.post('/update-cobj', async (req, res) => {
     };
 
     try {
-        const newPlaysetResult = await axios.post(playsetUpdate, playsetInfos, {headers});
+        const newPlaysetResult = await axios.post(playsetUrl, playsetInfos, {headers});
         res.redirect('homepage');
     } catch(err) {
         console.error(err);
