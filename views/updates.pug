@@ -13,15 +13,11 @@ html(lang="en")
                 input(type="text" name="setNumber")
                 label(for="brand") Brand
                 select(name="brand")
-                    option(value="lego")  LEGO
-                    option(value="cada")  CaDa
-                    option(value="cobi")  Cobi
-                    option(value="mould_king")  Mould King
+                    each brand, key in brands
+                        option(value=key)  #{brand}
                 label(for="theme") Theme
                 select(name="theme")
-                    option(value="technic")  Technic
-                    option(value="creator")  Creator
-                    option(value="medieval")  Medieval
-                    option(value="mouwwiild_king")  WWII
+                    each theme, key in themes
+                        option(value=key)  #{theme}
                 input(type="submit" value="Create")
                 a(href="/") Cancel

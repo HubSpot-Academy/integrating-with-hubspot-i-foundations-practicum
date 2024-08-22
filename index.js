@@ -16,6 +16,20 @@ const headers = {
     "Content-Type": 'application/json'
 }
 
+const enumBrand = {
+    "lego": "LEGO",
+    "cada": "CaDa",
+    "mould_king": "Mould King",
+    "cobi": "Cobi"
+};
+
+const enumTheme = {
+    "technic": "Technic",
+    "medieval": "Medieval",
+    "creator": "Creator",
+    "wwii": "WWII"
+}
+
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
@@ -28,7 +42,7 @@ app.get('/', async (req, res) => {
         const playsetsResults = await axios.get(playsetUrl, { headers, params });
         const playsets = playsetsResults.data.results;
 
-        res.render('homepage', { playsets });
+        res.render('homepage', { playsets, enumBrand, enumTheme });
     } catch(err) {
         console.log(err);
     }
@@ -39,9 +53,8 @@ app.get('/', async (req, res) => {
 // * Code for Route 2 goes here
 
 app.get('/update-cobj', async (req, res) => {
-
     try {
-        res.render('updates', {});
+        res.render('updates', {brands: enumBrand, themes: enumTheme});
     } catch(err) {
         console.error(err);
     }
@@ -65,7 +78,7 @@ app.post('/update-cobj', async (req, res) => {
 
     try {
         const newPlaysetResult = await axios.post(playsetUrl, playsetInfos, {headers});
-        res.redirect('homepage');
+        res.redirect('/');
     } catch(err) {
         console.error(err);
     }
