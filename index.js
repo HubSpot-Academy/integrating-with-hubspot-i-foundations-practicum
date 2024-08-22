@@ -12,8 +12,8 @@ app.use(express.json());
 const PRIVATE_APP_ACCESS = '';
 const playsetUrl = 'https://api.hubapi.com/crm/v3/objects/2-33304237';
 const headers = {
-    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-    'Content-Type': 'application/json'
+    "Authorization": `Bearer ${PRIVATE_APP_ACCESS}`,
+    "Content-Type": 'application/json'
 }
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
