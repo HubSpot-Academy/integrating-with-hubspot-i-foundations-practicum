@@ -8,6 +8,11 @@ body, * {
 
 h1 {
     margin: 1rem;
+    padding-bottom: 1.5rem;
+}
+
+.header {
+    margin: 1rem 5rem;
 }
 
 .cards {
@@ -20,7 +25,7 @@ h1 {
 .card {
     flex-basis: 31%;
     margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
+    padding: 1.5rem;
     border: solid 1px lightgrey;
     border-radius: 15px;
     box-shadow: 3px 2px 6px lightgrey;
@@ -38,6 +43,10 @@ h1 {
     border: solid 1px lightgrey;
     border-radius: 15px;
     box-shadow: 3px 2px 6px lightgrey;
+}
+
+.form-wrapper form {
+    padding-bottom: 1.5rem;
 }
 
 label, input {

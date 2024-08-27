@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+    head
+        title= `${title}`
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .form-wrapper
+            form(method="POST")
+                .form-group
+                    label(for="car_color") Car Color
+                    input(type="text" name="car_color" id="car_color" placeholder="Obsidian Black Ultra Metallic Gloss" required)
+                .form-group
+                    label(for="car_name") Car Name
+                    input(type="text" name="car_name" id="car_name" placeholder="Land Rover Range Rover Sport Carbon Edition" required)
+                .form-group
+                    label(for="car_price") Car Price ($)
+                    input(type="number" name="car_price" id="car_price" placeholder="224890" required)
+                input(type="submit" value="Submit")
+            a(href="/") Back to Home
