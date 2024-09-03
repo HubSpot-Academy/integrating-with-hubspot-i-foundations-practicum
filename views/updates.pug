@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    form(onSubmit="event=>event.preventDefault()" action="/update-cobj" method="POST")
+      div
+        label(for="distance") Distance:
+        input(type="text" name="distance" id="distance" required)
+      div
+        label(for="galaxy_name") Galaxy Name:
+        input(type="text" name="galaxy_name" id="galaxy_name" required)
+      div
+        label(for="galaxy_type") Galaxy Type:
+        input(type="text" name="galaxy_type" id="galaxy_type" required)
+      div
+        button(type="submit" href="/update-cobj") Submit
+    
+      a(href="/update-cobj") Return to the homepage

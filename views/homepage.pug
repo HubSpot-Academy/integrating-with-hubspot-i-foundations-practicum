@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    p
+      a(href="/update-cobj") Add to this table
+    table(border="1")
+      thead
+        tr
+          th Distance 
+          th Galaxy Name
+          th Galaxy Type
+      tbody
+        each item in data
+          tr
+            td= item.properties.distance
+            td= item.properties.galaxy_name 
+            td= item.properties.galaxy_type 
