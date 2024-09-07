@@ -1,0 +1,21 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1= `${title}`
+            table 
+                tr
+                    th Name
+                    th Is EU
+                    th Is GCC
+                each country in data
+                    tr
+                        td= country.properties.name 
+                        td= country.properties.is_eu
+                        td= country.properties.is_gcc
+
