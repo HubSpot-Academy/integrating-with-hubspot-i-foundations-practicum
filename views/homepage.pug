@@ -8,14 +8,15 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1= `${title}`
-            table 
+        p #[a(href=`/`) Add to this table]
+            table(style='width:30%', cellspacing='0', cellpadding='0', border='2')
                 tr
                     th Name
                     th Is EU
                     th Is GCC
                 each country in data
                     tr
-                        td= country.properties.name 
+                        td(text-align='center')= country.properties.name 
                         td= country.properties.is_eu
                         td= country.properties.is_gcc
 
