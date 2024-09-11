@@ -4,20 +4,17 @@ html
         title= `${title}`
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
-    body
-        a(href="/") back to home 
-        h1 Add a new cheese
-        form(action='/update-cheese' method='POST')
-            label(for='cheese_name') Cheese Name:
-            input(type='text' name='cheese_name' placeholder='Enter cheese name' required)
-            br
-
-            label(for='cheese_origin') Origin:
-            input(type='text' name='cheese_origin' placeholder='Enter cheese origin' required)
-            br
-
-            label(for='cheese_taste') Taste:
-            input(type='text' name='cheese_taste' placeholder='Enter cheese taste' required)
-            br
-
-            button(type='submit') Submit
+    body    
+        h1 Add New Cheese
+        form(action="/submit-cheese" method="POST")
+            .form-group
+                label(for="cheese_name") Cheese Name
+                input#cheese_name(type="text" name="cheese_name" required)
+            .form-group
+                label(for="cheese_origin") Cheese Origin
+                input#cheese_origin(type="text" name="cheese_origin" required)
+            .form-group
+                label(for="cheese_taste") Cheese Taste
+                input#cheese_taste(type="text" name="cheese_taste" required)
+            .form-group
+                button(type="submit") Submit
