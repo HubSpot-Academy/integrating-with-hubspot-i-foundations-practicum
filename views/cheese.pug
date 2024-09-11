@@ -1,0 +1,14 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Cheese
+        .cards 
+            each cheese in data
+                .card 
+                    h2.card__name #{cheese.properties.cheese_name}
+                    p.card__origin Origin: #{cheese.properties.cheese_origin}
+                    p.card__taste Taste: #{cheese.properties.cheese_taste}

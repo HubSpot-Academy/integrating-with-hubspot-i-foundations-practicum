@@ -26,7 +26,11 @@ h1 {
     box-shadow: 3px 2px 6px lightgrey;
 }
 
-.card__email {
+.card__origin {
+    font-size: 1rem;
+}
+
+.card__taste {
     font-size: 1rem;
 }
 
