@@ -6,9 +6,15 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Cheese
-        .cards 
-            each cheese in data
-                .card 
-                    h2.card__name #{cheese.properties.cheese_name}
-                    p.card__origin Origin: #{cheese.properties.cheese_origin}
-                    p.card__taste Taste: #{cheese.properties.cheese_taste}
+        table
+            thead
+                tr
+                    th Name
+                    th Origin
+                    th Taste
+            tbody
+                each cheese in data
+                    tr 
+                        td #{cheese.properties.cheese_name}
+                        td #{cheese.properties.cheese_origin}
+                        td #{cheese.properties.cheese_taste}

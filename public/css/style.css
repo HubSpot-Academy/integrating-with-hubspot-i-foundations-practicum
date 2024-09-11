@@ -1,62 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
+* { margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    padding: 1rem;
 }
 
-h1 {
-    margin: 1rem;
+h1{
+    font-size: 2rem;
+    font-weight: 800;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-.card__origin {
-    font-size: 1rem;
-}
-
-.card__taste {
-    font-size: 1rem;
-}
-
-.form-wrapper {
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
     font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+    text-align: left;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
+thead tr {
+    background-color: #3498db;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
 }
 
-input[type="text"] {
-    padding: .25rem;
+thead th {
+    padding: 12px 15px;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #3498db;
+}
+
+tbody td {
+    padding: 12px 15px;
 }
