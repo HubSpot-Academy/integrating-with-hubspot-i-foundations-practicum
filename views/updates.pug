@@ -6,7 +6,7 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body    
         h1 Add New Cheese
-        form(action="/submit-cheese" method="POST")
+        form(action="/create" method="POST")
             .form-group
                 label(for="cheese_name") Cheese Name
                 input#cheese_name(type="text" name="cheese_name" required)
@@ -17,4 +17,4 @@ html
                 label(for="cheese_taste") Cheese Taste
                 input#cheese_taste(type="text" name="cheese_taste" required)
             .form-group
-                button(type="submit") Submit
+                button(type="submit") Create
