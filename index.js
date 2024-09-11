@@ -3,19 +3,20 @@ const express = require("express");
 const axios = require("axios");
 const app = express();
 
-app.set("view engine", "pug");
-app.use(express.static(__dirname + "/public"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
 const PORT = process.env.PORT || 3000;
-
 
 const cheeseProperties = ["cheese_name", "cheese_origin", "cheese_taste"];
 const cheeseURL = `https://api.hubspot.com/crm/v3/objects/cheese?properties=${cheeseProperties.join(
   "&properties="
 )}`;
+
+app.set("view engine", "pug");
+app.use(express.static(__dirname + "/public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Route to display cheese data on the homepage
 app.get("/", async (req, res) => {
   const headers = {
     Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
@@ -31,6 +32,7 @@ app.get("/", async (req, res) => {
   }
 });
 
+// Route to display the form for adding new cheese data
 app.get("/update-cheese", async (req, res) => {
   const headers = {
     Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
@@ -50,6 +52,7 @@ app.get("/update-cheese", async (req, res) => {
   }
 });
 
+// Route to handle form submission for adding new cheese data
 app.post("/create", async (req, res) => {
   const { cheese_name, cheese_origin, cheese_taste } = req.body;
 
@@ -77,4 +80,4 @@ app.post("/create", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}...`));
+app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
