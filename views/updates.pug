@@ -1,0 +1,21 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+
+        body 
+        p #[a(href=`/`) Return to the homepage]
+
+        .form-wrapper
+            form(method="post")
+                label(for="countryName") Country name
+                input(type="text" name="countryName" required)
+                label(for="EU") Is country in the EU
+                input(type="checkbox" name="EU" checked = false)
+                label(for="GCC") Is country in the GCC
+                input(type="checkbox" name="GCC" checked = false)
+                input(type="submit" value="Submit")
