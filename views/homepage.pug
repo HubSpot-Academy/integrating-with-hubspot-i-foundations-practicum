@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1= title
+    a(href='/update-cobj') Add a new record
+    table
+      thead
+        tr
+          th Name
+          th Specie
+          th Age
+      tbody
+        each customObject in customObjects
+          tr
+            td= customObject.properties.name
+            td= customObject.properties.species
+            td= customObject.properties.age
+    if !customObjects.length
+      p There are no custom objects available.

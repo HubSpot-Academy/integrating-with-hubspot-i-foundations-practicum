@@ -1,58 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+body,
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 1rem;
 }
 
 h1 {
-    margin: 1rem;
+  color: #333;
+  padding-left: 0;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+table,
+th,
+td {
+  border: 1px solid black;
 }
 
-.card__email {
-    font-size: 1rem;
+th,
+td {
+  padding: 10px;
+  text-align: left;
 }
 
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+form {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  max-width: 25rem;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
+input {
+  border-radius: 15px;
+  border: 1px solid #bbbbbb;
 }
 
-input[type="text"] {
-    padding: .25rem;
+label{
+  padding: 6px 0px;
+}
+button {
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 15px;
+  background-color: #000;
+  color: #fff;
+  transition: .3s;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+button:hover {
+  transition: .3s;
+  transform: scale(1.05);
+}
+
+a {
+  margin-bottom: 1rem;
+  display: inline-block;
+  background-color: black;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 15px;
+  text-decoration: none;
+  transition: all .3s;
+}
+
+a:hover {
+  transition: all .3s;
+  transform: scale(1.05);
 }
