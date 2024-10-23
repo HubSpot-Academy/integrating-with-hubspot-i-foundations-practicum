@@ -1,0 +1,26 @@
+doctype html
+html
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        div.form-wrapper
+            form(action="/update-contacts" method="post")
+                label(for="first-name") First Name:
+                input#first-name(type="text" name="firstName" placeholder="Enter your first name")
+
+                label(for="last-name") Last Name:
+                input#last-name(type="text" name="lastName" placeholder="Enter your last name")
+
+                label(for="email") Email:
+                input#email(type="email" name="email" placeholder="Enter your email")
+
+                label(for="job-title") Job Title:
+                input#job-title(type="text" name="jobTitle" placeholder="Enter your job title")
+
+                label(for="company") Company:
+                input#company(type="text" name="company" placeholder="Enter your company name")
+
+                button(type="submit") Submit
+            a(href="/") Return to the homepage

@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        title="Home"
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        div.table-wrapper
+            h1.table-headline Contact Object Table
+            h2 Please note I had to use a standard onject for this Practicum and the route names reflect this as well.
+            a(href="/update-contacts") Add to this table
+            table
+                tr
+                    th First Name
+                    th Last Name
+                    th email
+                    th Job Title
+                    th Company Name
+                each contact in data
+                    tr
+                        td #{contact.properties.firstname}
+                        td #{contact.properties.lastname}
+                        td #{contact.properties.email}
+                        td #{contact.properties.jobtitle}
+                        td #{contact.properties.company}
+                
