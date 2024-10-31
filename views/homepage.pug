@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= title
+  body
+    a(href="/update-cobj") Add to this table
+    h1 CRM Records
+    table(border="1")
+      tr
+        th Name
+        th Author's Name
+        th Published Year
+      each record in crmRecords
+        tr
+          td= record.properties.name
+          td= record.properties.author_s_name
+          td= record.properties.published_year

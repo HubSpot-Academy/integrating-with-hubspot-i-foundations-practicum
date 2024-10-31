@@ -2,3 +2,7 @@
 node_modules
 package-lock.json
 .env
+pass.env
+
+# HubSpot config file
+hubspot.config.yml

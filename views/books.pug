@@ -1,0 +1,15 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Books
+        .cards 
+            each book in data
+                .card 
+                    h2.card__name #{book.properties.name}  #{book.properties.author_s_name}
+                    p.card__publishedDate #{book.properties.published_year}
