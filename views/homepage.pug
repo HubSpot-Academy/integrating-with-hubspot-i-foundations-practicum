@@ -1,0 +1,23 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .container    
+            h1 Cars
+            .table-container
+            a.create-btn(href="/update-cobj") Create New Car
+            table.cars-table
+                thead
+                    tr
+                        th Name
+                        th Price
+                        th Year
+                tbody
+                    each car in data
+                        tr
+                            td #{car.properties.name}
+                            td $#{car.properties.price}
+                            td #{car.properties.year}

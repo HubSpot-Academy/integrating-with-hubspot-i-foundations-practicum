@@ -1,0 +1,26 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body  
+        .container
+            
+            form(action="/update-cobj" method="POST").form-wrapper
+                h1= title
+                div
+                    label(for="name") Name:
+                    input(type="text" id="name" name="name"  required)
+                
+                div
+                    label(for="price") Price:
+                    input(type="number" id="price" name="price"  required)
+
+                div
+                    label(for="year") Year:
+                    input(type="number" id="year" name="year"  required)
+
+                input(type="submit" value="Submit")
+            
+            a(href="/") Return to the homepage
