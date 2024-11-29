@@ -1,0 +1,14 @@
+
+doctype html
+html(lang="en")
+    head
+        Update Custom Object Form | Integrating With HubSpot I Practicum
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .form-wrapper
+            p Laptops: #{Name}
+            p Price: #{Price}
+            form(method="POST")
+                label(for="newVal") Price
+                input(type="text" name="newVal" required)
+                input(type="submit" value="Submit")

@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+    head
+        Update Custom Object Form | Integrating With HubSpot I Practicum
+    body
+        h1 Getting Started With HubSpot OAuth
+        if token
+            p You're authenticated using the token: #{token}
+            p Your account has these Custom Objects:
+            ul
+                each Laptop in Laptops
+                    li #{Laptop.properties.Name.value}  #{Laptop.properties.ID.value}
+        else
+            p You're not authenticated 
+            p Please install me #[a(href=`${authUrl}`) here]
