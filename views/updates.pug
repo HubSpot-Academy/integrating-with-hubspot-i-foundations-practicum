@@ -1,0 +1,23 @@
+doctype html
+html
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Add entry
+
+        form(action="/update-cobj", method="POST")
+            div
+                label(for="name") Name:
+                input(type="text", id="name", name="name", required)
+            div
+                label(for="age") Age:
+                input(type="number", id="age", name="age", required)
+            div
+                label(for="email") Email:
+                input(type="email", id="email", name="email", required)
+            div
+                button(type="submit") Submit
+
+        a(href="/") Return to the homepage
