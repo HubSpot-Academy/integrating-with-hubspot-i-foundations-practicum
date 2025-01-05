@@ -1,0 +1,22 @@
+doctype html
+html 
+    head 
+        title= ` ${title} | Contact Object Table`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body  
+    h1 Contact Object Table 
+
+    a(href="/update-cobj") Add New Contact Record
+    table(border="1" cellpadding="10" cellspacing="0")
+        thead
+            tr
+                th First Name
+                th Last Name
+                th Email Address
+        tbody
+            each result in data
+                tr
+                    td= result.properties.firstname
+                    td= result.properties.lastname
+                    td= result.properties.email 

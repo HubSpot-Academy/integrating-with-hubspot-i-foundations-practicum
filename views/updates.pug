@@ -1,0 +1,70 @@
+
+doctype html
+html
+  head
+    title=` ${title} | Contact Object Table`
+     meta(name="viewport" content="width=device-width, initial-scale=1")
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .form-container {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+      .form-container h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .form-container label {
+        font-weight: bold;
+        display: block;
+        margin: 10px 0 5px;
+      }
+      .form-container input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+      .form-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .form-container button:hover {
+        background-color: #0056b3;
+      }
+  body
+    .form-container
+      h1 Update Contact
+      form(action="/update-cobj" method="POST")
+        label(for="firstname") First Name:
+        input(type="text" name="firstname" placeholder="First Name" required)
+        
+        label(for="lastname") Last Name:
+        input(type="text" name="lastname" placeholder="Last Name" required)
+        
+        label(for="email") Email Address:
+        input(type="email" name="email" placeholder="Email Address" required)
+        
+        button(type="submit") Submit
