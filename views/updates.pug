@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Update Custom Object Form
+    a(href="/") Return to the homepage
+    form(action="/update-cobj" method="POST")
+      label(for="name") Name:
+      input(type="text" id="name" name="name" required)
+      br
+      label(for="species") Species:
+      input(type="text" id="species" name="species" required)
+      br
+      label(for="legs") Legs:
+      input(type="number" id="legs" name="legs" required)
+      br
+      button(type="submit") Submit
