@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+    head
+        title Fast
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Fast Cars Custom Objects        
+            
+            p <BR> 
+            p Not Cool Enough?  #[a(href="/update-cobj") Add or Update this Table]
+             .cards 
+             each fastCar in fastCars
+                 .card 
+                     p.card__name #{fastCar.properties.name}  #{fastCar.properties.model_year}
+                     p.card__email #{fastCar.properties.color}  #{fastCar.properties.price}

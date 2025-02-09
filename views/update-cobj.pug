@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+    head
+        title Fast Cars
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    head
+    meta(charset='utf-8')
+    title Add new car for custom object
+    body
+            form(action="/submit", method="post")
+                label(for="name") Name:
+                input(type="text", id="name", name="name")
+                br
+                label(for="model") Model:
+                input(type="text", id="model", name="model")
+                br
+                label(for="year") Year:
+                input(type="text", id="year", name="year")
+                br
+                label(for="color") Color:
+                input(type="text", id="color", name="color")
+                br
+                label(for="price") Price:
+                input(type="text", id="price", name="price")
+                br
+                button(type="submit") Submit
+
+
+
