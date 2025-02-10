@@ -59,7 +59,25 @@ app.post('/submit', async (req, res) => {
     const { name, model, year, color, price } = req.body;
     // Process the form data (e.g., save to a database)
     console.log('Received form data:', { name, model, year, color, price  });
-    const payload = (`Name: ${name}, Model: ${model}, Year: ${year}, Color: ${color}, Price: ${price}`);
+    const payload = [`
+        {
+          "name": "name",
+          "value": "${name}"
+        },
+        {
+          "name": "model",
+          "value": "${model}"
+        },
+        {
+          "name": "price",
+          "value": "${price}"
+        },
+        {
+          "name": "color",
+          "value": "${color}"
+        }
+      `];
+
     console.log(payload);
     
     const fastCars = 'https://api.hubapi.com/crm/v3/objects/2-164595241';
