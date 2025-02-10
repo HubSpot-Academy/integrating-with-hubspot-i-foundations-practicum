@@ -59,26 +59,29 @@ app.post('/submit', async (req, res) => {
     const { name, model, year, color, price } = req.body;
     // Process the form data (e.g., save to a database)
     console.log('Received form data:', { name, model, year, color, price  });
-    const payload = [`
-        {
-          "name": "name",
-          "value": "${name}"
-        },
-        {
-          "name": "model",
-          "value": "${model}"
-        },
-        {
-          "name": "price",
-          "value": "${price}"
-        },
-        {
-          "name": "color",
-          "value": "${color}"
-        }
-      `];
+    // Define the custom object data
+const make = `${name}`;
+const modello = `${model}`;
+const modelyear = `${year}`;
+const model_year = `${year}`;
+const model_price = `${price}`;
+const model_color = `${color};`
 
-    console.log(payload);
+const customObjectData = {
+    properties: {
+        name:  make,
+        model: modello,
+        model_year: model_year,
+        price: model_price,
+        color: model_color
+
+    }
+};
+    
+    
+ 
+
+    console.log(customObjectData);
     
     const fastCars = 'https://api.hubapi.com/crm/v3/objects/2-164595241';
     const headers ={
@@ -86,7 +89,7 @@ app.post('/submit', async (req, res) => {
         'Content-Type': 'application/json'
     }
     try {
-        const response = await axios.post(fastCars, payload, { headers});
+        const response = await axios.post(fastCars, customObjectData, { headers});
        // res.json(response.data.results);
 
     }catch (error){
