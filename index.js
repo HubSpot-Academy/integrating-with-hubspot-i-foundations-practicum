@@ -55,11 +55,30 @@ app.get('/update-cobj', (req, res) => {
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 // * Code for Route 3 goes here
-app.post('/submit', (req, res) => {
+app.post('/submit', async (req, res) => {
     const { name, model, year, color, price } = req.body;
     // Process the form data (e.g., save to a database)
     console.log('Received form data:', { name, model, year, color, price  });
-    res.send(`Form submitted successfully! Name: ${name}, Model: ${model}, Year: ${year}, Color: ${color}, Price: ${price}`);
+    const payload = (`Name: ${name}, Model: ${model}, Year: ${year}, Color: ${color}, Price: ${price}`);
+    console.log(payload);
+    
+    const fastCars = 'https://api.hubapi.com/crm/v3/objects/2-164595241';
+    const headers ={
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+    try {
+        const response = await axios.post(fastCars, payload, { headers});
+       // res.json(response.data.results);
+
+    }catch (error){
+        console.log(error);
+        console.log(process.env.ACCESSToken);
+       
+    }
+
+    res.redirect("/");
+
   });
 
 
