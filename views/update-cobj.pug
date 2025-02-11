@@ -8,6 +8,13 @@ html(lang="en")
     meta(charset='utf-8')
     title Add new car for custom object
     body
+    h1 Update Custom Objects        
+            
+           
+    .form-wrapper
+            p <BR> 
+            h1 Please Submit a new car option
+            p <BR> 
             form(action="/submit", method="post")
                 label(for="name") Name:
                 input(type="text", id="name", name="name")
@@ -19,11 +26,16 @@ html(lang="en")
                 input(type="text", id="year", name="year")
                 br
                 label(for="color") Color:
-                input(type="text", id="color", name="color")
+                select(name='color' placeholder="color" id="color")
+                    option(value='Black') Black
+                    option(value='Blue') Blue
+                    option(value='Red') Red
+                    option(value='Yellow') Yellow
                 br
                 label(for="price") Price:
-                input(type="text", id="price", name="price")
+                input(type="currency", id="price", name="price")
                 br
+                
                 button(type="submit") Submit
 
 

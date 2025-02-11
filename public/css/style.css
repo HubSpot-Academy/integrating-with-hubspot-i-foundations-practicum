@@ -8,6 +8,7 @@ body, * {
 
 h1 {
     margin: 1rem;
+    color: #01579B;
 }
 
 .cards {
@@ -35,24 +36,53 @@ h1 {
     max-width: 768px;
     margin: 2rem auto;
     padding: 2rem;
-    border: solid 1px lightgrey;
+    border: solid 1px #01579B;
     border-radius: 15px;
     box-shadow: 3px 2px 6px lightgrey;
 }
 
-label, input {
+label, input, select {
     margin-top: 5px;
+    width: 250px;
+    padding: .25rem;
     display: block;
     font-size: inherit;
+    color: #01579B
 }
+
 
 input[type="text"] {
     padding: .25rem;
 }
 
 input[type="submit"] {
-    background-color: lightgrey;
+    background-color: #01579B;
     border: none;
-    padding: .375rem 1rem;
+    padding: .375rem 2rem;
     margin-top: 10px;
+   
+}
+
+
+#table-wrapper {
+  display: flex;
+  
+}
+#desc {
+  width: 50em;
+  border-collapse: collapse;
+  
+  & th {
+    background-color: #ADD8E6;
+    padding: 1em;
+    text-align: left  ;
+    border: 1px solid black;
+    padding: 1em;
+  }
+  
+  & td {
+    border: 1px solid black;
+    padding: 1em;
+    background-color: rgb(255, 255, 255);
+  }
 }

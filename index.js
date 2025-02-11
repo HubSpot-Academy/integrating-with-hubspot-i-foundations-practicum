@@ -19,27 +19,26 @@ app.use(bodyParser.json());
 require('dotenv').config();
 const PRIVATE_APP_ACCESS = process.env.ACCESSToken;
 
+const headers ={
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
+}
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 // * Code for Route 1 goes here
 
 
 app.get('/' , async (req, res) => {
-    const fastCars = 'https://api.hubapi.com/crm/v3/objects/2-164595241?properties=name,model_year,color,price';
-    const headers ={
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
+    const fastCars = 'https://api.hubapi.com/crm/v3/objects/2-164595241?properties=name,model,model_year,color,price';
     try {
         const response = await axios.get(fastCars, { headers});
-       // res.json(response.data.results);
         res.render('fastcars', {
             fastCars: response.data.results
         });
-
-    }catch (error){
+   }catch (error){
         console.log(error);
         console.log(process.env.ACCESSToken);
+        res.status(error.response.status).json(error.response.data);
        
     }
     
@@ -55,41 +54,29 @@ app.get('/update-cobj', (req, res) => {
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 // * Code for Route 3 goes here
+
+
+
 app.post('/submit', async (req, res) => {
     const { name, model, year, color, price } = req.body;
     // Process the form data (e.g., save to a database)
     console.log('Received form data:', { name, model, year, color, price  });
     // Define the custom object data
-const make = `${name}`;
-const modello = `${model}`;
-const modelyear = `${year}`;
-const model_year = `${year}`;
-const model_price = `${price}`;
-const model_color = `${color};`
-
 const customObjectData = {
     properties: {
-        name:  make,
-        model: modello,
-        model_year: model_year,
-        price: model_price,
-        color: model_color
+        name:  `${name}`,
+        model: `${model}`,
+        model_year: `${year}`,
+        price: `${price}`,
+        color: `${color}`
 
     }
 };
-    
-    
- 
 
-    console.log(customObjectData);
-    
-    const fastCars = 'https://api.hubapi.com/crm/v3/objects/2-164595241';
-    const headers ={
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
+
+const fastCars = 'https://api.hubapi.com/crm/v3/objects/2-164595241';
     try {
-        const response = await axios.post(fastCars, customObjectData, { headers});
+        const response = await axios.post(fastCars, customObjectData, {headers});
        // res.json(response.data.results);
 
     }catch (error){
@@ -101,7 +88,6 @@ const customObjectData = {
     res.redirect("/");
 
   });
-
 
 
 
