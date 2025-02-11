@@ -77,7 +77,7 @@ app.get("/cats/:id?", async (req, res) => {
 });
 
 // * CREATE or UPDATE - Handle form submissions
-app.post("/update-cat/:id?", async (req, res) => {
+app.post("/update-cobj/:id?", async (req, res) => {
 	const catId = req.params.id;
 	const { name, cat_size_descriptor, chill, cat_color } = req.body;
 

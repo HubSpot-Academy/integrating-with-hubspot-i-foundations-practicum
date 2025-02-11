@@ -9,7 +9,7 @@ html
         .link-wrapper
             a.link(href="/") Return to the homepage
         .form-wrapper
-            form(action=`/update-cat/${cat.id}`, method="POST")
+            form(action=`/update-cobj/${cat.id}`, method="POST")
                 label(for="name") Name:
                 input(type="text" id="name" name="name" value=cat.properties.name required)
 
