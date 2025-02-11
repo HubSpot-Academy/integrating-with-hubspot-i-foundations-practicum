@@ -1,58 +1,112 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body, * {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 h1 {
-    margin: 1rem;
+    margin: 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 .cards {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
+    flex-basis: 30%;
+    padding: 1.5rem;
     border: solid 1px lightgrey;
     border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+    box-shadow: 3px 2px 6px rgba(211, 211, 211, 0.5);
+    background-color: white;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.card__email {
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 4px 3px 8px rgba(211, 211, 211, 0.7);
+}
+
+.card__name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.card__size {
     font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.75rem;
 }
 
+.card__chill {
+    margin-top: 0.75rem;
+}
+
+.chill-badge {
+    background-color: #e6f4ea;
+    color: #2d7d46;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.no-chill-badge {
+    background-color: #fde8e8;
+    color: #d32f2f;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+/* Form Styles */
 .form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
+    font-size: 1rem;
+    max-width: 700px;
     margin: 2rem auto;
     padding: 2rem;
     border: solid 1px lightgrey;
     border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+    box-shadow: 3px 2px 6px rgba(211, 211, 211, 0.5);
+    background-color: white;
 }
 
 label, input {
     margin-top: 5px;
     display: block;
-    font-size: inherit;
+    font-size: 1rem;
 }
 
 input[type="text"] {
-    padding: .25rem;
+    padding: 0.4rem;
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
 }
 
 input[type="submit"] {
-    background-color: lightgrey;
+    background-color: #ccc;
     border: none;
-    padding: .375rem 1rem;
+    padding: 0.5rem 1.2rem;
     margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+input[type="submit"]:hover {
+    background-color: #bbb;
 }

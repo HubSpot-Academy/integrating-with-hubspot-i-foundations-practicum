@@ -9,10 +9,10 @@ html
         .cards
             each cat in data
                 .card
-                    h2.card__name #{cat.properties.name}
-                    p.card__size #{cat.properties.cat_size_descriptor}
+                    h2.card__name= cat.properties.name
+                    p.card__size Size: #{cat.properties.cat_size_descriptor.charAt(0).toUpperCase() + cat.properties.cat_size_descriptor.slice(1)}
                     p.card__chill
-                        if cat.properties.chill
-                            | Chill
+                        if cat.properties.chill == "true"
+                            span.chill-badge Chill
                         else
-                            | No Chill
+                            span.no-chill-badge No Chill
