@@ -78,6 +78,28 @@ h1 {
     color: #d32f2f;
 }
 
+.add-cat-link-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.add-cat-link {
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.add-cat-link:hover {
+    background-color: #0056b3;
+}
+
+
 /* Form Styles */
 .form-wrapper {
     font-size: 1rem;
@@ -117,3 +139,5 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+

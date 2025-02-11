@@ -13,12 +13,9 @@ app.use(express.json());
 const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
 
 // ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-// app.get("/", (req, res) => {
-// 	res.render("home", { title: "Home" });
-// });
 app.get("/", async (req, res) => {
 	const cats =
-		"https://api.hubspot.com/crm/v3/objects/cats?properties=name,cat_size_descriptor,chill,cat_color";
+		"https://api.hubspot.com/crm/v3/objects/cats?properties=id,name,cat_size_descriptor,chill,cat_color";
 	const headers = {
 		Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
 		"Content-Type": "application/json",
@@ -26,8 +23,6 @@ app.get("/", async (req, res) => {
 	try {
 		const resp = await axios.get(cats, { headers });
 		const data = resp.data.results;
-		console.log(data);
-
 		res.render("cats", { title: "Cats | HubSpot APIs", data });
 	} catch (error) {
 		console.error(error);
@@ -36,7 +31,61 @@ app.get("/", async (req, res) => {
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
-// * Code for Route 2 goes here
+// * SHOW
+app.get("/cats/:id", async (req, res) => {
+	const catId = req.params.id;
+	const catsUrl = `https://api.hubspot.com/crm/v3/objects/cats/${catId}?properties=name,cat_size_descriptor,chill,cat_color`;
+
+	const headers = {
+		Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+		"Content-Type": "application/json",
+	};
+
+	try {
+		const resp = await axios.get(catsUrl, { headers });
+		const catData = resp.data;
+		res.render("update", {
+			title: "Update Custom Object Form | Integrating With HubSpot I Practicum",
+			cat: catData,
+		});
+	} catch (error) {
+		console.error(error);
+		res.status(500).send("Error retrieving cat data.");
+	}
+});
+
+// UPDATE
+app.post("/update-cat/:id", async (req, res) => {
+	const catId = req.params.id;
+	const { name, cat_size_descriptor, chill, cat_color } = req.body;
+
+	const updatedCat = {
+		properties: {
+			name,
+			cat_size_descriptor,
+			chill,
+			cat_color,
+		},
+	};
+
+	const catsUrl = `https://api.hubspot.com/crm/v3/objects/cats/${catId}`;
+
+	const headers = {
+		Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+		"Content-Type": "application/json",
+	};
+
+	try {
+		// Send a PATCH request to update the cat object
+		const resp = await axios.patch(catsUrl, updatedCat, { headers });
+
+		// After successful update, redirect to the updated cat page
+		res.redirect(`/cats/${catId}`);
+	} catch (error) {
+		console.error(error);
+		res.status(500).send("Error updating cat data.");
+	}
+});
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 

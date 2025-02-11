@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Update Cat Record
+        .form-wrapper
+            form(action=`/update-cat/${cat.id}`, method="POST")
+                label(for="name") Name:
+                input(type="text" id="name" name="name" value=cat.properties.name required)
+
+                label(for="cat_size_descriptor") Size:
+                input(type="text" id="cat_size_descriptor" name="cat_size_descriptor" value=cat.properties.cat_size_descriptor required)
+
+                label(for="cat_color") Color:
+                input(type="text" id="cat_color" name="cat_color" value=cat.properties.cat_color required)
+
+                label(for="chill") Chill:
+                select(id="chill" name="chill")
+                    option(value="true" selected=cat.properties.chill === "true") Yes
+                    option(value="false" selected=cat.properties.chill === "false") No
+
+                input(type="submit" value="Update Cat")
+
+        .home-link-wrapper
+            a.home-link(href="/") Return to the homepage

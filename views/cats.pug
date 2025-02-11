@@ -6,14 +6,17 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body
         h1 Cats
+        .add-cat-link-wrapper
+            a.add-cat-link(href="/update-cobj") + Add Another Cat
         .cards
             each cat in data
                 .card
-                    h2.card__name= cat.properties.name
-                    p.card__size Size: #{cat.properties.cat_size_descriptor.charAt(0).toUpperCase() + cat.properties.cat_size_descriptor.slice(1)}
-                    p.card__color Color: #{cat.properties.cat_color}
-                    p.card__chill
-                        if cat.properties.chill == "true"
-                            span.chill-badge Chill
-                        else
-                            span.no-chill-badge No Chill
+                    a(href=`/cats/${cat.id}`)
+                        h2.card__name= cat.properties.name
+                        p.card__size Size: #{cat.properties.cat_size_descriptor.charAt(0).toUpperCase() + cat.properties.cat_size_descriptor.slice(1)}
+                        p.card__color Color: #{cat.properties.cat_color}
+                        p.card__chill
+                            if cat.properties.chill == "true"
+                                span.chill-badge Chill
+                            else
+                                span.no-chill-badge No Chill
