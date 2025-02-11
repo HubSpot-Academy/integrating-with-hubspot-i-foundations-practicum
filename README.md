@@ -8,6 +8,9 @@ To read the full directions, please go to the [practicum instructions](https://a
 
 😸 [https://app.hubspot.com/contacts/49176905/objects/2-40592572/views/all/list](https://app.hubspot.com/contacts/49176905/objects/2-40592572/views/all/list)
 
+**App Screenshot:**
+<img width="1223" alt="Screenshot 2025-02-11 at 4 51 37 PM" src="https://github.com/user-attachments/assets/d8cfae77-7ef2-4661-83fb-7256ce77380f" />
+
 ---
 
 ## Tips:
