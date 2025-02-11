@@ -6,13 +6,19 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body
         h1 Update Cat Record
+        .link-wrapper
+            a.link(href="/") Return to the homepage
         .form-wrapper
             form(action=`/update-cat/${cat.id}`, method="POST")
                 label(for="name") Name:
                 input(type="text" id="name" name="name" value=cat.properties.name required)
 
                 label(for="cat_size_descriptor") Size:
-                input(type="text" id="cat_size_descriptor" name="cat_size_descriptor" value=cat.properties.cat_size_descriptor required)
+                select(id="cat_size_descriptor" name="cat_size_descriptor" required)
+                    option(value="portly" selected=cat.properties.cat_size_descriptor === "portly") Portly
+                    option(value="chaunky" selected=cat.properties.cat_size_descriptor === "chaunky") Chaunky
+                    option(value="petite" selected=cat.properties.cat_size_descriptor === "petite") Petite
+                    option(value="average" selected=cat.properties.cat_size_descriptor === "average") Average
 
                 label(for="cat_color") Color:
                 input(type="text" id="cat_color" name="cat_color" value=cat.properties.cat_color required)
@@ -23,6 +29,3 @@ html
                     option(value="false" selected=cat.properties.chill === "false") No
 
                 input(type="submit" value="Update Cat")
-
-        .home-link-wrapper
-            a.home-link(href="/") Return to the homepage

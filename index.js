@@ -23,7 +23,11 @@ app.get("/", async (req, res) => {
 	try {
 		const resp = await axios.get(cats, { headers });
 		const data = resp.data.results;
-		res.render("cats", { title: "Cats | HubSpot APIs", data });
+		res.render("cats", {
+			title: "Cats | HubSpot APIs",
+			data: data,
+			message: req.query.message || "", // Pass the message to the template
+		});
 	} catch (error) {
 		console.error(error);
 	}
@@ -32,9 +36,12 @@ app.get("/", async (req, res) => {
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * SHOW
-app.get("/cats/:id", async (req, res) => {
+// * SHOW - Render the form for both creating and updating cats
+app.get("/cats/:id?", async (req, res) => {
 	const catId = req.params.id;
-	const catsUrl = `https://api.hubspot.com/crm/v3/objects/cats/${catId}?properties=name,cat_size_descriptor,chill,cat_color`;
+	const catsUrl = catId
+		? `https://api.hubspot.com/crm/v3/objects/cats/${catId}?properties=name,cat_size_descriptor,chill,cat_color`
+		: null; // For new cat, the URL is null
 
 	const headers = {
 		Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
@@ -42,11 +49,26 @@ app.get("/cats/:id", async (req, res) => {
 	};
 
 	try {
-		const resp = await axios.get(catsUrl, { headers });
-		const catData = resp.data;
+		let catData = null;
+
+		// If we have a catId, fetch the cat details. Otherwise, initialize an empty object.
+		if (catId) {
+			const resp = await axios.get(catsUrl, { headers });
+			catData = resp.data;
+		}
+
 		res.render("update", {
-			title: "Update Custom Object Form | Integrating With HubSpot I Practicum",
-			cat: catData,
+			title: catId
+				? "Update Custom Object Form | Integrating With HubSpot I Practicum"
+				: "Create Custom Object Form | Integrating With HubSpot I Practicum",
+			cat: catData || {
+				properties: {
+					name: "",
+					cat_size_descriptor: "",
+					chill: "false",
+					cat_color: "",
+				},
+			},
 		});
 	} catch (error) {
 		console.error(error);
@@ -54,12 +76,12 @@ app.get("/cats/:id", async (req, res) => {
 	}
 });
 
-// UPDATE
-app.post("/update-cat/:id", async (req, res) => {
+// * CREATE or UPDATE - Handle form submissions
+app.post("/update-cat/:id?", async (req, res) => {
 	const catId = req.params.id;
 	const { name, cat_size_descriptor, chill, cat_color } = req.body;
 
-	const updatedCat = {
+	const catData = {
 		properties: {
 			name,
 			cat_size_descriptor,
@@ -68,22 +90,33 @@ app.post("/update-cat/:id", async (req, res) => {
 		},
 	};
 
-	const catsUrl = `https://api.hubspot.com/crm/v3/objects/cats/${catId}`;
-
 	const headers = {
 		Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
 		"Content-Type": "application/json",
 	};
 
-	try {
-		// Send a PATCH request to update the cat object
-		const resp = await axios.patch(catsUrl, updatedCat, { headers });
+	let url = "https://api.hubspot.com/crm/v3/objects/cats";
+	let method = "POST"; // Default to POST for creating a new cat
 
-		// After successful update, redirect to the updated cat page
-		res.redirect(`/cats/${catId}`);
+	if (catId !== "undefined" && catId.length > 0) {
+		url = `https://api.hubspot.com/crm/v3/objects/cats/${catId}`;
+		method = "PATCH"; // Use PATCH for updating an existing cat
+	}
+
+	try {
+		// Send either a POST or PATCH request depending on whether it's a new or existing cat
+		const resp = await axios({
+			method,
+			url,
+			data: catData,
+			headers,
+		});
+
+		// After successful creation or update, redirect to the cat page
+		res.redirect(`/?message=Change%20successful`);
 	} catch (error) {
 		console.error(error);
-		res.status(500).send("Error updating cat data.");
+		res.status(500).send("Error processing cat data.");
 	}
 });
 
@@ -91,20 +124,20 @@ app.post("/update-cat/:id", async (req, res) => {
 
 // * Code for Route 3 goes here
 
-app.get("/contacts", async (req, res) => {
-	const contacts = "https://api.hubspot.com/crm/v3/objects/contacts";
-	const headers = {
-		Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-		"Content-Type": "application/json",
-	};
-	try {
-		const resp = await axios.get(contacts, { headers });
-		const data = resp.data.results;
-		res.render("contacts", { title: "Contacts | HubSpot APIs", data });
-	} catch (error) {
-		console.error(error);
-	}
-});
+// app.get("/contacts", async (req, res) => {
+// 	const contacts = "https://api.hubspot.com/crm/v3/objects/contacts";
+// 	const headers = {
+// 		Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+// 		"Content-Type": "application/json",
+// 	};
+// 	try {
+// 		const resp = await axios.get(contacts, { headers });
+// 		const data = resp.data.results;
+// 		res.render("contacts", { title: "Contacts | HubSpot APIs", data });
+// 	} catch (error) {
+// 		console.error(error);
+// 	}
+// });
 
 /**
 * * This is sample code to give you a reference for how you should structure your calls.

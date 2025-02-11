@@ -5,9 +5,13 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body
+        // Display success message if available
+        if message
+            .alert.alert-success
+                = message
         h1 Cats
-        .add-cat-link-wrapper
-            a.add-cat-link(href="/update-cobj") + Add Another Cat
+        .link-wrapper
+            a.link(href="/cats") 🐱 Add Another Cat 🐱
         .cards
             each cat in data
                 .card

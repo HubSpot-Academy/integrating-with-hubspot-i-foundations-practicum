@@ -78,13 +78,13 @@ h1 {
     color: #d32f2f;
 }
 
-.add-cat-link-wrapper {
+.link-wrapper {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
 }
 
-.add-cat-link {
+.link {
     padding: 0.8rem 2rem;
     font-size: 1.2rem;
     font-weight: 700;
@@ -95,7 +95,7 @@ h1 {
     transition: background-color 0.2s;
 }
 
-.add-cat-link:hover {
+.link:hover {
     background-color: #0056b3;
 }
 
