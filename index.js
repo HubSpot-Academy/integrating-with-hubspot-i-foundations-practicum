@@ -23,7 +23,7 @@ app.get("/", async (req, res) => {
 	try {
 		const resp = await axios.get(cats, { headers });
 		const data = resp.data.results;
-		res.render("cats", {
+		res.render("homepage", {
 			title: "Cats | HubSpot APIs",
 			data: data,
 			message: req.query.message || "", // Pass the message to the template
