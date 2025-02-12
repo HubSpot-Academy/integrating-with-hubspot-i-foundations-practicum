@@ -33,9 +33,7 @@ app.get("/", async (req, res) => {
 	}
 });
 
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * SHOW
+// ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 // * SHOW - Render the form for both creating and updating cats
 app.get("/cats/:id?", async (req, res) => {
 	const catId = req.params.id;
@@ -76,6 +74,9 @@ app.get("/cats/:id?", async (req, res) => {
 	}
 });
 
+// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
+
+// * Code for Route 3 goes here
 // * CREATE or UPDATE - Handle form submissions
 app.post("/update-cobj/:id?", async (req, res) => {
 	const catId = req.params.id;
@@ -119,10 +120,6 @@ app.post("/update-cobj/:id?", async (req, res) => {
 		res.status(500).send("Error processing cat data.");
 	}
 });
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
 
 // app.get("/contacts", async (req, res) => {
 // 	const contacts = "https://api.hubspot.com/crm/v3/objects/contacts";
