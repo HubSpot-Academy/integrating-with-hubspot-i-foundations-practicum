@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css") 
+  body
+    h1 Update Contact Form
+
+    form(action="/update-contact" method="POST")
+      label(for="firstname") First Name:
+      input(type="text" name="firstname" required)
+      br
+      label(for="lastname") Last Name:
+      input(type="text" name="lastname" required)
+      br
+      label(for="email") Email:
+      input(type="email" name="email" required)
+      br
+      button(type="submit") Submit
+
+    br
+    a(href="/") Return to the homepage

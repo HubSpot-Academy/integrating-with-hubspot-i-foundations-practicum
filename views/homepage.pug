@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css") 
+  body
+    h1 Contacts List
+    
+    a(href="/update-contact") Add New Contact
+    br
+    br
+    
+    table
+      thead
+        tr
+          th First Name
+          th Last Name
+          th Email
+      tbody
+        each contact in data
+          tr
+            td= contact.properties.firstname
+            td= contact.properties.lastname
+            td= contact.properties.email
