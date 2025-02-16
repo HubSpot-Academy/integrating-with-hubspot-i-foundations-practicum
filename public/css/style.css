@@ -17,6 +17,7 @@ h1 {
 .table {
     border-collapse: collapse;
     margin: 2rem 0;
+    border: 1px solid #7e7c7c;
 }
 
 .table th,
