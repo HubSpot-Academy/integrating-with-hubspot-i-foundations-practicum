@@ -6,53 +6,46 @@ body, * {
     padding: 0;
 }
 
+.content {
+    padding: 1rem;
+}
+
 h1 {
-    margin: 1rem;
+    margin-bottom: 1rem;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+.table {
+    border-collapse: collapse;
+    margin: 2rem 0;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+.table th,
+.table td {
+    padding: 0.5em 1em;
 }
 
-.card__email {
-    font-size: 1rem;
+.table th {
+    background-color: lightpink;
+    text-align: left;
 }
 
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+.table td {
+    border-bottom: 1px dashed #ccc;
 }
 
-label, input {
-    margin-top: 5px;
+.update-form label,
+.update-form input {
     display: block;
-    font-size: inherit;
+    font-size: 1.2em;
 }
 
-input[type="text"] {
-    padding: .25rem;
+.update-form input {
+    padding: 0.5em 1em;
+    margin: 0.2em 0 1em;
+    width: 400px;
+    max-width: 100%;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+.update-form input[type="submit"] {
+    margin: 2em 0;
 }
