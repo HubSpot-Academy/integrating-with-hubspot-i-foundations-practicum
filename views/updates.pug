@@ -1,0 +1,17 @@
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 #{title}
+        a(href="/") Return to the homepage
+
+        form.update-form(action="/update-cobj" method="POST")
+            label Name
+            input(type="text" name="name" placeholder="John Smith" required)
+            label House
+            input(type="text" name="house" placeholder="Hufflepuff" required)
+            label Wand Core
+            input(type="text" name="wand" placeholder="Phoenix Feather" required)
+            input(type="submit")
