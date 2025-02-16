@@ -31,16 +31,13 @@ app.get('/', async (req, res) => {
 });
 
 //create or update new custom object data
-
 app.get("/update-cobj", async (req, res) => {
     res.render("updates", {
-        title: "Update Custom Object Form - Harry Potter Characters",
+        title: "Update Custom Object Form | Integrating With HubSpot I Practicum",
     });
 });
 
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
+//post request to update custom object data
 app.post('/update-cobj', async (req, res) => {
     const url = 'https://api.hubspot.com/crm/v3/objects/p45674435_harry_potter_characters';
     const data = req.body;

@@ -10,7 +10,7 @@ body, * {
     padding: 1rem;
 }
 
-h1, h2 {
+h1, h2{
     margin-bottom: 1rem;
 }
 
@@ -38,6 +38,10 @@ a {
     border-bottom: 1px dashed #7e7c7c;
 }
 
+.update-form {
+    margin-top: 1rem;
+}
+
 .update-form label,
 .update-form input {
     display: block;
@@ -47,7 +51,7 @@ a {
 .update-form input {
     padding: 0.5em 1em;
     margin: 0.2em 0 1em;
-    width: 600px;
+    width: auto;
 }
 
 .update-form input[type="submit"] {
