@@ -1,7 +1,6 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
-const path = require('path');
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
@@ -9,24 +8,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
+require('dotenv').config();
 const PRIVATE_APP_ACCESS = process.env.ACCESS_TOKEN;
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
 app.get('/', async (req, res) => {
-    const url = 'https://api.hubspot.com/crm/v3/objects/contacts';
+    const url = 'https://api.hubspot.com/crm/v3/objects/p45674435_harry_potter_characters';
+    const params = "?properties=name,house,wand&associations=contacts";
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     };
-
+    
     try {
-        const response = await axios.get(url, { headers });
-        const characters = res.json(response.data.results);
-        console.log(results);
-        
-        res.render('homepage', { characters: 'Characters | HubSpot APIs', characters });
+        const response = await axios.get(url + params, { headers });
+        const characters = response.data.results;
+
+        res.render('homepage', { title: 'Characters | HubSpot APIs', characters: characters });
     } catch (error) {
         console.error(error);
     }
