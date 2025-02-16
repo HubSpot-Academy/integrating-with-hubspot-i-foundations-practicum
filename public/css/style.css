@@ -25,25 +25,24 @@ h1 {
 }
 
 .table th {
-    background-color: lightpink;
+    background-color: pink;
     text-align: left;
 }
 
 .table td {
-    border-bottom: 1px dashed #ccc;
+    border-bottom: 1px dashed #7e7c7c;
 }
 
 .update-form label,
 .update-form input {
     display: block;
-    font-size: 1.2em;
+    font-size: 18px;
 }
 
 .update-form input {
     padding: 0.5em 1em;
     margin: 0.2em 0 1em;
-    width: 400px;
-    max-width: 100%;
+    width: 600px;
 }
 
 .update-form input[type="submit"] {
