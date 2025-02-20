@@ -1,0 +1,20 @@
+doctype html 
+html 
+    head 
+        title #{title}
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 #{title}
+        h2 Add Mineral
+        form(action="/update-cobj" method="post")
+            label(for="mineral_name") Mineral Name:
+            input(type="text" name="mineral_name")
+            label(for="name")  Name:
+            input(type="text" name="name")
+            label(for="symbol") Symbol:
+            input(type="text" name="symbol")
+            label(for="atomic_number") Atomic number:
+            input(type="text" name="atomic_number")
+            input(type="submit" value="Submit")
+        a( href="/") Back to home
