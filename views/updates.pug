@@ -1,0 +1,38 @@
+doctype html 
+html 
+    head 
+        title= title 
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    html
+    head
+        title= title
+    body
+        h1 Update Custom Object Form
+        form(action='/update-cobj' method='POST')
+            label(for='firstname') First Name:
+            input(type='text' name='firstname' required)
+            br
+            label(for='lastname') last Name:
+            input(type='text' name='lastname' required)
+            br
+            label(for='email') Email:
+            input(type='text' name='email')
+            br
+            label(for='bio') Bio:
+            input(type='text' name='bio' required)
+            br
+            label(for='video_games') Video Games:
+            input(type='text' name='video_games' required)
+            br
+            label(for='city') City:
+            input(type='text' name='city')
+            br
+            label(for='favorit_movie') Favorit Movie:
+            input(type='text' name='favorit_movie')
+            br
+            button(type='submit') Submit
+        br
+        a(href='/') Return to the homepage! 
+
+                    

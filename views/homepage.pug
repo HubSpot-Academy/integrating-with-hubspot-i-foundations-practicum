@@ -1,0 +1,22 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Homepage
+        h2 Contacts
+        
+         .cards 
+             each contact in data
+                 .card 
+                     h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
+                     p.card__bio #{contact.properties.bio}
+                     p.card__email #{contact.properties.email}
+                     p.card__game #{contact.properties.video_games}
+                     p.card__movie #{contact.properties.favorit_movie}
+                     p.card__city #{contact.properties.city}
+
+
+        a(href='/update-cobj', type=button) Add Contact
