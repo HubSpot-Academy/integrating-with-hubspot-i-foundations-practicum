@@ -1,0 +1,26 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet" href="/css/style.css")
+    body    
+        h1 #{title}
+
+            a(href='/update-cobj') Add to this table
+
+    .table-container
+        table 
+            thead 
+                tr 
+                    th Dealname
+                    th Amount
+                    th Status
+            tbody
+                each  row in data  
+                    tr
+                        td #{row.properties.dealname}
+                        td #{row.properties.amount}
+                        td #{row.properties.dealstage}

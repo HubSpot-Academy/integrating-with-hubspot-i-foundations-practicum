@@ -8,29 +8,10 @@ body, * {
 
 h1 {
     margin: 1rem;
+    text-align: center;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-.card__email {
-    font-size: 1rem;
-}
-
-.form-wrapper {
+form {
     font-size: 18px;
     max-width: 768px;
     margin: 2rem auto;
@@ -49,6 +30,10 @@ label, input {
 input[type="text"] {
     padding: .25rem;
 }
+select {
+    padding: .40rem;
+    display: block;
+}
 
 input[type="submit"] {
     background-color: lightgrey;
@@ -56,3 +41,95 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+
+button{
+    background-color: lightgrey;
+    border: none;
+    padding: .375rem 1rem;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+
+a {
+    text-decoration: none;
+    font-size: small;
+    border-radius: 15px;
+    color: aliceblue;
+    background-color: #307dad;
+    border: none;
+    padding: 10px 20px;
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    width: 200px;
+}
+
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 16px;
+  }
+
+  th {
+    background-color: #307dad;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
+
+  td {
+    background-color: #fff;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover td {
+    background-color: #f1f1f1;
+  }
+
+  caption {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: left;
+    color: #333;
+  }
+
+  th, td {
+    border-right: 1px solid #ddd;
+  }
+
+  th:last-child, td:last-child {
+    border-right: none;
+  }
+
+  table {
+    border: 1px solid #ddd;
+  }
+
+  .table-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
