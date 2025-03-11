@@ -66,6 +66,11 @@ app.post('/update', async (req, res) => {
 });
 */
 
+app.get('/', async (req, res) => {});
+
+app.get('/update-cobj', async (req, res) => {});
+
+app.post('/update-cobj', async (req, res) => {});
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
