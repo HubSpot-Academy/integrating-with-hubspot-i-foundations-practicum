@@ -1,0 +1,21 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body(class="form-center")   
+    div
+     h1 Create New CRM Record  
+     form(action="/create" method="POST")
+      label(for="pet_name")
+      input(type="text" name="pet_name" placeholder="Enter Per Name" required)
+      br
+      label(for="pet_type")
+      input(type="text" name="pet_type" placeholder="Enter Per Type" required)
+      br
+      label(for="pet_bio")
+      input(type="text" name="pet_bio" placeholder="Enter Per Bio" required)
+
+      button(type="submit")  Submit
+      
