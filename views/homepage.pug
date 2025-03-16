@@ -1,0 +1,24 @@
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 My Custom Objects
+    p
+      a(href='/update-cobj') Add to this table
+    table
+      thead
+        tr
+          th Name
+          th Species
+          th Age
+      tbody
+        if objects && objects.length
+          each object in objects
+            tr
+              td= object.properties.name
+              td= object.properties.species
+              td= object.properties.age
+        else
+          tr
+            td(colspan='3') No pets found
