@@ -1,7 +1,19 @@
-doctype html 
-    htlm(lang="en")
-        head
-            title Update Custom Object Form | Integrating With HubSpot I Practicum.
-            link(rel="stylesheet", href="/stylesheets/style.css")
-        body
-            a(href="/") Return to the homepage
+doctype html
+html
+    head
+        title= title
+    body
+        h1 Update Custom Object Form | Integrating With HubSpot I Practicum
+        form(action="/update-cobj" method="POST")
+            label(for="name") Name:
+            input(type="text" name="name" required)
+            br
+            label(for="publisher") Publisher:
+            input(type="text" name="publisher" required)
+            br
+            label(for="price") Price:
+            input(type="text" name="price" required)
+            br
+            button(type="submit") Submit
+        br
+        a(href="/") Return to the homepage
