@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body, * {
+body,
+* {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
@@ -10,24 +11,20 @@ h1 {
     margin: 1rem;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+.container {
+    max-width: 1440px;
+    margin: 2rem auto;
+    padding: 0 1rem;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+.link {
+    margin-top: 1rem;
+    text-align: start;
 }
 
-.card__email {
-    font-size: 1rem;
+.link > a {
+    color: black;
+    text-decoration: none;
 }
 
 .form-wrapper {
@@ -40,19 +37,46 @@ h1 {
     box-shadow: 3px 2px 6px lightgrey;
 }
 
-label, input {
+.btn {
+    background-color: lightgrey;
+    padding: 0.375rem 1rem;
+    color: black;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+label,
+input {
     margin-top: 5px;
     display: block;
     font-size: inherit;
 }
 
-input[type="text"] {
-    padding: .25rem;
+input[type='text'] {
+    padding: 0.25rem;
 }
 
-input[type="submit"] {
+input[type='submit'] {
     background-color: lightgrey;
     border: none;
-    padding: .375rem 1rem;
+    padding: 0.375rem 1rem;
     margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid lightgrey;
+    padding: 8px;
+}
+
+th {
+    background-color: lightgrey;
 }
