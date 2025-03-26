@@ -1,0 +1,27 @@
+doctype html
+html
+    head
+        // Interpolation of title
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .custom-plants
+            h1.custom-plants__heading Custom Object
+            h2.custom-plants__subheading Plants
+            // Link to the /object-cobj get route
+            a.custom-plants__update-link(href='./update-cobj') Add to this table
+            // Setup of the table needed to render the data
+            table.custom-plants__table
+                tr.custom-plants__table__header-row
+                    th.custom-plants__table__heading Name
+                    th.custom-plants__table__heading Species
+                    th.custom-plants__table__heading Size
+                    // Loop through the data received from the get route that contains individual records of the
+                                    // custom object
+                each customPlants in data
+                    tr.custom-plants__table__row
+                        // Interpolation of the specific data points into a table
+                        td.custom-plants__table__cell #{customPlants.properties.plant_name}
+                        td.custom-plants__table__cell #{customPlants.properties.species}
+                        td.custom-plants__table__cell #{customPlants.properties.plant_size}

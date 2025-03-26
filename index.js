@@ -22,49 +22,49 @@ const PRIVATE_APP_ACCESS = '';
 
 // * Code for Route 3 goes here
 
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
+/**
+ * * This is sample code to give you a reference for how you should structure your calls.
 
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
-});
+ * * App.get sample
+ app.get('/contacts', async (req, res) => {
+ const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
+ const headers = {
+ Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+ 'Content-Type': 'application/json'
+ }
+ try {
+ const resp = await axios.get(contacts, { headers });
+ const data = resp.data.results;
+ res.render('contacts', { title: 'Contacts | HubSpot APIs', data });
+ } catch (error) {
+ console.error(error);
+ }
+ });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
+ * * App.post sample
+ app.post('/update', async (req, res) => {
+ const update = {
+ properties: {
+ "favorite_book": req.body.newVal
+ }
+ }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
+ const email = req.query.email;
+ const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
+ const headers = {
+ Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+ 'Content-Type': 'application/json'
+ };
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
+ try {
+ await axios.patch(updateContact, update, { headers } );
+ res.redirect('back');
+ } catch(err) {
+ console.error(err);
+ }
 
-});
-*/
+ });
+ */
 
 
 // * Localhost
