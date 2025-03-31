@@ -1,0 +1,56 @@
+doctype html
+html
+  head
+    title= title
+    style.
+      body {
+        font-family: 'Helvetica Neue', sans-serif;
+        text-align: center;
+        background: #f7f7f7;
+        padding: 50px;
+      }
+      form {
+        background: white;
+        padding: 20px;
+        display: inline-block;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        border-radius: 10px;
+      }
+      input {
+        display: block;
+        margin: 10px auto;
+        padding: 8px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      a {
+        display: block;
+        margin-top: 15px;
+        color: #007bff;
+        text-decoration: none;
+      }
+  body
+    h1= title
+    form(method='POST', action='/update-cobj')
+      label(for='name') Name:
+      input(type='text', name='name', required=true)
+
+      label(for='type') Type:
+      input(type='text', name='type', required=true)
+
+      label(for='age__years_') Age (Years):
+      input(type='number', name='age__years_', required=true)
+
+      button(type='submit') Submit
+
+    a(href='/') Go back to the table
+

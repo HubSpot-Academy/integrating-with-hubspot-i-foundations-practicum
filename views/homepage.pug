@@ -1,0 +1,62 @@
+doctype html
+html
+  head
+    title= title
+    style.
+      body {
+        font-family: 'Helvetica Neue', sans-serif;
+        text-align: center;
+        background: #f7f7f7;
+        padding: 50px;
+      }
+      h1 {
+        font-size: 2em;
+        margin-bottom: 0;
+      }
+      h2 {
+        margin-top: 0;
+        color: #777;
+        font-weight: normal;
+      }
+      table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        width: 400px;
+      }
+      th, td {
+        padding: 12px 15px;
+        border: 1px solid #ccc;
+        text-align: left;
+      }
+      th {
+        background: #eee;
+      }
+      a {
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #007bff;
+      }
+  body
+    h1 Custom Object Table
+    h2 Integrating With HubSpot I Practicum
+
+    if pets.length
+      table
+        thead
+          tr
+            th Name
+            th Type
+            th Age (Years)
+        tbody
+          each pet in pets
+            tr
+              td= pet.properties.name
+              td= pet.properties.type
+              td= pet.properties.age__years_
+    else
+      p No pets found.
+
+    a(href='/update-cobj') Add / Update this table
