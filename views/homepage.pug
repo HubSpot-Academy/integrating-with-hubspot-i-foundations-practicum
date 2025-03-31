@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title Custom Object Table
+    link(rel="stylesheet", href="/css/styles.css")
+  body
+    header
+      h1 Custom Object Table
+      h2 Integrating With HubSpot I Practicum
+    main
+
+      table
+        thead
+          tr
+            th Name
+            th Colour
+            th Size
+        tbody
+          each record in records
+            tr
+              td= record.properties.name
+              td= record.properties.colour
+              td= record.properties.size
+    footer
+      a(href="/update-coi") Add / Update this table

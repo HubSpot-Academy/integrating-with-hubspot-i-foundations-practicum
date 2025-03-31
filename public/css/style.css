@@ -1,58 +1,127 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/* Apply a simple reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Center the content vertically */
+  align-items: center; /* Center the content horizontally */
+  min-height: 100vh;
+  background-color: #f0f0f0; /* Light background color */
+  padding-top: 20px; /* Add some padding at the top */
+}
+
+/* Header styling */
+header {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px; /* Adds space between the header and the form */
 }
 
 h1 {
-    margin: 1rem;
+  font-size: 32px;
+  color: #333;
+  margin: 0;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+/* Form container styling */
+form {
+  background-color: #fff; /* White background for the form */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px; /* Limits the form width */
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+/* Styling for labels */
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.card__email {
-    font-size: 1rem;
-}
-
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
-}
-
+/* Styling for input fields */
 input[type="text"] {
-    padding: .25rem;
+  width: 100%; /* Full width of the container */
+  padding: 10px;
+  margin-bottom: 15px; /* Space between the fields */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+/* Styling for the submit button */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50; /* Green color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049; /* Darker green when hovered */
+}
+
+/* Footer styles */
+footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 16px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Custom Object Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #eaeaea;
+}
+
+/* Optional: Style the links in the footer differently when displayed on the table page */
+footer a {
+  color: #007bff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }

@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title Update Custom Object
+    link(rel="stylesheet", href="/css/styles.css")
+  body
+    header
+      h1 Update Custom Object Form
+      h2 Integrating With HubSpot I Practicum
+    main
+      form(action="/update-coi" method="POST")
+        label(for="name") Name:
+        input(type="text" name="name" id="name" required)
+
+        label(for="size") Size:
+        input(type="text" name="size" id="size" required)
+
+        label(for="colour") Colour:
+        input(type="text" name="colour" id="colour" required)
+
+        button(type="submit") Submit
+
+    footer
+      a(href="/") Go back to the table
