@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+link(rel="stylesheet", href="/css/style.css")
+head
+    title= `${title}`
+body 
+h1 Update Custom Object Form | Integrating With HubSpot I Practicum 
+    #form.responsive(style='width: 200px; display: center; max-width:90%;') 
+        form(method='POST')
+            .form-row
+                label(for='name') Name
+                input#name(name='name' type='text' required='')
+            .form-row
+                label(for='breed') Breed
+                input#breed(placeholder='Chihuahua' name='breed' type='text' required='')
+            .form-row
+                label(for='color') Color
+                input#color(name='color' type='text' required='')
+            button.btn.btn-primary(type='submit' value='Put in HubSpot' style='width: 200px; height: 35px; font-size: 20px;') Put in HubSpot
+
+        p Return to homepage #[a(href=`http://localhost:3007/`) here]

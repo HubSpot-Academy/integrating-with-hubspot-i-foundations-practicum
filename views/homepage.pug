@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+link(rel="stylesheet", href="/css/style.css")
+head
+    title All Dogs Go to Heaven
+body 
+    h1 Dogs 
+    p #[a(href=`http://localhost:3007/update-cobj`) Add to this table]
+    body
+main
+    .container        
+    table.table
+        tr
+        th(style='width: 200px; display: left; max-width:33%;') name
+        th(style='width: 200px; display: center; max-width:33%;') breed
+        th(style='width: 200px; display: right; max-width:33%;') color
+    tbody
+        each dog in data
+            tr
+            li
+            div(style='display: inline-flex; flex-direction: row; padding-left: 80px;')
+                .name(style='width: 200px; border-radius: 1px; border:#000000; display: left; max-width:33%;')
+                    |                     #{dog.properties.name}
+                .breed(style='width: 200px; display: center; max-width:33%;')
+                    |                     #{dog.properties.breed}
+                .color(style='width: 200px; display: right; max-width:33%;')
+                    |                     #{dog.properties.color}
+
+            
