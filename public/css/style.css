@@ -1,58 +1,132 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body, * {
+
+    body {
     font-family: 'Roboto', sans-serif;
+    background-color: #2d2d2d; /* Dark background */
+    color: #e0e0e0; /* Light text color */
     margin: 0;
     padding: 0;
-}
+    }
 
-h1 {
-    margin: 1rem;
-}
+    h1 {
+    text-align: center;
+    color: #ff9500; /* Firefox orange for the header */
+    margin-top: 20px;
+    }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
+    table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
+    th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #555; /* Light border between rows */
+    }
 
-.card__email {
-    font-size: 1rem;
-}
+    th {
+    background-color: #444; /* Darker background for header */
+    color: #ffffff;
+    }
 
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
+    td {
+    background-color: #333; /* Dark background for rows */
+    }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
-}
+    tr:hover td {
+    background-color: #444; /* Darker row on hover */
+    }
 
-input[type="text"] {
-    padding: .25rem;
-}
-
-input[type="submit"] {
-    background-color: lightgrey;
+    button, .buttonHref {
+    background-color: #ff9500; /* Firefox orange */
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
     border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
-}
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+    display: block;
+    max-width: 170px;
+    font-size:15px;
+    }
+
+    .submit_buttom {
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    button:hover, .buttonHref:hover {
+    background-color: #d87d00; /* Slightly darker orange on hover */
+    }
+
+
+    /* Form container styles */
+    .form-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+    font-size: 14px;
+    color: #e0e0e0;
+    margin-bottom: 8px;
+    display: block;
+    text-align:left;
+    }
+
+    input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: #444;
+    border: 1px solid #555;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 16px;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus {
+    border-color: #ff9500; /* Highlight border on focus */
+    outline: none;
+    }
+
+  
+
+   
+
+
+
+    /* Mobile Responsiveness */
+    @media screen and (max-width: 600px) {
+    table {
+    width: 90%;
+    }
+
+    .form-container {
+        width: 90%;
+    }
+
+    input[type="text"], input[type="number"] {
+        font-size: 14px;
+    }
+
+    th, td {
+    font-size: 14px;
+    }
+
+    .buttonHref {
+    width: 100%;
+    padding: 12px;
+    }
+    }
