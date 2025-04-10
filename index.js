@@ -1,71 +1,91 @@
+// Load environment variables
+require('dotenv').config();
+
+// Import required packages
 const express = require('express');
 const axios = require('axios');
+const path = require('path');
+
+// Initialize Express
 const app = express();
 
+// Set up middleware
 app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+// Get environment variables
+const PRIVATE_APP_TOKEN = process.env.PRIVATE_APP_TOKEN;
+const OBJECT_TYPE = "2-43176702"; // Replace with your actual object type
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+// API base URL
+const API_BASE_URL = 'https://api.hubapi.com';
 
-// * Code for Route 1 goes here
+// Set up headers for API requests
+const headers = {
+ 'Authorization': `Bearer ${PRIVATE_APP_TOKEN}`,
+ 'Content-Type': 'application/json'
+};
 
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
+// Home page route - List all guitars
+app.get('/', async (req, res) => {
+ try {
+   // Make API call to get all guitar records
+   const response = await axios.get(
+     `${API_BASE_URL}/crm/v3/objects/${OBJECT_TYPE}?properties=name,year,description`, 
+     { headers }
+   );
+   
+   // Render homepage with guitar data
+   res.render('homepage', {
+     guitars: response.data.results
+   });
+ } catch (error) {
+   console.error('Error fetching guitar data:', error.response ? error.response.data : error.message);
+   res.status(500).send('Error fetching guitar data. Check console for details.');
+ }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
-
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
-
+// Form page route - Display the form to add a new guitar
+app.get('/update-cobj', (req, res) => {
+ res.render('updates', {
+   title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'
+ });
 });
-*/
 
+// Form submission route - Process the form data
+app.post('/update-cobj', async (req, res) => {
+ try {
+   // Get form data
+   const { name, year, description } = req.body;
+   
+   // Prepare data for API call
+   const data = {
+     properties: {
+       name,
+       year,
+       description
+     }
+   };
+   
+   // Make API call to create new guitar
+   await axios.post(
+     `${API_BASE_URL}/crm/v3/objects/${OBJECT_TYPE}`,
+     data,
+     { headers }
+   );
+   
+   // Redirect to homepage after successful creation
+   res.redirect('/');
+ } catch (error) {
+   console.error('Error creating guitar:', error.response ? error.response.data : error.message);
+   res.status(500).send('Error creating guitar. Check console for details.');
+ }
+});
 
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+ console.log(`Server running at http://localhost:${PORT}`);
+});
