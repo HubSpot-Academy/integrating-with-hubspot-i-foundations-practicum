@@ -1,0 +1,23 @@
+doctype html
+html 
+    head 
+        title= `${title}` 
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1= title
+
+            form(action="/update-cobj" method="POST" class="form-container")
+                label(for="Name") Name: 
+                input(type="text" id="name" name="name" required)
+
+                label(for="Price") Price: 
+                input(type="number" min="0" max="10000" id="price" name="price" required)
+
+                label(for="ProductID") ProductID*: 
+                input(type="number" min="0" max="10000" id="productid" name="productid" required)
+
+                button(type="submit" class="submit_buttom") Submit 
+
+                a(href="/" class="buttonHref") Home
+                
