@@ -1,0 +1,23 @@
+html
+  head
+    title Guitars Collection | Integrating With HubSpot I Practicum
+    link(rel='stylesheet', href='css/style.css')
+  body
+    h1 My Guitar Collection
+    a(href="/update-cobj") Add to this table
+    
+    if guitars && guitars.length > 0
+      table
+        thead
+          tr
+            th Name
+            th Year
+            th Description
+        tbody
+          each guitar in guitars
+            tr
+              td= guitar.properties.name
+              td= guitar.properties.year
+              td= guitar.properties.description
+    else
+      p No guitars found. Add one!

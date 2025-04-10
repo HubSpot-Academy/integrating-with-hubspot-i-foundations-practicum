@@ -1,0 +1,23 @@
+html
+  head
+    title= title
+    link(rel='stylesheet', href='css/style.css')
+  body
+    h1 Add New Guitar
+    
+    form(action="/update-cobj", method="POST")
+      div.form-group
+        label(for="name") Guitar Name:
+        input#name(type="text", name="name", required)
+      
+      div.form-group
+        label(for="year") Year:
+        input#year(type="number", name="year", required)
+      
+      div.form-group
+        label(for="description") Description:
+        textarea#description(name="description", rows="4", required)
+      
+      button(type="submit") Add Guitar
+    
+    a(href="/") Return to the homepage
