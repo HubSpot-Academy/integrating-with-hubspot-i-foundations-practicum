@@ -1,0 +1,27 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        .content-wrapper    
+            h1 Mountains
+            a(href="/update-cobj") Create/Update Mountain Record
+            .mountains 
+                table
+                    tr
+                        th Name
+                        th Location
+                        th Elevation
+                        th Country
+                        th Record ID
+                    each mountain in data
+                        tr(class="mountain")
+                            td #{mountain.properties.name}
+                            td #{mountain.properties.location}
+                            td #{mountain.properties.elevation} ft
+                            td #{mountain.properties.country}
+                            td #{mountain.id}
+                            td
+                                a(href=`/update-cobj?id=${mountain.id}`) Update
