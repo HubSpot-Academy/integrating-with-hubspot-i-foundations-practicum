@@ -10,25 +10,27 @@ html
         a(href="/") Return to the homepage
         .form-wrapper 
             form(action="/update-cobj", method="POST")
-                .form-group
-                    label(for="name") Name
-                    input(type="text" name="name" id="name" required)/
-                .form-group
-                    label(for="location") Location
-                    input(type="text" name="location" id="location" placeholder="City, State Abbreviation")/
-                .form-group
-                    label(for="elevation") Elevation
-                    input(type="number" name="elevation" id="elevation" suffix=" ft")/
-                .form-group
-                    label(for="country") Country
-                    select(name="country" id="country")
-                        option(value="") Select a country
-                        option(value="United States") USA
-                        option(value="Canada") Canada
-                        option(value="Mexico") Mexico
-                .form-group
-                    label(for="record_id") Record ID
-                        br/
-                        span(class="help-text") Use this field to update an existing record using the record id from the #[a(href='/') Mountains Table].
-                    input(type="number" name="record_id" id="record_id" placeholder="12345678")/
-                button(type="submit") Submit
+                .form-row
+                    .form-group
+                        label(for="name") Name
+                        input(type="text" name="name" id="name" value=`${data ? data.name : ''}` required)/
+                    .form-group
+                        label(for="elevation") Elevation (ft.)
+                        input(type="number" name="elevation" id="elevation" value=`${data ? data.elevation : ''}`)/
+                .form-row
+                    .form-group
+                        label(for="location") Location
+                        input(type="text" name="location" id="location" placeholder="City, State Abbreviation" value=`${data ? data.location : ''}`)/
+                    .form-group
+                        label(for="country") Country
+                        select(name="country" id="country" data-value=`${data ? data.country : ''}`)
+                            option(value="") Select a country
+                            option(value="United States") United States
+                            option(value="Canada") Canada
+                            option(value="Mexico") Mexico
+                if data
+                    .form-row
+                        .form-group
+                            input(type="hidden" name="record_id" id="record_id" value=`${data.hs_object_id}`)/
+                .form-row
+                    button(type="submit") #{submitLabel}

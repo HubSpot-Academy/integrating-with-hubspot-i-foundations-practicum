@@ -5,7 +5,8 @@ window.addEventListener("load", (event) => {
     const paramsString = window.location.search;
     const queryParams = new URLSearchParams(paramsString);
     const recordId = queryParams.get('id');
+    const countrySelect = document.getElementById('country');
     if (recordId) {
-        document.getElementById('record_id').value = recordId;
+        countrySelect.value = countrySelect.dataset.value;
     }
 });
