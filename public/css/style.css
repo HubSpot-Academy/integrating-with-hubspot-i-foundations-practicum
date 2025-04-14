@@ -11,8 +11,32 @@ h1 {
   margin: 1rem;
 }
 
-a {
+a,
+.table-container {
   padding: 1rem;
+}
+
+.table {
+  border-collapse: collapse;
+  table-layout: auto;
+  width: auto;
+}
+
+.table-header {
+  background-color: #f4c6cc;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.table th {
+  font-weight: bold;
+  color: #000;
 }
 
 .form-wrapper {
