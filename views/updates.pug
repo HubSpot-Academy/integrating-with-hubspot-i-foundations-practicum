@@ -5,32 +5,33 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
         script(src="/js/main.js")
-    body    
-        h1 Create/Update Mountain Record
-        a(href="/") Return to the homepage
-        .form-wrapper 
-            form(action="/update-cobj", method="POST")
-                .form-row
-                    .form-group
-                        label(for="name") Name
-                        input(type="text" name="name" id="name" value=`${data ? data.name : ''}` required)/
-                    .form-group
-                        label(for="elevation") Elevation (ft.)
-                        input(type="number" name="elevation" id="elevation" value=`${data ? data.elevation : ''}`)/
-                .form-row
-                    .form-group
-                        label(for="location") Location
-                        input(type="text" name="location" id="location" placeholder="City, State Abbreviation" value=`${data ? data.location : ''}`)/
-                    .form-group
-                        label(for="country") Country
-                        select(name="country" id="country" data-value=`${data ? data.country : ''}`)
-                            option(value="") Select a country
-                            option(value="United States") United States
-                            option(value="Canada") Canada
-                            option(value="Mexico") Mexico
-                if data
+    body
+        .content-wrapper
+            h1 Create/Update Mountain Record
+            a(href="/") Return to the homepage
+            .form-wrapper 
+                form(action="/update-cobj", method="POST")
                     .form-row
                         .form-group
-                            input(type="hidden" name="record_id" id="record_id" value=`${data.hs_object_id}`)/
-                .form-row
-                    button(type="submit") #{submitLabel}
+                            label(for="name") Name
+                            input(type="text" name="name" id="name" value=`${data ? data.name : ''}` required)/
+                        .form-group
+                            label(for="elevation") Elevation (ft.)
+                            input(type="number" name="elevation" id="elevation" value=`${data ? data.elevation : ''}`)/
+                    .form-row
+                        .form-group
+                            label(for="location") Location
+                            input(type="text" name="location" id="location" placeholder="City, State Abbreviation" value=`${data ? data.location : ''}`)/
+                        .form-group
+                            label(for="country") Country
+                            select(name="country" id="country" data-value=`${data ? data.country : ''}`)
+                                option(value="") Select a country
+                                option(value="United States") United States
+                                option(value="Canada") Canada
+                                option(value="Mexico") Mexico
+                    if data
+                        .form-row
+                            .form-group
+                                input(type="hidden" name="record_id" id="record_id" value=`${data.hs_object_id}`)/
+                    .form-row
+                        input(type="submit" value=`${submitLabel}`)/
