@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1= title
+ 
+    if data && data.length
+      table
+        thead
+          tr
+            th Name
+            th Team Location
+            th Conference
+        tbody
+          each object in data
+            tr
+              td= object.properties.name
+              td= object.properties.team_location
+              td= object.properties.team_name
+    else
+      p No custom object records found.
+ 
+    br
+    a(href='/update-cobj') Add to this Table

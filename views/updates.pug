@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body    
+    h1= title
+ 
+    // Form to update the custom object data
+    form(action="/update-cobj" method="POST")
+      .form-group
+        label(for="name") Name
+        input(type="text" id="name" name="name" required)
+ 
+      .form-group
+        label(for="team_location") Team Location
+        input(type="text" id="team_location" name="team_location" required)
+ 
+      .form-group
+        label(for="team_name") Team Name
+        textarea(id="team_name" name="team_name" required)
+ 
+      button(type="submit") Submit
+ 
+    br
+    a(href='/') Return to the homepage
