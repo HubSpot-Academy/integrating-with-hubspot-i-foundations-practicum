@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a(href="/") Return to the homepage
+    .form-wrapper
+            form(method="POST")
+                label(for="card_name") Card Name
+                input(type="text" name="card_name" required)
+                label(for="name") Display Name
+                input(type="text" name="name" required)
+                label(for="spell_type") Spell Type
+                select(name="spell_type" required)
+                  option(value=creature) creature
+                  option(value=sorcery) sorcery
+                  option(value=instant) instant
+                  option(value=enchantment) enchantment
+                label(for="cmc") CMC
+                input(type="number" name="cmc" required)
+                input(type="submit" value="Submit")
