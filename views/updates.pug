@@ -1,0 +1,16 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        a(href="/") Return to the homepage
+        form(action="/update" method="POST")
+            label(for="name") Name:
+            input(type="text" name="name" required)
+            label(for="class") Class:
+            input(type="text" name="class" required)
+            label(for="number_of_legs") Number of Legs:
+            input(type="number" name="number_of_legs" required)
+            button(type="submit") Submit

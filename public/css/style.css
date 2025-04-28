@@ -40,6 +40,20 @@ h1 {
     box-shadow: 3px 2px 6px lightgrey;
 }
 
+table {
+    margin-top: 1rem;
+    width: auto;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 0.5rem;
+    text-align: left;
+    border: 1px solid black;
+}
+th {
+    background-color: rgb(255, 225, 225);
+}
+
 label, input {
     margin-top: 5px;
     display: block;
@@ -50,7 +64,7 @@ input[type="text"] {
     padding: .25rem;
 }
 
-input[type="submit"] {
+button[type="submit"] {
     background-color: lightgrey;
     border: none;
     padding: .375rem 1rem;
