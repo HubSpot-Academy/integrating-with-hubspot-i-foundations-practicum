@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Mario Brothers Characters
+    a(href='/update-cobj') Add a New Character
+    table
+      thead
+        tr
+          th Name
+          th Role
+          th Power Level
+      tbody
+        each record in records
+          tr
+            td= record.properties.name
+            td= record.properties.role
+            td= record.properties.powerlevel

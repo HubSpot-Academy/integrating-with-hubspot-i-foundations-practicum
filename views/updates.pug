@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Add a New Mario Brothers Character
+    form(action="/update-cobj", method="POST")
+      label(for="name") Name:
+      input(type="text", name="name", required)
+      br
+      label(for="role") Role:
+      input(type="text", name="role")
+      br
+      label(for="powerlevel") Power Level:
+      input(type="number", name="powerlevel")
+      br
+      button(type="submit") Submit
+    br
+    a(href="/") Return to homepage
