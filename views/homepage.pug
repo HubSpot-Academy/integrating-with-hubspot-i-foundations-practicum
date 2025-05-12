@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1= title
+    a(href="/update-cobj") Add to this table
+    table(border="1")
+      thead
+        tr
+          th Name
+          th Bio
+          th Species
+      tbody
+        each item in items
+          tr
+            td= item.properties.name
+            td= item.properties.bio
+            td= item.properties.species

@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1= title
+    a(href="/") ← Return to the homepage
+    form(action="/update-cobj", method="POST")
+      div
+        label(for="name") Name:
+        input#name(type="text", name="name", required)
+      div
+        label(for="bio") Bio:
+        textarea#bio(name="bio")
+      div
+        label(for="species") Species:
+        input#species(type="text", name="species")
+      div
+        button(type="submit") Create Record
