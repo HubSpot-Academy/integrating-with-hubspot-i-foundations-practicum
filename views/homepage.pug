@@ -1,0 +1,21 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Custom Object Table
+        a(href="/update-cobj") Add to this table
+        table(border="1")
+            thead
+                tr
+                    th Pet Name
+                    th Nickname
+                    th Type
+            tbody
+                each pet in data
+                    tr
+                        td #{pet.properties.pet_name}
+                        td #{pet.properties.pet_nickname}
+                        td #{pet.properties.pet_type}

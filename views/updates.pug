@@ -1,0 +1,27 @@
+doctype html
+html 
+head 
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+body    
+    h1 Add a new Pet
+    form(action="/update-cobj" method="POST")
+        label(for="pet_name") Pet Name
+        input(type="text" name="pet_name" required)
+        br
+        label(for="pet_nickname") Nickname
+        input(type="text" name="pet_nickname")
+        br
+        label(for="pet_type") Type
+        select(name="pet_type")
+            option(value="Dog") Dog
+            option(value="Cat") Cat
+            option(value="Horse") Horse
+            option(value="Fish") Fish
+            option(value="Other") Other
+        br
+        button(type="submit") Add New Pet
+    br
+    br
+    a(href="/") Return to the homepage
