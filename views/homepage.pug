@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Custom Object Table
+    a(href="/update-cobj") Add/update this table
+    br
+    br
+    if records.length
+      table(border="1")
+        thead
+          tr
+            th Asset Name
+            th Serial Number
+            th Asset Status
+        tbody
+          each record in records
+            tr
+              td= record.properties.asset_name
+              td= record.properties.serial_number
+              td= record.properties.asset_status
+    else
+      p No records found.
