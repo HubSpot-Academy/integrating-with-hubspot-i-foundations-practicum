@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Update Custom Object Form | Integrating With HubSpot I Practicum
+    form(action="/update-cobj", method="POST")
+      div
+        label(for="asset_name") Asset Name:
+        input(type="text", name="asset_name", required=true)
+      div
+        label(for="serial_number") Serial Number:
+        input(type="number", name="serial_number", required=true)
+      div
+        label(for="asset_status") Asset Status:
+        input(type="text", name="asset_status", required=true)
+      div
+        button(type="submit") Submit
+    br
+    a(href="/") Return to the homepage
