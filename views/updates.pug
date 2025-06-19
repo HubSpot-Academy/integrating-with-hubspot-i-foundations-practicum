@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .form-wrapper
+      p Air Defense Systems:
+      form(method="POST")
+        label(for="newName") New name
+        input(type="text", name="newName", id="newName", required)
+        
+        label(for="newRange") New range 
+        input(type="number", name="newRange", id="newRange", required)
+        
+        label(for="newDescription") New description
+        input(type="text", name="newDescription", id="newDescription", required)
+        
+        input(type="submit", value="Submit")
+
+    a(href="/") Return to the homepage
