@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        h1= title 
+        a(href="/update-cobj") Add to this table
+        table 
+            thead 
+                tr
+                    th Pet Name 
+                    th Pet Breed 
+                    th Favorite Toy 
+            tbody 
+                if records.length 
+                each record in records 
+                    tr 
+                        td= record.properties.pet_name 
+                        td= record.properties.pet_breed
+                        td= record.properties.pet_favorite_toy
+                else    
+                    tr  
+                        td(colspan="3") No record found

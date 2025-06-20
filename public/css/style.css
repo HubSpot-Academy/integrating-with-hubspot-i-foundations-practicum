@@ -56,3 +56,21 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid #CCC;
+    padding: 8px;
+    text-align: left;
+}
+a {
+    display: inline-block;
+    margin-bottom: 10px;
+}

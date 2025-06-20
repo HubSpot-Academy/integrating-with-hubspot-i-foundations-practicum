@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title 
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        h1= title 
+        form(method="POST", action="/update-cobj")
+            label(for="pet_name") Pet Name: 
+            input(type="text", name="pet_name", required)
+            br
+
+            label(for="pet_breed") Pet Breed: 
+            input(type="text", name="pet_breed")
+            br
+
+            label(for="pet_favorite_toy") Pet Favorite Toy: 
+            input(type="text", name="pet_favorite_toy")
+            br
+
+            button(type="submit") Submit 
+
+            br 
+            a(href="/") Return to the homepage
+            
