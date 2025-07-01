@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Custom Object Records
+    a(href='/update-cobj') Add to this table
+    table(border='1')
+      tr
+        th Name
+        th Author
+        th Summary
+      each item in data
+        tr
+          td= item.properties.Name
+          td= item.properties.Author
+          td= item.properties.Summary
