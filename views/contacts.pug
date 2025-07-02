@@ -1,15 +1,22 @@
-//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
-
-//- doctype html
-//- html 
-//-     head 
-//-         title= `${title}`
-//-         meta(name="viewport" content="width=device-width, initial-scale=1")
-//-         link(rel="stylesheet", href="/css/style.css")
-//-     body    
-//-         h1 Contacts
-//-         .cards 
-//-             each contact in data
-//-                 .card 
-//-                     h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-//-                     p.card__email #{contact.properties.email}
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Dessert Contacts
+    a(href="/update-contact") Add New Contact
+    .cards
+      each contact in data
+        .card
+          h2.card__name #{contact.properties.firstname} #{contact.properties.lastname}
+          p.card__email  #{contact.properties.email}
+          if contact.properties.icecream_flavor
+            p.card__flavor  First Scoop: #{contact.properties.icecream_flavor}
+          if contact.properties.message
+            p.card__message  Feeling: #{contact.properties.message}
+          if contact.properties.feeling_after_eating
+            p.card__feeling  Feeling after eating: #{contact.properties.feeling_after_eating}
+          if contact.properties.second_scoop
+            p.card__second 🍨 Second Scoop: #{contact.properties.second_scoop}

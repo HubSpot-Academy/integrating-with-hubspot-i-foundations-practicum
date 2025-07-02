@@ -1,75 +1,86 @@
+require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
+const hubspot = require('@hubspot/api-client');
 const app = express();
+
+const hubspotClient = new hubspot.Client({
+  accessToken: process.env.PRIVATE_APP_ACCESS
+});
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+/** ✅ ROUTE 1 — Homepage: Mostrar todos los contactos */
+app.get('/', async (req, res) => {
+  try {
+    const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(
+      10,
+      undefined,
+      [
+        'email',
+        'firstname',
+        'lastname',
+        'icecream_flavor',
+        'message',
+        'feeling_after_eating',
+        'second_scoop'
+      ]
+    );
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+    const contacts = contactsResponse.results;
 
-// * Code for Route 1 goes here
+    res.render('contacts', {
+      title: 'Dessert Directory | Contacts',
+      data: contacts
+    });
+  } catch (error) {
+    console.error('❌ Error fetching contacts:', error.message || error);
+    res.status(500).send('Error fetching contacts');
+  }
+});
 
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
+//** ✅ ROUTE 2 — Formulario para crear nuevo contacto */
 app.get('/update-contact', (req, res) => {
   res.render('updates', {
     title: 'Update Contact | Dessert Directory'
   });
 });
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
+//** ✅ ROUTE 3
 app.post('/update-contact', async (req, res) => {
-  const { fullname, email, icecream_flavor, message } = req.body;
+  const {
+    fullname,
+    email,
+    icecream_flavor,
+    message,
+    feeling_after_eating,
+    second_scoop
+  } = req.body;
 
   const [firstname, ...rest] = fullname.split(' ');
   const lastname = rest.join(' ') || 'DessertLover';
 
-try {
+  try {
     const createContact = await hubspotClient.crm.contacts.basicApi.create({
       properties: {
         email,
         firstname,
         lastname,
         icecream_flavor,
-        message
+        message,
+        feeling_after_eating,
+        second_scoop
       }
     });
 
     console.log('✅ Contact created:', createContact.id);
-    res.send(`<h2>🎉 Contact created!</h2><p><a href="/">Go Home</a></p>`);
-
+    res.redirect('/');
   } catch (error) {
     console.error('❌ Error creating contact:', error.message || error);
-    res.status(500).send(`<h2>Woorp! Something went wrong.</h2><p>${error.message}</p>`);
+    res.status(500).send(`<h2>Something went wrong.</h2><p>${error.message}</p>`);
   }
 });
-/**
-* * This is sample code to give you a reference for how you should structure your calls.
 
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-
-
-
-// * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
