@@ -16,14 +16,18 @@ const PRIVATE_APP_ACCESS = '';
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
-// * Code for Route 2 goes here
+app.get('/update-contact', (req, res) => {
+  res.render('updates', {
+    title: 'Update Contact | Dessert Directory'
+  });
+});
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
 
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
+/**
+* * This is sample code to give you a reference for how you should structure your calls.
 
 * * App.get sample
 app.get('/contacts', async (req, res) => {
@@ -35,7 +39,7 @@ app.get('/contacts', async (req, res) => {
     try {
         const resp = await axios.get(contacts, { headers });
         const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
+        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });
     } catch (error) {
         console.error(error);
     }
@@ -56,7 +60,7 @@ app.post('/update', async (req, res) => {
         'Content-Type': 'application/json'
     };
 
-    try { 
+    try {
         await axios.patch(updateContact, update, { headers } );
         res.redirect('back');
     } catch(err) {
