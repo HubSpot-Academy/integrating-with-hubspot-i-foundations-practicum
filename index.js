@@ -24,8 +24,31 @@ app.get('/update-contact', (req, res) => {
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
-// * Code for Route 3 goes here
+app.post('/update-contact', async (req, res) => {
+  const { fullname, email, icecream_flavor, message } = req.body;
 
+  const [firstname, ...rest] = fullname.split(' ');
+  const lastname = rest.join(' ') || 'DessertLover';
+
+try {
+    const createContact = await hubspotClient.crm.contacts.basicApi.create({
+      properties: {
+        email,
+        firstname,
+        lastname,
+        icecream_flavor,
+        message
+      }
+    });
+
+    console.log('✅ Contact created:', createContact.id);
+    res.send(`<h2>🎉 Contact created!</h2><p><a href="/">Go Home</a></p>`);
+
+  } catch (error) {
+    console.error('❌ Error creating contact:', error.message || error);
+    res.status(500).send(`<h2>Woorp! Something went wrong.</h2><p>${error.message}</p>`);
+  }
+});
 /**
 * * This is sample code to give you a reference for how you should structure your calls.
 
@@ -45,30 +68,7 @@ app.get('/contacts', async (req, res) => {
     }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    try {
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
-
-});
-*/
 
 
 // * Localhost
