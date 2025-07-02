@@ -1,0 +1,30 @@
+// views/updates.pug
+
+doctype html
+html
+  head
+    title= `${title}`
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Create a Dessert-Loving Contact
+    form(method="POST", action="/update-contact")
+      label(for="fullname") Full Name:
+      input(type="text", name="fullname", required=true)
+      br
+
+      label(for="email") Email:
+      input(type="email", name="email", required=true)
+      br
+
+      label(for="icecream_flavor") Favorite Dessert:
+      input(type="text", name="icecream_flavor")
+      br
+
+      label(for="message") Mood After Eating:
+      input(type="text", name="message")
+      br
+
+      button(type="submit") Add Contact
+
+    br
+    a(href="/") Back to Home
