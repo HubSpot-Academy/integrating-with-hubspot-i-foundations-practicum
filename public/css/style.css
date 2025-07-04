@@ -7,7 +7,11 @@ body, * {
 }
 
 h1 {
-    margin: 1rem;
+    text-align: center;
+    color: #333;
+    margin: 2rem 1rem;
+    font-size: 2.5rem;
+    font-weight: 300;
 }
 
 .cards {
@@ -20,14 +24,82 @@ h1 {
 .card {
     flex-basis: 31%;
     margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
+    padding: 1.5rem;
+    border: solid 1px #e0e0e0;
     border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.card__name {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 .card__email {
-    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.card form {
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.card label {
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.card input[type="text"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.card input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+.card button {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    width: 100%;
+}
+
+.card button:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    transform: translateY(-1px);
+}
+
+.card button:active {
+    transform: translateY(0);
 }
 
 .form-wrapper {
@@ -55,4 +127,94 @@ input[type="submit"] {
     border: none;
     padding: .375rem 1rem;
     margin-top: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .card {
+        flex-basis: 100%;
+        margin: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        margin: 1.5rem 1rem;
+    }
+}
+
+/* Table styles for homepage */
+.add-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    margin: 1rem;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.add-button:hover {
+    background: linear-gradient(135deg, #20c997, #17a2b8);
+    transform: translateY(-1px);
+}
+
+.custom-objects-table {
+    width: 95%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
+
+.custom-objects-table th {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.custom-objects-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+}
+
+.custom-objects-table tbody tr:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease;
+}
+
+.custom-objects-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    .custom-objects-table {
+        width: 100%;
+        margin: 1rem 0;
+        font-size: 0.8rem;
+    }
+    
+    .custom-objects-table th,
+    .custom-objects-table td {
+        padding: 0.5rem;
+    }
+    
+    .add-button {
+        margin: 1rem 0;
+        display: block;
+        text-align: center;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

@@ -1,0 +1,26 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Custom Objects
+        a.add-button(href="/update-cobj") Add to this table
+        
+        table.custom-objects-table
+            thead
+                tr
+                    th ID
+                    th Language Name
+                    th Description
+                    th Primary Use Case
+                    th Created Date
+            tbody
+                each item in data
+                    tr
+                        td #{item.id}
+                        td #{item.properties.language_name || 'N/A'}
+                        td #{item.properties.description || 'N/A'}
+                        td #{item.properties.primary_use_case || 'N/A'}
+                        td #{item.createdAt ? new Date(item.createdAt).toLocaleDateString() : 'N/A'}

@@ -1,0 +1,22 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Update Custom Object Form
+        .form-wrapper
+            form(method="POST" action="/update-cobj")
+                label(for="language_name") Language Name:
+                input(type="text" name="language_name" id="language_name" placeholder="Enter programming language name" required)
+                
+                label(for="description") Description:
+                input(type="text" name="description" id="description" placeholder="Enter language description")
+                
+                label(for="primary_use_case") Primary Use Case:
+                input(type="text" name="primary_use_case" id="primary_use_case" placeholder="Enter primary use case")
+                
+                input(type="submit" value="Create Object")
+        
+        a(href="/") Return to the homepage
