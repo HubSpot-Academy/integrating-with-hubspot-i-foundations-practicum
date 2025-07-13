@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    p Fill in the form below to create a new contact.
+
+    form(action='/update-cobj' method='POST')
+      div
+        label(for='firstname') First Name:
+        input(type='text' id='firstname' name='firstname' required)
+      div
+        label(for='hs_role') Role:
+        select(id='hs_role' name='hs_role')
+          option(value='accounting') Accounting
+          option(value='business_development') Business Development
+          option(value='consulting') Consulting
+          option(value='customer_service') Customer Service
+          option(value='design') Design
+      div
+        label(for='company') Company:
+        input(type='text' id='company' name='company' required)
+      div
+        button(type='submit') Submit
+
+    a(href='/') Return to the homepage

@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+
+    a(href='/update-cobj') Add a new contact
+
+    if records.length
+      table(border='1' cellpadding='8')
+        thead
+          tr
+            th First Name
+            th Role
+            th Company
+        tbody
+          each record in records
+            tr
+              td= record.properties.firstname
+              td= record.properties.hs_role
+              td= record.properties.company
+    else
+      p No contact records found.
