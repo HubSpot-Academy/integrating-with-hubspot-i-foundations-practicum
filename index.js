@@ -1,71 +1,108 @@
+// Load environment variables from .env file
+require('dotenv').config();
+
 const express = require('express');
 const axios = require('axios');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+// HubSpot Private App Access Token from .env
+const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
+
+// This is the fully qualified name for your custom object.
+// You MUST replace this placeholder with the exact value from your HubSpot account.
+// It should be in the format: 'p' + [Portal ID] + '_' + [Internal name]
+const CUSTOM_OBJECT_NAME_FOR_API = 'p50294925_pets';
+
+// Middleware to parse URL-encoded bodies (from HTML forms)
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
+// Set Pug as the templating engine
+app.set('view engine', 'pug');
+app.set('views', './views');
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+// ===================================
+// === Routes for the Practicum ===
+// ===================================
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
+// App.get for the homepage ("/")
+// Retrieves and displays all custom object records in a table.
+app.get('/', async (req, res) => {
     try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
+        // HubSpot API endpoint to retrieve all custom object records
+        // Make sure to include all your custom property internal names in the 'properties' query parameter.
+        const getAllUrl = `https://api.hubapi.com/crm/v3/objects/${CUSTOM_OBJECT_NAME_FOR_API}?properties=name,species,bio,dog`;
+
+        const response = await axios.get(getAllUrl, {
+            headers: {
+                'Authorization': `Bearer ${HUBSPOT_ACCESS_TOKEN}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // The custom object records are in the 'results' array
+        const customObjects = response.data.results;
+
+        res.render('homepage', {
+            title: 'Custom Objects | Integrating With HubSpot I Practicum',
+            customObjects: customObjects
+        });
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching custom object records:', error.response ? error.response.data : error.message);
+        res.status(500).send('Error fetching custom object records.');
     }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
+// App.get for rendering the update form ("update-cobj")
+app.get('/update-cobj', (req, res) => {
+    // Renders the 'updates.pug' template, which contains the form.
+    res.render('updates', {
+        title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'
+    });
+});
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
+// App.post for creating a new custom object record ("/update-cobj")
+app.post('/update-cobj', async (req, res) => {
+    // Get form data from the request body, including the new 'dog' property
+    const { name, species, bio, dog } = req.body;
+
+    // Create the properties object to send to HubSpot
+    // The keys must match your custom property internal names exactly.
+    const properties = {
+        name: name,
+        species: species,
+        bio: bio,
+        dog: dog // <-- Added the required 'dog' property
     };
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
+    const data = {
+        properties: properties
+    };
+
+    try {
+        // HubSpot API endpoint to create a custom object record
+        const createUrl = `https://api.hubapi.com/crm/v3/objects/${CUSTOM_OBJECT_NAME_FOR_API}`;
+
+        // Make the API call
+        await axios.post(createUrl, data, {
+            headers: {
+                'Authorization': `Bearer ${HUBSPOT_ACCESS_TOKEN}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log('Custom object record created successfully!');
+        // Redirect to the homepage to see the new record
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error creating custom object record:', error.response ? error.response.data : error.message);
+        res.status(500).send('Error creating custom object record.');
     }
-
 });
-*/
 
 
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});

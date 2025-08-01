@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+    style.
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+  body
+    .container
+      h1 Custom Objects
+      p
+        a(href="/update-cobj") Add to this table
+
+      if customObjects && customObjects.length > 0
+        table
+          thead
+            tr
+              th Name
+              th Species
+              th Bio
+              // Add more <th> for any additional custom properties
+          tbody
+            each obj in customObjects
+              tr
+                td= obj.properties.name
+                td= obj.properties.species
+                td= obj.properties.bio
+                // Add more <td> for any additional custom properties
+      else
+        p No custom object records found. Add some using the link above!

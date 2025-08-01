@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .container
+      h1 Update Custom Object Form
+      p
+        a(href="/") &larr; Return to the homepage
+
+      form(action="/update-cobj", method="POST")
+        .form-group
+          label(for="name") Name:
+          input(type="text", id="name", name="name", required)
+        .form-group
+          label(for="species") Species:
+          input(type="text", id="species", name="species", required)
+        .form-group
+          label(for="bio") Bio:
+          textarea(id="bio", name="bio", rows="4")
+        // New form field for the 'dog' property, which is required by HubSpot
+        .form-group
+          label(for="dog") Dog (Required):
+          input(type="text", id="dog", name="dog", required)
+        button(type="submit") Create Custom Object Record
