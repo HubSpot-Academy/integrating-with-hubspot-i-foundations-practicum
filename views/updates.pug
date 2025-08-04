@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= "Update Custom Object Form | Integrating With HubSpot I Practicum"
+  body
+    a(href="/") Return to the homepage
+    h1 Create a New CRM Record
+    form(action="/update-cobj" method="POST")
+      div
+        label(for="name") Name:
+        input(type="text" name="name" required)
+      div
+        label(for="breed") Breed:
+        input(type="text" name="breed" required)
+      div
+        label(for="age") Age:
+        input(type="text" name="age" required)
+      button(type="submit") Create Record
