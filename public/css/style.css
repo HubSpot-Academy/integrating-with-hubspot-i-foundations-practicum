@@ -1,58 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+/* Table styles for homepage */
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin: 1rem auto;
+  box-shadow: 3px 2px 6px lightgrey;
 }
 
-h1 {
-    margin: 1rem;
+th,
+td {
+  border: 1px solid lightgrey;
+  padding: 0.75rem;
+  text-align: left;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+th {
+  background-color: pink;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+td {
+  font-size: 0.95rem;
 }
 
-.card__email {
-    font-size: 1rem;
+a.table-link {
+  display: inline-block;
+  margin: 1rem;
+  text-decoration: none;
+  background-color: pink;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: black;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px lightgrey;
 }
 
+a.table-link:hover {
+  background-color: #ffb6c1;
+}
+
+/* Form styling for update-cobj page */
 .form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: solid 1px lightgrey;
+  border-radius: 10px;
+  box-shadow: 3px 2px 6px lightgrey;
+  background-color: #fff;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
+.form-wrapper h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-input[type="text"] {
-    padding: .25rem;
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+.form-group label {
+  flex: 0 0 120px;
+  font-weight: bold;
+}
+
+.form-group input {
+  flex: 1;
+  padding: 0.4rem;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  background-color: pink;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px lightgrey;
+  display: block;
+  margin: 1rem auto 0;
+}
+
+button[type="submit"]:hover {
+  background-color: #ffb6c1;
+}
+
+a.return-link {
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
