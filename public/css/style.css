@@ -56,3 +56,11 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 2rem; }
+h1 { margin-bottom: 1rem; }
+a.button { display:inline-block; padding:.5rem 1rem; border:1px solid #ccc; border-radius:.5rem; text-decoration:none; }
+table { width:100%; border-collapse:collapse; margin-top:1rem; }
+th, td { border:1px solid #ddd; padding:.5rem; text-align:left; }
+.field { margin-bottom:1rem; }
+input { width:100%; padding:.5rem; box-sizing:border-box; }
+button { padding:.5rem 1rem; }
