@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a.btn(href="/") Return to the homepage
+    h1= title
+    form(method="POST", action="/update-cobj")
+      .form-field
+        label(for="name") Name (required)
+        input(type="text", id="name", name="name", required)
+      .form-field
+        label(for="creator") Creator
+        input(type="text", id="creator", name="creator")
+      .form-field
+        label(for="genre") Genre
+        input(type="text", id="genre", name="genre")
+      button.btn(type="submit") Create Record

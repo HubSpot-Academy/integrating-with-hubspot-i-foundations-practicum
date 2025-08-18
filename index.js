@@ -1,71 +1,88 @@
+// index.js
+require('dotenv').config();
+
 const express = require('express');
+const path = require('path');
 const axios = require('axios');
+
 const app = express();
 
+// --- ENV / Config ---
+const PORT = process.env.PORT;
+const HUBSPOT_TOKEN = process.env.HUBSPOT_PRIVATE_APP_TOKEN;   
+const CUSTOM_OBJECT_TYPE = process.env.HUBSPOT_CUSTOM_OBJECT_TYPE;
+const PROPERTIES = (process.env.HUBSPOT_PROPERTIES)
+  .split(',')
+  .map(function (p) { return p.trim(); })
+  .filter(Boolean);
+
+// --- Express setup ---
 app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
-
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
+// --- Axios for HubSpot ---
+const hubspot = axios.create({
+  baseURL: 'https://api.hubapi.com',
+  headers: {
+    Authorization: `Bearer ${HUBSPOT_TOKEN}`,
+    'Content-Type': 'application/json'
+  },
+  timeout: 15000
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
+// -------------------- ROUTES --------------------
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
+// GET "/" — homepage list (renders views/homepage.pug)
+// homepage.pug expects { records, error? }
+app.get('/', async function (req, res) {
+  try {
+    var params = new URLSearchParams();
+    PROPERTIES.forEach(function (p) { params.append('properties', p); });
+    params.append('limit', '100');
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
+    var url = '/crm/v3/objects/' + encodeURIComponent(CUSTOM_OBJECT_TYPE) + '?' + params.toString();
+    var resp = await hubspot.get(url);
 
+    res.render('homepage', { records: resp.data.results || [], error: null });
+  } catch (err) {
+    console.error(err?.response?.data || err.message);
+    res.render('homepage', { records: [], error: 'Failed to load records.' });
+  }
 });
-*/
 
+// GET "/update-cobj" — render the HTML form (views/updates.pug)
+app.get('/update-cobj', function (req, res) {
+  res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
+});
 
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+// POST "/update-cobj" — create a PC Game then redirect back to "/"
+app.post('/update-cobj', async function (req, res) {
+  try {
+    // only include known props from the form
+    var props = {};
+    PROPERTIES.forEach(function (p) {
+      if (req.body[p] != null && req.body[p] !== '') props[p] = req.body[p];
+    });
+
+    // require Name (internal name: "name")
+    if (!props.name || !props.name.trim()) {
+      return res.status(400).send('Name is required.');
+    }
+
+    await hubspot.post('/crm/v3/objects/' + encodeURIComponent(CUSTOM_OBJECT_TYPE), {
+      properties: props
+    });
+
+    res.redirect('/');
+  } catch (err) {
+    console.error(err?.response?.data || err.message);
+    res.status(500).send('Failed to create record.');
+  }
+});
+
+// --- Start server ---
+app.listen(PORT, function () {
+  console.log('Server running on http://localhost:' + PORT);
+});
