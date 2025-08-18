@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title Homepage | Integrating With HubSpot I Practicum
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a.btn(href="/update-cobj") Add to this table
+    h1 PC Games
+
+    if error
+      p(style="color:red")= error
+
+    if records && records.length
+      table
+        thead
+          tr
+            th Name
+            th Creator
+            th Genre
+        tbody
+          each rec in records
+            - var nameVal = (rec && rec.properties && rec.properties.name) ? rec.properties.name : '';
+            - var creatorVal = (rec && rec.properties && rec.properties.creator) ? rec.properties.creator : '';
+            - var genreVal = (rec && rec.properties && rec.properties.genre) ? rec.properties.genre : '';
+            tr
+              td= nameVal
+              td= creatorVal
+              td= genreVal
+    else
+      p No records yet. Click "Add to this table" to create one.
