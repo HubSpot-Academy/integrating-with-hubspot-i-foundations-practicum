@@ -1,0 +1,27 @@
+//- views/homepage.pug
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    header
+      h1 Contact List
+      a(href="/update-cobj") Add to this table
+
+    if contacts && contacts.length
+      table
+        thead
+          tr
+            th First name
+            th Last name
+            th Email
+        tbody
+          each c in contacts
+            tr
+              td #{c.properties?.firstname || ''}
+              td #{c.properties?.lastname || ''}
+              td #{c.properties?.email || ''}
+    else
+      p No contacts found yet. Try adding one!
