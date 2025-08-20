@@ -1,0 +1,26 @@
+//- views/updates.pug
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    header
+      a(href="/") Return to the homepage
+      h1 Add / Update Contact
+
+    form(method="POST", action="/update-cobj")
+      .field
+        label(for="firstname") First name
+        input(type="text", name="firstname", id="firstname", required)
+
+      .field
+        label(for="lastname") Last name
+        input(type="text", name="lastname", id="lastname", required)
+
+      .field
+        label(for="email") Email
+        input(type="email", name="email", id="email", required)
+
+      button(type="submit") Save
