@@ -1,4 +1,3 @@
-// index.js
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
@@ -12,7 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// NO subas el token al repo. Cárgalo desde .env
+
 const PRIVATE_APP_ACCESS = process.env.TOKEN_HUBSPOT;
 
 // ---------- ROUTE 1: Homepage (lista contactos) ----------
