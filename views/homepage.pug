@@ -1,0 +1,27 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Cars
+        a(href="/update-cobj") Add to this table
+        table
+            thead
+                tr
+                    th Name
+                    th VIN
+                    th Year
+                    th Make
+
+            tbody
+
+                each car in data
+
+                    tr
+                        td= `${car.properties.name}`
+                        td= `${car.properties.vin}`
+                        td= `${car.properties.year}`
+                        td= `${car.properties.make}`
+                        
