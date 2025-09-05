@@ -1,19 +1,68 @@
 doctype html
-html
+html(lang="en")
   head
-    title= title
+    meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
+    title= title
     link(rel="stylesheet", href="/css/style.css")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap", rel="stylesheet")
   body
-    header
-      h1 Contact List
-      a(href="/update-cobj") Add to this table
+    header.app-header
+      .container
+        .titlebar
+          h1.app-title Contacts
+          a.btn.btn-primary(href="/update-cobj") + Add contact
 
-    if contacts && contacts.length
-      .cards
-        each c in contacts
-          .card
-            h2.card__name #{(c.properties && c.properties.firstname) || ''} #{(c.properties && c.properties.lastname) || ''}
-            p.card__email #{(c.properties && c.properties.email) || ''}
-    else
-      p No contacts found yet. Try adding one!
+    main.container
+      if contacts && contacts.length
+        .card
+          .card-header
+            h2.card-title List
+            form(method="GET", action="/", class="inline-form")
+              // Mantén after/trail si ya vienen en la URL
+              if typeof nextAfter !== 'undefined' && nextAfter
+                input(type="hidden", name="after", value=nextAfter)
+                input(type="hidden", name="trail", value=nextTrail)
+              label(for="limit") Per page
+              select#limit(name="limit", onchange="this.form.submit()")
+                - const opts=[25,50,100];
+                each o in opts
+                  option(value=o selected=(+limit===o))= o
+          .table-wrap
+            table.table
+              thead
+                tr
+                  th First name
+                  th Last name
+                  th Email
+              tbody
+                each c in contacts
+                  tr
+                    td= c.firstname || '–'
+                    td= c.lastname || '–'
+                    td
+                      if c.email
+                        span.badge= c.email
+                      else
+                        span.muted — 
+          .card-footer.pagination
+            if prevAfter
+              a.btn(href=`/?limit=${limit}&after=${prevAfter}&trail=${prevTrail}`) ← Prev
+            else
+              button.btn.secondary(disabled) ← Prev
+            if nextAfter
+              a.btn.btn-primary(href=`/?limit=${limit}&after=${nextAfter}&trail=${nextTrail}`) Next →
+            else
+              button.btn.secondary(disabled) Next →
+
+      else
+        .empty
+          h2 No contacts found
+          p Try adding one to get started.
+          a.btn.btn-primary(href="/update-cobj") Create your first contact
+
+    footer.app-footer
+      .container
+        p.muted Practicum · Node + HubSpot CRM API

@@ -1,26 +1,35 @@
-//- views/updates.pug
 doctype html
-html
+html(lang="en")
   head
-    title= title
+    meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
+    title= title
     link(rel="stylesheet", href="/css/style.css")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap", rel="stylesheet")
   body
-    header
-      a(href="/") Return to the homepage
-      h1 Add / Update Contact
+    header.app-header
+      .container
+        .titlebar
+          h1.app-title Add / Update Contact
+          a.btn(href="/") ← Back
 
-    form(method="POST", action="/update-cobj")
-      .field
-        label(for="firstname") First name
-        input(type="text", name="firstname", id="firstname", required)
+    main.container
+      .form-card
+        form(method="POST", action="/update-cobj", novalidate)
+          .form-row
+            label.form-label(for="firstname") First name
+            input.form-input#firstname(type="text", name="firstname", required, autocomplete="given-name", placeholder="Jane", autofocus)
+            .hint Optional if your data model allows it.
+          .form-row
+            label.form-label(for="lastname") Last name
+            input.form-input#lastname(type="text", name="lastname", required, autocomplete="family-name", placeholder="Doe")
+          .form-row
+            label.form-label(for="email") Email
+            input.form-input#email(type="email", name="email", required, autocomplete="email", placeholder="jane.doe@example.com", inputmode="email")
+            .hint We'll never share your email.
 
-      .field
-        label(for="lastname") Last name
-        input(type="text", name="lastname", id="lastname", required)
-
-      .field
-        label(for="email") Email
-        input(type="email", name="email", id="email", required)
-
-      button(type="submit") Save
+          .btn-row
+            a.btn(href="/") Cancel
+            button.btn.btn-primary(type="submit") Save
