@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Homepage
+  body
+    a(href='/update-cobj') Add to this table
+    h1 Custom Objects
+    table(border='1')
+      tr
+        th Character Name
+        th Character Type
+        th Price
+      each record in records
+        tr
+          td= record.properties.character_name
+          td= record.properties.character_type
+          td= record.properties.price
