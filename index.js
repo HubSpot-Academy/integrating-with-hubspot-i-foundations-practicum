@@ -22,7 +22,7 @@ app.get('/', async (req, res) => {
     try {
         const resp = await axios.get(videoGames, { headers });
         const data = resp.data.results;
-        res.render('homepage', { title: 'Home Video Games Table | Integrating With HubSpot I Practicum', data });      
+        res.render('homepage', { title: 'Home Video Games Table | Integrating With HubSpot I Practicum', data });
     } catch (error) {
         console.error(error);
     }
@@ -42,21 +42,27 @@ app.get('/update-cobj', async (req, res) => {
 
 app.post('/update-cobj', async (req, res) => {
     const videoGameName = req.body.videoGameName;
-    const update = {
-            properties: {
-                "name": videoGameName,
-                "release_date": req.body.releaseDate,
-                "price": req.body.price
+    const upsert = {
+        inputs: [
+            {
+                properties: {
+                    "name": videoGameName,
+                    "release_date": req.body.releaseDate,
+                    "price": req.body.price
+                },
+                "idProperty": "name",
+                "id": videoGameName
             }
-        };
-        const updateVideoGame = `https://api.hubapi.com/crm/v3/objects/2-49888286/${videoGameName}?idProperty=name`;
-        const headers = {
-            'Authorization': `Bearer ${PRIVATE_APP_ACCESS}`,
-            'Content-Type': 'application/json'
-        };
+        ]
+    };
+    const updateVideoGame = `https://api.hubapi.com/crm/v3/objects/2-49888286/batch/upsert`;
+    const headers = {
+        'Authorization': `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
 
     try {
-        await axios.patch(updateVideoGame, update, { headers } );
+        await axios.post(updateVideoGame, upsert, { headers });
         res.redirect('/');
     } catch (error) {
         console.error(error);
