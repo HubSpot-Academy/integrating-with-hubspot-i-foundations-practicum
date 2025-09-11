@@ -10,6 +10,20 @@ h1 {
     margin: 1rem;
 }
 
+th {
+    background-color: lightblue;
+}
+
+a {
+    margin: 1rem;
+    display: inline-block;
+}
+
+table {
+    margin: 1rem;
+    margin-top: 0px;
+}
+
 .cards {
     display: flex;
     align-items: center;
