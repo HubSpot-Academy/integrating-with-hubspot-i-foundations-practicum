@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Update Custom Object
+    form(method='POST', action='/update-cobj')
+      label(for='name') Name:
+      input(type='text', name='name', required)
+      br
+      label(for='power') Power:
+      input(type='text', name='power', required)
+      br
+      label(for='team') Team:
+      input(type='text', name='team', required)
+      br
+      button(type='submit') Submit
+    br
+    a(href='/') Return to the homepage
