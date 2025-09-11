@@ -17,3 +17,7 @@ html(lang="en")
                 input(type="number" name="price" min="0.01" step="0.01" required)
                 input(type="submit" name="Submit")
         a(href="/") Return to the homepage
+        if alert 
+            script.
+                alert("Entered updated video game name already exists. Please choose a different name.");
+                window.location.href = '/update-cobj';

@@ -32,7 +32,7 @@ app.get('/', async (req, res) => {
 
 app.get('/update-cobj', async (req, res) => {
     try {
-        res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
+        res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum', alert: req.query.alert });
     } catch (error) {
         console.error(error);
     }
@@ -66,7 +66,12 @@ app.post('/update-cobj', async (req, res) => {
         await axios.post(updateVideoGame, upsert, { headers });
         res.redirect('/');
     } catch (error) {
-        console.error(error);
+        if (error.response && error.response.status === 400) {
+            res.redirect('/update-cobj?alert=updated+video+game+name+exists');
+        }
+        else {
+            console.error(error);
+        }
     }
 });
 
