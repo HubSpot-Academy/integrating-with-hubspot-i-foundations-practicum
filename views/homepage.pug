@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title Custom Object Table
+    style.
+      table {
+        border-collapse: collapse;
+      }
+      
+      th {
+        background-color: #ffc0cb;
+        color: black;
+      }
+      
+      td, th {
+        border: 1px solid black;
+        padding: 5px;
+      }
+  body
+    h1 Custom Object Table
+    
+    a(href="/update-cobj") Add/Update this table
+    
+    if data.length
+      table(border="1" cellpadding="5")
+        thead
+          tr
+            each prop in properties
+              th= prop
+        tbody
+          each record in data
+            tr
+              each prop in properties
+                td= record.properties[prop] || '-'
+    else
+      p No records found.

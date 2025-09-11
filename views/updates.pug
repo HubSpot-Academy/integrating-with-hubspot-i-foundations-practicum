@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+
+    form(action="/update-cobj" method="POST")
+      each prop in properties
+        div
+          label(for=prop)= prop
+          if prop === 'project_start_date' || prop === 'project_end_date'
+            input(type="text" name=prop id=prop required placeholder="YYYY-MM-DD")
+            span(style="margin-left:10px; font-size:12px; color:gray") Format: YYYY-MM-DD
+          else
+            input(type="text" name=prop id=prop required)
+      button(type="submit") Create Record
+
+    br
+    a(href="/") Return to the homepage
+
+
