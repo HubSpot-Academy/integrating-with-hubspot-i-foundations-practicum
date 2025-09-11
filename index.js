@@ -41,13 +41,13 @@ app.get('/update-cobj', async (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 app.post('/update-cobj', async (req, res) => {
-    const videoGameName = req.body.videoGameName;
-    const updatedVideoGameName = req.body.updatedVideoGameName;
+    const videoGameName = req.body.videoGameName.trim();
+    const updatedVideoGameName = req.body.updatedVideoGameName.trim();
     const upsert = {
         inputs: [
             {
                 properties: {
-                    "name": updatedVideoGameName && updatedVideoGameName.trim() !== '' ? updatedVideoGameName : videoGameName,
+                    "name": updatedVideoGameName && updatedVideoGameName !== '' ? updatedVideoGameName : videoGameName,
                     "release_date": req.body.releaseDate,
                     "price": req.body.price
                 },
