@@ -10,6 +10,10 @@ h1 {
     margin: 1rem;
 }
 
+input.text-input {
+    width: 350px;
+}
+
 th {
     background-color: lightblue;
 }

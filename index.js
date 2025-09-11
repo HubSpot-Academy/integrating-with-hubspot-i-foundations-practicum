@@ -42,11 +42,12 @@ app.get('/update-cobj', async (req, res) => {
 
 app.post('/update-cobj', async (req, res) => {
     const videoGameName = req.body.videoGameName;
+    const updatedVideoGameName = req.body.updatedVideoGameName;
     const upsert = {
         inputs: [
             {
                 properties: {
-                    "name": videoGameName,
+                    "name": updatedVideoGameName && updatedVideoGameName.trim() !== '' ? updatedVideoGameName : videoGameName,
                     "release_date": req.body.releaseDate,
                     "price": req.body.price
                 },

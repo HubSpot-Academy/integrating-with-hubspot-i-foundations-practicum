@@ -8,7 +8,9 @@ html(lang="en")
         .form-wrapper
             form(method="POST")
                 label(for="videoGameName") Video Game Name
-                input(type="text" name="videoGameName" required)
+                input.text-input(type="text" name="videoGameName" required)
+                label(for="updatedVideoGameName") Updated Video Game Name
+                input.text-input(type="text" name="updatedVideoGameName" placeholder="Leave blank for new entry or not renaming")
                 label(for="releaseDate") Release Date
                 input(type="date" name="releaseDate" required)
                 label(for="price") Price (USD)
