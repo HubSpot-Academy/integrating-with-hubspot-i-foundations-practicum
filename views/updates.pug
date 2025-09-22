@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    form(action="/update-cobj" method="POST")
+      div
+        label First Name:
+        input(type="text" name="name" required)
+      div
+        label Game Name:
+        input(type="text" name="game_name" required)
+      div
+        label Publisher:
+        input(type="text" name="publisher" required)
+      div
+        label Price:
+        input(type="number" name="price" min="0" step="1" required)
+      button(type="submit") Submit
+    p
+      a(href="/") Return to the homepage

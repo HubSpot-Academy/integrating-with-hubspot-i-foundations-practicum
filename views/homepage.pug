@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Contact Table with Games
+    a(href="/update-cobj") Add/Update this table
+    if contacts.length
+      table(border="1" cellpadding="8")
+        tr
+          th Name
+          th Game Name
+          th Publisher
+          th Price
+        each c in contacts
+          tr
+            td= (c.properties && c.properties.firstname) || ""
+            td= (c.properties && c.properties.game_name) || ""
+            td= (c.properties && c.properties.publisher) || ""
+            td= (c.properties && c.properties.price) || ""
+    else
+      p No contacts yet. Click the link above to add one.
