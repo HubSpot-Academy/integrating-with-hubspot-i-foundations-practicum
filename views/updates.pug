@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .container
+      h1= title
+      form(action="/update-cobj", method="POST")
+        label(for="name") Name:
+        input(type="text", name="name", required=true)
+
+        label(for="bio") Bio:
+        textarea(name="bio", required=true)
+
+        label(for="age") Age:
+        input(type="number", name="age", min="0", required=true)
+
+        button(type="submit") Submit
+
+      a(href="/") ← Return to the homepage

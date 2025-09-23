@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+
+    a(href="/update-cobj") Add to this table
+    br
+    br
+
+    if data.length
+      table(border="1", cellpadding="10", cellspacing="0")
+        thead
+          tr
+            th Name
+            th Bio
+            th Age
+        tbody
+          each event in data
+            tr
+              td= event.properties.name
+              td= event.properties.bio
+              td= event.properties.age
+    else
+      p No events found.
