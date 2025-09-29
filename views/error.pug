@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .container.mt-4
+    .row.justify-content-center
+      .col-md-8
+        .alert.alert-danger
+          h4.alert-heading Error
+          p= message || 'An error occurred'
+          if error && error.message
+            hr
+            p.mb-0
+              strong Details: 
+              = error.message
+        .mt-3
+          a.btn.btn-primary(href='/') Back to Home

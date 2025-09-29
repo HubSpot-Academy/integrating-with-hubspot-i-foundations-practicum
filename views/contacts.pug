@@ -1,15 +1,66 @@
-//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+extends layout
 
-//- doctype html
-//- html 
-//-     head 
-//-         title= `${title}`
-//-         meta(name="viewport" content="width=device-width, initial-scale=1")
-//-         link(rel="stylesheet", href="/css/style.css")
-//-     body    
-//-         h1 Contacts
-//-         .cards 
-//-             each contact in data
-//-                 .card 
-//-                     h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-//-                     p.card__email #{contact.properties.email}
+block content
+  .container.mt-4
+    .row
+      .col-12
+        .d-flex.justify-content-between.align-items-center.mb-4
+          h1.mb-0 Contact Directory
+          a.btn.btn-success(href='/update-cobj') 
+            i.bi.bi-plus-circle.me-2
+            | Add New Contact
+    
+    .row
+      .col-12
+        if contacts && contacts.length > 0
+          .card.shadow-sm
+            .card-header.bg-primary.text-white
+              h5.mb-0 All Contacts (#{contacts.length})
+            .card-body.p-0
+              .table-responsive
+                table.table.table-hover.mb-0
+                  thead.table-light
+                    tr
+                      th.px-4.py-3 Name
+                      th.px-4.py-3 Email
+                      th.px-4.py-3 Phone
+                      th.px-4.py-3 Created Date
+                      th.px-4.py-3 Actions
+                  tbody
+                    each contact in contacts
+                      tr
+                        td.px-4.py-3
+                          .d-flex.align-items-center
+                            .avatar.bg-primary.text-white.rounded-circle.me-3.d-flex.align-items-center.justify-content-center(style="width: 40px; height: 40px; font-weight: bold;")
+                              = (contact.properties.firstname || 'U').charAt(0).toUpperCase()
+                            div
+                              .fw-bold= contact.properties.firstname || 'Unknown'
+                              if contact.properties.lastname
+                                small.text-muted= contact.properties.lastname
+                        td.px-4.py-3
+                          if contact.properties.email
+                            a.text-decoration-none(href=`mailto:${contact.properties.email}`)= contact.properties.email
+                          else
+                            span.text-muted No email
+                        td.px-4.py-3
+                          if contact.properties.phone
+                            a.text-decoration-none(href=`tel:${contact.properties.phone}`)= contact.properties.phone
+                          else
+                            span.text-muted No phone
+                        td.px-4.py-3
+                          small.text-muted= new Date(contact.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+                        td.px-4.py-3
+                          .btn-group(role='group')
+                            button.btn.btn-sm.btn-outline-primary(type='button', title='View Details')
+                              i.bi.bi-eye
+                            button.btn.btn-sm.btn-outline-secondary(type='button', title='Edit')
+                              i.bi.bi-pencil
+        else
+          .text-center.py-5
+            .mb-4
+              i.bi.bi-people.display-1.text-muted
+            h3.text-muted No Contacts Found
+            p.text-muted.mb-4 Get started by adding your first contact to the system.
+            a.btn.btn-primary.btn-lg(href='/update-cobj')
+              i.bi.bi-plus-circle.me-2
+              | Add Your First Contact

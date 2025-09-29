@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .container.mt-4
+    h1.mb-4 CRM Contacts
+    a.btn.btn-primary.mb-3(href='/update-cobj') Add to this table
+    
+    if contacts && contacts.length > 0
+      table.table.table-striped.table-hover
+        thead
+          tr
+            th Name
+            th Email
+            th Phone
+            th Created
+        tbody
+          each contact in contacts
+            tr
+              td= contact.properties.firstname || 'N/A'
+              td= contact.properties.email || 'N/A'
+              td= contact.properties.phone || 'N/A'
+              td= new Date(contact.createdAt).toLocaleDateString()
+    else
+      .alert.alert-info No contacts found. 
+        a(href='/update-cobj') Add your first contact
+        |.

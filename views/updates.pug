@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 Update Custom Object
+  form(method='POST', action='/update-cobj')
+    div.form-group
+      label(for='name') Name:
+      input#name.form-control(type='text', name='name', required)
+    div.form-group
+      label(for='email') Email:
+      input#email.form-control(type='email', name='email', required)
+    div.form-group
+      label(for='phone') Phone:
+      input#phone.form-control(type='tel', name='phone', required)
+    button.btn.btn-primary(type='submit') Submit
+  br
+  a(href='/') ← Return to the homepage
