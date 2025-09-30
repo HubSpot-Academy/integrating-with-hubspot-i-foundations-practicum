@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Custom Objects List
+    p
+      a(href="/update-cobj") Add to this table
+    table(border="1")
+      thead
+        tr
+          th Name
+          th Brand
+          th Color
+      tbody
+        each obj in data
+          tr
+            td= obj.properties.name
+            td= obj.properties.brand
+            td= obj.properties.color
