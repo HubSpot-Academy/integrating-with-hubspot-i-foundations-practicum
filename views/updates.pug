@@ -1,0 +1,18 @@
+doctype html
+html 
+    head 
+        title Add Record
+    body    
+        h1 Add a custom Object Record
+        form(action='/update-cobj' method="POST")
+            label Firstname:
+            input(type='text' name='firstname')
+            br
+            label Lastname:
+            input(type='text' name='lastname')
+            br
+            label Email:
+            input(type='email' name='email')
+            br
+            button(type='submit') Submit 
+        a(href='/') Return to homepage

@@ -1,0 +1,15 @@
+doctype html
+html 
+    head 
+        title Custom Object Table
+        
+    body    
+        h1 Custom Object Records
+        a(href="/update-cobj") Add to this table
+        div(class='cards')
+            each contact in data
+                div(class='card')
+                    p(class='label') ID: #{contact.id}
+                    p Firstname: #{contact.properties.firstname}
+                    p Lastname: #{contact.properties.lastname}
+                    p Email: #{contact.properties.email}
