@@ -39,33 +39,44 @@ app.get("/", async (req, res) => {
 
 // * Code for Route 2 goes here
 app.get("/update-cobj", async (req, res) => {
-  res.render("updates");
+  const { id, firstname, lastname, email } = req.query;
+  res.render("updates", { id, firstname, lastname, email });
 });
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-app.post("/update-cobj", async (req, res) => {
+app.post("/add-cobj", async (req, res) => {
+  const { recordId, ...properties } = req.body;
+
+  const hubspotRequest = {
+    properties,
+  };
+
   try {
-    await axios.patch(
-      `https://api.hubapi.com/crm/v3/objects/contacts/${req.query.email}?idProperty=email`,
-      {
-        properties: {
-          favorite_book: req.body.newVal,
-        },
-      },
-      {
+    if (recordId) {
+      const updateUrl = `${HUBSPOT_API_URL}/${recordId}`;
+      await axios.patch(updateUrl, hubspotRequest, {
         headers: {
           Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
           "Content-Type": "application/json",
         },
-      }
-    );
-    res.redirect("");
+      });
+    } else {
+      await axios.post(HUBSPOT_API_URL, hubspotRequest, {
+        headers: {
+          Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+          "Content-Type": "application/json",
+        },
+      });
+    }
+    res.redirect("/");
   } catch (err) {
     console.error(err);
+    res.status(500).send("An error occurred while communicating with HubSpot.");
   }
 });
+
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 
 

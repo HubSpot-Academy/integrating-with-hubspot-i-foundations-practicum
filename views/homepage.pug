@@ -1,15 +1,36 @@
 doctype html
-html 
-    head 
-        title Custom Object Table
-        
-    body    
-        h1 Custom Object Records
-        a(href="/update-cobj") Add to this table
-        div(class='cards')
-            each contact in data
-                div(class='card')
-                    p(class='label') ID: #{contact.id}
-                    p Firstname: #{contact.properties.firstname}
-                    p Lastname: #{contact.properties.lastname}
-                    p Email: #{contact.properties.email}
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Custom Object Table
+    script(src="https://cdn.tailwindcss.com")
+  body.bg-gray-100.font-sans.p-8
+    div.max-w-7xl.mx-auto
+      div.flex.justify-between.items-center.mb-8
+        h1.text-3xl.font-bold.text-gray-800 Custom Object Records
+        a(href="/update-cobj", class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md shadow-sm transition duration-300 ease-in-out") Add New Record
+      
+      //- Responsive grid for the cards
+      div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6")
+        //- Loop through each record to display it as a card
+        each contact in data
+          div(class="bg-white rounded-lg shadow-md p-6 border border-gray-200 flex flex-col")
+            div.flex-grow
+              div.mb-4
+                p.text-xs.text-gray-500.font-semibold.uppercase ID
+                p.text-gray-800 #{contact.id}
+              div.space-y-3
+                div
+                  p.text-sm.text-gray-500 First Name
+                  p.text-lg.font-medium.text-gray-900 #{contact.properties.firstname}
+                div
+                  p.text-sm.text-gray-500 Last Name
+                  p.text-lg.font-medium.text-gray-900 #{contact.properties.lastname}
+                div
+                  p.text-sm.text-gray-500 Email
+                  p.text-gray-700 #{contact.properties.email}
+            //- Edit link added here
+            div(class="mt-6 pt-4 border-t border-gray-200 text-right")
+              a(href=`/update-cobj?id=${contact.id}&firstname=${contact.properties.firstname}&lastname=${contact.properties.lastname}&email=${contact.properties.email}`, class="text-indigo-600 hover:text-indigo-800 font-medium text-sm") Edit Record
+
