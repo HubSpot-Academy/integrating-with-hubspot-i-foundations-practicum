@@ -3,7 +3,6 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
-
 app.set("view engine", "pug");
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
@@ -12,7 +11,6 @@ app.use(express.json());
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
 const PRIVATE_APP_ACCESS = process.env.HUBSPOT_ACCESS_TOKKEN;
 const PRIVATE_CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET;
-console.log(PRIVATE_CLIENT_SECRET, PRIVATE_APP_ACCESS);
 const HUBSPOT_API_URL = "https://api.hubspot.com/crm/v3/objects/contacts";
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
@@ -48,11 +46,9 @@ app.get("/update-cobj", async (req, res) => {
 // * Code for Route 3 goes here
 app.post("/add-cobj", async (req, res) => {
   const { recordId, ...properties } = req.body;
-
   const hubspotRequest = {
     properties,
   };
-
   try {
     if (recordId) {
       const updateUrl = `${HUBSPOT_API_URL}/${recordId}`;
