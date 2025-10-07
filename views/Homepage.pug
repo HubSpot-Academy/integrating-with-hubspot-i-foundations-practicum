@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+    head
+        title= `${title}`
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        
+    body 
+        h1 Redes Sociales
+        table(border="1")
+                    tr
+                        th NAME
+                        th YEAR OF CREATION
+                        th CEO
+                    each redes_sociales in data
+                        tr
+                            td #{redes_sociales.properties.nombre_red}
+                            td #{redes_sociales.properties.anio_creacion}  
+                            td #{redes_sociales.properties.ceo}
+        a(href="http://localhost:3000/update-cobj") Add to this table
