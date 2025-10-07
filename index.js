@@ -10,25 +10,62 @@ app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
 const PRIVATE_APP_ACCESS = process.env.HUBSPOT_ACCESS_TOKKEN;
+const CUSTOM_OBJECT_ID = "p_songs";
+const SONG_TO_CONTACT_ASSOCIATION_ID = 22;
+
 const PRIVATE_CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET;
-const HUBSPOT_API_URL = "https://api.hubspot.com/crm/v3/objects/contacts";
+const HUBSPOT_API_URL = "https://api.hubapi.com/crm/v3/";
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
 app.get("/", async (req, res) => {
+  const contactsEndpoint =
+    "https://api.hubapi.com/crm/v3/objects/contacts?properties=firstname,lastname,email";
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    "Content-Type": "application/json",
+  };
+
   try {
-    const response = await axios.get(HUBSPOT_API_URL, {
-      headers: {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        "Content-Type": "application/json",
-      },
+    const contactsResponse = await axios.get(contactsEndpoint, { headers });
+    const contacts = contactsResponse.data.results;
+
+    const contactsWithSongsPromises = contacts.map(async (contact) => {
+      const contactId = contact.id;
+      const associationsEndpoint = `https://api.hubapi.com/crm/v3/objects/contacts/${contactId}/associations/${CUSTOM_OBJECT_ID}`;
+
+      const associationsResponse = await axios.get(associationsEndpoint, {
+        headers,
+      });
+      const songAssociations = associationsResponse.data.results;
+
+      let songs = [];
+      if (songAssociations && songAssociations.length > 0) {
+        const songDetailPromises = songAssociations.map((association) => {
+          const songId = association.id;
+          const songEndpoint = `https://api.hubapi.com/crm/v3/objects/${CUSTOM_OBJECT_ID}/${songId}?properties=name,genre,singer`;
+          return axios.get(songEndpoint, { headers });
+        });
+
+        const songDetailResponses = await Promise.all(songDetailPromises);
+        songs = songDetailResponses.map((response) => response.data);
+      }
+
+      return {
+        ...contact,
+        songs: songs.length > 0 ? [songs[0]] : [],
+      };
     });
-    const data = response.data.results;
-    console.log(data);
-    res.render("homepage", { data });
+
+    const contactsWithSongs = await Promise.all(contactsWithSongsPromises);
+
+    res.render("homepage", { data: contactsWithSongs });
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching data from HubSpot:", error.message);
+    if (error.response) {
+      console.error("HubSpot Response:", error.response.data);
+    }
     res.status(500).send("Error fetching data from HubSpot");
   }
 });
@@ -37,38 +74,71 @@ app.get("/", async (req, res) => {
 
 // * Code for Route 2 goes here
 app.get("/update-cobj", async (req, res) => {
-  const { id, firstname, lastname, email } = req.query;
-  res.render("updates", { id, firstname, lastname, email });
+  const { id, name, genre, singer, contactId } = req.query;
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    "Content-Type": "application/json",
+  };
+  const contactsEndpoint = `${HUBSPOT_API_URL}objects/contacts?properties=firstname,lastname`;
+
+  try {
+    // Fetch all contacts to populate the dropdown
+    const contactsResponse = await axios.get(contactsEndpoint, { headers });
+    const contacts = contactsResponse.data.results;
+
+    res.render("updates", { id, name, genre, singer, contacts, contactId });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Error fetching contacts from HubSpot");
+  }
 });
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
 app.post("/add-cobj", async (req, res) => {
-  const { recordId, ...properties } = req.body;
+  const HUBSPOT_API_URL_SONGS = `${HUBSPOT_API_URL}objects/${CUSTOM_OBJECT_ID}`;
+
+  const { recordId, contactId, ...properties } = req.body;
+
   const hubspotRequest = {
     properties,
   };
+
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+    "Content-Type": "application/json",
+  };
+
   try {
     if (recordId) {
-      const updateUrl = `${HUBSPOT_API_URL}/${recordId}`;
-      await axios.patch(updateUrl, hubspotRequest, {
-        headers: {
-          Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-          "Content-Type": "application/json",
-        },
-      });
+      // This is an update
+      const updateUrl = `${HUBSPOT_API_URL_SONGS}/${recordId}`;
+      await axios.patch(updateUrl, hubspotRequest, { headers });
     } else {
-      await axios.post(HUBSPOT_API_URL, hubspotRequest, {
-        headers: {
-          Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-          "Content-Type": "application/json",
-        },
-      });
+      // This is a create
+      const createResponse = await axios.post(
+        HUBSPOT_API_URL_SONGS,
+        hubspotRequest,
+        { headers }
+      );
+      const newSongId = createResponse.data.id;
+
+      // If a contact was selected, create the association
+      if (contactId && newSongId) {
+        const associationUrl = `${HUBSPOT_API_URL}objects/${CUSTOM_OBJECT_ID}/${newSongId}/associations/contacts/${contactId}/${SONG_TO_CONTACT_ASSOCIATION_ID}`;
+        await axios.put(associationUrl, null, { headers });
+      }
     }
     res.redirect("/");
   } catch (err) {
-    console.error(err);
+    console.error(err.message);
+    if (err.response) {
+      console.error("HubSpot Error:", err.response.data);
+      if (err.response.context.ASSOCIATION_USER_CONFIG_LIMIT_EXCEEDED.length > 0){
+        res.send(503).send('Association limit has exceeded for this user.')
+      }
+    }
     res.status(500).send("An error occurred while communicating with HubSpot.");
   }
 });

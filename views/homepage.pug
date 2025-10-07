@@ -3,30 +3,45 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Custom Object Table
+    title Contacts and Their Songs
     script(src="https://cdn.tailwindcss.com")
   body.bg-gray-100.font-sans.p-8
     div.max-w-7xl.mx-auto
       div.flex.justify-between.items-center.mb-8
-        h1.text-3xl.font-bold.text-gray-800 Custom Object Records
-        a(href="/update-cobj", class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md shadow-sm transition duration-300 ease-in-out") Add New Record
-      div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6")
-        each contact in data
-          div(class="bg-white rounded-lg shadow-md p-6 border border-gray-200 flex flex-col")
-            div.flex-grow
-              div.mb-4
-                p.text-xs.text-gray-500.font-semibold.uppercase ID
-                p.text-gray-800 #{contact.id}
-              div.space-y-3
+        h1.text-3xl.font-bold.text-gray-800 Contacts & Songs
+        a(href="/update-cobj", class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md shadow-sm transition duration-300 ease-in-out") Add a New Song
+      
+      div(class="space-y-8")
+        if data && data.length
+          each contact in data
+            div(class="bg-white rounded-lg shadow-md border border-gray-200")
+              div(class="p-6 border-b border-gray-200 flex justify-between items-center")
                 div
-                  p.text-sm.text-gray-500 First Name
-                  p.text-lg.font-medium.text-gray-900 #{contact.properties.firstname}
-                div
-                  p.text-sm.text-gray-500 Last Name
-                  p.text-lg.font-medium.text-gray-900 #{contact.properties.lastname}
-                div
-                  p.text-sm.text-gray-500 Email
-                  p.text-gray-700 #{contact.properties.email}
-            div(class="mt-6 pt-4 border-t border-gray-200 text-right")
-              a(href=`/update-cobj?id=${contact.id}&firstname=${contact.properties.firstname}&lastname=${contact.properties.lastname}&email=${contact.properties.email}`, class="text-indigo-600 hover:text-indigo-800 font-medium text-sm") Edit Record
+                  h2.text-2xl.font-bold.text-gray-900 #{contact.properties.firstname} #{contact.properties.lastname}
+                  p.text-md.text-gray-600 #{contact.properties.email}
+                a(href=`/update-cobj?contactId=${contact.id}`, class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-md text-sm") Add Song to this Contact
+              
+              div(class="p-6")
+                h3.text-lg.font-semibold.text-gray-800.mb-4 Associated Songs
+                if contact.songs && contact.songs.length
+                  div(class="grid grid-cols-1 md:grid-cols-2 gap-4")
+                    each song in contact.songs
+                      div(class="bg-gray-50 rounded-lg p-4 border border-gray-200 flex flex-col")
+                        div.flex-grow
+                          div.space-y-2
+                            div
+                              p.text-xs.text-gray-500 Song Name
+                              p.font-semibold.text-gray-800 #{song.properties.name}
+                            div
+                              p.text-xs.text-gray-500 Genre
+                              p.font-medium.text-gray-700 #{song.properties.genre}
+                            div
+                              p.text-xs.text-gray-500 Singer
+                              p.font-medium.text-gray-700 #{song.properties.singer}
+                        div(class="mt-4 pt-4 border-t border-gray-200 text-right")
+                          a(href=`/update-cobj?id=${song.id}&name=${song.properties.name}&genre=${song.properties.genre}&singer=${song.properties.singer}`, class="text-indigo-600 hover:text-indigo-800 font-medium text-sm") Edit Song
+                else
+                  p.text-gray-500 No songs associated with this contact.
+        else
+          p.text-gray-500.text-center No contacts found in your account.
 
