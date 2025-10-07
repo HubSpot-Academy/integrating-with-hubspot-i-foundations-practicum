@@ -1,16 +1,17 @@
 {
-    "name": "integrating-with-hubspot-i-foundations-practicum",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "HubSpot Academy learner",
-    "license": "ISC",
-    "dependencies": {
-        "axios": "^1.3.5",
-        "express": "^4.18.2",
-        "pug": "^3.0.2"
-    }
+  "name": "iwh-i-practicum-eu1-custom",
+  "version": "1.0.0",
+  "description": "IWH I Practicum app configured for EU1 test account and custom object id 2-192837072",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pug": "^3.0.3"
+  }
 }

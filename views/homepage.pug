@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .container
+      h1= title
+      p
+        a.btn(href="/update-cobj") Add to this table
+        |  
+        a.btn.secondary(href="https://app-eu1.hubspot.com/contacts/146990843/objects/2-192837072/views/all/list") View in HubSpot (EU1)
+      if error
+        p.notice.error #{error}
+      if records && records.length
+        table.table
+          thead
+            tr
+              each col in columns
+                th= col
+          tbody
+            each r in records
+              tr
+                each col in columns
+                  td= r[col] || ""
+      else
+        p.notice No records yet. Click "Add to this table" to create your first one.
+      .footer
+        p Return to the 
+          a(href="/") homepage

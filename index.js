@@ -1,71 +1,117 @@
-const express = require('express');
-const axios = require('axios');
+import express from "express";
+import dotenv from "dotenv";
+import axios from "axios";
+
+dotenv.config();
+
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
+const OBJECT_TYPE = process.env.HUBSPOT_CUSTOM_OBJECT_TYPE || "2-192837072"; // from user's URL
+let PROPERTY_LIST = (process.env.HUBSPOT_CUSTOM_PROPERTIES || "")
+  .split(",")
+  .map(s => s.trim())
+  .filter(Boolean);
+
+app.set("view engine", "pug");
+app.set("views", "./views");
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use("/css", express.static("./public/css"));
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
-
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
+const hs = axios.create({
+  baseURL: "https://api.hubapi.com",
+  headers: {
+    Authorization: `Bearer ${HUBSPOT_ACCESS_TOKEN}`,
+    "Content-Type": "application/json"
+  },
+  timeout: 15000
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
+function requireToken(req, res, next) {
+  if (!HUBSPOT_ACCESS_TOKEN) {
+    return res.status(500).send("Missing HUBSPOT_ACCESS_TOKEN in .env. Copy .env.example to .env and set your token.");
+  }
+  next();
+}
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
+// Fetch schema properties (string props) if PROPERTY_LIST not provided
+async function getDefaultProperties() {
+  try {
+    const { data } = await hs.get(`/crm/v3/schemas/${encodeURIComponent(OBJECT_TYPE)}`);
+    const props = (data?.properties || [])
+      .filter(p => p.type === "string")
+      .map(p => p.name);
+    const set = new Set(props);
+    const ordered = [];
+    if (set.has("name")) { ordered.push("name"); set.delete("name"); }
+    for (const p of props) if (p !== "name") ordered.push(p);
+    return ordered.slice(0, 5);
+  } catch (e) {
+    console.error("Failed to load schema, using fallback ['name']:", e.response?.data || e.message);
+    return ["name"];
+  }
+}
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
+async function ensureProperties() {
+  if (!PROPERTY_LIST.length) PROPERTY_LIST = await getDefaultProperties();
+  return PROPERTY_LIST;
+}
 
+/**
+ * Route 1: Homepage — list records as a table
+ */
+app.get("/", requireToken, async (req, res) => {
+  try {
+    const columns = await ensureProperties();
+    const { data } = await hs.get(`/crm/v3/objects/${encodeURIComponent(OBJECT_TYPE)}`, {
+      params: { properties: columns.join(",") }
+    });
+    const records = (data.results || []).map(row => {
+      const out = {};
+      for (const p of columns) out[p] = row.properties?.[p] ?? "";
+      return out;
+    });
+    res.render("homepage", { title: "Custom Object List | IWH I Practicum (EU1)", records, columns });
+  } catch (err) {
+    const msg = err?.response?.data?.message || err.message || "Unknown error";
+    res.status(500).render("homepage", {
+      title: "Custom Object List | IWH I Practicum (EU1)",
+      error: msg,
+      records: [],
+      columns: PROPERTY_LIST.length ? PROPERTY_LIST : ["name"]
+    });
+  }
 });
-*/
 
+/**
+ * Route 2: Render the form to create a record
+ */
+app.get("/update-cobj", requireToken, async (req, res) => {
+  const fields = await ensureProperties();
+  res.render("updates", {
+    title: "Update Custom Object Form | IWH I Practicum (EU1)",
+    fields
+  });
+});
 
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+/**
+ * Route 3: Handle form submission and create a record
+ */
+app.post("/update-cobj", requireToken, async (req, res) => {
+  try {
+    const fields = await ensureProperties();
+    const props = {};
+    for (const p of fields) {
+      if (req.body[p] != null && req.body[p] !== "") props[p] = req.body[p];
+    }
+    await hs.post(`/crm/v3/objects/${encodeURIComponent(OBJECT_TYPE)}`, { properties: props });
+    res.redirect("/");
+  } catch (err) {
+    const msg = err?.response?.data?.message || err.message || "Unknown error";
+    const fields = await ensureProperties();
+    res.status(500).render("updates", { title: "Update Custom Object Form | IWH I Practicum (EU1)", error: msg, fields });
+  }
+});
+
+app.listen(port, () => { console.log(`Server running on http://localhost:${port}`); });
