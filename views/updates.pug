@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= pageTitle
+  body
+    h1 Update Custom Object Form
+    a(href='/') Return to the homepage
+    form(action='/update-cobj' method='POST')
+      label(for='pokemon_name') Name:
+      input(type='text' name='pokemon_name' required)
+      br
+      label(for='pokemon_type') Type:
+      input(type='text' name='pokemon_type' required)
+      br
+      label(for='pokemon_description') Description:
+      input(type='text' name='pokemon_description')
+      br
+      button(type='submit') Add Pokémon

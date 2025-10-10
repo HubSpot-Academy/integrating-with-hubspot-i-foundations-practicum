@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Homepage
+  body
+    h1 Custom Object Records
+    a(href="/update-cobj") Add to this table
+    table(border="1")
+      thead
+        tr
+          th Pokemon Name
+          th Pokemon Type
+          th Pokemon Description
+      tbody
+        each pokemon in pokemons
+          tr
+            td= pokemon.pokemon_name
+            td= pokemon.pokemon_type
+            td= pokemon.pokemon_description
