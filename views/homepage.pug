@@ -1,0 +1,25 @@
+//- Pass the CRM record data as a variable to the template.
+//- The template should display the list of custom objects in a table format, with columns for the custom object’s individual properties.
+
+
+block content
+  h1 Homepage | Integrating With HubSpot I Practicum
+  a(href="/update-cobj") Add to this table
+  if customObjects && customObjects.length
+    h2 List of Custom Objects
+    table
+      thead
+        tr
+          each key in Object.keys(customObjects[0].properties) 
+            if !key.startsWith('hs')
+              th= key
+      tbody
+        each obj in customObjects
+          tr
+            each key in Object.keys(obj.properties)
+              if !key.startsWith('hs')
+                td= obj.properties[key]
+  else
+    p No custom objects found.
+  br
+

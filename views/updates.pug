@@ -1,0 +1,20 @@
+//- Render the updates template and pass along a page title called Update Custom Object Form | Integrating With HubSpot I Practicum.
+//- In the updates pug template, add a link “Return to the homepage” that links to the root route.
+
+
+block content
+  h1 Update Custom Object Form | Integrating With HubSpot I Practicum
+  form(action="/update-cobj" method="POST")
+    label(for="name") Name:
+    input(type="text" id="name" name="name" required)
+    br
+    label(for="release_year") Release Year:
+    input(type="text" id="release_year" name="release_year" required)
+    br
+    label(for="record_label") Record Label:
+    input(type="text" id="record_label" name="record_label" required)
+    br
+    button(type="submit") Add record to custom object
+
+  br
+  a(href="/") Return to the homepage
