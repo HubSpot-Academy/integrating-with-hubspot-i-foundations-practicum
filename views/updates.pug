@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .container
+      h1 Add a Custom Object Record
+      p
+        a(href="/") Return to the homepage
+      form(method="post", action="/update-cobj")
+        each field in fields
+          .form-group
+            label(for=field.name)= field.label
+            input(type="text", id=field.name, name=field.name, required=field.name === 'name')
+        button(type="submit") Create record

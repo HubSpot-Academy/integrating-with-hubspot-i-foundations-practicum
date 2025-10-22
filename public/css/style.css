@@ -1,58 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  margin: 0;
+}
 
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
 }
 
 h1 {
-    margin: 1rem;
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+a {
+  color: #0959da;
+  text-decoration: underline;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+a:hover {
+  text-decoration: none;
 }
 
-.card__email {
-    font-size: 1rem;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  background-color: #fff;
 }
 
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+thead th {
+  background-color: #ffd6e7;
+  font-size: 1.1rem;
+  padding: 0.75rem;
+  text-align: left;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
+tbody td {
+  border: 1px solid #ccc;
+  padding: 0.75rem;
 }
 
-input[type="text"] {
-    padding: .25rem;
+.error-message {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  background-color: #fdecea;
+  color: #c0392b;
+  font-weight: 600;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+button {
+  appearance: none;
+  border: none;
+  border-radius: 4px;
+  background-color: #0959da;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0749ae;
 }

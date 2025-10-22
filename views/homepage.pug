@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .container
+      h1 Custom Object Table
+      p
+        a(href="/update-cobj") Add to this table
+      if errorMessage
+        p.error-message= errorMessage
+      if records.length
+        table
+          thead
+            tr
+              each field in fields
+                th= field.label
+          tbody
+            each record in records
+              tr
+                each field in fields
+                  td= record.properties[field.name] || '—'
+      else
+        p No records found yet. Add one by using the form.
