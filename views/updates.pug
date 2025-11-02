@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Create a New Pet
+
+    a(href="/") Return to the homepage
+    br
+    br
+
+    form(action="/update-cobj" method="POST")
+      label Name:
+      input(type="text" name="name" required)
+      br
+
+      label Type:
+      input(type="text" name="type")
+      br
+
+      label Age:
+      input(type="number" name="age")
+      br
+
+      button(type="submit") Save
