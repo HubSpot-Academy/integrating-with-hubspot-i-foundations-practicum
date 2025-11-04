@@ -2,70 +2,83 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 
+// Configuration
+const PORT = 8085;
+const PRIVATE_APP_ACCESS = '';
+const HUBSPOT_BASE_URL = 'https://api.hubspot.com/crm/v3';
+const CUSTOM_OBJECT_ID = '2-52510659';
+
 app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
-
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
+const hubspotClient = axios.create({
+    baseURL: HUBSPOT_BASE_URL,
+    headers: {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
+        'Content-Type': 'application/json',
+    },
+});
+
+// ROUTE 1: Homepage - Fetch all pets
+app.get('/', async (req, res) => {
+    const url = `/objects/${CUSTOM_OBJECT_ID}`;
+    const params = { properties: 'breed,color,name' };
+
     try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
+        const response = await hubspotClient.get(url, { params });
+        const data = response.data.results || [];
+        res.render('homepage', {
+            title: 'Pets | HubSpot Integration',
+            data,
+        });
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching pets:', error.response?.data || error.message);
+        res.render('homepage', {
+            title: 'Pets | HubSpot Integration',
+            data: [],
+            error: 'Failed to load pets.',
+        });
     }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
+// ROUTE 2: Render form to add new pet
+app.get('/update-cobj', (req, res) => {
+    res.render('updates', {
+        title: 'Add Pet Form | Integrating With HubSpot I Practicum',
+    });
+});
+
+// ROUTE 3: Handle form submission - Create new pet
+app.post('/update-cobj', async (req, res) => {
+    const { breed, color, name } = req.body;
+
+    if (!breed || !color || !name) {
+        return res.status(400).render('updates', {
+            title: 'Add Pet Form | Integrating With HubSpot I Practicum',
+            error: 'All fields are required.',
+            old: req.body,
+        });
     }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
+    const payload = {
+        properties: { breed, color, name },
     };
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
+    try {
+        await hubspotClient.post(`/objects/${CUSTOM_OBJECT_ID}`, payload);
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error creating pet:', error.response?.data || error.message);
+        res.status(500).render('updates', {
+            title: 'Add Pet Form | Integrating With HubSpot I Practicum',
+            error: 'Failed to create pet. Please try again.',
+            old: req.body,
+        });
     }
-
 });
-*/
 
-
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});

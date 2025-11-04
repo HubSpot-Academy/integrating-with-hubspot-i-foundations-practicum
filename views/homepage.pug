@@ -1,0 +1,38 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet")
+    link(rel="stylesheet" href="/css/style.css")
+
+  body
+    .container
+      header.header
+        h1 Pets Directory
+        a.btn.btn-primary(href="/update-cobj") + Add Pet
+
+      main.main-content
+        if error
+          .alert.alert-error= error
+
+        if data && data.length
+          .cards
+            each pet in data
+              article.card
+                .card__id ID: #[strong= pet.id]
+                h3.card__name= pet.properties.name || '—'
+                p.card__detail
+                  strong Breed:
+                  |  #{pet.properties.breed || '—'}
+                p.card__detail
+                  strong Color:
+                  |  #{pet.properties.color || '—'}
+
+        else
+          .empty-state
+            p No pets added yet.
+            a.btn.btn-secondary(href="/update-cobj") Add Your First Pet
