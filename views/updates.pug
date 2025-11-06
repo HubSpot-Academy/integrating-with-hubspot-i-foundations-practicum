@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Add New Pokemon
+        a(href="/") Return to the homepage
+        div
+            form(method="post" action="/update-cobj")
+                div
+                    label(for="pokemon_name") Pokemon Name:
+                    input(type="text" name="pokemon_name" id="pokemon_name" required)
+                div
+                    label(for="pokemon_type") Pokemon Type:
+                    input(type="text" name="pokemon_type" id="pokemon_type" required)
+                div
+                    label(for="pokemon_hp") Pokemon HP:
+                    input(type="number" name="pokemon_hp" id="pokemon_hp" required)
+                div
+                    button(type="submit") Add Pokemon

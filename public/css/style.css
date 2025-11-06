@@ -10,6 +10,19 @@ h1 {
     margin: 1rem;
 }
 
+a {
+    padding: .5rem 1rem;
+    background-color: lightblue;
+    border-radius: 15px;
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    margin: 1rem;
+}
+
 .cards {
     display: flex;
     align-items: center;
@@ -55,4 +68,25 @@ input[type="submit"] {
     border: none;
     padding: .375rem 1rem;
     margin-top: 10px;
+}
+
+table {
+    margin: 2rem 1rem;
+    border-collapse: collapse;
+    width: calc(100% - 2rem);
+}
+
+th, td {
+    border: 1px solid lightgrey;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #fafafa;
 }
