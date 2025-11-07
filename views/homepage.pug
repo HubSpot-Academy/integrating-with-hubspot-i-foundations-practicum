@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Monks
+
+    p
+      a(href="/update-cobj") Add to this table
+
+    if rows && rows.length
+      table
+        thead
+          tr
+            th Name
+            th Bio
+            th Skills
+        tbody
+          each row in rows
+            tr
+              td= row.properties.name
+              td= row.properties.bio
+              td= row.properties.skills
+    else
+      p No records yet.
+      p
+        a(href="/update-cobj") Add your first record

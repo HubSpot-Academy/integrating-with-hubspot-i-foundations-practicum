@@ -10,6 +10,26 @@ h1 {
     margin: 1rem;
 }
 
+p {
+    margin: 0 0 10px;
+}
+
+p a {
+    padding: 5px 1rem;
+}
+table {
+    margin: 1rem;
+}
+table thead tr th {
+    padding: 5px;
+    background: rgba(245, 246, 254, 1);
+    text-align: left;
+}
+table tbody tr td {
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
 .cards {
     display: flex;
     align-items: center;
@@ -50,9 +70,10 @@ input[type="text"] {
     padding: .25rem;
 }
 
-input[type="submit"] {
+button[type="submit"] {
     background-color: lightgrey;
     border: none;
     padding: .375rem 1rem;
     margin-top: 10px;
+    cursor: pointer;
 }

@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Create a new record
+    p: a(href="/") Return to the homepage
+    
+    .form-wrapper
+        form(method="POST", action="/update-cobj")
+            each p in props
+                .form-row
+                label(for=p)= p
+                input(type="text", id=p, name=p, required=(p==='Name'))
+            button(type="submit") Create
