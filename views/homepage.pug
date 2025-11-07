@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet' href='/public/css/style.css')
+  body
+    header
+      h1 Custom Objects Table
+      a(href='/update-cobj') Add to this table
+    main
+      if records.length === 0
+        p No records found.
+      else
+        table
+          thead
+            tr
+              th ID
+              each propName in (records.length ? Object.keys(records[0].properties) : ['Name','Age','Type'])
+                th= propName
+          tbody
+            each record in records
+              tr
+                td= record.id
+                each prop in Object.keys(record.properties)
+                  td= record.properties[prop] || ''
