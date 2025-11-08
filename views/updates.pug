@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet' href='/public/css/style.css')
+  body
+    header
+      h1= title
+      a(href='/') Return to the homepage
+    main
+      form(action='/update-cobj' method='post')
+        div
+          label(for='name') Name
+          input(type='text' name='name' id='name' required)
+        div
+          label(for='age') Age
+          input(type='number' name='age' id='age')
+        div
+          label(for='type') Type
+          input(type='text' name='type' id='type')
+        div
+          button(type='submit') Create Record

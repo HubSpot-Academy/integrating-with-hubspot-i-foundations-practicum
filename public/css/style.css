@@ -1,58 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+body { 
+  font-family: Arial, sans-serif; 
+  padding: 20px; 
 }
-
-h1 {
-    margin: 1rem;
+header { 
+  margin-bottom: 20px; 
 }
-
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+table { 
+  border-collapse: collapse; 
+  width: 100%; 
 }
-
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+table, th, td { 
+  border: 1px solid #ccc; 
+  padding: 8px; 
 }
-
-.card__email {
-    font-size: 1rem;
+th { 
+  background: #f2f2f2; 
 }
-
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+form div { 
+  margin-bottom: 10px; 
 }
-
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
-}
-
-input[type="text"] {
-    padding: .25rem;
-}
-
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+label { 
+  display: inline-block; 
+  width: 80px; 
 }
