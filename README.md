@@ -1,11 +1,31 @@
 # Welcome to the Integrating With HubSpot I: Foundations Practicum
 
-This repository is for the Integrating With HubSpot I: Foundations course. This practicum is one of two requirements for receiving your Integrating With HubSpot I: Foundations certification. You must also take the exam and receive a passing grade (at least 75%).
+Este repositorio contiene la práctica de integración con HubSpot I (Foundations) usando **Node.js + Express + Axios + Pug**.
 
-To read the full directions, please go to the [practicum instructions](https://app.hubspot.com/academy/l/tracks/1092124/1093824/5493?language=en).
+## Rutas nuevas (requisito)
+- `GET /` → Lista objetos personalizados (mascotas) en tabla (sin mostrar ID).
+- `GET /update-cobj` → Muestra formulario para crear un registro de Mascota (propiedades: `nombre`, `tipo_de_animal`, `edad`).
+- `POST /update-cobj` → Envía el formulario y crea el registro en HubSpot; redirige a `/`.
 
-**Put your HubSpot developer test account custom objects URL link here:** https://app.hubspot.com/contacts/l/objects/${custom-obj-number}/views/all/list
+## Cómo ejecutar
+1. Clonar repo y entrar a la carpeta.
+2. `npm install`
+3. Crear archivo `.env` a partir de `.env.example`con los siguientes campos:
 
+HS_TOKEN=<TU_TOKEN_PRIVATE_APP>
+HS_CUSTOM_OBJECT=<OBJECT TYPE ID o API name> # ej. p_mascota
+HS_PROPS=nombre,tipo_de_animal,edad
+
+4. `node index.js` (o `npx nodemon index.js`)
+5. Abrir `http://localhost:3000`
+
+**Put your HubSpot developer test account custom objects URL link here:** https://app.hubspot.com/contacts/50564796/objects/2-52812418/views/all/list
+
+## Notas de seguridad
+- No se incluye el token real en el repo.
+
+## Historial de confirmaciones
+Commits atómicos por feature: rutas, vistas, README y .env.example.
 ___
 ## Tips:
 - Commit to your repository often. Even if you make small tweaks to your code, it’s best to be committing to your repository frequently.

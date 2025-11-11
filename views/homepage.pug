@@ -1,0 +1,34 @@
+
+//- views/homepage.pug
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    a.top-link(href="/update-cobj") Add/Update this table
+    h1 Custom Object Table
+
+    if rows && rows.length
+      table.pretty
+        thead
+          tr
+            
+            each prop in props
+              th= labels && labels[prop] ? labels[prop] : prop
+        tbody
+          each row in rows
+            tr
+              
+              each prop in props
+                //- Alinea a la derecha si es edad (número)
+                - const val = row.properties && row.properties[prop] ? row.properties[prop] : ''
+                if prop === 'edad'
+                  td.num= val
+                else
+                  td= val
+    else
+      p No records yet. Click "Add/Update this table" to create your first item.
+
+
