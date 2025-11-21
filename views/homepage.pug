@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 HubSpot Exam Custom Object Records
+
+    a(href="/update-cobj") Add to this table
+
+    if records.length
+      table
+        thead
+          tr
+            each prop in properties
+              th= prop
+        tbody
+          each record in records
+            tr
+              each prop in properties
+                td= record.properties[prop]
+    else
+      p No records found yet. Click "Add to this table" to create one.
