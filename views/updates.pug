@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    h1= title
+    form(action='/update-cobj' method='POST')
+      each prop in properties
+        div
+          label(for=prop)= prop.charAt(0).toUpperCase() + prop.slice(1)
+          input(type='text' id=prop name=prop)
+      br
+      button(type='submit') Create record
+    br
+    a(href='/') Return to the homepage

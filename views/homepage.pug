@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    h1= title
+    p
+      a(href='/update-cobj') Add to this table
+    table
+      thead
+        tr
+          each prop in properties
+            th= prop.charAt(0).toUpperCase() + prop.slice(1)
+      tbody
+        if !items || items.length === 0
+          tr
+            td(colspan=properties.length) No records found.
+        else
+          each item in items
+            tr
+              each prop in properties
+                td= item[prop]
