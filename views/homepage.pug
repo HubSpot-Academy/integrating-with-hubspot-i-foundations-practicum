@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Custom Object Table
+
+    a(href='/update-cobj') Add/Update this table
+
+    .layout
+      if records && records.length
+        table
+          thead
+            tr
+              th Name
+              th Times Died
+              th Likes Cartman
+          tbody
+            each record in records
+              tr
+                td= record.properties.name
+                td= record.properties.times_died
+                td= record.properties.likes_cartman
+      else
+        p No records found yet. Try adding one!
+
+      img.sp-sign(
+        src='https://upload.wikimedia.org/wikipedia/commons/f/ff/South_park_sign.svg',
+        alt='South Park sign'
+      )

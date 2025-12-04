@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1= title
+
+    a(href='/') Return to the homepage
+
+    form(action='/update-cobj', method='POST')
+      div
+        label(for='name') Name
+        input#name(type='text', name='name', required)
+
+      div
+        label(for='times_died') Times Died
+        input#times_died(type='number', name='times_died', min='0', step='1', required)
+
+      div
+        label(for='likes_cartman') Likes Cartman
+        select#likes_cartman(name='likes_cartman', required)
+          option(value='') Select an option
+          option(value='Yes') Yes
+          option(value='No') No
+          option(value='Sometimes') Sometimes
+
+      button(type='submit') Save
