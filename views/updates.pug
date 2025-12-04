@@ -1,0 +1,17 @@
+html
+  head
+    title= title
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    .container
+      h1 Update Custom Object Form
+      a(href="/") Return to the homepage
+      .form-wrapper
+        form(method="POST" action="/update-cobj")
+          label(for="name") Name:
+          input(type="text" name="name" required)
+          label(for="type") Type:
+          input(type="text" name="type" required)
+          label(for="age") Age:
+          input(type="text" name="age" required)
+          button(type="submit") Submit
