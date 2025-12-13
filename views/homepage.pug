@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a(href="/update-cobj") Add to this table
+    h1 Pets Table
+
+    if pets.length === 0
+      p No pets found yet.
+    else
+      table
+        thead
+          tr
+            th Name
+            th Species
+            th Age
+        tbody
+          each pet in pets
+            tr
+              td= pet.properties[nameProp]
+              td= pet.properties[speciesProp]
+              td= pet.properties[ageProp]
