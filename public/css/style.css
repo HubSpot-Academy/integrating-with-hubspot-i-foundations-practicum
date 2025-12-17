@@ -46,8 +46,9 @@ label, input {
     font-size: inherit;
 }
 
-input[type="text"] {
+input[type="text"],input[type="number"] {
     padding: .25rem;
+    min-width: 400px;
 }
 
 input[type="submit"] {
