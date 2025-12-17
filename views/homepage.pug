@@ -1,0 +1,25 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Custom Object Table    
+        .table-wrapper 
+            a(href="/update-cobj") Add/Update this table
+            table
+                thead
+                    tr 
+                        th Name 
+                        th Artist 
+                        th Price 
+                        th Condition 
+                tbody
+                    each record in data
+                        tr 
+                            td #{record.properties.name}
+                            td #{record.properties.artist}
+                            td.text-right $ #{record.properties.price}
+                            td #{record.properties.condition}
+        
