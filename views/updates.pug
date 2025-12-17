@@ -1,0 +1,26 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        
+        div.form-wrapper
+            h1 Add a new Record
+            form(action="")(method="post")
+                div * = required
+                label(for="name") Name*
+                input(type="text",name="name",id="name",required="required")
+
+                label(for="artist") Artist*
+                input(type="text",name="artist",id="artist",required="required")
+
+                label(for="price") Price
+                input(type="number",name="price",id="price")
+
+                label(for="condition") Condition
+                input(type="text",name="condition",id="condition")
+
+                input(type="submit",value="Submit")
+        
