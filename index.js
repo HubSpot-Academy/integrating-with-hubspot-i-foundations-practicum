@@ -54,7 +54,7 @@ app.post('/update-cobj', async (req, res) => {
             "name": req.body.name,
             "artist": req.body.artist,
             "price": req.body.price,
-            "condtion": req.body.condtion,
+            "condition": req.body.condition,
         }
     }
 
