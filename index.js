@@ -23,7 +23,7 @@ const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_TOKEN;
 
 app.get('/update-cobj', async (req, res) => {
     try {
-        res.render('updates', { title: ' Update Custom Object Form | Integrating With HubSpot I Practicum' });      
+        res.render('updates', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });      
     } catch (error) {
         console.error(error);
     }
