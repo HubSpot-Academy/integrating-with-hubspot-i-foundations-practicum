@@ -8,7 +8,7 @@ html
         
         div.form-wrapper
             h1 Add a new Record
-            form(action="")(method="post")
+            form(action="/update-cobj",method="post")
                 div * = required
                 label(for="name") Name*
                 input(type="text",name="name",id="name",required="required")
