@@ -91,7 +91,7 @@ app.post("/update-cobj", async (req, res) => {
       }
     }
 
-    // 
+    // Required by practicum: "name" must be present
     if (!propertiesPayload.name) {
       return res.status(400).send('Validation error: property "name" is required.');
     }
