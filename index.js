@@ -1,71 +1,150 @@
-const express = require('express');
-const axios = require('axios');
+require("dotenv").config();
+
+const path = require("path");
+const express = require("express");
+const axios = require("axios");
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
-app.use(express.urlencoded({ extended: true }));
+const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
+const CUSTOM_OBJECT_TYPE = process.env.HUBSPOT_CUSTOM_OBJECT_TYPE; 
+const CUSTOM_PROPERTIES = (process.env.HUBSPOT_CUSTOM_PROPERTIES || "name")
+  .split(",")
+  .map((p) => p.trim())
+  .filter(Boolean);
+
+// Fail fast (helps troubleshooting)
+if (!HUBSPOT_ACCESS_TOKEN) {
+  console.error("Missing env: HUBSPOT_ACCESS_TOKEN");
+  process.exit(1);
+}
+if (!CUSTOM_OBJECT_TYPE) {
+  console.error("Missing env: HUBSPOT_CUSTOM_OBJECT_TYPE");
+  process.exit(1);
+}
+if (!CUSTOM_PROPERTIES.includes("name")) {
+  console.error('HUBSPOT_CUSTOM_PROPERTIES must include "name"');
+  process.exit(1);
+}
+
+// Middleware
+app.use(express.urlencoded({ extended: true })); //  POST
 app.use(express.json());
+app.use("/public", express.static(path.join(__dirname, "public")));
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+// View engine
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
+// HubSpot API client
+const hubspot = axios.create({
+  baseURL: "https://api.hubapi.com",
+  headers: {
+    Authorization: `Bearer ${HUBSPOT_ACCESS_TOKEN}`,
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  timeout: 20000,
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
+function normalizeHubSpotError(err) {
+  return {
+    message: err?.message || "Unknown error",
+    status: err?.response?.status,
+    data: err?.response?.data,
+  };
+}
+
+/**
+ * GET /update-cobj
+ * Renders the HTML form (updates.pug)
+ */
+app.get("/update-cobj", (req, res) => {
+  return res.render("updates", {
+    title: "Update Custom Object Form | Integrating With HubSpot I Practicum",
+    properties: CUSTOM_PROPERTIES,
+  });
+});
+
+/**
+ * POST /update-cobj
+ * Creates a new custom object record, then redirects to /
+ */
+app.post("/update-cobj", async (req, res) => {
+  try {
+    const propertiesPayload = {};
+
+    // Pull only the properties you expect from the form
+    for (const prop of CUSTOM_PROPERTIES) {
+      if (typeof req.body[prop] !== "undefined") {
+        propertiesPayload[prop] = String(req.body[prop]).trim();
+      }
     }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
+    // Required by practicum: "name" must exist
+    if (!propertiesPayload.name) {
+      return res.status(400).send('Validation error: property "name" is required.');
+    }
+
+    await hubspot.post(`/crm/v3/objects/${CUSTOM_OBJECT_TYPE}`, {
+      properties: propertiesPayload,
+    });
+
+    // Required redirect
+    return res.redirect("/");
+  } catch (err) {
+    const e = normalizeHubSpotError(err);
+    console.error("POST /update-cobj failed:", e);
+    return res.status(500).send({
+      error: "Failed to create CRM record",
+      details: e,
+    });
+  }
+});
+
+/**
+ * GET /
+ * Fetches records and renders homepage.pug as an HTML table
+ */
+app.get("/", async (req, res) => {
+  try {
+    const params = {
+      limit: 100,
+      properties: CUSTOM_PROPERTIES.join(","),
     };
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
+    const response = await hubspot.get(`/crm/v3/objects/${CUSTOM_OBJECT_TYPE}`, {
+      params,
+    });
 
+    const results = response?.data?.results || [];
+
+    const records = results.map((r) => ({
+      id: r.id,
+      properties: r.properties || {},
+      createdAt: r.createdAt,
+      updatedAt: r.updatedAt,
+    }));
+
+    return res.render("homepage", {
+      title: "Homepage | Integrating With HubSpot I Practicum",
+      properties: CUSTOM_PROPERTIES,
+      records,
+    });
+  } catch (err) {
+    const e = normalizeHubSpotError(err);
+    console.error("GET / failed:", e);
+    return res.status(500).send({
+      error: "Failed to fetch CRM records",
+      details: e,
+    });
+  }
 });
-*/
 
-
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+// Start server
+app.listen(PORT, () => {
+  console.log(`App running on http://localhost:${PORT}`);
+  console.log(`Custom Object Type: ${CUSTOM_OBJECT_TYPE}`);
+  console.log(`Properties: ${CUSTOM_PROPERTIES.join(", ")}`);
+});
