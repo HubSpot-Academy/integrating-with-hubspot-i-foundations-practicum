@@ -7,14 +7,17 @@ const axios = require("axios");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+/**
+ * Required env vars
+ */
 const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN;
-const CUSTOM_OBJECT_TYPE = process.env.HUBSPOT_CUSTOM_OBJECT_TYPE; 
+const CUSTOM_OBJECT_TYPE = process.env.HUBSPOT_CUSTOM_OBJECT_TYPE;
 const CUSTOM_PROPERTIES = (process.env.HUBSPOT_CUSTOM_PROPERTIES || "name")
   .split(",")
   .map((p) => p.trim())
   .filter(Boolean);
 
-// Fail fast (helps troubleshooting)
+// Fail fast (helps debugging)
 if (!HUBSPOT_ACCESS_TOKEN) {
   console.error("Missing env: HUBSPOT_ACCESS_TOKEN");
   process.exit(1);
@@ -28,16 +31,22 @@ if (!CUSTOM_PROPERTIES.includes("name")) {
   process.exit(1);
 }
 
-// Middleware
-app.use(express.urlencoded({ extended: true })); //  POST
+/**
+ * Middleware
+ */
+app.use(express.urlencoded({ extended: true })); // for HTML form POST
 app.use(express.json());
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-// View engine
+/**
+ * View engine
+ */
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
-// HubSpot API client
+/**
+ * HubSpot API client
+ */
 const hubspot = axios.create({
   baseURL: "https://api.hubapi.com",
   headers: {
@@ -58,7 +67,7 @@ function normalizeHubSpotError(err) {
 
 /**
  * GET /update-cobj
- * Renders the HTML form (updates.pug)
+ * Render form (updates.pug)
  */
 app.get("/update-cobj", (req, res) => {
   return res.render("updates", {
@@ -69,20 +78,20 @@ app.get("/update-cobj", (req, res) => {
 
 /**
  * POST /update-cobj
- * Creates a new custom object record, then redirects to /
+ * Create record then redirect to homepage
  */
 app.post("/update-cobj", async (req, res) => {
   try {
     const propertiesPayload = {};
 
-    // Pull only the properties you expect from the form
+    // Only accept expected properties (prevents junk inputs)
     for (const prop of CUSTOM_PROPERTIES) {
       if (typeof req.body[prop] !== "undefined") {
         propertiesPayload[prop] = String(req.body[prop]).trim();
       }
     }
 
-    // Required by practicum: "name" must exist
+    // 
     if (!propertiesPayload.name) {
       return res.status(400).send('Validation error: property "name" is required.');
     }
@@ -91,7 +100,6 @@ app.post("/update-cobj", async (req, res) => {
       properties: propertiesPayload,
     });
 
-    // Required redirect
     return res.redirect("/");
   } catch (err) {
     const e = normalizeHubSpotError(err);
@@ -105,18 +113,21 @@ app.post("/update-cobj", async (req, res) => {
 
 /**
  * GET /
- * Fetches records and renders homepage.pug as an HTML table
+ * Fetch records and render homepage.pug table
  */
 app.get("/", async (req, res) => {
   try {
-    const params = {
-      limit: 100,
-      properties: CUSTOM_PROPERTIES.join(","),
-    };
+    const qs = new URLSearchParams();
+    qs.set("limit", "100");
 
-    const response = await hubspot.get(`/crm/v3/objects/${CUSTOM_OBJECT_TYPE}`, {
-      params,
-    });
+    // Repeat "properties" keys to avoid 400 Invalid request in some portals
+    for (const prop of CUSTOM_PROPERTIES) {
+      qs.append("properties", prop);
+    }
+
+    const url = `/crm/v3/objects/${CUSTOM_OBJECT_TYPE}?${qs.toString()}`;
+
+    const response = await hubspot.get(url);
 
     const results = response?.data?.results || [];
 
@@ -142,7 +153,9 @@ app.get("/", async (req, res) => {
   }
 });
 
-// Start server
+/**
+ * Start server
+ */
 app.listen(PORT, () => {
   console.log(`App running on http://localhost:${PORT}`);
   console.log(`Custom Object Type: ${CUSTOM_OBJECT_TYPE}`);
