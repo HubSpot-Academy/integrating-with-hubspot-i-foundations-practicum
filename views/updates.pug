@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Crear Nuevo Videojuego
+    a(href="/") Volver a la lista
+
+    .form-wrapper
+      form(method="POST")
+        label(for="name") Name:
+        input(type="text" name="name" required)
+        
+        label(for="publisher") Publisher:
+        input(type="text" name="publisher" required)
+        
+        label(for="price") Price:
+        input(type="number" name="price" required)
+        
+        input(type="submit" value="Crear Videojuego")

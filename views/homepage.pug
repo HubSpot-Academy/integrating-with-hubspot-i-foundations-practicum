@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Lista de Videojuegos (Custom Object)
+    a(href="/update-cobj") Add / Update this table
+    
+    table
+      thead
+        tr
+          th Name
+          th Publisher
+          th Price
+      tbody
+        each game in data
+          tr
+            td= game.properties[props.name]
+            td= game.properties[props.pub]
+            td= game.properties[props.price] + ' €'

@@ -1,58 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 50px;
+    background-color: #f4f7f6;
+    color: #333;
 }
 
 h1 {
-    margin: 1rem;
+    color: #ff7a59; /* Naranja HubSpot */
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+a {
+    text-decoration: none;
+    color: #0091ae;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.card__email {
-    font-size: 1rem;
+th {
+    background-color: #425b76;
+    color: white;
+    padding: 15px;
+    text-align: left;
 }
 
+td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilos del formulario */
 .form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+    background: white;
+    padding: 30px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 500px;
 }
 
-label, input {
-    margin-top: 5px;
+label {
     display: block;
-    font-size: inherit;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-input[type="text"] {
-    padding: .25rem;
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 input[type="submit"] {
-    background-color: lightgrey;
+    background-color: #ff7a59;
+    color: white;
     border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+input[type="submit"]:hover {
+    background-color: #e66a4c;
 }
