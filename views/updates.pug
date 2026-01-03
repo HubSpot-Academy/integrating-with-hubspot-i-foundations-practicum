@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    a(href="/") Return to the homepage
+
+    form(action="/update-cobj" method="POST")
+      label(for="title") Name:
+      input(type="text" name="title" required)
+      br
+
+      label(for="author") author:
+      input(type="text" name="author" required)
+      br
+
+      label(for="summary") summary:
+      input(type="text" name="summary" required)
+      br
+
+      button(type="submit") Submit

@@ -55,4 +55,5 @@ input[type="submit"] {
     border: none;
     padding: .375rem 1rem;
     margin-top: 10px;
+    margin-bottom: 5px;
 }
