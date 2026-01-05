@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title #{title}
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    h1 Pet Custom Objects
+    
+    a(href='/update-cobj') Add to this table
+    
+    if data && data.length > 0
+      .table-container
+        table.pet-table
+          thead
+            tr
+              th Pet Name
+              th Pet Bio
+              th Pet Color
+          tbody
+            each item, idx in data
+              tr(class= idx % 2 === 0 ? 'row-odd' : 'row-even')
+                td(data-label='Pet Name')= item.properties.pet_name || 'N/A'
+                td(data-label='Pet Bio')= item.properties.pet_bio || 'N/A'
+                td(data-label='Pet Color')= item.properties.pet_color || 'N/A'
+    else
+      p No pet records found.

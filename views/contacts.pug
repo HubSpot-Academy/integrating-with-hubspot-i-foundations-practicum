@@ -1,15 +1,20 @@
-//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+doctype html
+html
+	head
+		title #{title}
+		meta(name='viewport' content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='/css/style.css')
+	body
+		h1 Contacts
 
-//- doctype html
-//- html 
-//-     head 
-//-         title= `${title}`
-//-         meta(name="viewport" content="width=device-width, initial-scale=1")
-//-         link(rel="stylesheet", href="/css/style.css")
-//-     body    
-//-         h1 Contacts
-//-         .cards 
-//-             each contact in data
-//-                 .card 
-//-                     h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-//-                     p.card__email #{contact.properties.email}
+		if data && data.length > 0
+			.cards
+				each item in data
+					.card
+						h2.card__name= item.properties.pet_name || 'Unnamed'
+						p.card__bio= item.properties.pet_bio || ''
+						p.card__color Strong Color: #{item.properties.pet_color || 'N/A'}
+		else
+			p No records to display.
+
+		a.center-link(href='/') Return to the homepage

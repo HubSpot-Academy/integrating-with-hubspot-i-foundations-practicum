@@ -1,0 +1,26 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Create New Pet
+        
+        .form-wrapper
+          form(action='/create-pet' method='POST')
+            div
+                label(for='petName') Pet Name:
+                input(type='text' id='petName' name='petName' value=petName required)
+            
+            div
+                label(for='petBio') Pet Bio:
+                input(type='text' id='petBio' name='petBio' value=petBio)
+            
+            div
+                label(for='petColor') Pet Color:
+                input(type='text' id='petColor' name='petColor' value=petColor)
+            
+            button(type='submit') Create Pet
+
+        a.center-link(href="/") Return to the homepage
