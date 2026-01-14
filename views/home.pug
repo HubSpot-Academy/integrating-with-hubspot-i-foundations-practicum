@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    p
+      a(href="/update-cobj") + Create new record
+
+    if !data || data.length === 0
+      p No records yet.
+    else
+      ul
+        each item in data
+          li
+            strong #{item.properties[prop1]}
+            |  — #{item.properties[prop2]} — #{item.properties[prop3]}
