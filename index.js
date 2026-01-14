@@ -36,7 +36,7 @@ app.get('/', async (req, res) => {
     const resp = await axios.get(url, { headers: getHeaders() });
     const data = resp.data.results;
 
-    // Renderiza un pug template "home" que tú creas en /views/home.pug
+    // It renderized the plug template template "homepage" created in /views/homepage.pug
     res.render('homepage', {
       title: 'Custom Object Table',
       data,
@@ -67,7 +67,7 @@ app.get('/update-cobj', (req, res) => {
 app.post('/update-cobj', async (req, res) => {
   const createUrl = `https://api.hubspot.com/crm/v3/objects/${CUSTOM_OBJECT_TYPE_ID}`;
 
-  // En el form vamos a mandar campos: prop1, prop2, prop3
+  // Fields in the form: prop1, prop2, prop3
   const payload = {
     properties: {
       [PROP_1]: req.body.prop1,
