@@ -37,8 +37,8 @@ app.get('/', async (req, res) => {
     const data = resp.data.results;
 
     // Renderiza un pug template "home" que tú creas en /views/home.pug
-    res.render('home', {
-      title: 'Pets | HubSpot Custom Objects',
+    res.render('homepage', {
+      title: 'Custom Object Table',
       data,
       prop1: PROP_1,
       prop2: PROP_2,
@@ -55,7 +55,7 @@ app.get('/', async (req, res) => {
 
 app.get('/update-cobj', (req, res) => {
   res.render('updates', {
-    title: 'Create Pet Record',
+    title: 'Update Custom Object Form | Integrating With HubSpot I Practicum',
     prop1: PROP_1,
     prop2: PROP_2,
     prop3: PROP_3

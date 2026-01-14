@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title= title
+    style.
+      table { border-collapse: collapse; margin-top: 16px; }
+      th, td { border: 1px solid #999; padding: 10px 14px; }
+      th { background: #f5c2c7; }
+  body
+    h1= title
+
+    a(href="/update-cobj") Add/Update this table
+
+    if !data || data.length === 0
+      p No records yet.
+    else
+      table
+        thead
+          tr
+            th Name
+            th Bio
+            th Species
+        tbody
+          each item in data
+            tr
+              td= item.properties[prop1] || ''
+              td= item.properties[prop2] || ''
+              td= item.properties[prop3] || ''
