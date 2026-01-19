@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+
+    form(action="/update-cobj" method="POST")
+      div
+        label #{prop1}
+        input(type="text" name="prop1" required)
+
+      div
+        label #{prop2}
+        input(type="text" name="prop2" required)
+
+      div
+        label #{prop3}
+        input(type="text" name="prop3" required)
+
+      button(type="submit") Create record
+
+    p
+      a(href="/") Return to the homepage
