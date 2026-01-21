@@ -2,23 +2,23 @@ doctype html
 html
   head
     title= title
-    link(rel="stylesheet", href="./css/style.css")
+    link(rel="stylesheet", href="/css/style.css")
   body
     .container 
         h1= title
 
         form(action="/update-cobj" method="POST")
             div
-                label Name
-                input(type="text" name="name" required)
+                label(for="name") Name
+                input(type="text" name="name" id="name" required)
 
             div
-                label Type
-                input(type="text" name="type" required)
+                label(for="type") Type
+                input(type="text" name="type" id="type" required)
 
             div
-                label Age
-                input(type="number" name="age" required)
+                label(for="age") Age
+                input(type="number" name="age" id="age" required)
 
             input(type="submit" placeholder="Create new record")
 

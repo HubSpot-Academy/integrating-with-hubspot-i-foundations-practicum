@@ -2,7 +2,7 @@ doctype html
 html
   head
     title= title
-    link(rel="stylesheet", href="./css/style.css")
+    link(rel="stylesheet", href="/css/style.css")
   body
     .container  
         h1= title
@@ -14,13 +14,13 @@ html
         else
             table
                 thead
-                tr
-                    th Name
-                    th Type
-                    th Age
-                tbody
-                each item in data
                     tr
-                    td= item.properties.name || ''
-                    td= item.properties.type || ''
-                    td= item.properties.age || ''
+                        th Name
+                        th Type
+                        th Age
+                tbody
+                    each item in data
+                        tr
+                            td= item.properties.name || ''
+                            td= item.properties.type || ''
+                            td= item.properties.age || ''
