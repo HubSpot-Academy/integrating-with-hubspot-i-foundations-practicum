@@ -4,23 +4,23 @@ html
     title= title
     link(rel="stylesheet", href="./css/style.css")
   body
-  .container  
-    h1= title
+    .container  
+        h1= title
 
-    a(href="/update-cobj") Add/Update this table
+        a(href="/update-cobj") Add/Update this table
 
-    if !data || data.length === 0
-      p No records yet.
-    else
-      table
-        thead
-          tr
-            th Name
-            th Type
-            th Age
-        tbody
-          each item in data
-            tr
-              td= item.properties.name || ''
-              td= item.properties.type || ''
-              td= item.properties.age || ''
+        if !data || data.length === 0
+            p No records to show.
+        else
+            table
+                thead
+                tr
+                    th Name
+                    th Type
+                    th Age
+                tbody
+                each item in data
+                    tr
+                    td= item.properties.name || ''
+                    td= item.properties.type || ''
+                    td= item.properties.age || ''

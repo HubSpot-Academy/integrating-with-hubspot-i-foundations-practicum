@@ -45,10 +45,17 @@ input[type="text"] {
 }
 
 input[type="submit"] {
-    background-color: lightgrey;
+    background-color: #01a501;
+    color: #fff;
     border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+    padding: 12px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+h1{
+    margin-bottom: 16px;
 }
 
 .container{
