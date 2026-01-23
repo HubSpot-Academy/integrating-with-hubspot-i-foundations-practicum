@@ -1,71 +1,112 @@
-const express = require('express');
-const axios = require('axios');
+require("dotenv").config();
+
+const express = require("express");
+const axios = require("axios");
+const path = require("path");
+
 const app = express();
 
-app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+const PORT = process.env.PORT || 3000;
+const TOKEN = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
+
+const OBJECT_TYPE = process.env.CUSTOM_OBJECT_TYPE; // "contacts"
+const PROP_1 = process.env.PROP_1; // firstname
+const PROP_2 = process.env.PROP_2; // lastname
+const PROP_3 = process.env.PROP_3; // email
+
+if (!TOKEN || !OBJECT_TYPE || !PROP_1 || !PROP_2 || !PROP_3) {
+  console.error(
+    "Missing required env vars. Check .env for HUBSPOT_PRIVATE_APP_TOKEN, CUSTOM_OBJECT_TYPE, PROP_1/2/3."
+  );
+  process.exit(1);
+}
+
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
-
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
+const hs = axios.create({
+  baseURL: "https://api.hubapi.com",
+  headers: {
+    Authorization: `Bearer ${TOKEN}`,
+    "Content-Type": "application/json",
+  },
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
-    }
+// GET /  -> show table of records
+app.get("/", async (req, res) => {
+  try {
+    const props = [PROP_1, PROP_2, PROP_3].join(",");
+    const response = await hs.get(`/crm/v3/objects/${OBJECT_TYPE}`, {
+      params: { limit: 100, properties: props },
+    });
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
+    const results = response.data.results || [];
+
+    const rows = results.map((r) => ({
+      id: r.id,
+      p1: r.properties?.[PROP_1] ?? "",
+      p2: r.properties?.[PROP_2] ?? "",
+      p3: r.properties?.[PROP_3] ?? "",
+    }));
+
+    res.render("homepage", {
+      title: "Homepage | Integrating With HubSpot I Practicum",
+      objectType: OBJECT_TYPE,
+      prop1: PROP_1,
+      prop2: PROP_2,
+      prop3: PROP_3,
+      rows,
+    });
+  } catch (err) {
+    const status = err.response?.status;
+    const data = err.response?.data;
+    res.status(500).send({
+      message: "Failed to fetch records from HubSpot.",
+      status,
+      data,
+    });
+  }
+});
+
+// GET /update-cobj -> render form
+app.get("/update-cobj", (req, res) => {
+  res.render("updates", {
+    title: "Update Form | Integrating With HubSpot I Practicum",
+    objectType: OBJECT_TYPE,
+    prop1: PROP_1,
+    prop2: PROP_2,
+    prop3: PROP_3,
+  });
+});
+
+// POST /update-cobj -> create record then redirect to /
+app.post("/update-cobj", async (req, res) => {
+  try {
+    const payload = {
+      properties: {
+        [PROP_1]: req.body[PROP_1],
+        [PROP_2]: req.body[PROP_2],
+        [PROP_3]: req.body[PROP_3],
+      },
     };
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
+    await hs.post(`/crm/v3/objects/${OBJECT_TYPE}`, payload);
 
+    return res.redirect("/");
+  } catch (err) {
+    const status = err.response?.status;
+    const data = err.response?.data;
+    res.status(500).send({
+      message: "Failed to create record in HubSpot.",
+      status,
+      data,
+    });
+  }
 });
-*/
 
-
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+app.listen(PORT, () => {
+  console.log(`App running at http://localhost:${PORT}`);
+});

@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1= title
+
+    p
+      a(href="/update-cobj") Add to this table
+
+    p
+      strong Object Type:
+      |  #{objectType}
+
+    table(border="1", cellpadding="8")
+      thead
+        tr
+          th Record ID
+          th= prop1
+          th= prop2
+          th= prop3
+      tbody
+        if rows.length === 0
+          tr
+            td(colspan="4") No records found.
+        else
+          each row in rows
+            tr
+              td= row.id
+              td= row.p1
+              td= row.p2
+              td= row.p3
