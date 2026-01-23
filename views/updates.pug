@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1= title
+
+    p
+      a(href="/") Return to the homepage
+
+    form(action="/update-cobj", method="POST")
+      div
+        label(for=prop1)= prop1
+        input(type="text", name=prop1, id=prop1, required=true)
+
+      div
+        label(for=prop2)= prop2
+        input(type="text", name=prop2, id=prop2, required=true)
+
+      div
+        label(for=prop3)= prop3
+        input(type="text", name=prop3, id=prop3, required=true)
+
+      div
+        button(type="submit") Create record
