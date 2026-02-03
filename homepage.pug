@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Custom Object Records
+    a(href="/update-cobj") Add to this table
+
+    if records.length
+      table
+        thead
+          tr
+            th ID
+            th Device
+        tbody
+          each record in records
+            tr
+              td= record.id
+              td= record.properties.device
+    else
+      p No records found.
