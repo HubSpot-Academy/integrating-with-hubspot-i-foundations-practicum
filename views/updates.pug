@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    style.
+      body { font-family: Arial, sans-serif; padding: 20px; }
+      input, button { padding: 6px 10px; margin: 5px 0; width: 300px; }
+      label { display: block; margin-top: 10px; font-weight: bold; }
+      button { width: 150px; background-color: #f4a1a8; border: none; cursor: pointer; }
+      button:hover { background-color: #e89092; }
+
+  body
+    h1= title
+    form(method="POST", action=action)
+      each prop in properties
+        label(for=prop)= prop.charAt(0).toUpperCase() + prop.slice(1)
+        input(type="text", name=prop, id=prop)
+      button(type="submit") Save
+    br
+    a(href="/") Back to Table
