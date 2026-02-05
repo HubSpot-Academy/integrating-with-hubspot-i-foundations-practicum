@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    h1= title
+    form(method='post' action='/truck')
+      div
+        label(for='name') Name:
+        input(type='text' name='name' id='name' required)
+      div
+        label(for='vehicle_year') Year:
+        input(type='text' name='vehicle_year' id='vehicle_year')
+      div
+        label(for='vehicle_make') Make:
+        input(type='text' name='vehicle_make' id='vehicle_make')
+      div
+        label(for='vehicle_model') Model:
+        input(type='text' name='vehicle_model' id='vehicle_model')
+      div
+        label(for='price') Price:
+        input(type='number' name='price' id='price' step='0.01')
+      div
+        button(type='submit') Save

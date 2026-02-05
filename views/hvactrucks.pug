@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    h1= title
+    p
+      a(href='/truck-form') Add a Truck
+      |  ·  
+      a(href='/create-schema') Create Schema & Add Sample Data
+
+    if data && data.length
+      ul
+        each obj in data
+          li
+            b= obj.properties.name
+            |  — #{obj.properties.vehicle_make} #{obj.properties.vehicle_model} (#{obj.properties.vehicle_year}) — $
+            = obj.properties.price
+    else
+      p No HVAC Trucks found.

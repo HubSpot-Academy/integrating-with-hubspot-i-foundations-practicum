@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    h1= title
+    p
+      a(href='/update-cobj') Add to this table
+
+    if data && data.length
+      table
+        thead
+          tr
+            th Name
+            th Year
+            th Make
+            th Model
+            th Price
+        tbody
+          each obj in data
+            - const p = obj.properties || {}
+            tr
+              td= p.name || '-'
+              td= p.vehicle_year || '-'
+              td= p.vehicle_make || '-'
+              td= p.vehicle_model || '-'
+              td= (p.price !== undefined && p.price !== null) ? `$${p.price}` : '-'
+    else
+      p No records found.
