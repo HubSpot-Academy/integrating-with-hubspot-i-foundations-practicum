@@ -69,4 +69,10 @@ app.post('/update', async (req, res) => {
 
 
 // * Localhost
+app.get("/", (req, res) => {
+  res.render("homepage", {
+    title: "Homepage | Integrating With HubSpot I Practicum"
+  });
+});
+
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
