@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Add a Custom Object Record
+
+    a(href="/") Return to the homepage
+
+    form(action="/update-cobj" method="POST")
+      div
+        label(for="name") Name
+        input(type="text" name="name" required)
+
+      div
+        label(for="description") Description
+        input(type="text" name="description")
+
+      div
+        label(for="category") Category
+        input(type="text" name="category")
+
+      button(type="submit") Create Record
+
