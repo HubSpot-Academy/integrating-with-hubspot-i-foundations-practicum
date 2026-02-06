@@ -1,24 +1,25 @@
-doctype html
-html
-  head
-    title= title
-  body
-    h1 Add a Custom Object Record
+block content
+  h1= title
 
-    a(href="/") Return to the homepage
+  a(href="/") Return to the homepage
 
-    form(action="/update-cobj" method="POST")
-      div
-        label(for="name") Name
-        input(type="text" name="name" required)
+  form(action="/update-cobj" method="POST")
+    div
+      label(for="name") Book Name
+      input(type="text" name="name" required)
 
-      div
-        label(for="description") Description
-        input(type="text" name="description")
+    div
+      label(for="author") Author
+      input(type="text" name="author" required)
 
-      div
-        label(for="category") Category
-        input(type="text" name="category")
+    div
+      label(for="genre") Genre
+      select(name="genre" required)
+        option(value="Young Adult (YA)") Young Adult (YA)
+        option(value="Fantasy") Fantasy
+        option(value="Horror") Horror
+        option(value="Romance") Romance
+        option(value="Mystery/Thriller") Mystery / Thriller
 
-      button(type="submit") Create Record
+    button(type="submit") Add Book
 
