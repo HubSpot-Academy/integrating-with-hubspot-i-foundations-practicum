@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= pageTitle
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1= pageTitle
+    form(action='/update-cobj', method='POST')
+      label(for='Name') Name:
+      input(type='text', name='Name', required)
+      br
+      label(for='Genre') Genre:
+      input(type='text', name='Genre', required)
+      br
+      label(for='Rating') Rating:
+      input(type='text', name='Rating', required)
+      br
+      button(type='submit') Add Record
+    br
+    a(href='/') Return to the homepage

@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= pageTitle
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1= pageTitle
+    a(href='/update-cobj') Add to this table
+    if records && records.length
+      table(border='1')
+        thead
+          tr
+            th Name
+            th Genre
+            th Rating
+        tbody
+          each record in records
+            - const p = (record && record.properties) || {};
+            tr
+              td= p.name || record.name || '—'
+              td= p.genre || '—'
+              td= p.rating || '—'
+    else
+      p No records yet. Use
+        a(href='/update-cobj') the form
+        |  to add one.
