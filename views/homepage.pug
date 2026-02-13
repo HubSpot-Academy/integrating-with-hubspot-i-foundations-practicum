@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Custom Object Table
+
+    a(href="/update-cobj") Add to this table
+    br
+    br
+
+    table(border="1" cellpadding="8")
+      thead
+        tr
+          th Name
+          th Company
+          th Model Year
+          th Car Type
+      tbody
+        each record in data
+          tr
+            td= record.properties.name
+            td= record.properties.company
+            td= record.properties.model_year
+            td= record.properties.car_type

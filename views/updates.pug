@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Add / Update Custom Object
+
+    a(href="/") Return to the homepage
+    br
+    br
+
+    form(method="POST" action="/update-cobj")
+      label(for="name") Name:
+      br
+      input(type="text" name="name" required)
+      br
+      br
+
+      label(for="company") Company:
+      br
+      input(type="text" name="company" required)
+      br
+      br
+
+      label(for="model_year") Model Year:
+      br
+      input(type="number" name="model_year" required)
+      br
+      br
+
+      button(type="submit") Submit
