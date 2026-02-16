@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= "Update Custom Object Form | Integrating With HubSpot I Practicum"
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .main
+        h1= "Update My Custom Object"
+
+        form(action="/update-cobj" method="POST")
+            div
+                label(for="age") Age
+                input(type="number" name="age" id="age" required)
+
+            div
+                label(for="breed") Breed
+                input(type="text" name="breed" id="breed" required)
+
+            div
+                label(for="name") Name
+                input(type="text" name="name" id="name" required)
+
+            input(type="submit")
+
+        p
+            a(href="/") Back to Home
