@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= "My Custom Object"
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .main
+        h1= "My Custom Object"
+
+        a(href="/update-cobj") Add/Update this table
+
+        if !data || data.length === 0
+            p Nothing to see here
+        else
+            table
+                thead
+                    tr
+                        th Age
+                        th Breed
+                        th Name
+                tbody
+                    each item in data
+                        tr
+                            td= item.properties.age || ''
+                            td= item.properties.breed || ''
+                            td= item.properties.name || ''
