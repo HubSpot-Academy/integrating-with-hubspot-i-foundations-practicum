@@ -1,26 +1,22 @@
 doctype html
-html
+html(lang="en")
   head
-    title= pageTitle
+    title= title
     link(rel='stylesheet', href='/css/style.css')
   body
-    h1= pageTitle
+    h1 My Pets
     a(href='/update-cobj') Add to this table
-    if records && records.length
-      table(border='1')
-        thead
+    br
+    br
+    table(border='1')
+      thead
+        tr
+          th Pet Name
+          th Breed
+          th Age
+      tbody
+        each item in data
           tr
-            th Name
-            th Genre
-            th Rating
-        tbody
-          each record in records
-            - const p = (record && record.properties) || {};
-            tr
-              td= p.name || record.name || '—'
-              td= p.genre || '—'
-              td= p.rating || '—'
-    else
-      p No records yet. Use
-        a(href='/update-cobj') the form
-        |  to add one.
+            td= item.properties.pet_name
+            td= item.properties.breed
+            td= item.properties.age
