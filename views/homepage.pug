@@ -1,0 +1,15 @@
+block content
+  h1= title
+  a(href="/update-cobj") Add to this table
+  table(border="1" cellpadding="8")
+    thead
+      tr
+        th Name
+        th Category
+        th Cuisine Type
+    tbody
+      each recipe in recipes
+        tr
+          td= recipe.properties.name
+          td= recipe.properties.category
+          td= recipe.properties.cuisine_type

@@ -1,0 +1,26 @@
+block content
+  h1= title
+  a(href="/") Return to the homepage
+  form(action="/update-cobj" method="POST")
+    div
+      label(for="name") Recipe Name
+      input(type="text" name="name" required)
+    div
+      label(for="category") Category
+      select(name="category" required)
+        option(value="") -- Select --
+        option(value="Appetizer") Appetizer
+        option(value="Entree") Entree
+        option(value="Dessert") Dessert
+        option(value="Snack") Snack
+        option(value="Beverage") Beverage
+    div
+      label(for="cuisine_type") Cuisine Type
+      select(name="cuisine_type" required)
+        option(value="") -- Select --
+        option(value="Greek") Greek
+        option(value="Japanese") Japanese
+        option(value="Brazilian") Brazilian
+        option(value="Thai") Thai
+        option(value="American") American
+    button(type="submit") Add Recipe
