@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a(href="/update-cobj") Add to this table
+    h1 Companies Table
+
+    if data.length === 0
+      p No companies found yet.
+    else
+      table(border="1")
+        thead
+          tr
+            th Name
+            th Category
+            th Notes
+        tbody
+          each row in data
+            tr
+              td= row.name || ""
+              td= row.category || ""
+              td= row.notes || ""

@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a(href="/") Return to the homepage
+    h1 Add a new company
+
+    form(method="POST", action="/update-cobj")
+      label(for="name") Name
+      input(type="text", id="name", name="name", required)
+
+      label(for="category") Category
+      input(type="text", id="category", name="category")
+
+      label(for="notes") Notes
+      textarea(id="notes", name="notes")
+
+      button(type="submit") Create
