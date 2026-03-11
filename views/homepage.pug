@@ -1,0 +1,25 @@
+doctype html
+html 
+    head 
+        title = title 
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        a(href="/update-cobj") Add to this table 
+        h1 Custom Object Records 
+
+        table 
+            thead 
+                tr 
+                    each prop in properties 
+                        th= prop 
+            tbody 
+                if data.length
+                    each record in data
+                        tr 
+                            each prop in properties 
+                                td= record.properties[prop] || ""
+
+                else 
+                    tr 
+                        td(colspan=properties.length) No records foud.

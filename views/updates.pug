@@ -1,0 +1,30 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a(href="/") Return to the homepage
+    h1 Update Custom Object Form
+
+    form(method="POST", action="/update-cobj")
+      div
+        label(for="full_name") Full Name
+        input#full_name(type="text", name="full_name", required)
+
+      div
+        label(for="name") Name
+        input#name(type="text", name="name", required)
+
+      div
+        label(for="coolness") Coolness
+        input#coolness(type="text", name="coolness")
+
+      div
+        label(for="rating") Rating
+        input#rating(type="text", name="rating")
+
+      button(type="submit") Create record
