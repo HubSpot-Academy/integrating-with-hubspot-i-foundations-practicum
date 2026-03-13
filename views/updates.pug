@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+
+    h1 Add a Game
+
+    a(href="/") Return to the homepage
+
+    form(action="/update-cobj" method="POST")
+      div
+        label(for="name") Name
+        input(type="text" name="name" required)
+
+      div
+        label(for="genre") Genre
+        input(type="text" name="genre" required)
+
+      div
+        label(for="rating") Rating
+        input(type="text" name="rating" required)
+
+      button(type="submit") Submit
