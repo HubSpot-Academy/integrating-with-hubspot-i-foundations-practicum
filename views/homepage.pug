@@ -1,0 +1,21 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        a(href="/update-cobj") Add to this table
+        h1 Texas Native Plants
+        table
+            thead
+                tr
+                    th Name 
+                    th Zone 
+                    th Sunlight 
+            tbody
+                each plant in data
+                    tr
+                        td #{plant.properties.name}
+                        td #{plant.properties.zone}
+                        td #{plant.properties.sunlight}

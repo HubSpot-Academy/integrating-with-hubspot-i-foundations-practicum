@@ -1,0 +1,39 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        .form-wrapper 
+            form(method="POST")
+                label(for="plantName") Plant Name 
+                input(type="text" name="plantName" required)
+
+                label(for="plantZone") Zone 
+                select(name="plantZone" required)
+                    option(value="" disabled selected) Select a Zone
+                    option(value="6a") Zone 6a
+                    option(value="6b") Zone 6b
+                    option(value="7a") Zone 7a
+                    option(value="7b") Zone 7b
+                    option(value="8a") Zone 8a
+                    option(value="8b") Zone 8b
+                    option(value="9a") Zone 9a
+                    option(value="9b") Zone 9b
+                    option(value="10a") Zone 10a
+                    option(value="10b") Zone 10b
+
+                label(for="plantSunlight") Sunlight 
+                select(name="plantSunlight" required)
+                    option(value="" disabled selected) Select Sunlight
+                    option(value="Full Sun") Full Sun
+                    option(value="Full Shade") Full Shade
+                    option(value="Morning Sun/Afternoon Shade") Morning Sun/Afternoon Shade
+                    option(value="Morning Shade/Afternoon Sun") Morning Shade/Afternoon Sun
+                    option(value="Moderate") Moderate
+                
+                input(type="submit" value="Submit")
+            
+           
+            a(href="/") Return to the homepage
