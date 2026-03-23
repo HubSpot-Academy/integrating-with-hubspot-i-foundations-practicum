@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1= title
+    a(href="/") Return to the homepage
+    form(action="/update-cobj", method="POST")
+        div
+            label(for="name") Name:
+            input(type="text", name="name", id="name", required)
+        div
+            label(for="experience") Experience:
+            input(type="text", name="experience", id="experience", required)
+        div
+            label(for="rate") Rate:
+            input(type="text", name="rate", id="rate", required)
+        button(type="submit") Submit

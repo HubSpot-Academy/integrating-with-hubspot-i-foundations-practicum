@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1= title
+    a(href="/update-cobj") Add to this table
+    if data && data.length > 0
+        table
+            thead
+                tr
+                    th Name
+                    th Experiance
+                    th Rate
+            tbody
+                each item in data
+                    tr
+                        td= item.properties['name']
+                        td= item.properties['experience']
+                        td= item.properties['rate']
+
+    else
+        p No custom objects found.
