@@ -1,0 +1,41 @@
+doctype html
+html 
+    head 
+        title Add Membership
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        a.add-btn(href="/") ← Return to the homepage
+        .form-container
+            h1 Add Membership
+            form(method="POST", action="/update-cobj")
+                
+                .form-group
+                    label(for="name") Name (Membership Name)
+                    input(type="text", name="name", id="name", placeholder="Enter membership name", required)
+
+                //- .form-group
+                //-     label(for="membership_type") Membership Type
+                //-     input(type="text", name="membership_type", id="membership_type", placeholder="Enter membership type", required)
+
+                .form-group
+                    label(for="membership_type") Membership Type
+                    select(name="membership_type", id="membership_type")
+                        each option in membershipOptions
+                            option(value=option.value) #{option.label}
+
+                .form-group
+                    label(for="start_date") Start Date
+                    input(type="date", name="start_date", id="start_date", required)
+
+                .form-group
+                    label(for="end_date") End Date
+                    input(type="date", name="end_date", id="end_date", required)
+
+                .form-group
+                    label(for="contact_id") Contact Association
+                    select(name="contact_id", id="contact_id")
+                        each contact in contacts
+                            option(value=contact.properties.hs_object_id) #{contact.properties.firstname} #{contact.properties.lastname}
+
+                button(type="submit") Submit

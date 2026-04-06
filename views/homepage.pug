@@ -1,0 +1,25 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Home Page
+        a.add-btn(href="/update-cobj") + Add to this table
+        table.membership-table
+            thead
+                tr
+                    th Name
+                    th Membership Type
+                    th Start Date
+                    th End Date
+                    th Associated Contact
+            tbody
+                each membership in data
+                    tr
+                        td #{membership.properties.name || '-'}
+                        td #{(membership.properties.membership_type || '-').replace(/_/g, ' ')}
+                        td #{membership.properties.start_date || '-'}
+                        td #{membership.properties.end_date || '-'}
+                        td #{membership.contactName || '-'}
