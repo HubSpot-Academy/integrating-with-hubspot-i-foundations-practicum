@@ -1,0 +1,17 @@
+doctype html
+html 
+    head 
+        title= title
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        .form-wrapper
+            a(href="/") Return to the homepage
+            h2 Update Custom Object
+            form(method="POST")
+                label(for="name") Name
+                input(type="text" name="name" required)
+                label(for="color") Color
+                input(type="text" name="color" required)
+                label(for="species") Species
+                input(type="text" name="species" required)
+                input(type="submit" value="Submit")

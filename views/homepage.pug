@@ -1,0 +1,19 @@
+doctype html
+html 
+    head 
+        title= title
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Custom Object: Pets
+        .nav 
+            a(href="/update-cobj") Add/Update this table
+        table
+            tr
+                th Name
+                th Color
+                th Species
+            each obj in data
+                tr
+                    td #{obj.properties.name}
+                    td #{obj.properties.color}
+                    td #{obj.properties.species}
