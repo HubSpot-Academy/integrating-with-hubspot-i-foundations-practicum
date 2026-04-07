@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        title= `${title}`
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Custom Objects Table
+        a(href="/update-cobj") Add to this table
+        table
+            tr
+                th Property 1
+                th Property 2
+            each obj in data
+                tr
+                    td #{obj.properties.custom_prop_1}
+                    td #{obj.properties.custom_prop_2}

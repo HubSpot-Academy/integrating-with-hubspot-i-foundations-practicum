@@ -1,0 +1,14 @@
+doctype html
+html
+    head
+        title= `${title}`
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Update Custom Object
+        a(href="/") Return to the homepage
+        .form-wrapper
+            form(method="POST")
+                label(for="new_property") New Property Value
+                input(type="text" name="new_property" required)
+                //- Add your other two custom properties here
+                input(type="submit" value="Submit")
