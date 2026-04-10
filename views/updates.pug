@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .container
+        h1= title
+
+        form(action="/update-cobj" method="POST")
+            div
+                label(for="name") Character Name
+                input(type="text" name="name" id="name" required)
+
+            div
+                label(for="special_ability") Special Ability
+                input(type="text" name="special_ability" id="special_ability" required)
+
+            div
+                label(for="power_level") Power Level
+                input(type="number" name="power_level" id="power_level" required)
+
+            input(type="submit" value="Create Anime Character")
+
+        p
+            a(href="/") Return to the homepage
