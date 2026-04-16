@@ -1,0 +1,22 @@
+doctype html
+hmtl 
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        h1 Add a new Linux Distribution 
+        .form-wrapper 
+            form(method="POST" action="/update-cobj")
+                label(for="name") 
+                input(type="text" id="name" name="name" required)
+
+                label(for="developer") Distribution developer
+                input(type="text" id="developer" name="distribution_developer" required)
+
+                label(for="kernel_version") Current Linux kernel version
+                input(type="text" id="kernel_versioon" name="current_linux_kernel_versioon" required)
+
+                input(type="submit" value="Add distribution")
+
+        a(href="/") Return to homepage

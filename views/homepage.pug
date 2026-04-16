@@ -1,0 +1,21 @@
+doctype html 
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+        h1 Linux Distributiion Custom Object Table
+        a(href="/update-cobj") Add to this table
+        table 
+            thead 
+                tr  
+                    th Distribution Name 
+                    th Linux Kernel Version 
+                    th Distributor Devloper 
+                tbody 
+                    each linux_distribution in data
+                        tr 
+                            td #{linux_distribution.properties.name}
+                            td #{linux_distribution.properties.current_linux_kernel_versioon}
+                            td #{linux_distribution.properties.distribution_developer}
