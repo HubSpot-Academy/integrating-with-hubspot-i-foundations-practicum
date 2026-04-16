@@ -56,3 +56,17 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+
+table {
+    border: 1px
+}
+
+th, td {
+    text-align: left;
+    border: 1px solid lightgrey;
+}
+
+th {
+    background-color: oklab(70.331% 0.02604 0.00829);
+    font-weight: bold;
+}
