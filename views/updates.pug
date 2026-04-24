@@ -1,0 +1,27 @@
+doctype html 
+html 
+    head 
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        .container
+            h1= title 
+
+            form(action="/update-cobj" method="POST")
+                div
+                    label(for="name") Name:
+                    input(type="text" id="name" name="name" required)
+
+                div
+                    label(for="special_ability") Special Ability:
+                    input(type="text" id="special_ability" name="special_ability" required)
+                    
+                div 
+                    label(for="power_level") Power Level:
+                    input(type="number" id="power_level" name="power_level" required)
+
+                input(type="submit" placeholder="create new record")
+
+            p 
+                a(href="/") Return to homepage    
