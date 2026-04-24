@@ -7,14 +7,15 @@ body, * {
 }
 
 h1 {
-    margin: 1rem;
+    margin: 1rem 0 2rem;
+    text-align: center;
+    color: #333;
 }
-
 
 table {
     border-collapse: collapse;
     width: 100%;
-    margin-top: 16px;
+    margin-top: 40px;
 }
 
 th,
@@ -26,38 +27,8 @@ td{
 }
 
 th{
-background-color: #f5c2c7;
-
-}
-
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
-}
-
-.card__email {
-    font-size: 1rem;
-}
-
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+    background-color: #310ecf;
+    color: #fff;
 }
 
 label, input {
@@ -81,4 +52,67 @@ input[type="submit"] {
 }
 .container {
     padding: 20px 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.btn{
+    background-color: #01a501;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    margin: 20px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #028a02;
+}
+
+.form-card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #310ecf;
+    box-shadow: 0 0 5px rgba(49, 14, 207, 0.3);
+}
+
+.form-actions {
+    text-align: center;
+}
+
+.form-actions .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
 }

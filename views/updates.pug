@@ -8,20 +8,22 @@ html
         .container
             h1= title 
 
-            form(action="/update-cobj" method="POST")
-                div
-                    label(for="name") Name:
-                    input(type="text" id="name" name="name" required)
+            .form-card
+                form(action="/update-cobj" method="POST")
+                    .form-group
+                        label(for="name") Name:
+                        input.form-control(type="text" id="name" name="name" required placeholder="Enter name")
 
-                div
-                    label(for="special_ability") Special Ability:
-                    input(type="text" id="special_ability" name="special_ability" required)
-                    
-                div 
-                    label(for="power_level") Power Level:
-                    input(type="number" id="power_level" name="power_level" required)
+                    .form-group
+                        label(for="special_ability") Special Ability:
+                        input.form-control(type="text" id="special_ability" name="special_ability" required placeholder="Enter special ability")
+                        
+                    .form-group
+                        label(for="power_level") Power Level:
+                        input.form-control(type="number" id="power_level" name="power_level" required placeholder="Enter power level")
 
-                input(type="submit" placeholder="create new record")
+                    .form-actions
+                        input.btn(type="submit" value="Create New Record")
 
             p 
-                a(href="/") Return to homepage    
+                a.btn(href="/") Return to Homepage    

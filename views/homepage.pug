@@ -5,22 +5,23 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
-        h1= title
+        .container
+            h1= title
 
-        a(href="/update-cobj") Add/Update this table 
+            a(href="/update-cobj" class="btn") Add/Update this table 
 
-        if !data || data.length === 0 
-            p No records found.
-        else
-            table 
-                thead 
-                    tr 
-                        th Name
-                        th Special Ability
-                        th Power Level
-                tbody 
-                    each record in data
+            if !data || data.length === 0 
+                p No records found.
+            else
+                table 
+                    thead 
                         tr 
-                            td #{record.properties.name}
-                            td #{record.properties.special_ability}
-                            td #{record.properties.power_level}
+                            th Name
+                            th Special Ability
+                            th Power Level
+                    tbody 
+                        each record in data
+                            tr 
+                                td #{record.properties.name}
+                                td #{record.properties.special_ability}
+                                td #{record.properties.power_level}
