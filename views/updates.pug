@@ -1,0 +1,29 @@
+doctype html 
+html 
+    head 
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        .container
+            h1= title 
+
+            .form-card
+                form(action="/update-cobj" method="POST")
+                    .form-group
+                        label(for="name") Name:
+                        input.form-control(type="text" id="name" name="name" required placeholder="Enter name")
+
+                    .form-group
+                        label(for="special_ability") Special Ability:
+                        input.form-control(type="text" id="special_ability" name="special_ability" required placeholder="Enter special ability")
+                        
+                    .form-group
+                        label(for="power_level") Power Level:
+                        input.form-control(type="number" id="power_level" name="power_level" required placeholder="Enter power level")
+
+                    .form-actions
+                        input.btn(type="submit" value="Create New Record")
+
+            p 
+                a.btn(href="/") Return to Homepage    
