@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= pageTitle
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1= pageTitle
+
+    a(href="/") Return to the homepage
+
+    form(action="/update-cobj", method="POST")
+      div
+        label(for="name") Name
+        input(type="text", id="name", name="name", required)
+
+      div
+        label(for="genre") Genre
+        input(type="text", id="genre", name="genre", required)
+
+      div
+        label(for="platform") Platform
+        input(type="text", id="platform", name="platform", required)
+
+      button(type="submit") Submit
