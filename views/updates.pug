@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Add a New Time Tracking Record
+        a(href="/") Return to the homepage
+        .form-wrapper
+            form(action="/update-cobj", method="POST")
+                label(for="hours_spent") Hours Spent
+                input(type="number", id="hours_spent", name="hours_spent", placeholder="e.g. 5", required)
+
+                label(for="time_logged") Time Logged
+                input(type="datetime-local", id="time_logged", name="time_logged", required)
+
+                input(type="submit", value="Add Record")
