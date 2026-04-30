@@ -1,0 +1,16 @@
+h1 Custom Object Table
+
+a(href="/update-cobj") Add to this table
+
+table(border="1")
+  thead
+    tr
+      th Name
+      th Bio
+      th Weight
+  tbody
+    each item in data
+      tr
+        td= item.properties.name || 'N/A'
+        td= item.properties.bio || 'N/A'
+        td= item.properties.weight || 'N/A'
