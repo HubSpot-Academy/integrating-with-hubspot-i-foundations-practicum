@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Time Tracking
+        a.add-link(href="/update-cobj") Add to this table
+        table
+            thead
+                tr
+                    th Billable Amount
+                    th Billable Rate
+                    th Hours Spent
+            tbody
+                each record in data
+                    tr
+                        td= record.properties.billable_amount
+                        td= record.properties.billable_rate
+                        td= record.properties.hours_spent

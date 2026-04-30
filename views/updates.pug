@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Add a New Time Tracking Record
+        a(href="/") Return to the homepage
+        .form-wrapper
+            form(action="/update-cobj", method="POST")
+                label(for="billable_amount") Billable Amount
+                input(type="text", id="billable_amount", name="billable_amount", placeholder="e.g. 500", required)
+
+                label(for="billable_rate") Billable Rate
+                input(type="text", id="billable_rate", name="billable_rate", placeholder="e.g. 100", required)
+
+                label(for="hours_spent") Hours Spent
+                input(type="text", id="hours_spent", name="hours_spent", placeholder="e.g. 5", required)
+
+                input(type="submit", value="Add Record")
