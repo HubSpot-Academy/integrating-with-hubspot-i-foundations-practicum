@@ -16,17 +16,22 @@ const CUSTOM_OBJ_TYPE = '2-136343455';
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get('/', async (req, res) => {
-    const url = `https://api.hubapi.com/crm/v3/objects/${CUSTOM_OBJ_TYPE}?properties=billable_amount,billable_rate,hours_spent`;
+    const url = `https://api.hubapi.com/crm/v3/objects/${CUSTOM_OBJ_TYPE}/search`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     };
+    const body = {
+        properties: ['hours_spent', 'billable_amount', 'billable_rate', 'time_logged'],
+        sorts: [{ propertyName: 'hs_createdate', direction: 'DESCENDING' }],
+        limit: 20
+    };
     try {
-        const resp = await axios.get(url, { headers });
+        const resp = await axios.post(url, body, { headers });
         const data = resp.data.results;
         res.render('homepage', { title: 'Time Tracking | HubSpot Custom Objects', data });
     } catch (error) {
-        console.error(error);
+        console.error('HubSpot error:', JSON.stringify(error.response?.data, null, 2));
         res.status(500).send('Error fetching custom object data');
     }
 });
@@ -40,12 +45,11 @@ app.get('/update-cobj', (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 app.post('/update-cobj', async (req, res) => {
-    const { billable_amount, billable_rate, hours_spent } = req.body;
+    const { hours_spent, time_logged } = req.body;
     const newRecord = {
         properties: {
-            billable_amount,
-            billable_rate,
-            hours_spent
+            hours_spent,
+            time_logged: new Date(time_logged).getTime()
         }
     };
     const url = `https://api.hubapi.com/crm/v3/objects/${CUSTOM_OBJ_TYPE}`;
@@ -57,7 +61,7 @@ app.post('/update-cobj', async (req, res) => {
         await axios.post(url, newRecord, { headers });
         res.redirect('/');
     } catch (error) {
-        console.error(error);
+        console.error('HubSpot error:', JSON.stringify(error.response?.data, null, 2));
         res.status(500).send('Error creating custom object record');
     }
 });

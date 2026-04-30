@@ -10,12 +10,14 @@ html
         table
             thead
                 tr
-                    th Billable Amount
-                    th Billable Rate
+                    th Time Logged
                     th Hours Spent
+                    th Billable Rate
+                    th Billable Amount
             tbody
                 each record in data
                     tr
-                        td= record.properties.billable_amount
-                        td= record.properties.billable_rate
-                        td= record.properties.hours_spent
+                        td= record.properties.time_logged ? new Date(Number(record.properties.time_logged)).toLocaleString() : '-'
+                        td= record.properties.hours_spent || '-'
+                        td= record.properties.billable_rate || '-'
+                        td= record.properties.billable_amount || '-'

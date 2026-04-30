@@ -9,13 +9,10 @@ html
         a(href="/") Return to the homepage
         .form-wrapper
             form(action="/update-cobj", method="POST")
-                label(for="billable_amount") Billable Amount
-                input(type="text", id="billable_amount", name="billable_amount", placeholder="e.g. 500", required)
-
-                label(for="billable_rate") Billable Rate
-                input(type="text", id="billable_rate", name="billable_rate", placeholder="e.g. 100", required)
-
                 label(for="hours_spent") Hours Spent
-                input(type="text", id="hours_spent", name="hours_spent", placeholder="e.g. 5", required)
+                input(type="number", id="hours_spent", name="hours_spent", placeholder="e.g. 5", required)
+
+                label(for="time_logged") Time Logged
+                input(type="datetime-local", id="time_logged", name="time_logged", required)
 
                 input(type="submit", value="Add Record")
