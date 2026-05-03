@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Update Custom Object Form
+        a(href="/") Return to the homepage
+        form(action="/update-cobj" method="POST")
+            div
+                label(for="name") Name
+                input#name(type="text" name="name" required)
+            div
+                label(for="type") Type
+                input#type(type="text" name="type" required)
+            div
+                label(for="id") Id
+                input#id(type="text" name="id" required)
+            div
+                button(type="submit") Submit
