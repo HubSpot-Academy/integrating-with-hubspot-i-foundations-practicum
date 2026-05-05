@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Add Game
+  body
+    h1 Add Game
+
+    a(href="/") Return to homepage
+
+    form(action="/update-cobj" method="POST")
+      input(type="text" name="name" placeholder="Name" required)
+      br
+      input(type="text" name="publisher" placeholder="Publisher")
+      br
+      input(type="number" name="price" placeholder="Price")
+      br
+      button(type="submit") Submit
