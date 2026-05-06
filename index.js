@@ -30,17 +30,17 @@ const fetchObjectsByType = async (objectType) => {
     return resp.data.results || [];
 };
 
-const renderVehiclesPage = async (req, res) => {
+const renderHomepage = async (req, res) => {
     if (!PRIVATE_APP_ACCESS) {
-        return res.render('vehicles', {
-            title: 'Vehicles | HubSpot APIs',
+        return res.render('homepage', {
+            title: 'Integrating With HubSpot I Practicum',
             data: [],
             error: 'PRIVATE_APP_ACCESS is missing in .env'
         });
     }
     if (!HUBSPOT_OBJECT_TYPE) {
-        return res.render('vehicles', {
-            title: 'Vehicles | HubSpot APIs',
+        return res.render('homepage', {
+            title: 'Integrating With HubSpot I Practicum',
             data: [],
             error: 'HUBSPOT_OBJECT_TYPE is missing in .env'
         });
@@ -53,36 +53,91 @@ const renderVehiclesPage = async (req, res) => {
             return {
                 name: properties.name || '-',
                 model: properties.model || '-',
-                licencePlate: properties.license_plate || properties.licence_plate || '-'
+                licensePlate: properties.license_plate || properties.licence_plate || '-'
             };
         });
 
-        res.render('vehicles', {
-            title: 'Vehicles | HubSpot APIs',
+        res.render('homepage', {
+            title: 'Integrating With HubSpot I Practicum',
             data,
             error: null
         });
     } catch (error) {
         const status = error.response?.status || 'UNKNOWN';
         console.error(error.response?.data || error.message || error);
-        res.render('vehicles', {
-            title: 'Vehicles | HubSpot APIs',
+        res.render('homepage', {
+            title: 'Integrating With HubSpot I Practicum',
             data: [],
             error: `Custom object data could not be loaded (${status}).`
         });
     }
 };
 
-app.get('/', renderVehiclesPage);
-app.get('/vehicles', renderVehiclesPage);
+app.get('/', renderHomepage);
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
+app.get('/update-cobj', (req, res) => {
+    const formData = {
+        name: req.query.name || '',
+        model: req.query.model || '',
+        license_plate: req.query.license_plate || ''
+    };
+
+    res.render('updates', {
+        title: 'Update Custom Object Form | Integrating With HubSpot I Practicum',
+        formData
+    });
+});
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
+app.post('/update-cobj', async (req, res) => {
+    const { name, model, license_plate } = req.body;
+
+    if (!PRIVATE_APP_ACCESS) {
+        return res.render('updates', {
+            title: 'Update Custom Object Form | Integrating With HubSpot I Practicum',
+            formData: { name: name || '', model: model || '', license_plate: license_plate || '' },
+            error: 'PRIVATE_APP_ACCESS is missing in .env'
+        });
+    }
+    if (!HUBSPOT_OBJECT_TYPE) {
+        return res.render('updates', {
+            title: 'Update Custom Object Form | Integrating With HubSpot I Practicum',
+            formData: { name: name || '', model: model || '', license_plate: license_plate || '' },
+            error: 'HUBSPOT_OBJECT_TYPE is missing in .env'
+        });
+    }
+
+    const payload = {
+        properties: {
+            name,
+            model,
+            license_plate
+        }
+    };
+
+    try {
+        const createEndpoint = `https://api.hubapi.com/crm/v3/objects/${HUBSPOT_OBJECT_TYPE}`;
+        await axios.post(createEndpoint, payload, { headers: buildHeaders() });
+        res.redirect('/');
+    } catch (error) {
+        const status = error.response?.status || 'UNKNOWN';
+        console.error(error.response?.data || error.message || error);
+        res.render('updates', {
+            title: 'Update Custom Object Form | Integrating With HubSpot I Practicum',
+            formData: {
+                name: name || '',
+                model: model || '',
+                license_plate: license_plate || ''
+            },
+            error: `Saving vehicle failed (${status}).`
+        });
+    }
+});
 
 // This is sample code to give you a reference for how you should structure your calls. 
 // App.get sample
