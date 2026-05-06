@@ -1,0 +1,29 @@
+doctype html
+html
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Custom Object Records
+        p
+            a(href="/update-cobj") Add to this table
+
+        if error
+            p= error
+        else if !data.length
+            p No custom object records found.
+        else
+            .table-wrapper
+                table.table.table-striped
+                    thead
+                        tr
+                            th Name
+                            th Model
+                            th License Plate
+                    tbody
+                        each row in data
+                            tr
+                                td= row.name
+                                td= row.model
+                                td= row.licensePlate

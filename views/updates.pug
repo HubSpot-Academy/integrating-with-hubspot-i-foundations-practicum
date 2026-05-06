@@ -1,0 +1,29 @@
+doctype html
+html
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Create Vehicle Record
+
+        p
+            a(href="/") Return to the homepage
+
+        if error
+            p= error
+
+        form(action="/update-cobj" method="POST")
+            p
+                label(for="name") Name
+                input#name.form-control(type="text" name="name" value=formData.name required)
+
+            p
+                label(for="model") Model
+                input#model.form-control(type="text" name="model" value=formData.model required)
+
+            p
+                label(for="license_plate") License plate
+                input#license_plate.form-control(type="text" name="license_plate" value=formData.license_plate required)
+
+            button.btn.btn-primary(type="submit") Create record
