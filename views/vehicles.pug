@@ -1,0 +1,24 @@
+doctype html
+html
+    head
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Vehicles
+
+        if error
+            p= error
+        else if !data.length
+            p No custom object records found.
+        else
+            .cards
+                each vehicle in data
+                    .card
+                        h2.card__name= vehicle.name
+                        p
+                            strong Model:
+                            |  #{vehicle.model}
+                        p
+                            strong Kennzeichen:
+                            |  #{vehicle.licencePlate}
