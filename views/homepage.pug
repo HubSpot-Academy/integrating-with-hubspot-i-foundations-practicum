@@ -1,0 +1,20 @@
+doctype html
+html
+  body
+
+    h1 Books Table
+
+    a(href="/update-cobj") Add to this table
+
+    table(border="1")
+
+      tr
+        th Name
+        th Author
+        th Genre
+
+      each record in records
+        tr
+          td= record.properties.name
+          td= record.properties.author
+          td= record.properties.genre

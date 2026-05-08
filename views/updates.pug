@@ -1,0 +1,25 @@
+doctype html
+html
+  body
+
+    h1 Add Book
+
+    a(href="/") Return to homepage
+
+    form(action="/update-cobj" method="POST")
+
+      div
+        label Name
+        input(type="text" name="name")
+
+      div
+        label Author
+        input(type="text" name="author")
+
+      div
+        label Genre
+        input(type="text" name="genre")
+
+      br
+
+      button(type="submit") Submit
