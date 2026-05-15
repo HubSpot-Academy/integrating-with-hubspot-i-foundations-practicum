@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    main
+      h1= title
+
+      a(href="/") Return to the homepage
+
+      form(action="/update-cobj", method="POST")
+        div
+          label(for="name") Name
+          input(type="text", id="name", name="name", required)
+
+        div
+          label(for="publisher") Publisher
+          input(type="text", id="publisher", name="publisher", required)
+
+        div
+          label(for="price") Price
+          input(type="number", id="price", name="price", required)
+
+        button(type="submit") Create record
