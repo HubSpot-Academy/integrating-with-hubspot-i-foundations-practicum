@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+
+  h1 Plant Collection
+
+  a(href='/update-cobj') Add to this table
+
+  table
+    thead
+      tr
+        th Name
+        th Species
+        th Watering Schedule
+
+    tbody
+      each record in records
+        tr
+          td= record.properties.name
+          td= record.properties.species
+          td= record.properties.watering_schedule

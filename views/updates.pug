@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+
+  .form-wrapper
+
+    h1 Add Plant
+
+    a(href='/') Return to the homepage
+
+    form(action='/update-cobj' method='POST')
+
+      label Name
+      input(type='text' name='name' required)
+
+      label Species
+      input(type='text' name='species' required)
+
+      label Watering Schedule
+      input(type='text' name='watering_schedule' required)
+
+      button(type='submit') Submit
