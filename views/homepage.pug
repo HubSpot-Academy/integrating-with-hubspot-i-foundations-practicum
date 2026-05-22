@@ -1,0 +1,26 @@
+html
+  head
+    title= title
+
+  body
+
+    h1 Contacts Table
+
+    a(href="/update-cobj") Add to this table
+
+    br
+    br
+
+    table(border="1")
+
+      tr
+        th First Name
+        th Last Name
+        th Email
+
+      each contact in data
+
+        tr
+          td= contact.properties.firstname
+          td= contact.properties.lastname
+          td= contact.properties.email

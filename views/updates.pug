@@ -1,0 +1,34 @@
+html
+  head
+    title= title
+
+  body
+
+    h1 Add Contact
+
+    a(href="/") Return to the homepage
+
+    br
+    br
+
+    form(action="/update-cobj" method="POST")
+
+      div
+        label First Name
+        input(type="text" name="firstname")
+
+      br
+
+      div
+        label Last Name
+        input(type="text" name="lastname")
+
+      br
+
+      div
+        label Email
+        input(type="email" name="email")
+
+      br
+
+      button(type="submit") Submit
