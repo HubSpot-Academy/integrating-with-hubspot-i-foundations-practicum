@@ -1,0 +1,41 @@
+//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+
+//- doctype html
+//- html 
+//-     head 
+//-         title= `${title}`
+//-         meta(name="viewport" content="width=device-width, initial-scale=1")
+//-         link(rel="stylesheet", href="/css/style.css")
+//-     body    
+//-         h1 Contacts
+//-         .cards 
+//-             each contact in data
+//-                 .card 
+//-                     h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
+//-                     p.card__email #{contact.properties.email}
+
+doctype html 
+html 
+    head 
+        title=title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+    body 
+        h1 Create a New Character
+        a(href="/") Return to the homepage
+
+        form(method="POST", action="/update-cobj")
+
+            label(for="name") Character Name 
+            input(type="text" name="name" id="name" required)
+
+            label(for="class") Class 
+            select(name="class" id="class" reqiured)
+                option(value="" disabled selected) Select a class...
+                option(value="Rogue") Rogue 
+                option(value="Mage") Mage 
+                option(value="Warrior") Warrior
+
+            label(for="level") Level 
+            input(type="number" name="level" id="level" required)
+
+            button(type="submit") Create Character
