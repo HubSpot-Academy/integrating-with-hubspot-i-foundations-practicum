@@ -52,7 +52,7 @@ app.get("/update-cobj", (req, res) => {
 // * Code for Route 3 goes here
 app.post("/update-cobj", async (req, res) => {
   const customObjectTypeId = "2-230139702";
-  const url = `https://api.hubapi.com/crm/objects/2026-03/${customObjectTypeId}`;
+  const url = `https://api.hubapi.com/crm/v3/objects/${customObjectTypeId}`;
 
   const newCharacter = {
     properties: {
