@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const app = express();
@@ -13,6 +14,29 @@ const PRIVATE_APP_ACCESS = "";
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
+app.get("/", async (req, res) => {
+  const customObjectTypeId = "2-230139702";
+  const url = `https://api.hubapi.com/crm/v3/objects/${customObjectTypeId}?properties=name,class,level`;
+  const headers = {
+    Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS_TOKEN}`,
+  };
+
+  try {
+    const response = await axios.get(url, { headers });
+    const data = response.data.results;
+
+    res.render("homepage", {
+      title: "Custom Object Records",
+      data,
+    });
+  } catch (error) {
+    console.error(
+      "Error retrieving custom object records: ",
+      error.response ? error.response.data : error.message,
+    );
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
