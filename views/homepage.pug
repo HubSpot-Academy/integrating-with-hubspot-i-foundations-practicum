@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Custom Object Records
+
+    a(href='/update-cobj') Add to this table
+
+    if records && records.length
+      table
+        thead
+          tr
+            th= col1
+            th= col2
+            th= col3
+            th= col4 
+        tbody
+          each record in records
+            tr
+              td= record.properties[prop1] || '—'
+              td= record.properties[prop2] || '—'
+              td= record.properties[prop3] || '—'
+              td= record.properties[prop4] || '—'
+    else
+      p No records found. Add one using the link above!

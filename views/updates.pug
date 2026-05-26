@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Add a New Record
+
+    a(href='/') Return to the homepage
+
+    form(action='/update-cobj', method='POST')
+      div
+        label(for=prop1)= col1
+        input(type='text', id=prop1, name=prop1, required)
+
+      div
+        label(for=prop2)= col2
+        input(type='text', id=prop2, name=prop2, required)
+
+      div
+        label(for=prop3)= col3
+        input(type='text', id=prop3, name=prop3, required)
+
+      div
+        label(for=prop4)= col4
+        select(id=prop4, name=prop4, required)
+            option(value='') -- Select --
+            option(value='Meow') Meow
+            option(value='Bark') Bark
+
+      button(type='submit') Add Record
