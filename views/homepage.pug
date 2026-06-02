@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Apartment Listings
+    a(href='/update-cobj') Add to this table
+    table
+      thead
+        tr
+          th Name
+          th Location
+          th Type
+      tbody
+        each record in records
+          tr
+            td= record.properties.name
+            td= record.properties.location
+            td= record.properties.type
