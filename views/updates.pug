@@ -10,6 +10,7 @@ html
         .cards 
             each contact in data
                 .card 
-                    h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-                    p.card__email #{contact.properties.email}
+                    h2.card__name #{contact.properties.name}
+                    p.card__rating Rating: #{contact.properties.rating}
+                    p.card__position Position: #{contact.properties.position}
         a(href="/") Back to homepage
