@@ -29,7 +29,7 @@ app.get('/', async (req, res) => {
 
     const data = response.data.results;
 
-    res.render('updates', {
+    res.render('homepage', {
       title: 'Custom Objects | HubSpot APIs',
       data
     });
