@@ -1,0 +1,45 @@
+doctype html
+html 
+  head 
+    title Update Custom Object Form | Integrating With HubSpot I Practicum
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+
+  body    
+    h1 Update Custom Object Form
+
+    .cards 
+      each contact in data
+        .card 
+          form(action="/update-cobj" method="POST")
+
+            // Hidden ID so HubSpot knows which custom object record to update
+            input(type="hidden" name="objectId" value=contact.id)
+
+            label(for=`name-${contact.id}`) Name
+            input(
+              type="text"
+              id=`name-${contact.id}`
+              name="name"
+              value=contact.properties.name
+            )
+
+            label(for=`rating-${contact.id}`) Rating
+            input(
+              type="number"
+              id=`rating-${contact.id}`
+              name="rating"
+              value=contact.properties.rating
+            )
+
+            label(for=`position-${contact.id}`) Position
+            input(
+              type="text"
+              id=`position-${contact.id}`
+              name="position"
+              value=contact.properties.position
+            )
+
+            button(type="submit") Update
+
+    a(href="/") Back to homepage
