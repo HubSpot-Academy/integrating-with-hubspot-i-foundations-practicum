@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title Ambar Apparel Items
+  body
+    h1 Ambar Apparel Items
+    a(href="/update-cobj") Add/Update Item
+    ul
+      each item in items
+        li
+          strong= item.properties.name 
+          |  (SKU: #{item.properties.sku}) - Price: $#{item.properties.price}

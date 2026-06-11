@@ -1,5 +1,7 @@
+require('dotenv').config();
 const express = require('express');
-const axios = require('axios');
+const { Client } = require('@hubspot/api-client');
+
 const app = express();
 
 app.set('view engine', 'pug');
@@ -7,65 +9,53 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+// Initialize HubSpot Client
+const hubspotClient = new Client({ accessToken: process.env.PRIVATE_APP_ACCESS_TOKEN });
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+// Your specific Object ID
+const OBJECT_ID = '2-203999469';
 
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
+// ROUTE 1: Homepage - Fetch and display data
+app.get('/', async (req, res) => {
     try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
+        const properties = ['name', 'sku', 'price'];
+        const response = await hubspotClient.crm.objects.basicApi.getPage(OBJECT_ID, 10, undefined, properties);
+        
+        // This log helps us identify the exact names of your properties in the terminal
+        if (response.results.length > 0) {
+            console.log("HUB_DATA_PROPERTIES:", response.results[0].properties);
+        }
+
+        res.render('homepage', { items: response.results });
     } catch (error) {
+        console.error('--- ERROR FETCHING DATA ---');
         console.error(error);
+        res.status(500).send('Error fetching data. Check terminal for details.');
     }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
+// ROUTE 2: Form page - Render the update form
+app.get('/update-cobj', async (req, res) => {
+    res.render('updates', { title: 'Update Custom Object Form' });
+});
+
+// ROUTE 3: POST route - Submit form data to HubSpot
+app.post('/update-cobj', async (req, res) => {
+    const newRecord = {
         properties: {
-            "favorite_book": req.body.newVal
+            "name": req.body.name,
+            "sku": req.body.sku,
+            "price": req.body.price
         }
     }
-
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
+    try {
+        await hubspotClient.crm.objects.basicApi.create(OBJECT_ID, { properties: newRecord.properties });
+        res.redirect('/');
     } catch(err) {
+        console.error('--- ERROR CREATING RECORD ---');
         console.error(err);
+        res.status(500).send('Error creating record. Check terminal for details.');
     }
-
 });
-*/
 
-
-// * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));

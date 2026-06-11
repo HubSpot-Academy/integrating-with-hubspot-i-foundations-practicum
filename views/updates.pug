@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Add Item
+  body
+    h1 Add New Apparel Item
+    form(action="/update-cobj", method="POST")
+      label Name:
+      input(type="text", name="name", required)
+      br
+      label SKU:
+      input(type="text", name="sku", required)
+      br
+      label Price:
+      input(type="number", name="price", required)
+      br
+      button(type="submit") Submit
+    a(href="/") Return to homepage
