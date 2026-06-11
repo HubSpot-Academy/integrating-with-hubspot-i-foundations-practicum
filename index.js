@@ -12,14 +12,20 @@ app.use(express.json());
 // Initialize HubSpot Client
 const hubspotClient = new Client({ accessToken: process.env.PRIVATE_APP_ACCESS_TOKEN });
 
-// Use the exact Object ID found in your URL: 2-203999469
+// Your specific Object ID
 const OBJECT_ID = '2-203999469';
 
-// ROUTE 1: Homepage - Fetch data
+// ROUTE 1: Homepage - Fetch and display data
 app.get('/', async (req, res) => {
     try {
-        // Use basicApi.getPage to retrieve records
-        const response = await hubspotClient.crm.objects.basicApi.getPage(OBJECT_ID);
+        const properties = ['name', 'sku', 'price'];
+        const response = await hubspotClient.crm.objects.basicApi.getPage(OBJECT_ID, 10, undefined, properties);
+        
+        // This log helps us identify the exact names of your properties in the terminal
+        if (response.results.length > 0) {
+            console.log("HUB_DATA_PROPERTIES:", response.results[0].properties);
+        }
+
         res.render('homepage', { items: response.results });
     } catch (error) {
         console.error('--- ERROR FETCHING DATA ---');
@@ -28,12 +34,12 @@ app.get('/', async (req, res) => {
     }
 });
 
-// ROUTE 2: Form page
+// ROUTE 2: Form page - Render the update form
 app.get('/update-cobj', async (req, res) => {
     res.render('updates', { title: 'Update Custom Object Form' });
 });
 
-// ROUTE 3: POST route
+// ROUTE 3: POST route - Submit form data to HubSpot
 app.post('/update-cobj', async (req, res) => {
     const newRecord = {
         properties: {
@@ -43,7 +49,6 @@ app.post('/update-cobj', async (req, res) => {
         }
     }
     try {
-        // Use basicApi.create to create records
         await hubspotClient.crm.objects.basicApi.create(OBJECT_ID, { properties: newRecord.properties });
         res.redirect('/');
     } catch(err) {
