@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .form-wrapper
+      h1 Add Custom Object Record
+
+      a(href="/") Return to the homepage
+
+      form(action="/update-cobj", method="POST")
+        label(for="name") Name
+        input(type="text", id="name", name="name", required)
+
+        label(for="publisher") Publisher
+        input(type="text", id="publisher", name="publisher", required)
+
+        label(for="price") Price
+        input(type="number", id="price", name="price", required)
+
+        input(type="submit", value="Submit")

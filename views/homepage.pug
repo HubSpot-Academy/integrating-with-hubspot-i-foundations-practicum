@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= `${title}`
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Custom Object Table
+
+    a(href="/update-cobj") Add to this table
+
+    table
+      thead
+        tr
+          th Name
+          th Publisher
+          th Price
+      tbody
+        each game in data
+          tr
+            td #{game.properties.name}
+            td #{game.properties.publisher}
+            td #{game.properties.price}
+            
