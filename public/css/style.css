@@ -51,8 +51,23 @@ input[type="text"] {
 }
 
 input[type="submit"] {
-    background-color: lightgrey;
+    background-color: cadetblue;
     border: none;
     padding: .375rem 1rem;
     margin-top: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+}
+
+th, td {
+    border: 1px solid  cadetblue;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: cadetblue;
 }
