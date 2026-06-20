@@ -1,0 +1,18 @@
+html
+    head
+        title #{title}
+    body
+        h1 Books
+        a(href='/update-cobj') Add to this table
+        table
+            thead
+                tr
+                    th Name
+                    th Author
+                    th Genre
+            tbody
+                each book in data
+                    tr
+                        td #{book.properties.name}
+                        td #{book.properties.author}
+                        td #{book.properties.genre}
