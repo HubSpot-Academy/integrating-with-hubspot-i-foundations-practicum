@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Add a Board Game
+        if error
+            p.error= error
+        .form-wrapper
+            form(action="/update-cobj" method="POST")
+                each property in properties
+                    label(for=property.name)= property.label
+                    input(type=property.type === "number" ? "number" : "text", id=property.name, name=property.name, required=property.name === "name")
+                input(type="submit" value="Submit")
+        p
+            a(href="/") Return to the homepage

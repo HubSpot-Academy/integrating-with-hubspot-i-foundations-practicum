@@ -1,5 +1,7 @@
 const express = require('express');
 const axios = require('axios');
+require('dotenv').config();
+
 const app = express();
 
 app.set('view engine', 'pug');
@@ -8,64 +10,84 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
+const CUSTOM_OBJECT_TYPE = process.env.CUSTOM_OBJECT_TYPE;
+const FORM_TITLE = 'Update Custom Object Form | Integrating With HubSpot I Practicum';
+const HOME_TITLE = 'Board Games | Integrating With HubSpot I Practicum';
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+if (!PRIVATE_APP_ACCESS || !CUSTOM_OBJECT_TYPE) {
+    console.error('Missing PRIVATE_APP_ACCESS or CUSTOM_OBJECT_TYPE in .env - HubSpot requests will fail until these are set.');
+}
 
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
+const hubspot = axios.create({
+    baseURL: 'https://api.hubapi.com',
+    headers: {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     }
+});
+
+// Custom (non HubSpot-defined) properties on the object, "name" first
+async function getCustomProperties() {
+    const resp = await hubspot.get(`/crm/v3/properties/${CUSTOM_OBJECT_TYPE}`);
+    return resp.data.results
+        .filter(property => !property.hubspotDefined)
+        .sort((a, b) => (a.name === 'name' ? -1 : b.name === 'name' ? 1 : 0));
+}
+
+// ROUTE 1 - Homepage: fetch every custom property for every Board Game record and render them in a table
+app.get('/', async (req, res) => {
     try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
+        const properties = await getCustomProperties();
+        const propertyNames = properties.map(property => property.name).join(',');
+        const resp = await hubspot.get(`/crm/v3/objects/${CUSTOM_OBJECT_TYPE}?properties=${propertyNames}`);
+        res.render('homepage', { title: HOME_TITLE, properties, data: resp.data.results });
     } catch (error) {
-        console.error(error);
+        console.error(error.response ? error.response.data : error.message);
+        res.status(502).render('homepage', {
+            title: HOME_TITLE,
+            properties: [],
+            data: [],
+            error: 'Could not load records from HubSpot. Check the server logs and your .env configuration.'
+        });
     }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
-        }
+// ROUTE 2 - Render the form used to create a new Board Game record
+app.get('/update-cobj', async (req, res) => {
+    try {
+        const properties = await getCustomProperties();
+        res.render('updates', { title: FORM_TITLE, properties });
+    } catch (error) {
+        console.error(error.response ? error.response.data : error.message);
+        res.status(502).render('updates', {
+            title: FORM_TITLE,
+            properties: [],
+            error: 'Could not load the form fields from HubSpot.'
+        });
     }
-
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
-
 });
-*/
 
+// ROUTE 3 - Create the new Board Game record from the form data, then redirect home
+app.post('/update-cobj', async (req, res) => {
+    if (!req.body.name || !req.body.name.trim()) {
+        const properties = await getCustomProperties().catch(() => []);
+        return res.status(400).render('updates', { title: FORM_TITLE, properties, error: 'Name is required.' });
+    }
+
+    try {
+        await hubspot.post(`/crm/v3/objects/${CUSTOM_OBJECT_TYPE}`, { properties: req.body });
+        res.redirect('/');
+    } catch (error) {
+        console.error(error.response ? error.response.data : error.message);
+        const properties = await getCustomProperties().catch(() => []);
+        res.status(502).render('updates', {
+            title: FORM_TITLE,
+            properties,
+            error: 'Could not create the record in HubSpot. Please try again.'
+        });
+    }
+});
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));

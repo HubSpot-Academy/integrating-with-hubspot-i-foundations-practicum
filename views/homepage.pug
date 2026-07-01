@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Board Games
+        p
+            a(href="/update-cobj") Add to this table
+        if error
+            p.error= error
+        table
+            thead
+                tr
+                    each property in properties
+                        th= property.label
+            tbody
+                each game in data
+                    tr
+                        each property in properties
+                            td= game.properties[property.name]
