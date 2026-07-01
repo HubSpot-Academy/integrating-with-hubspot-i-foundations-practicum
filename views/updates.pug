@@ -6,14 +6,13 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body
         h1 Add a Board Game
+        if error
+            p.error= error
         .form-wrapper
             form(action="/update-cobj" method="POST")
-                label(for="name") Name
-                input(type="text" id="name" name="name" required)
-                label(for="genre") Genre
-                input(type="text" id="genre" name="genre")
-                label(for="designer") Designer
-                input(type="text" id="designer" name="designer")
+                each property in properties
+                    label(for=property.name)= property.label
+                    input(type=property.type === "number" ? "number" : "text", id=property.name, name=property.name, required=property.name === "name")
                 input(type="submit" value="Submit")
         p
             a(href="/") Return to the homepage

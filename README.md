@@ -7,6 +7,17 @@ To read the full directions, please go to the [practicum instructions](https://a
 **Put your HubSpot developer test account custom objects URL link here:** https://app-na2.hubspot.com/contacts/245441031/objects/2-231926726/views/all/list
 
 ___
+## About this app
+A small Express app that lists records from a custom "Board Games" object in HubSpot and lets you add new ones through a form. The homepage and form fields are both driven off of whatever custom properties actually exist on the object in HubSpot, so adding a property there (e.g. "Min Players") shows up automatically without code changes.
+
+## Setup
+1. `npm install`
+2. Copy `.env.example` to `.env` and fill in:
+   - `PRIVATE_APP_ACCESS`: your HubSpot private app's access token
+   - `CUSTOM_OBJECT_TYPE`: the custom object's fully qualified name or object type ID (e.g. `p123456_board_games` or `2-123456`)
+3. `node index.js`
+4. Open `http://localhost:3000`
+
 ## Tips:
 - Commit to your repository often. Even if you make small tweaks to your code, it’s best to be committing to your repository frequently.
 - The subject of the custom object is up to you. Feel free to get creative!

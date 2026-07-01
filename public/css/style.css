@@ -81,3 +81,9 @@ p {
     text-align: center;
     margin: 1rem;
 }
+
+.error {
+    text-align: center;
+    color: #b91c1c;
+    font-weight: bold;
+}
