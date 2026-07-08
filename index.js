@@ -8,19 +8,81 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
+require('dotenv').config();
 
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
+const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS_TOKEN;
 
-// * Code for Route 1 goes here
+const OBJECT_TYPE = "2-232068898";
 
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
+//TODO ROUTE 1
 
-// * Code for Route 2 goes here
+app.get('/', async (req, res) => {
 
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
+    const url = `https://api.hubapi.com/crm/v3/objects/${OBJECT_TYPE}?properties=name,genre,rating`;
 
-// * Code for Route 3 goes here
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    try {
+
+        const response = await axios.get(url, { headers });
+
+        res.render('homepage', {
+            title: 'Movies',
+            data: response.data.results
+        });
+
+    } catch (err) {
+
+        console.error(err.response?.data || err);
+
+    }
+
+});
+
+//TODO ROUTE 2
+
+app.get('/update-cobj', (req, res) => {
+    res.render('updates', {
+        title: 'Update Custom Object Form | Integrating With HubSpot I Practicum'
+    });
+});
+
+// TODO: ROUTE 3 
+
+app.post('/update-cobj', async (req, res) => {
+
+    const url = `https://api.hubapi.com/crm/v3/objects/${OBJECT_TYPE}`;
+
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    const newMovie = {
+        properties: {
+            name: req.body.name,
+            genre: req.body.genre,
+            rating: req.body.rating
+        }
+    };
+
+    try {
+        await axios.post(url, newMovie, { headers });
+
+        res.redirect('/');
+
+    } catch (err) {
+
+        console.error(err.response?.data || err);
+
+        res.send("Error creating record");
+
+    }
+
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 

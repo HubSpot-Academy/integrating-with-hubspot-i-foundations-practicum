@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title= title
+
+  body
+
+    h1 Add a Movie
+
+    a(href="/") Return to the homepage
+
+    br
+    br
+
+    form(action="/update-cobj" method="POST")
+
+      div
+        label(for="name") Name
+        br
+        input(type="text" name="name" required)
+
+      br
+
+      div
+        label(for="genre") Genre
+        br
+        input(type="text" name="genre" required)
+
+      br
+
+      div
+        label(for="rating") Rating
+        br
+        input(type="number" name="rating" required)
+
+      br
+
+      button(type="submit") Create Movie
+      
