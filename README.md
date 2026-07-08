@@ -26,3 +26,46 @@ ___
 - All work must be your own. During the grading process we will check the revision history. Submissions that do not meet this requirement will not be considered.
 - You must have at least two new routes in your index.js file and one new pug template for the homepage.
 - You must create a developer test account and link to it in your README.md file. Submissions that do not meet this requirement will not be considered.
+
+
+
+
+
+# Integrating With HubSpot I: Foundations Practicum
+
+## Description
+
+This application displays Movie custom object records from HubSpot CRM and allows users to create new Movie records using a form.
+
+## Technologies Used
+
+- Node.js
+- Express
+- Axios
+- Pug
+- HubSpot CRM API
+
+## Installation
+
+1. Clone the repository.
+2. Run:
+
+```bash
+npm install
+```
+
+3. Create a `.env` file with:
+
+```text
+PRIVATE_APP_ACCESS_TOKEN=your_private_app_token
+```
+
+4. Run:
+
+```bash
+node index.js
+```
+
+## Custom Object List
+
+https://app-na2.hubspot.com/contacts/246657356/objects/2-232068898/views/all/list
