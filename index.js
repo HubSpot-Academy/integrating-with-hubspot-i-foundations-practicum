@@ -14,7 +14,19 @@ const PRIVATE_APP_ACCESS = process.env.HS_PRIVATE_APP_KEY;
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get('/', async (req, res) => {
-    
+    const cars = 'https://api.hubspot.com/crm/v3/objects/2-65497311?properties=name&properties=year&properties=manufacturer';
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    }
+    try {
+        const resp = await axios.get(cars, { headers });
+        const data = resp.data.results;
+        console.log(data)
+        res.render('homepage', { title: 'Cars | HubSpot APIs', data });      
+    } catch (error) {
+        console.error(error);
+    }
 });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
@@ -45,31 +57,13 @@ app.post('/update-cobj', async (req, res) => {
 
     try { 
         await axios.post(createContact, update, { headers } );
-        res.redirect('back');
+        res.redirect('/');
     } catch(err) {
         console.error(err);
     }
 });
 
 
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
 
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
-});
-**/
 
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
