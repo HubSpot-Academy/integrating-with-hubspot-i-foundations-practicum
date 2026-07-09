@@ -5,6 +5,21 @@ body, * {
     margin: 0;
     padding: 0;
 }
+/* public/css/style.css */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+/* This is the code you asked about */
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
 
 h1 {
     margin: 1rem;
