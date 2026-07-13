@@ -1,0 +1,52 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title= title
+    link(rel='stylesheet' href='/css/style.css')
+
+  body
+    main
+      h1 Add a Movie
+      p Enter the movie information below.
+
+      form(action='/update-cobj' method='POST')
+        label(for='name') Name
+        input(
+          type='text'
+          id='name'
+          name='name'
+          placeholder='Example: Aliens'
+          required
+        )
+
+        label(for='genre') Genre
+        select(id='genre' name='genre' required)
+          option(value='' disabled selected) Select a genre
+          option(value='Action') Action
+          option(value='Adventure') Adventure
+          option(value='Animation') Animation
+          option(value='Comedy') Comedy
+          option(value='Drama') Drama
+          option(value='Fantasy') Fantasy
+          option(value='Horror') Horror
+          option(value='Mystery') Mystery
+          option(value='Romance') Romance
+          option(value='Science Fiction') Science Fiction
+
+        label(for='release_year') Release Year
+        input(
+          type='number'
+          id='release_year'
+          name='release_year'
+          placeholder='Example: 1986'
+          min='1888'
+          max='2100'
+          step='1'
+          required
+        )
+
+        button(type='submit') Add Movie
+
+      a(href='/') Return to the homepage

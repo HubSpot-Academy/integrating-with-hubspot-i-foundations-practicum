@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+
+    h1 🎬 Kristina's Movie Database
+
+    a(href='/update-cobj') Add to this table
+
+    br
+    br
+
+    table(border='1')
+
+      tr
+        th Name
+        th Genre
+        th Release Year
+
+      each movie in data
+
+        tr
+          td= movie.properties.name
+          td= movie.properties.genre
+          td= movie.properties.release_year
+        
