@@ -1,0 +1,24 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Form
+        .form-wrapper
+            form(action="/update-cobj", method="POST")
+                
+                p
+                    | Plant Name: 
+                    input(type="text", name="name" value=name)
+                p
+                    | Plant color: 
+                    input(type="text", name="color" value=color)
+                p
+                | Plant edibility: 
+                select(type="text", name="edible" value=edible)
+                    option(value="Yes") Yes
+                    option(value="No") No
+                button(type="submit") Submit
+            

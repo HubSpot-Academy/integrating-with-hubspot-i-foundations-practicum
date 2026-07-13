@@ -1,0 +1,22 @@
+
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 My Plants
+    a(href="/update-cobj") Add to this table
+    
+    table
+      thead
+        tr
+          th Name
+          th Color
+          th Edible
+      tbody
+        each item in data
+          tr
+            td #{item.properties.name}
+            td #{item.properties.color}
+            td #{item.properties.edible}
