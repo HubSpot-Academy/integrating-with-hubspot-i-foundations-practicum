@@ -1,58 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  max-width: 700px;
+  margin: 40px auto;
+  color: #2d2d2d;
+  padding: 0 20px;
 }
 
 h1 {
-    margin: 1rem;
+  color: #ff7a59;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+a {
+  color: #0091ae;
+  display: inline-block;
+  margin-bottom: 16px;
+  text-decoration: none;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+a:hover {
+  text-decoration: underline;
 }
 
-.card__email {
-    font-size: 1rem;
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+th, td {
+  border: 1px solid #cbd6e2;
+  padding: 8px 12px;
+  text-align: left;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
+th {
+  background-color: #f5c6cb;
 }
 
-input[type="text"] {
-    padding: .25rem;
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  margin-bottom: 20px;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+label {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #cbd6e2;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ff7a59;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #e26a4d;
 }

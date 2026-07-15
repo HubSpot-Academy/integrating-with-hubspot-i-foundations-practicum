@@ -1,0 +1,23 @@
+doctype html
+html(lang='it')
+  head
+    meta(charset='UTF-8')
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Custom Object Table
+
+    a(href='/update-cobj') Add to this table
+
+    table
+      thead
+        tr
+          th Name
+          th Publisher
+          th Price
+      tbody
+        each game in games
+          tr
+            td= game.properties.name
+            td= game.properties.publisher
+            td= game.properties.price

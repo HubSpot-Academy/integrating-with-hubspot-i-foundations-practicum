@@ -1,0 +1,22 @@
+doctype html
+html(lang='it')
+  head
+    meta(charset='UTF-8')
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Aggiungi un nuovo Videogioco
+
+    form(action='/update-cobj', method='POST')
+      label(for='name') Nome:
+      input(type='text', id='name', name='name', required)
+
+      label(for='publisher') Publisher:
+      input(type='text', id='publisher', name='publisher', required)
+
+      label(for='price') Prezzo:
+      input(type='number', id='price', name='price', required)
+
+      button(type='submit') Invia
+
+    a(href='/') Return to the homepage

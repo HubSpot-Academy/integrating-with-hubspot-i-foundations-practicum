@@ -1,15 +1,21 @@
-//- ** This is a sample of a pug template and how it uses the data passed to it from index.js.
+doctype html
+html(lang='it')
+  head
+    meta(charset='UTF-8')
+    title Contacts (reference)
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Contacts Table (esempio di riferimento)
 
-//- doctype html
-//- html 
-//-     head 
-//-         title= `${title}`
-//-         meta(name="viewport" content="width=device-width, initial-scale=1")
-//-         link(rel="stylesheet", href="/css/style.css")
-//-     body    
-//-         h1 Contacts
-//-         .cards 
-//-             each contact in data
-//-                 .card 
-//-                     h2.card__name #{contact.properties.firstname}  #{contact.properties.lastname}
-//-                     p.card__email #{contact.properties.email}
+    table
+      thead
+        tr
+          th First name
+          th Last name
+          th Email
+      tbody
+        each contact in contacts
+          tr
+            td= contact.properties.firstname
+            td= contact.properties.lastname
+            td= contact.properties.email
