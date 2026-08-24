@@ -1,0 +1,20 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Update Custom Object Form
+        .form-wrapper
+            form(action="/update-cobj" method="POST")
+                label(for="name") Name
+                input(type="text" name="name" id="name" required)
+                label(for="age") Age
+                input(type="text" name="age" id="age")
+                label(for="race") Race
+                select(name="race" id="race")
+                    option(value="German shepherd") German shepherd
+                    option(value="Australian shepherd") Australian shepherd
+                input(type="submit" value="Submit")
+        a(href="/") Return to the homepage
