@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    h1 Video Game Characters
+    a(href='/update-cobj') Add to this table
+    table
+      thead
+        tr
+          th Name
+          th Class
+          th Level
+      tbody
+        each character in characters
+          tr
+            td= character.properties.name
+            td= character.properties.character_class
+            td= character.properties.level

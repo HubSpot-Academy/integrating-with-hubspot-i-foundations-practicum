@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    h1 Add a New Character
+    form(action='/update-cobj' method='POST')
+      label(for='name') Name
+      input(type='text' name='name' id='name' required)
+      label(for='character_class') Class
+      input(type='text' name='character_class' id='character_class' required)
+      label(for='level') Level
+      input(type='number' name='level' id='level' required)
+      button(type='submit') Submit
+    a(href='/') Return to the homepage
