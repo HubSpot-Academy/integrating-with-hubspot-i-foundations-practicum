@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title Custom Object Table
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Custom Object Records (Cars)
+    a(href="/update-cobj") Add/Update this table
+    table
+      thead
+        tr
+          th Name
+          th Model
+          th Year
+      tbody
+        each car in data
+          tr
+            td= car.properties.car_name || car.properties.name
+            td= car.properties.car_model || car.properties.model
+            td= car.properties.car_year || car.properties.year
