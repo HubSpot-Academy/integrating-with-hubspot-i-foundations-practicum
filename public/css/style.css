@@ -1,58 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-body, * {
-    font-family: 'Roboto', sans-serif;
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
     margin: 0;
-    padding: 0;
+    padding: 40px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 30px;
 }
 
 h1 {
-    margin: 1rem;
+    margin-top: 0;
+}
+.container {
+    border-radius: 8px;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+button:hover,
+.button:hover {
+    opacity: 0.9;
+}
+.button {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px 16px;
+    background: #ff7a59;
+    color: #ffffff;
+    text-decoration: none;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.card__email {
-    font-size: 1rem;
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
 }
 
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+th {
+    background: #f1f1f1;
 }
 
-label, input {
-    margin-top: 5px;
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
     display: block;
-    font-size: inherit;
+    margin-bottom: 6px;
+    font-weight: bold;
 }
 
-input[type="text"] {
-    padding: .25rem;
+input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+button {
+    padding: 10px 18px;
+    border: 0;
+    background: #ff7a59;
+    color: #ffffff;
+    cursor: pointer;
 }
