@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Books
+    a(href="/update-cobj") Add to this table
+
+    table
+      thead
+        tr
+          th Name
+          th Author
+          th Genre
+      tbody
+        each book in books
+          tr
+            td= book.properties.name
+            td= book.properties.author
+            td= book.properties.genre
