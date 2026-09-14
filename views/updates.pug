@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+
+  body
+    h1 Create a New Contact
+
+    form(action="/update-cobj" method="POST")
+      div
+        label(for="firstname") First Name
+        input#firstname(type="text" name="firstname" required)
+
+      div
+        label(for="lastname") Last Name
+        input#lastname(type="text" name="lastname" required)
+
+      div
+        label(for="email") Email
+        input#email(type="email" name="email" required)
+
+      button(type="submit") Create Contact
+
+    br
+
+    a(href="/") Return to the homepage

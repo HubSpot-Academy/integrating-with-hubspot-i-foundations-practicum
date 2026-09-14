@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+
+  body
+    h1 HubSpot Contacts
+
+    a(href="/update-cobj") Add a new contact
+
+    table
+      thead
+        tr
+          th First Name
+          th Last Name
+          th Email
+
+      tbody
+        each contact in data
+          tr
+            td= contact.properties.firstname || ''
+            td= contact.properties.lastname || ''
+            td= contact.properties.email || ''
