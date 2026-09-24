@@ -56,3 +56,19 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+.add-link {
+    display: inline-block;
+    margin: 0 1rem 1rem;
+}
+
+.pets-table {
+    margin: 0 1rem;
+    border-collapse: collapse;
+}
+
+.pets-table th,
+.pets-table td {
+    border: solid 1px lightgrey;
+    padding: .5rem 1rem;
+    text-align: left;
+}
