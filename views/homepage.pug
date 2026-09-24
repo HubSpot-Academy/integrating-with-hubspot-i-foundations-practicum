@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Pets
+        a.add-link(href="/update-cobj") Add to this table
+        table.pets-table
+            thead
+                tr
+                    th Name
+                    th Species
+                    th Bio
+            tbody
+                each pet in pets
+                    tr
+                        td= pet.properties.name
+                        td= pet.properties.species
+                        td= pet.properties.bio
