@@ -1,0 +1,31 @@
+doctype html
+html
+    head 
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1 Pets
+        hr
+        p
+            a(href="/new-pet") Add to this table
+        hr
+        table
+            thead
+                tr
+                    th First Name
+                    th Last Name
+                    th Email
+                    th Last Changed
+                    th
+            tbody
+                each contact in data
+                    tr
+                        td #{contact.properties.firstname}
+                        td #{contact.properties.lastname}
+                        td #{contact.properties.email}
+                        td #{contact.properties.lastmodifieddate}
+                        td 
+                            button
+                                a(href='/update-pet?method=patch&firstname=' + contact.properties.firstname + '&lastname=' + contact.properties.lastname + '&email=' + contact.properties.email) Update
+
