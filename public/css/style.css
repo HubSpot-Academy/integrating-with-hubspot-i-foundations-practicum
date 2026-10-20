@@ -56,3 +56,92 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+
+.custom-object-page,
+.custom-object-page * {
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.custom-object-page {
+    margin: 24px 32px;
+    color: #000;
+}
+
+.custom-object-page h1 {
+    margin: 0 0 36px;
+    font-size: 3.5rem;
+    line-height: 1.1;
+}
+
+.custom-object-link {
+    display: inline-block;
+    margin-bottom: 18px;
+    font-size: 1.875rem;
+}
+
+.custom-object-table {
+    border-spacing: 3px;
+    font-size: 1.75rem;
+}
+
+.custom-object-table th {
+    padding: 3px 6px;
+    background: pink;
+    text-align: center;
+}
+
+.custom-object-table td {
+    padding: 4px 3px;
+    border: 1px solid #aaa;
+}
+
+.record-form {
+    width: min(100%, 540px);
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+}
+
+.form-field {
+    margin-bottom: 16px;
+}
+
+.form-field label,
+.form-field input {
+    display: block;
+    margin-top: 5px;
+    font-size: inherit;
+}
+
+.form-field input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #aaa;
+}
+
+.record-form button {
+    padding: 7px 12px;
+    border: 1px solid #aaa;
+    background: pink;
+    font: inherit;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .custom-object-page {
+        margin: 20px 16px;
+    }
+
+    .custom-object-page h1 {
+        font-size: 2.5rem;
+    }
+
+    .custom-object-link {
+        font-size: 1.5rem;
+    }
+
+    .custom-object-table {
+        max-width: 100%;
+        font-size: 1.15rem;
+    }
+}

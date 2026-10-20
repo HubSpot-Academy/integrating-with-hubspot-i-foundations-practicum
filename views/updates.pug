@@ -1,0 +1,20 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet" href="/css/style.css")
+    body.custom-object-page
+        h1 Update Contact Object
+        form.record-form(action="/update-cobj" method="post")
+            div.form-field
+                label(for="custom_name") Name
+                input#firstname(type="text" name="custom_name" required)
+            div.form-field
+                label(for="custom_city") City
+                input#city(type="text" name="custom_city" required)
+            div.form-field
+                label(for="custom_country") Country
+                input#hs_country_region_code(type="text" name="custom_country" required)
+            button(type="submit") Create record
+        a.custom-object-link(href="/") Return to the homepage

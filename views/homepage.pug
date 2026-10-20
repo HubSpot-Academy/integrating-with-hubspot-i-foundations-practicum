@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet" href="/css/style.css")
+    body.custom-object-page
+        h1 Custom Contact Table
+        a.custom-object-link(href="/update-cobj") Add/Update this table
+        table.custom-object-table
+            thead
+                tr
+                    th Name
+                    th City
+                    th Country
+            tbody
+                each record in data
+                    tr
+                        td= record.properties.custom_name
+                        td= record.properties.custom_city
+                        td= record.properties.custom_country
