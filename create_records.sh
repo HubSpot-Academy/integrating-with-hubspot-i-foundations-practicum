@@ -1,0 +1,19 @@
+set -a
+source "$(dirname "$0")/.env"
+set +a
+
+export TOKEN=$HUBSPOT_TOKEN
+export OBJECT_TYPE_ID="2-71757848"
+
+cat > records.json <<'EOF'
+{
+  "inputs": [
+    { "properties": { "name": "Falcon 9", "manufacturer": "SpaceX", "payload_to_leo_kg": "22800", "first_launch_date": "2010-06-04" } },
+    { "properties": { "name": "Atlas V", "manufacturer": "United Launch Alliance", "payload_to_leo_kg": "18850", "first_launch_date": "2002-08-21" } },
+    { "properties": { "name": "Space Launch System", "manufacturer": "Boeing / NASA", "payload_to_leo_kg": "95000", "first_launch_date": "2022-11-16" } }
+  ]
+}
+EOF
+
+curl -s -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d @records.json "https://api.hubapi.com/crm/v3/objects/$OBJECT_TYPE_ID/batch/create"
+echo
