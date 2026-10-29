@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        a(href="/update-cobj") Add to this table
+        h1= title
+        table
+            thead
+                tr
+                    th Name
+                    th Payload to LEO (kg)
+                    th Manufacturer
+            tbody
+                each record in data
+                    tr
+                        td= record.properties.name
+                        td= record.properties.payload_to_leo_kg
+                        td= record.properties.manufacturer

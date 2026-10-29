@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1= title
+        a(href="/") Return to the homepage
+
+        form(action="/update-cobj" method="POST")
+            label(for="name") Launch Vehicle Name
+            input#name(type="text" name="name" required)
+
+            label(for="manufacturer") Manufacturer
+            input#manufacturer(type="text" name="manufacturer" required)
+
+            label(for="payload_to_leo_kg") Payload (Dry Mass) to LEO (kg)
+            input#payload_to_leo_kg(type="number" name="payload_to_leo_kg" required)
+
+            input(type="submit" value="Submit")

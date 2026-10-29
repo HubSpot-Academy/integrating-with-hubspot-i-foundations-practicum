@@ -1,9 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+
+/* 
+practicing working with Chrome dev tools to adjust css then moving results to the stylesheet.
 body, * {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+} */
+
+body, * {
+    font-family: 'Roboto', sans-serif;
+    margin: 1rem;
+    padding: 1rem;
 }
 
 h1 {
