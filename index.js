@@ -11,6 +11,7 @@ app.use(express.json());
 const PRIVATE_APP_ACCESS = 'pat-na1-b3c5e75b-9515-44bb-a6b0-586e20c6e5f5';
 
 app.get('/pets', async (req, res) => {
+    console.log(PRIVATE_APP_ACCESS)
     const pets = 'https://api.hubspot.com/crm/v3/objects/2-72310222?properties=name,bio,species';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
