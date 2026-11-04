@@ -4,55 +4,81 @@ body, * {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 2rem;
+    background: #fff;
 }
 
 h1 {
-    margin: 1rem;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+a {
+    color: #0000EE;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: inline-block;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+/* Homepage table */
+table {
+    border-collapse: collapse;
+    margin-top: 1rem;
 }
 
-.card__email {
+th {
+    background-color: #f4b8c1;
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+td {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+}
+
+/* Form page */
+.form-wrapper {
+    font-size: 18px;
+    max-width: 500px;
+    margin: 2rem 0;
+}
+
+label {
+    margin-top: 1rem;
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"] {
+    display: block;
+    width: 100%;
+    padding: 0.4rem 0.5rem;
+    margin-top: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     font-size: 1rem;
 }
 
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+button[type="submit"] {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    background-color: #f4b8c1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
-}
-
-input[type="text"] {
-    padding: .25rem;
-}
-
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+button[type="submit"]:hover {
+    background-color: #e8a0ad;
 }

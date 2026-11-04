@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Custom Object Table
+    a(href='/update-cobj') Add/Update this table
+    table
+      thead
+        tr
+          th Name
+          th Age
+          th Species
+      tbody
+        each record in records
+          tr
+            td= record.properties.name
+            td= record.properties.age
+            td= record.properties.species

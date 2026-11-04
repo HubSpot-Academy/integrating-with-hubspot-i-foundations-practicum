@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    h1 Add a New Pet
+    a(href='/') Return to the homepage
+    .form-wrapper
+      form(action='/update-cobj', method='POST')
+        label(for='name') Name
+        input(type='text', id='name', name='name', required)
+        label(for='age') Age
+        input(type='number', id='age', name='age')
+        label(for='species') Species
+        input(type='text', id='species', name='species')
+        button(type='submit') Submit
