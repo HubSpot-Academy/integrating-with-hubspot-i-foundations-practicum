@@ -8,10 +8,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-const PRIVATE_APP_ACCESS = 'pat-na1-ca557874-74af-4b3d-8b29-f4f324d648af';
+const PRIVATE_APP_ACCESS = 'pat-na1-b3c5e75b-9515-44bb-a6b0-586e20c6e5f5';
 
 app.get('/pets', async (req, res) => {
-    const pets = 'https://api.hubspot.com/crm/v3/objects/2-72310222';
+    const pets = 'https://api.hubspot.com/crm/v3/objects/2-72310222?properties=name,bio,species';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ app.post('/update', async (req, res) => {
         }
     }
 
-    const email = req.query.name;
+    const name = req.query.name;
     const updatePets = `https://api.hubapi.com/crm/v3/objects/2-72310222/${name}?idProperty=name`;
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
