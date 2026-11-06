@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a(href="/update-cobj") Add to this table
+    h1 My Games
+    table
+      thead
+        tr
+          th Name
+          th Platform
+          th Genre
+      tbody
+        each game in games
+          tr
+            td= game.properties.name
+            td= game.properties.platform
+            td= game.properties.genre
