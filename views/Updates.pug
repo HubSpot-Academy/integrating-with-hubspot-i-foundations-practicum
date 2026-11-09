@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1 Update Custom Object Form
+        form(action="/update-cobj" method="POST")
+            label(for="name") Name
+            input(type="text" id="name" name="name" required)
+            label(for="type") Type
+            input(type="text" id="type" name="type" required)
+            label(for="year") Year
+            input(type="text" id="year" name="year" required)
+            input(type="submit" value="Save")
+        a(href="/") Back to homepage
