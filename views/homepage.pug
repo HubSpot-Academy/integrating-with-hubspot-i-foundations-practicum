@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    a(href="/update-cobj") Add to this table
+    h1 Projects
+    table
+      thead
+        tr
+          th Name
+          th Code
+          th Amount
+      tbody
+        each item in data
+          tr
+            td= item.properties.name
+            td= item.properties.code
+            td= item.properties.total
