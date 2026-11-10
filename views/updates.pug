@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Add a new record
+    form(method="POST", action="/update-cobj")
+      label(for="name") Name
+      input(type="text", id="name", name="name", required)
+
+      label(for="code") Code
+      input(type="text", id="code", name="code")
+
+      label(for="total") Total
+      input(type="text", id="total", name="total")
+
+      button(type="submit") Submit
+    a(href="/") Return to the homepage
