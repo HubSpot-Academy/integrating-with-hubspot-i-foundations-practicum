@@ -1,0 +1,69 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet" href="/css/style.css")
+    body
+        header.topbar
+            a.brand(href="/")
+                span.brand-mark N
+                span
+                    strong VMob
+                    small AUTO GROUP
+            nav.topbar__nav
+                a(href="/") CRM Overview
+                span HubSpot demo workspace
+        main.page.page--form
+            a.back-link(href="/") ← Back to overview
+            section.form-panel
+                p.eyebrow ADD TO HUBSPOT
+                h1 New #{config.singular}
+                p.hero__copy Enter the record details and link it to a customer. The record will be created in your HubSpot account.
+                if error
+                    .alert.alert--error(role="alert")
+                        strong Could not save the record
+                        p= error
+                form.record-form(method="post" action=`/records/${objectKey}`)
+                    .form-grid
+                        each property in config.properties
+                            label.form-field(for=property.name)
+                                span
+                                    | #{property.label}
+                                    if config.requiredProperties.includes(property.name)
+                                        b.required-mark  *
+                                input(
+                                    type="text"
+                                    name=property.name
+                                    id=property.name
+                                    required=config.requiredProperties.includes(property.name)
+                                    value=values && values[property.name] ? values[property.name] : ""
+                                    placeholder=`Enter ${property.label.toLowerCase()}`
+                                )
+                    .form-divider
+                        h2 Associations
+                        p Choose an existing contact. Company and vehicle links are optional.
+                    .form-grid
+                        label.form-field(for="contactId")
+                            span Contact
+                            select(name="contactId" id="contactId" required)
+                                option(value="") Select a contact
+                                each contact in contacts
+                                    option(value=contact.id)
+                                        | #{contact.properties.firstname || ''} #{contact.properties.lastname || ''} — #{contact.properties.email || 'No email'}
+                        label.form-field(for="companyId")
+                            span Company
+                            select(name="companyId" id="companyId")
+                                option(value="") No company
+                                each company in companies
+                                    option(value=company.id)= company.properties.name || 'Company'
+                        if objectKey !== 'vehicles' && vehicles.length
+                            label.form-field(for="vehicleId")
+                                span Related vehicle
+                                select(name="vehicleId" id="vehicleId")
+                                    option(value="") No vehicle
+                                    each vehicle in vehicles
+                                        option(value=vehicle.id)= vehicle.properties.name || vehicle.properties.vin || 'Vehicle'
+                    .form-actions
+                        a.button.button--secondary(href="/") Cancel
+                        button.button.button--primary(type="submit") Create #{config.singular}

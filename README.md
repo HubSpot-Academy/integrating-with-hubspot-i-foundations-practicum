@@ -4,13 +4,24 @@ This repository is for the Integrating With HubSpot I: Foundations course. This 
 
 To read the full directions, please go to the [practicum instructions](https://app.hubspot.com/academy/l/tracks/1092124/1093824/5493?language=en).
 
-**Put your HubSpot developer test account custom objects URL link here:** https://app.hubspot.com/contacts/l/objects/${custom-obj-number}/views/all/list
+**HubSpot Vehicles custom object list view:** [Open the list view](https://app.hubspot.com/contacts/248019139/objects/2-271933748/views/all/list)
 
 ___
+## Automotive demo app
+
+This Node.js app creates three HubSpot custom objects: **Vehicles**, **Inventory**, and **Warranties**. Each has a string property labeled **Name** and additional dealership-specific properties. The objects are associated with HubSpot contacts and companies; inventory and warranty records can also be associated with vehicles.
+
+1. Create a HubSpot developer test account and a private app with these scopes: `crm.objects.contacts.read`, `crm.objects.contacts.write`, `crm.objects.companies.read`, `crm.objects.companies.write`, `crm.objects.custom.read`, `crm.objects.custom.write`, `crm.schemas.custom.read`, and `crm.schemas.custom.write`.
+2. Copy `.env.template` to `.env` and set `PRIVATE_ACCESS_KEY` to your private app token. Keep `.env` local; never commit or share the token.
+3. Install packages with `npm install`, then start the app with `node index.js`.
+4. Open [http://localhost:3000](http://localhost:3000) and select **Set up demo workspace**. The app creates or reuses the schemas, then adds three fictional records to each custom object and links them to demo contacts and a demo company.
+
+The setup action is safe to repeat: it looks up the demo records using their unique email, VIN, SKU, warranty number, or company name before creating them.
+
 ## Tips:
 - Commit to your repository often. Even if you make small tweaks to your code, it’s best to be committing to your repository frequently.
 - The subject of the custom object is up to you. Feel free to get creative!
-- Please create a test account and include your private app access token in your repo.
+- Please create a HubSpot developer test account and use a private app token stored only in your local `.env` file.
 - Ensure you re-merge any working branches into the main branch.
 - DO NOT ADD YOUR PRIVATE APP TOKEN TO YOUR REPOSITORY. 
 

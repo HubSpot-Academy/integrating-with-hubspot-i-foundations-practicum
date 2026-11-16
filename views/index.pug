@@ -1,0 +1,120 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet" href="/css/style.css")
+    body
+        header.topbar
+            a.brand(href="/")
+                span.brand-mark N
+                span
+                    strong VMob
+                    small AUTO GROUP
+            nav.topbar__nav
+                a.active(href="/") CRM Overview
+                span HubSpot demo workspace
+        main.page
+            section.hero
+                div
+                    p.eyebrow DEALERSHIP OPERATIONS
+                    h1 Your automotive CRM, at a glance
+                    p.hero__copy Manage vehicles, parts inventory, and customer warranties in one connected HubSpot workspace.
+                form(method="post" action="/setup")
+                    button.button.button--primary(type="submit") Set up demo workspace
+
+            if error
+                .alert.alert--error(role="alert")
+                    strong HubSpot connection needs attention
+                    p= error
+                    if error.includes('not configured')
+                        p Add your private app token to the local .env file and restart the app. Never commit the token.
+                    else
+                        p Check that the private app has the contacts, companies, custom objects, and custom object schema scopes listed in the README.
+            if setupComplete
+                .alert.alert--success(role="status")
+                    strong Demo workspace is ready.
+                    |  The three custom objects and their sample records are available in HubSpot.
+            if created
+                .alert.alert--success(role="status")
+                    strong= `${created} record created.`
+                    |  It has been associated with the selected contact.
+
+            section.metrics(aria-label="CRM summary")
+                each label, key in { vehicles: 'Vehicles', inventory: 'Inventory items', warranties: 'Warranties' }
+                    - const item = objects[key]
+                    article.metric-card
+                        span.metric-card__label= label
+                        strong.metric-card__value= item ? item.records.length : 0
+                        span.metric-card__detail= item && item.schema ? `${item.schema.labels.plural} in HubSpot` : 'Custom object not set up'
+
+            section.section
+                .section-heading
+                    div
+                        p.eyebrow CUSTOM OBJECTS
+                        h2 Dealership records
+                    p.section-heading__note Each record can be linked to a contact and company.
+                .object-grid
+                    each label, key in { vehicles: 'Vehicles', inventory: 'Inventory', warranties: 'Warranties' }
+                        - const item = objects[key]
+                        article.object-card
+                            .object-card__heading
+                                div
+                                    h3= label
+                                    p= item && item.config ? item.config.description : ''
+                                if item && item.schema
+                                    a.button.button--small(href=`/records/${key}/new`) Add record
+                            if item && item.schema && item.records.length
+                                .table-wrap
+                                    table
+                                        thead
+                                            tr
+                                                each property in item.config.properties.slice(0, 4)
+                                                    th= property.label
+                                        tbody
+                                            each record in item.records
+                                                tr
+                                                    each property in item.config.properties.slice(0, 4)
+                                                        td= record.properties[property.name] || '—'
+                            else
+                                .empty-state
+                                    p= item && item.schema ? 'No records yet.' : 'Set up the demo workspace to create this custom object.'
+                                    if item && item.schema
+                                        a.text-link(href=`/records/${key}/new`) Add the first record
+
+            section.relationships
+                article.relationship-card
+                    .section-heading.section-heading--compact
+                        div
+                            p.eyebrow STANDARD OBJECT
+                            h2 Contacts
+                        span.count-pill= contacts.length
+                    if contacts.length
+                        ul.record-list
+                            each contact in contacts.slice(0, 5)
+                                li
+                                    span.avatar= (contact.properties.firstname || 'C').charAt(0)
+                                    span.record-list__text
+                                        strong= `${contact.properties.firstname || ''} ${contact.properties.lastname || ''}`.trim() || 'Contact'
+                                        small= contact.properties.email || 'No email'
+                    else
+                        p.muted Contacts from your HubSpot account will appear here.
+                article.relationship-card
+                    .section-heading.section-heading--compact
+                        div
+                            p.eyebrow STANDARD OBJECT
+                            h2 Companies
+                        span.count-pill= companies.length
+                    if companies.length
+                        ul.record-list
+                            each company in companies.slice(0, 5)
+                                li
+                                    span.avatar.avatar--company= (company.properties.name || 'C').charAt(0)
+                                    span.record-list__text
+                                        strong= company.properties.name || 'Company'
+                                        small HubSpot company record
+                    else
+                        p.muted Companies from your HubSpot account will appear here.
+            footer.footer
+                span VMob Auto Group
+                span Demo data is fictional and intended for testing.
