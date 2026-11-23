@@ -1,0 +1,33 @@
+
+doctype html
+html
+  head
+    title= title
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+
+  body
+    .container
+      h1 Pet Registry
+
+      a.add-link(href="/update-cobj") Add to this table
+
+      if pets && pets.length
+        table
+          thead
+            tr
+              th Name
+              th Pet Type
+              th Age
+              th Breed
+
+          tbody
+            each pet in pets
+              tr
+                td= pet.properties.name
+                td= pet.properties.pet_type
+                td= pet.properties.age
+                td= pet.properties.breed
+      else
+        p No Pet Registry records found.

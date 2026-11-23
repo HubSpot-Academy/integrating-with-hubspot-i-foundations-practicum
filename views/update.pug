@@ -1,0 +1,58 @@
+
+doctype html
+html
+  head
+    title= title
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+
+  body
+    .container
+      h1 Add a New Pet
+
+      form(action="/update-cobj", method="POST")
+        .form-group
+          label(for="name") Pet Name
+          input(
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter pet name"
+            required
+          )
+
+        .form-group
+          label(for="pet_type") Pet Type
+          input(
+            type="text"
+            id="pet_type"
+            name="pet_type"
+            placeholder="Dog, Cat, Bird etc."
+            required
+          )
+
+        .form-group
+          label(for="age") Age
+          input(
+            type="number"
+            id="age"
+            name="age"
+            min="0"
+            placeholder="Enter pet age"
+            required
+          )
+
+        .form-group
+          label(for="breed") Breed
+          input(
+            type="text"
+            id="breed"
+            name="breed"
+            placeholder="Enter breed"
+            required
+          )
+
+        button(type="submit") Create Pet Record
+
+      a(href="/") Return to the homepage
