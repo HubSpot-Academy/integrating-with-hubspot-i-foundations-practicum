@@ -1,71 +1,121 @@
-const express = require('express');
-const axios = require('axios');
-const app = express();
 
-app.set('view engine', 'pug');
-app.use(express.static(__dirname + '/public'));
+require("dotenv").config();
+
+const express = require("express");
+const axios = require("axios");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Configure Pug
+app.set("view engine", "pug");
+app.set("views", "./views");
+
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"));
 
-// * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
-const PRIVATE_APP_ACCESS = '';
-
-// TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
-
-// * Code for Route 1 goes here
-
-// TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
-
-// * Code for Route 2 goes here
-
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
-
-// * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
+// HubSpot configuration
+const hubspot = axios.create({
+  baseURL: "https://api.hubapi.com",
+  headers: {
+    Authorization: `Bearer ${process.env.HUBSPOT_ACCESS_TOKEN}`,
+    "Content-Type": "application/json"
+  }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
+// Custom object configuration
+const OBJECT_TYPE_ID = process.env.HUBSPOT_OBJECT_TYPE_ID;
+
+const PET_PROPERTIES = [
+  "name",
+  "pet_type",
+  "age",
+  "breed"
+];
+
+// Route 1: Homepage
+app.get("/", async (req, res) => {
+  try {
+    const response = await hubspot.get(
+      `/crm/v3/objects/${OBJECT_TYPE_ID}`,
+      {
+        params: {
+          properties: PET_PROPERTIES.join(","),
+          limit: 100
         }
+      }
+    );
+
+    const pets = response.data.results;
+
+    res.render("homepage", {
+      title: "Pet Registry | Integrating With HubSpot I Practicum",
+      pets: pets
+    });
+
+  } catch (error) {
+    console.error(
+      "Error fetching Pet Registry records:",
+      error.response?.data || error.message
+    );
+
+    res.status(500).send("Unable to retrieve Pet Registry records.");
+  }
+});
+
+// Route 2: Display custom object form
+app.get("/update-cobj", (req, res) => {
+  res.render("updates", {
+    title: "Update Custom Object Form | Integrating With HubSpot I Practicum"
+  });
+});
+
+// Route 3: Create custom object record
+app.post("/update-cobj", async (req, res) => {
+  try {
+    const { name, pet_type, age, breed } = req.body;
+
+    // Validate form fields
+    if (!name || !pet_type || !age || !breed) {
+      return res.status(400).send("All fields are required.");
     }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
+    if (!Number.isFinite(Number(age)) || Number(age) < 0) {
+      return res.status(400).send("Please enter a valid pet age.");
+    }
+
+    const petData = {
+      properties: {
+        name: name.trim(),
+        pet_type: pet_type.trim(),
+        age: String(age),
+        breed: breed.trim()
+      }
     };
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
+    const response = await hubspot.post(
+      `/crm/v3/objects/${OBJECT_TYPE_ID}`,
+      petData
+    );
 
+    console.log("Pet created successfully:", response.data.id);
+
+    // Redirect to homepage
+    res.redirect("/");
+
+  } catch (error) {
+    console.error(
+      "Error creating Pet Registry record:",
+      error.response?.data || error.message
+    );
+
+    res.status(500).send("Unable to create Pet Registry record.");
+  }
 });
-*/
 
-
-// * Localhost
-app.listen(3000, () => console.log('Listening on http://localhost:3000'));
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});

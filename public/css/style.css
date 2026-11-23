@@ -1,58 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body, * {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 30px;
+  color: #33475b;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 h1 {
-    margin: 1rem;
+  color: #33475b;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+.add-link {
+  display: inline-block;
+  margin: 15px 0 25px;
+  color: #ff7a59;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.card__email {
-    font-size: 1rem;
+th, td {
+  padding: 14px;
+  border: 1px solid #ddd;
+  text-align: left;
 }
 
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+th {
+  background: #f2f5f8;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
+.form-group {
+  margin-bottom: 20px;
 }
 
-input[type="text"] {
-    padding: .25rem;
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd6e2;
+  border-radius: 5px;
+}
+
+button {
+  background: #ff7a59;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background: #e56b4c;
 }
