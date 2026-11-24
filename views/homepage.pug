@@ -5,17 +5,31 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body
-        a(href="/update-cobj") Add to this table
-        h1= title
-        table
-            thead
-                tr
-                    th Name
-                    th Species
-                    th Breed
-            tbody
-                each record in records
-                    tr
-                        td= record.properties.name
-                        td= record.properties.species
-                        td= record.properties.breed
+        .page
+            header.topbar
+                .brand
+                    span.mark(aria-hidden="true")
+                    span
+                        span.brand__name Pets
+                        span.brand__meta Custom object
+                a.button(href="/update-cobj") Add to this table
+            h1= title
+            p.lede Every pet stored on your HubSpot custom object, in one place.
+            .table-card
+                if records && records.length
+                    .table-scroll
+                        table
+                            thead
+                                tr
+                                    th Name
+                                    th Species
+                                    th Breed
+                            tbody
+                                each record in records
+                                    tr
+                                        td.name(data-label="Name")= record.properties.name
+                                        td(data-label="Species")
+                                            span.chip= record.properties.species
+                                        td(data-label="Breed")= record.properties.breed
+                else
+                    p.empty No pets yet. Use the button above to add the first one.
